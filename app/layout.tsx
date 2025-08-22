@@ -3,7 +3,6 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 
-// ajustează calea dacă e altă locație
 import { ThemeProvider } from "@/components/theme-provider"
 import { LanguageProvider } from "@/components/language-provider"
 
@@ -30,7 +29,7 @@ export const metadata: Metadata = {
     "fizică",
     "chimie",
     "biologie",
-    "astronomie",
+    "astronomie"
   ],
   authors: [{ name: "ELEMENTAR" }],
   creator: "ELEMENTAR",
@@ -49,18 +48,18 @@ export const metadata: Metadata = {
         url: "/images/logo-elementara.png",
         width: 1200,
         height: 630,
-        alt: "ELEMENTAR — Parc de Știință și Curiozități",
-      },
+        alt: "ELEMENTAR — Parc de Știință și Curiozități"
+      }
     ],
     locale: "ro_MD",
-    type: "website",
+    type: "website"
   },
   twitter: {
     card: "summary_large_image",
     title: "ELEMENTAR — Parc de Știință și Curiozități",
     description:
       "Parcul de Știință și Curiozități – locul în care joaca, arta și experimentul te conduc la înțelegerea fenomenelor reale.",
-    images: ["/images/logo-elementara.png"],
+    images: ["/images/logo-elementara.png"]
   },
   robots: {
     index: true,
@@ -70,18 +69,18 @@ export const metadata: Metadata = {
       follow: true,
       "max-video-preview": -1,
       "max-image-preview": "large",
-      "max-snippet": -1,
-    },
+      "max-snippet": -1
+    }
   },
   icons: {
     icon: [
       { url: "/favicon.png", sizes: "32x32", type: "image/png" },
-      { url: "/favicon.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon.png", sizes: "16x16", type: "image/png" }
     ],
     apple: [{ url: "/favicon.png", sizes: "180x180", type: "image/png" }],
-    shortcut: "/favicon.png",
+    shortcut: "/favicon.png"
   },
-  generator: "v0.app",
+  generator: "v0.app"
 }
 
 export default function RootLayout({
@@ -101,9 +100,10 @@ export default function RootLayout({
         <meta name="msapplication-config" content="/browserconfig.xml" />
         <link rel="manifest" href="/site.webmanifest" />
       </head>
-      {/* important: clasele pentru culori globale */}
+      {/* IMPORTANT: culori globale + layout de bază */}
       <body className={`${inter.className} min-h-screen bg-background text-foreground`}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+        {/* Default pe dark pentru a activa paleta cu fundal închis */}
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <LanguageProvider>
             {children}
           </LanguageProvider>
