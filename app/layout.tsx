@@ -3,7 +3,8 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 
-// IMPORTANT: ajustează calea dacă fișierul e în alt loc
+// ajustează calea dacă e altă locație
+import { ThemeProvider } from "@/components/theme-provider"
 import { LanguageProvider } from "@/components/language-provider"
 
 export const dynamic = "force-dynamic"
@@ -34,15 +35,9 @@ export const metadata: Metadata = {
   authors: [{ name: "ELEMENTAR" }],
   creator: "ELEMENTAR",
   publisher: "ELEMENTAR",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
+  formatDetection: { email: false, address: false, telephone: false },
   metadataBase: new URL("https://elementar.md"),
-  alternates: {
-    canonical: "/",
-  },
+  alternates: { canonical: "/" },
   openGraph: {
     title: "ELEMENTAR — Parc de Știință și Curiozități",
     description:
@@ -86,7 +81,6 @@ export const metadata: Metadata = {
     apple: [{ url: "/favicon.png", sizes: "180x180", type: "image/png" }],
     shortcut: "/favicon.png",
   },
-  // alternativ poți seta și: manifest: "/site.webmanifest",
   generator: "v0.app",
 }
 
@@ -96,7 +90,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="ro" className="scroll-smooth">
+    <html lang="ro" className="scroll-smooth" suppressHydrationWarning>
       <head>
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png" />
@@ -107,10 +101,13 @@ export default function RootLayout({
         <meta name="msapplication-config" content="/browserconfig.xml" />
         <link rel="manifest" href="/site.webmanifest" />
       </head>
-      <body className={inter.className}>
-        <LanguageProvider>
-          {children}
-        </LanguageProvider>
+      {/* important: clasele pentru culori globale */}
+      <body className={`${inter.className} min-h-screen bg-background text-foreground`}>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+          <LanguageProvider>
+            {children}
+          </LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   )
