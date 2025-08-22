@@ -3,6 +3,9 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 
+// IMPORTANT: ajustează calea dacă fișierul e în alt loc
+import { LanguageProvider } from "@/components/language-provider"
+
 export const dynamic = "force-dynamic"
 export const revalidate = 0
 
@@ -83,8 +86,7 @@ export const metadata: Metadata = {
     apple: [{ url: "/favicon.png", sizes: "180x180", type: "image/png" }],
     shortcut: "/favicon.png",
   },
-  // Poți lăsa doar link-ul din <head>; dacă preferi, poți debloca linia de mai jos:
-  // manifest: "/site.webmanifest",
+  // alternativ poți seta și: manifest: "/site.webmanifest",
   generator: "v0.app",
 }
 
@@ -105,7 +107,11 @@ export default function RootLayout({
         <meta name="msapplication-config" content="/browserconfig.xml" />
         <link rel="manifest" href="/site.webmanifest" />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
+      </body>
     </html>
   )
 }
