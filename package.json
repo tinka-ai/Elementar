@@ -1,7 +1,11 @@
 {
-  "name": "my-v0-project",
+  "name": "elementar",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@9",
+  "engines": {
+    "node": ">=18.18.0"
+  },
   "scripts": {
     "build": "next build",
     "dev": "next dev",
