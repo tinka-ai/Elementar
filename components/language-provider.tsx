@@ -1,69 +1,87 @@
 "use client"
 
-import type React from "react"
-import { createContext, useContext, useState, useEffect } from "react"
-import { useRouter, usePathname } from "next/navigation"
+import * as React from "react"
 import type { Locale } from "@/lib/i18n"
 import { translations } from "@/translations"
 
-interface LanguageContextType {
+type LanguageContextType = {
   locale: Locale
   setLocale: (locale: Locale) => void
   t: (key: string) => string
 }
 
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
+const DEFAULT_LOCALE: Locale = "ro"
+
+const LanguageContext = React.createContext<LanguageContextType | null>(null)
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const router = useRouter()
-  const pathname = usePathname()
-  const [locale, setLocaleState] = useState<Locale>("ro")
+  const [locale, setLocaleState] = React.useState<Locale>(DEFAULT_LOCALE)
 
-  useEffect(() => {
-    const savedLocale = localStorage.getItem("elementar-locale") as Locale
-    const initialLocale = savedLocale || "ro"
-    setLocaleState(initialLocale)
+  // Citește preferința din localStorage după montare (evită mismatch)
+  React.useEffect(() => {
+    try {
+      const saved = (localStorage.getItem("elementar-locale") as Locale) || DEFAULT_LOCALE
+      setLocaleState(saved)
+    } catch {
+      // dacă localStorage nu e disponibil, rămâne "ro"
+    }
   }, [])
 
-  const setLocale = (newLocale: Locale) => {
-    console.log("[v0] Setting locale to:", newLocale)
-    setLocaleState(newLocale)
-    localStorage.setItem("elementar-locale", newLocale)
-    // React will automatically re-render components when locale state changes
+  const setLocale = (next: Locale) => {
+    setLocaleState(next)
+    try {
+      localStorage.setItem("elementar-locale", next)
+    } catch {
+      /* noop */
+    }
   }
 
   const t = (key: string): string => {
     const keys = key.split(".")
-    let current: any = translations[locale]
-
+    // încearcă întâi în limba curentă
+    let cur: any = translations[locale]
     for (const k of keys) {
-      if (current && typeof current === "object" && k in current) {
-        current = current[k]
-      } else {
-        console.warn(`[v0] Translation key not found: ${key} for locale: ${locale}`)
-        // Fallback to Romanian if translation not found
-        let fallback: any = translations.ro
-        for (const fallbackKey of keys) {
-          if (fallback && typeof fallback === "object" && fallbackKey in fallback) {
-            fallback = fallback[fallbackKey]
-          } else {
-            return key // Return key if no translation found
-          }
+      if (cur && typeof cur === "object" && k in cur) cur = cur[k]
+      else {
+        // fallback pe RO dacă nu găsește
+        let fb: any = translations.ro
+        for (const fk of keys) {
+          if (fb && typeof fb === "object" && fk in fb) fb = fb[fk]
+          else return key
         }
-        return typeof fallback === "string" ? fallback : key
+        return typeof fb === "string" ? fb : key
       }
     }
-
-    return typeof current === "string" ? current : key
+    return typeof cur === "string" ? cur : key
   }
 
-  return <LanguageContext.Provider value={{ locale, setLocale, t }}>{children}</LanguageContext.Provider>
+  const value: LanguageContextType = React.useMemo(
+    () => ({ locale, setLocale, t }),
+    [locale]
+  )
+
+  return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>
 }
 
-export function useLanguage() {
-  const context = useContext(LanguageContext)
-  if (context === undefined) {
+export function useLanguage(): LanguageContextType {
+  const ctx = React.useContext(LanguageContext)
+  if (ctx) return ctx
+
+  // În PROD nu dărâmăm pagina: folosim fallback „ro”.
+  // În DEV aruncăm eroare ca să vezi unde lipsește providerul.
+  if (process.env.NODE_ENV !== "production") {
     throw new Error("useLanguage must be used within a LanguageProvider")
   }
-  return context
+
+  const t = (key: string) => {
+    const keys = key.split(".")
+    let cur: any = translations.ro
+    for (const k of keys) {
+      if (cur && typeof cur === "object" && k in cur) cur = cur[k]
+      else return key
+    }
+    return typeof cur === "string" ? cur : key
+  }
+
+  return { locale: DEFAULT_LOCALE, setLocale: () => {}, t }
 }
