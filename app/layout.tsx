@@ -3,6 +3,9 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 
+export const dynamic = "force-dynamic"
+export const revalidate = 0
+
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
@@ -80,8 +83,9 @@ export const metadata: Metadata = {
     apple: [{ url: "/favicon.png", sizes: "180x180", type: "image/png" }],
     shortcut: "/favicon.png",
   },
-  manifest: "/site.webmanifest",
-    generator: 'v0.app'
+  // Poți lăsa doar link-ul din <head>; dacă preferi, poți debloca linia de mai jos:
+  // manifest: "/site.webmanifest",
+  generator: "v0.app",
 }
 
 export default function RootLayout({
@@ -99,7 +103,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#000000" />
         <meta name="msapplication-TileColor" content="#000000" />
         <meta name="msapplication-config" content="/browserconfig.xml" />
-              <link rel="manifest" href="/site.webmanifest" />
+        <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body className={inter.className}>{children}</body>
     </html>
