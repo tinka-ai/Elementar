@@ -29,7 +29,7 @@ export const metadata: Metadata = {
       "Parcul de Știință și Curiozități – locul în care joaca, arta și experimentul te conduc la înțelegerea fenomenelor reale.",
     url: "https://elementar.md",
     siteName: "ELEMENTAR",
-    images: [{ url: "/images/logo-elementara.png", width: 1200, height: 630, alt: "ELEMENTAR" }],
+    images: [{ url: "/images/logo-elementara-new.png", width: 1200, height: 630, alt: "ELEMENTAR" }],
     locale: "ro_MD",
     type: "website",
   },
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     title: "ELEMENTAR — Parc de Știință și Curiozități",
     description:
       "Parcul de Știință și Curiozități – locul în care joaca, arta și experimentul te conduc la înțelegerea fenomenelor reale.",
-    images: ["/images/logo-elementara.png"],
+    images: ["/images/logo-elementara-new.png"],
   },
   robots: { index: true, follow: true },
   icons: {
@@ -93,7 +93,7 @@ function SiteHeader() {
         <div className="h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3" aria-label="Acasă">
             <img
-              src="/images/logo-elementara.png"
+              src="/images/logo-elementara-new.png"
               alt="Logo ELEMENTAR — Parc de Știință și Curiozități"
               className="h-8 sm:h-9 md:h-10 w-auto select-none pointer-events-none"
             />
@@ -201,4 +201,4 @@ function BottomBar() {
       </div>
     </div>
   )
-}
+              }
