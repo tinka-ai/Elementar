@@ -3,7 +3,6 @@
 import type React from "react"
 import Link from "next/link"
 import Image from "next/image"
-import physicsHero from "@/public/interactive-physics-experiment.png"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -27,7 +26,7 @@ export default function Page() {
 
   return (
     <>
-      {/* VIDEO LOGO SECTION - Full width, first on page */}
+      {/* VIDEO LOGO SECTION */}
       <section className="relative w-full h-auto overflow-hidden flex items-center justify-center bg-black py-4">
         <video className="max-w-full max-h-full object-contain" autoPlay loop muted playsInline>
           <source
@@ -148,11 +147,14 @@ export default function Page() {
                 </div>
               </div>
             </div>
+
             <div>
-              {/* FIX 404: folosim next/image cu import din /public */}
+              {/* Fără import; folosim string din /public ca să evităm erori la build */}
               <Image
-                src={physicsHero}
+                src="/interactive-physics-experiment.png"
                 alt="Copil experimentează pendulul lui Newton la un stand"
+                width={880}
+                height={620}
                 className={`w-full h-auto rounded-2xl object-cover ${fx}`}
                 priority={false}
                 sizes="(max-width: 1024px) 100vw, 880px"
@@ -310,65 +312,4 @@ function Donut({ value, label }: { value: number; label: string }) {
       <div className="absolute text-center">
         <div className="text-xl font-bold text-gray-300">{value}%</div>
         <div className="text-[10px] text-gray-400">{label}</div>
-      </div>
-    </div>
-  )
-}
-
-function Progress({ label, value }: { label: string; value: number }) {
-  return (
-    <div>
-      <div className="flex items-center justify-between text-sm">
-        <span className="text-gray-300">{label}</span>
-        <span className="text-gray-300 font-medium">{value}%</span>
-      </div>
-      <div className="mt-2 h-2 rounded-full bg-white/10 overflow-hidden">
-        <div
-          className="h-full bg-gradient-to-r from-pink-400 via-sky-400 to-violet-500 rounded-full"
-          style={{ width: `${value}%` }}
-        />
-      </div>
-    </div>
-  )
-}
-
-function PricingCard({
-  fx,
-  title,
-  price,
-  perks,
-  cta,
-  highlight = false,
-}: {
-  fx: string
-  title: string
-  price: string
-  perks: string[]
-  cta: string
-  highlight?: boolean
-}) {
-  return (
-    <div
-      className={`p-6 rounded-xl border ${highlight ? "border-sky-400/40" : "border-white/10"} bg-white/5 ${fx}`}
-      aria-label={`Plan ${title}`}
-    >
-      <div className="flex items-center justify-between">
-        <h3 className="text-xl font-bold text-gray-300">{title}</h3>
-        <span className="text-2xl font-extrabold text-gray-300">{price}</span>
-      </div>
-      <ul className="mt-4 space-y-2 text-sm text-gray-300">
-        {perks.map((p, i) => (
-          <li key={i} className="flex items-start gap-2">
-            <BadgeCheck className="mt-0.5 h-4 w-4 text-sky-400" />
-            <span>{p}</span>
-          </li>
-        ))}
-      </ul>
-      <Button
-        className={`mt-5 w-full ${highlight ? "bg-sky-500 hover:bg-sky-400 text-white" : "bg-white/10 hover:bg-white/15 text-white"} ${fx}`}
-      >
-        {cta}
-      </Button>
-    </div>
-  )
-}
+      </
