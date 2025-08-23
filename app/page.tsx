@@ -2,16 +2,17 @@
 
 import type React from "react"
 import Link from "next/link"
+import Image from "next/image"
+import physicsHero from "@/public/interactive-physics-experiment.png"
+
 import { Button } from "@/components/ui/button"
 import {
   ArrowRight,
   Eye,
-  Facebook,
   FlaskConical,
   Puzzle,
   Sparkles,
   Waves,
-  Instagram,
   Link2,
   BadgeCheck,
 } from "lucide-react"
@@ -19,12 +20,10 @@ import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/
 import { useLanguage } from "@/components/language-provider"
 
 export default function Page() {
-  const { t, locale } = useLanguage()
+  const { t } = useLanguage()
 
   const fx =
     "transition-shadow duration-300 ease-out hover:shadow-[0_0_0_1px_rgba(56,189,248,0.35),0_0_28px_6px_rgba(168,85,247,0.25)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-400/70 rounded-md"
-  const fxIcon =
-    "transition-shadow duration-300 ease-out hover:shadow-[0_0_0_1px_rgba(56,189,248,0.45),0_0_18px_4px_rgba(168,85,247,0.35)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-400/70 rounded-md"
 
   return (
     <>
@@ -40,13 +39,13 @@ export default function Page() {
       </section>
 
       <main>
-        {/* HERO - inspirat de design: text mare stânga, imagine dreapta */}
+        {/* HERO */}
         <section id="acasa" className="relative overflow-hidden border-b border-white/5">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <div className="grid lg:grid-cols-2 gap-10 items-center py-8 sm:py-12">
               <div className="space-y-6">
                 <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-gray-300">
-                  <Sparkles className="h-3.5 w-3.5 text-sky-400" aria-hidden="true" />
+                  <Sparkles className="h-3.5 w-3.5 text-sky-400" aria-hidden />
                   {t("hero.badge")}
                 </div>
                 <h1 className="text-4xl sm:text-6xl xl:text-7xl font-extrabold tracking-tight leading-[1.05] bg-gradient-to-r from-pink-400 via-sky-400 to-violet-500 bg-clip-text text-transparent">
@@ -57,7 +56,7 @@ export default function Page() {
                   <Button asChild className={`bg-sky-500 text-white hover:bg-sky-400 ${fx}`}>
                     <Link href="/domenii" aria-label={t("aria.home")}>
                       {t("hero.ctaPrimary")}
-                      <ArrowRight className="ms-2 h-4 w-4" aria-hidden="true" />
+                      <ArrowRight className="ms-2 h-4 w-4" aria-hidden />
                     </Link>
                   </Button>
                   <Button
@@ -89,7 +88,7 @@ export default function Page() {
           </div>
         </section>
 
-        {/* FEATURES - 4 carduri similare designului */}
+        {/* FEATURES */}
         <section id="experiente" className="py-12 sm:py-16 border-b border-white/5">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <SectionTitle title={t("features.title")} />
@@ -130,7 +129,7 @@ export default function Page() {
           </div>
         </section>
 
-        {/* VALUES - imagine + statistici */}
+        {/* VALUES */}
         <section className="py-12 sm:py-16 border-b border-white/5">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 grid lg:grid-cols-2 gap-10 items-center">
             <div className="space-y-6">
@@ -150,20 +149,19 @@ export default function Page() {
               </div>
             </div>
             <div>
-              <img
-                src="/interactive-physics-experiment.png"
+              {/* FIX 404: folosim next/image cu import din /public */}
+              <Image
+                src={physicsHero}
                 alt="Copil experimentează pendulul lui Newton la un stand"
-                width={880}
-                height={620}
                 className={`w-full h-auto rounded-2xl object-cover ${fx}`}
-                loading="lazy"
-                decoding="async"
+                priority={false}
+                sizes="(max-width: 1024px) 100vw, 880px"
               />
             </div>
           </div>
         </section>
 
-        {/* SKILLS - imagine + bare de progres */}
+        {/* SKILLS */}
         <section className="py-12 sm:py-16 border-b border-white/5">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 grid lg:grid-cols-2 gap-10 items-center">
             <div>
@@ -187,7 +185,7 @@ export default function Page() {
           </div>
         </section>
 
-        {/* PRICING - două planuri */}
+        {/* PRICING */}
         <section className="py-12 sm:py-16 border-b border-white/5">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <SectionKicker>{t("pricing.kicker")}</SectionKicker>
@@ -223,7 +221,7 @@ export default function Page() {
           </div>
         </section>
 
-        {/* FAQ - acordeon */}
+        {/* FAQ */}
         <section id="faq" className="py-12 sm:py-16 border-b border-white/5">
           <div className="mx-auto max-w-4xl px-4 sm:px-6">
             <SectionKicker>{t("faq.kicker")}</SectionKicker>
@@ -243,18 +241,12 @@ export default function Page() {
             </Accordion>
           </div>
         </section>
-
-        {/* TESTIMONIAL */}
-
-        {/* GALERIE – integrată fluent; include zoom și lista Blob încărcată */}
       </main>
-
-      <Footer fx={fx} fxIcon={fxIcon} t={t} />
     </>
   )
 }
 
-/* ————— Sub‑componente ————— */
+/* ————— Sub-componente ————— */
 
 function SectionKicker({ children }: { children: React.ReactNode }) {
   return (
@@ -313,7 +305,7 @@ function Donut({ value, label }: { value: number; label: string }) {
             rotation +
             "deg 360deg)",
         }}
-        aria-hidden="true"
+        aria-hidden
       />
       <div className="absolute text-center">
         <div className="text-xl font-bold text-gray-300">{value}%</div>
@@ -378,85 +370,5 @@ function PricingCard({
         {cta}
       </Button>
     </div>
-  )
-}
-
-function GalleryImage({ src, alt, fx }: { src: string; alt: string; fx: string }) {
-  return (
-    <div className="group relative overflow-hidden rounded-xl transition-shadow duration-300 ease-out hover:shadow-[0_0_0_1px_rgba(56,189,248,0.35),0_0_28px_6px_rgba(168,85,247,0.25)]">
-      <img
-        src={src || "/placeholder.svg"}
-        alt={alt}
-        width={520}
-        height={340}
-        className="h-full w-full object-cover"
-        loading="lazy"
-        decoding="async"
-      />
-    </div>
-  )
-}
-
-function Footer({ fx, fxIcon, t }: { fx: string; fxIcon: string; t: (key: string) => string }) {
-  return (
-    <footer id="contact" className="border-t border-white/5">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 py-10">
-        {/* Contact info only */}
-        <div className="mt-8"></div>
-
-        <div className="mt-8 text-xs text-gray-500 flex items-center justify-between">
-          <div>
-            <p>{t("footer.copyright").replace("{year}", new Date().getFullYear().toString())}</p>
-            <p className="mt-1">{t("footer.poweredBy")}</p>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <a
-              href="https://facebook.com/elementara.ro"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={t("aria.facebook")}
-              className={`grid h-10 w-10 place-items-center rounded-md bg-white/10 hover:bg-white/15 border border-white/10 text-white ${fxIcon}`}
-            >
-              <Facebook className="h-5 w-5" />
-            </a>
-            <a
-              href="https://instagram.com/elementara.ro"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={t("aria.instagram")}
-              className={`grid h-10 w-10 place-items-center rounded-md bg-white/10 hover:bg-white/15 border border-white/10 text-white ${fxIcon}`}
-            >
-              <Instagram className="h-5 w-5" />
-            </a>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <span className="inline-flex items-center gap-1">
-              <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                />
-              </svg>
-              {t("footer.phone")}
-            </span>
-            <span className="inline-flex items-center gap-1">
-              <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2z"
-                />
-              </svg>
-              {t("footer.email")}
-            </span>
-          </div>
-        </div>
-      </div>
-    </footer>
   )
 }
