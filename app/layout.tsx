@@ -76,9 +76,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="manifest" href="/site.webmanifest" />
       </head>
       {/* padding top/bottom ca să nu fie acoperit conținutul de barele fixe */}
-      <body
-        className={`${inter.className} min-h-screen bg-background text-foreground pt-16 pb-14`}
-      >
+      <body className={`${inter.className} min-h-screen bg-background text-foreground pt-16 pb-14`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <LanguageProvider>
             <SiteHeader />
@@ -108,17 +106,16 @@ function SiteHeader() {
             <span className="sr-only">Parcul de Știință și Curiozități</span>
           </Link>
 
-          {/* meniul site-ului */}
+          {/* meniul site-ului (fără „Experiențe”) */}
           <nav className="hidden md:flex items-center gap-6 text-sm">
             <Link href="/" className={`${fxLink} text-sky-400`}>Acasă</Link>
-            <Link href="/experiente" className={fxLink}>Experiențe</Link>
             <Link href="/domenii" className={fxLink}>Domenii</Link>
             <Link href="/galerie" className={fxLink}>Galerie</Link>
             <Link href="/faq" className={fxLink}>Întrebări</Link>
             <Link href="/contact" className={fxLink}>Contact</Link>
           </nav>
 
-          {/* programul de lucru în dreapta + CTA */}
+          {/* programul de lucru + CTA */}
           <div className="hidden md:flex items-center gap-2">
             <div className="flex items-center gap-2 text-sm text-gray-300">
               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -137,7 +134,7 @@ function SiteHeader() {
   )
 }
 
-/* ===== Footer global (conținut clasic) ===== */
+/* ===== Footer global ===== */
 function SiteFooter() {
   return (
     <footer id="contact" className="border-t border-white/5">
@@ -182,7 +179,7 @@ function SiteFooter() {
   )
 }
 
-/* ===== Bara fixă jos (ACUM fixă pe toate ecranele) ===== */
+/* ===== Bara fixă jos (FIXED pe toate ecranele) ===== */
 function BottomBar() {
   return (
     <div className={`fixed bottom-0 left-0 right-0 z-[90] bg-black/80 backdrop-blur-md border-t border-white/10 ${BOTTOM_H}`}>
