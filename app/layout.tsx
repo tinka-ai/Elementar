@@ -58,6 +58,10 @@ const fxIcon =
   "grid h-10 w-10 place-items-center rounded-md border border-white/10 hover:bg-white/10 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
 const fxLink = "relative transition-colors duration-200 hover:text-white"
 
+/** înălțimi fixe: header = 64px, bottom bar = 56px */
+const HEADER_H = "h-16"
+const BOTTOM_H = "h-14"
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ro" className="scroll-smooth" suppressHydrationWarning>
@@ -71,7 +75,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="msapplication-config" content="/browserconfig.xml" />
         <link rel="manifest" href="/site.webmanifest" />
       </head>
-      <body className={`${inter.className} min-h-screen bg-background text-foreground`}>
+      {/* padding top/bottom ca să nu fie acoperit conținutul de barele fixe */}
+      <body
+        className={`${inter.className} min-h-screen bg-background text-foreground pt-16 pb-14`}
+      >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <LanguageProvider>
             <SiteHeader />
@@ -85,12 +92,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   )
 }
 
-/* ===== Header global ===== */
+/* ===== Header global (FIXED pe toate paginile) ===== */
 function SiteHeader() {
   return (
-    <header className="sticky top-0 z-[100] bg-black/70 backdrop-blur supports-[backdrop-filter]:bg-black/50 border-b border-white/5">
+    <header className={`fixed top-0 left-0 right-0 z-[100] bg-black/70 backdrop-blur supports-[backdrop-filter]:bg-black/50 border-b border-white/5 ${HEADER_H}`}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="h-16 flex items-center justify-between">
+          {/* logo + home */}
           <Link href="/" className="flex items-center gap-3" aria-label="Acasă">
             <img
               src="/images/logo-elementara-new.png"
@@ -100,6 +108,7 @@ function SiteHeader() {
             <span className="sr-only">Parcul de Știință și Curiozități</span>
           </Link>
 
+          {/* meniul site-ului */}
           <nav className="hidden md:flex items-center gap-6 text-sm">
             <Link href="/" className={`${fxLink} text-sky-400`}>Acasă</Link>
             <Link href="/experiente" className={fxLink}>Experiențe</Link>
@@ -109,9 +118,10 @@ function SiteHeader() {
             <Link href="/contact" className={fxLink}>Contact</Link>
           </nav>
 
+          {/* programul de lucru în dreapta + CTA */}
           <div className="hidden md:flex items-center gap-2">
             <div className="flex items-center gap-2 text-sm text-gray-300">
-              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               <span>PROGRAM: Lu - Du, 10:00 - 22:00</span>
@@ -127,7 +137,7 @@ function SiteHeader() {
   )
 }
 
-/* ===== Footer global ===== */
+/* ===== Footer global (conținut clasic) ===== */
 function SiteFooter() {
   return (
     <footer id="contact" className="border-t border-white/5">
@@ -172,11 +182,11 @@ function SiteFooter() {
   )
 }
 
-/* ===== Bara fixă jos (mobil) ===== */
+/* ===== Bara fixă jos (ACUM fixă pe toate ecranele) ===== */
 function BottomBar() {
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-[90] bg-black/80 backdrop-blur-md border-t border-white/10 md:hidden">
-      <div className="flex items-center justify-around py-3 px-4 max-w-md mx-auto text-gray-300">
+    <div className={`fixed bottom-0 left-0 right-0 z-[90] bg-black/80 backdrop-blur-md border-t border-white/10 ${BOTTOM_H}`}>
+      <div className="h-full flex items-center justify-around px-4 max-w-3xl mx-auto text-gray-300">
         <Link href="/" className="flex flex-col items-center gap-1 text-xs hover:text-white">
           <Home className="h-5 w-5" />
           Acasă
@@ -201,4 +211,4 @@ function BottomBar() {
       </div>
     </div>
   )
-              }
+}
