@@ -1,61 +1,60 @@
 "use client"
+
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Sparkles, Download, Share2 } from "lucide-react"
 import { useState } from "react"
-import BlobUpload from "@/components/blob-upload"
-import GalleryClient from "@/components/gallery-client"
 
 export default function GaleriePage() {
-  const [uploadVersion, setUploadVersion] = useState(0)
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
 
   const fx =
     "transition-shadow duration-300 ease-out hover:shadow-[0_0_0_1px_rgba(56,189,248,0.35),0_0_28px_6px_rgba(168,85,247,0.25)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-400/70 rounded-md"
 
+  // Galeria statică (imaginile trebuie să existe în /public/images)
   const galleryImages = [
     {
-      src: "/astronomie-planetariu-tehnologie.png",
+      src: "/images/astronomie-planetariu-tehnologie.png",
       alt: "Planetariu interactiv cu copii explorând sistemul solar",
       category: "Astronomie",
     },
     {
-      src: "/optical-illusions-science-exhibit.png",
+      src: "/images/optical-illusions-science-exhibit.png",
       alt: "Expoziție de iluzii optice cu instalații interactive",
       category: "Fizică",
     },
     {
-      src: "/hands-on-science-experiment.png",
+      src: "/images/hands-on-science-experiment.png",
       alt: "Copii participând la experimente hands-on",
       category: "Experimente",
     },
     {
-      src: "/planetariu-astronomie-copii.png",
+      src: "/images/planetariu-astronomie-copii.png",
       alt: "Sesiune de astronomie în planetariu",
       category: "Astronomie",
     },
     {
-      src: "/provocari-logice-puzzle-stiinta.png",
+      src: "/images/provocari-logice-puzzle-stiinta.png",
       alt: "Provocări logice și puzzle-uri științifice",
       category: "Matematică",
     },
     {
-      src: "/tesla-coil-experiment.png",
+      src: "/images/tesla-coil-experiment.png",
       alt: "Experiment cu bobina Tesla și descărcări electrice",
       category: "Fizică",
     },
     {
-      src: "/interactive-physics-experiment.png",
+      src: "/images/interactive-physics-experiment.png",
       alt: "Experimente interactive de fizică",
       category: "Fizică",
     },
     {
-      src: "/interactive-biology-microscope.png",
+      src: "/images/interactive-biology-microscope.png",
       alt: "Explorarea lumii microscopice",
       category: "Biologie",
     },
     {
-      src: "/colorful-chemistry-experiments.png",
+      src: "/images/colorful-chemistry-experiments.png",
       alt: "Experimente chimice colorate și spectaculoase",
       category: "Chimie",
     },
@@ -70,7 +69,7 @@ export default function GaleriePage() {
   return (
     <>
       <main>
-        {/* HERO SECTION */}
+        {/* HERO */}
         <section className="relative overflow-hidden border-b border-white/5">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 py-16 sm:py-24">
             <div className="text-center space-y-6">
@@ -78,10 +77,10 @@ export default function GaleriePage() {
                 className={`inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-gray-300 ${fx}`}
               >
                 <Sparkles className="h-3.5 w-3.5 text-sky-400" aria-hidden="true" />
-                {"Galerie Foto"}
+                Galerie Foto
               </div>
               <h1 className="text-4xl sm:text-6xl xl:text-7xl font-extrabold tracking-tight leading-[1.05] bg-gradient-to-r from-pink-400 via-sky-400 to-violet-500 bg-clip-text text-transparent">
-                {"Știința în imagini"}
+                Știința în imagini
               </h1>
               <p className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto">
                 Descoperă momentele magice ale explorării științifice prin colecția noastră de fotografii din
@@ -146,35 +145,6 @@ export default function GaleriePage() {
           </div>
         </section>
 
-        {/* UPLOAD SECTION */}
-        <section className="py-16 sm:py-24 border-b border-white/5">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6">
-            <div className="text-center mb-8">
-              <SectionTitle title="Împărtășește experiența ta" />
-              <p className="mt-4 text-gray-300">
-                Ai vizitat parcul nostru? Încarcă fotografiile tale și ajută-ne să construim o galerie comună a
-                momentelor speciale.
-              </p>
-            </div>
-            <div className="bg-white/5 border border-white/10 rounded-xl p-6">
-              <BlobUpload
-                onUploaded={() => setUploadVersion((v) => v + 1)}
-                helperText="Acceptăm imagini JPG, PNG până la 4.5MB"
-              />
-            </div>
-          </div>
-        </section>
-
-        {/* IMAGINI ÎNCĂRCATE DE UTILIZATORI */}
-        <section className="py-16 sm:py-24">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6">
-            <SectionTitle title="Imagini încărcate de vizitatori" />
-            <div className="mt-8">
-              <GalleryClient version={uploadVersion} />
-            </div>
-          </div>
-        </section>
-
         {/* PAGINI CONEXE */}
         <section className="py-16 sm:py-24 border-t border-white/5">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
@@ -188,18 +158,18 @@ export default function GaleriePage() {
                 <p className="text-gray-400 text-sm">Explorează domeniile științifice</p>
               </Link>
               <Link
-                href="/domenii"
+                href="/galerie"
                 className={`p-6 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors ${fx}`}
               >
-                <h3 className="text-lg font-bold text-gray-300 mb-2">Domenii Științifice</h3>
-                <p className="text-gray-400 text-sm">Explorează domeniile științifice</p>
+                <h3 className="text-lg font-bold text-gray-300 mb-2">Galeria Foto</h3>
+                <p className="text-gray-400 text-sm">Vezi mai multe imagini</p>
               </Link>
               <Link
                 href="/faq"
                 className={`p-6 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors ${fx}`}
               >
                 <h3 className="text-lg font-bold text-gray-300 mb-2">Întrebări Frecvente</h3>
-                <p className="text-gray-400 text-sm">Află mai multe despre experiențele din fotografii</p>
+                <p className="text-gray-400 text-sm">Află detalii despre vizită</p>
               </Link>
             </div>
           </div>
@@ -231,7 +201,7 @@ export default function GaleriePage() {
   )
 }
 
-/* ————— Sub‑componente ————— */
+/* ————— Sub-componente ————— */
 
 function SectionTitle({ title }: { title: string }) {
   return (
@@ -254,20 +224,7 @@ function GalleryImageCard({
   category: string
   onClick: () => void
 }) {
-  const getCategoryLink = (category: string) => {
-    switch (category) {
-      case "Fizică":
-      case "Chimie":
-      case "Biologie":
-      case "Astronomie":
-      case "Matematică":
-        return "/domenii"
-      case "Experimente":
-        return "/experiente"
-      default:
-        return "/experiente"
-    }
-  }
+  const getCategoryLink = (_category: string) => "/domenii" // toate duc la Domenii
 
   return (
     <div className={`group relative overflow-hidden rounded-xl cursor-pointer ${fx}`} onClick={onClick}>
