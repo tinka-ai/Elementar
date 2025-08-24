@@ -2,11 +2,12 @@
 
 import type React from "react"
 import Link from "next/link"
+import { useState } from "react"
+
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import {
-  ArrowRight,
   Facebook,
   Instagram,
   Sparkles,
@@ -18,7 +19,6 @@ import {
   Calendar,
   Users,
 } from "lucide-react"
-import { useState } from "react"
 
 export default function ContactPage() {
   const [isLoading, setIsLoading] = useState(false)
@@ -29,8 +29,6 @@ export default function ContactPage() {
     "transition-shadow duration-300 ease-out hover:shadow-[0_0_0_1px_rgba(56,189,248,0.35),0_0_28px_6px_rgba(168,85,247,0.25)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-400/70 rounded-md"
   const fxIcon =
     "transition-shadow duration-300 ease-out hover:shadow-[0_0_0_1px_rgba(56,189,248,0.45),0_0_18px_4px_rgba(168,85,247,0.35)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-400/70 rounded-md"
-  const fxLink =
-    "relative transition-colors duration-200 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 hover:after:w-full after:bg-gradient-to-r after:from-pink-400 after:via-sky-400 after:to-violet-500 after:transition-all after:duration-300"
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -48,7 +46,6 @@ export default function ContactPage() {
       message: formData.get("message") as string,
     }
 
-    // Validate required fields
     if (!data.name || !data.email || !data.message) {
       setResult({ success: false, error: "Câmpurile obligatorii nu sunt completate." })
       setIsLoading(false)
@@ -56,16 +53,14 @@ export default function ContactPage() {
     }
 
     try {
-      // Method 1: Using EmailJS (client-side, WordPress compatible)
+      // Metoda 1: EmailJS
       const emailJSResponse = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          service_id: "service_elementar", // You'll need to configure this in EmailJS
-          template_id: "template_contact", // You'll need to configure this in EmailJS
-          user_id: "your_emailjs_user_id", // You'll need to get this from EmailJS
+          service_id: "service_elementar",
+          template_id: "template_contact",
+          user_id: "your_emailjs_user_id",
           template_params: {
             from_name: data.name,
             from_email: data.email,
@@ -81,34 +76,29 @@ export default function ContactPage() {
 
       if (emailJSResponse.ok) {
         setResult({ success: true, message: "Mesajul a fost trimis cu succes! Vă vom contacta în curând." })
-        // Reset form
         ;(e.target as HTMLFormElement).reset()
       } else {
         throw new Error("EmailJS failed")
       }
-    } catch (error) {
-      // Fallback Method 2: Direct PHP endpoint
+    } catch {
+      // Metoda 2: PHP (fallback)
       try {
         const phpResponse = await fetch("/wp-content/themes/elementar/send-email.php", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data),
         })
 
-        const result = await phpResponse.json()
-
-        if (result.success) {
+        const r = await phpResponse.json()
+        if (r.success) {
           setResult({ success: true, message: "Mesajul a fost trimis cu succes! Vă vom contacta în curând." })
           ;(e.target as HTMLFormElement).reset()
         } else {
-          throw new Error(result.error || "PHP endpoint failed")
+          throw new Error(r.error || "PHP endpoint failed")
         }
-      } catch (phpError) {
-        // Fallback Method 3: Simple mailto (always works)
+      } catch {
+        // Metoda 3: mailto (fallback universal)
         const mailtoLink = `mailto:office@elementar.md?subject=Mesaj nou de la ${data.name} - ${data.visitType || "Contact general"}&body=Nume: ${data.name}%0D%0AEmail: ${data.email}%0D%0A${data.phone ? `Telefon: ${data.phone}%0D%0A` : ""}${data.visitType ? `Tipul vizitei: ${data.visitType}%0D%0A` : ""}${data.groupSize ? `Numărul de persoane: ${data.groupSize}%0D%0A` : ""}${data.preferredDate ? `Data preferată: ${data.preferredDate}%0D%0A` : ""}%0D%0AMesaj:%0D%0A${data.message}`
-
         window.location.href = mailtoLink
         setResult({
           success: true,
@@ -123,13 +113,9 @@ export default function ContactPage() {
   const handleDirectEmail = async () => {
     try {
       setIsLoading(true)
-
-      // Send email in background to element.ar.md@gmail.com
       const response = await fetch("/api/send-direct-email", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           to: "element.ar.md@gmail.com",
           subject: "Contact direct de pe site",
@@ -139,15 +125,12 @@ export default function ContactPage() {
 
       if (response.ok) {
         setShowEmailSuccess(true)
-        // Hide success message after 3 seconds
         setTimeout(() => setShowEmailSuccess(false), 3000)
       } else {
-        // Fallback to mailto if API fails
         window.location.href =
           "mailto:office@elementar.md?subject=Întrebare despre Parcul de Știință și Curiozități&body=Bună ziua,%0D%0A%0D%0AAș dori să aflu mai multe informații despre..."
       }
-    } catch (error) {
-      // Fallback to mailto if there's an error
+    } catch {
       window.location.href =
         "mailto:office@elementar.md?subject=Întrebare despre Parcul de Știință și Curiozități&body=Bună ziua,%0D%0A%0D%0AAș dori să aflu mai multe informații despre..."
     } finally {
@@ -157,21 +140,19 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-dvh bg-black text-gray-200 antialiased pb-20">
-      <Header fx={fx} fxIcon={fxIcon} fxLink={fxLink} />
-
       <main>
-        {/* HERO SECTION */}
+        {/* HERO */}
         <section className="relative overflow-hidden border-b border-white/5">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 py-16 sm:py-24">
             <div className="text-center space-y-6">
               <div
                 className={`inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-gray-300 ${fx}`}
               >
-                <Sparkles className="h-3.5 w-3.5 text-sky-400" aria-hidden="true" />
-                {"Contactează-ne"}
+                <Sparkles className="h-3.5 w-3.5 text-sky-400" aria-hidden />
+                Contactează-ne
               </div>
               <h1 className="text-4xl sm:text-6xl xl:text-7xl font-extrabold tracking-tight leading-[1.05] bg-gradient-to-r from-pink-400 via-sky-400 to-violet-500 bg-clip-text text-transparent">
-                {"Hai să planificăm vizita"}
+                Hai să planificăm vizita
               </h1>
               <p className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto">
                 Suntem aici să răspundem la întrebările tale și să te ajutăm să organizezi o experiență de neuitat la
@@ -181,11 +162,11 @@ export default function ContactPage() {
           </div>
         </section>
 
-        {/* INFORMAȚII DE CONTACT */}
+        {/* INFORMAȚII + FORMULAR */}
         <section className="py-16 sm:py-24 border-b border-white/5">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <div className="grid lg:grid-cols-2 gap-12">
-              {/* INFORMAȚII */}
+              {/* INFO */}
               <div className="space-y-8">
                 <div>
                   <h2 className="text-3xl font-bold text-gray-300 mb-6">Informații de contact</h2>
@@ -221,7 +202,7 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                {/* SOCIAL MEDIA */}
+                {/* SOCIAL */}
                 <div>
                   <h3 className="text-xl font-bold text-gray-300 mb-4">Urmărește-ne</h3>
                   <div className="flex gap-4">
@@ -253,11 +234,10 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* FORMULAR DE CONTACT */}
+              {/* FORMULAR */}
               <div className={`p-8 rounded-xl border border-white/10 bg-white/5 ${fx}`}>
                 <h2 className="text-2xl font-bold text-gray-300 mb-6">Trimite-ne un mesaj</h2>
 
-                {/* MESAJ DE REZULTAT */}
                 {result && (
                   <div
                     className={`mb-6 p-4 rounded-lg ${result.success ? "bg-green-500/20 border border-green-500/30" : "bg-red-500/20 border border-red-500/30"}`}
@@ -309,7 +289,7 @@ export default function ContactPage() {
                         id="phone"
                         name="phone"
                         type="tel"
-                        className="bg-white/10 border border-white/20 rounded-md text-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-400"
+                        className="bg-white/10 border border-white/20 rounded-md text-gray-200 placeholder:text-gray-400"
                         placeholder="+373 XX XXX XXX"
                         disabled={isLoading}
                       />
@@ -343,7 +323,7 @@ export default function ContactPage() {
                         id="groupSize"
                         name="groupSize"
                         type="number"
-                        min="1"
+                        min={1}
                         className="bg-white/10 border border-white/20 rounded-md text-gray-200 placeholder:text-gray-400"
                         placeholder="Ex: 5"
                         disabled={isLoading}
@@ -378,11 +358,7 @@ export default function ContactPage() {
                     />
                   </div>
 
-                  <Button
-                    type="submit"
-                    disabled={isLoading}
-                    className={`w-full bg-sky-500 text-white hover:bg-sky-400 ${fx}`}
-                  >
+                  <Button type="submit" disabled={isLoading} className={`w-full bg-sky-500 text-white hover:bg-sky-400 ${fx}`}>
                     <Send className="mr-2 h-4 w-4" />
                     {isLoading ? "Se trimite..." : "Trimite mesajul"}
                   </Button>
@@ -416,7 +392,7 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                {/* CONTACT DIRECT SUCCESS POPUP */}
+                {/* POPUP SUCCES EMAIL DIRECT */}
                 {showEmailSuccess && (
                   <div className="fixed top-4 right-4 z-50 p-4 bg-green-500/90 border border-green-400 rounded-lg shadow-lg">
                     <div className="flex items-center gap-2">
@@ -530,7 +506,7 @@ export default function ContactPage() {
                 />
               </div>
 
-              {/* INSTRUCȚIUNI DE ACCES */}
+              {/* INSTRUCȚIUNI */}
               <div className="space-y-6">
                 <div className={`p-6 rounded-xl border border-white/10 bg-white/5 ${fx}`}>
                   <div className="flex items-start gap-4">
@@ -556,7 +532,7 @@ export default function ContactPage() {
                       <h3 className="font-semibold text-gray-300 mb-2">Transport public</h3>
                       <p className="text-gray-400 text-sm">
                         Autobuzele 1, 22, 35 și troleibuzele 2, 8 opresc în apropierea mall-ului. Stația cea mai
-                        apropiată: "Port Mall".
+                        apropiată: „Port Mall”.
                       </p>
                     </div>
                   </div>
@@ -594,7 +570,7 @@ export default function ContactPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <svg className="mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                    <svg className="mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                       <path d="M23.184 10.036c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10 10 4.477 10 10zm-10-8c-4.411 0-8 3.589-8 8s3.589 8 8 8 8-3.589 8-8-3.589-8-8-8zm0 14.5c-3.584 0-6.5-2.916-6.5-6.5s2.916-6.5 6.5-6.5 6.5 2.916 6.5 6.5-2.916 6.5-6.5-6.5zm0-11c-2.481 0-4.5 2.019-4.5 4.5s2.019 4.5 4.5 4.5 4.5-2.019 4.5-4.5-2.019-4.5-4.5-4.5z" />
                     </svg>
                     Deschide în WAZE
@@ -605,55 +581,11 @@ export default function ContactPage() {
           </div>
         </section>
       </main>
-
-      <Footer fx={fx} fxIcon={fxIcon} />
     </div>
   )
 }
 
-/* ————— Sub‑componente ————— */
-
-function Header({ fx, fxIcon, fxLink }: { fx: string; fxIcon: string; fxLink: string }) {
-  return (
-    <header className="sticky top-0 z-50 bg-black/70 backdrop-blur supports-[backdrop-filter]:bg-black/50 border-b border-white/5">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3" aria-label="Acasă">
-            <img
-              src="/images/logo-elementara.png"
-              alt="Logo ELEMENTAR — Parc de Știință și Curiozități"
-              className="h-8 sm:h-9 md:h-10 w-auto select-none pointer-events-none"
-            />
-            <span className="sr-only">Parcul de Știință și Curiozități</span>
-          </Link>
-          <nav className="hidden md:flex items-center gap-6 text-sm">
-            <Link href="/" className={fxLink}>
-              Acasă
-            </Link>
-            <Link href="/domenii" className={fxLink}>
-              Domenii
-            </Link>
-            <Link href="/galerie" className={fxLink}>
-              Galerie
-            </Link>
-            <Link href="/faq" className={fxLink}>
-              FAQ
-            </Link>
-            <Link href="/contact" className={`${fxLink} text-sky-400`}>
-              Contact
-            </Link>
-          </nav>
-          <Button asChild className={`hidden md:inline-flex bg-sky-500 text-white hover:bg-sky-400 ${fx}`}>
-            <Link href="/contact">
-              Programează o vizită
-              <ArrowRight className="ms-2 h-4 w-4" aria-hidden="true" />
-            </Link>
-          </Button>
-        </div>
-      </div>
-    </header>
-  )
-}
+/* ————— Sub-componente ————— */
 
 function ContactInfo({
   fx,
@@ -677,72 +609,5 @@ function ContactInfo({
         <p className="text-sm text-gray-400">{details}</p>
       </div>
     </div>
-  )
-}
-
-function Footer({ fx, fxIcon }: { fx: string; fxIcon: string }) {
-  return (
-    <footer className="border-t border-white/5">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 py-10">
-        <div className="mt-8 grid gap-6 sm:grid-cols-2">
-          <div className="space-y-2">
-            <p className="text-gray-300 font-medium">Contact</p>
-            <p className="text-sm text-gray-300">Port Mall, Chișinău MD — Strada Mihai Sadoveanu 42/6, MD-2075</p>
-            <p className="text-sm text-gray-300">+373 79 010 277 • office@elementar.md</p>
-          </div>
-          <div className="flex items-center gap-3">
-            <a
-              href="https://facebook.com/elementara.ro"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook"
-              className={`grid h-10 w-10 place-items-center rounded-md bg-white/10 hover:bg-white/15 border border-white/10 text-white ${fxIcon}`}
-            >
-              <Facebook className="h-5 w-5" />
-            </a>
-            <a
-              href="https://instagram.com/elementara.ro"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-              className={`grid h-10 w-10 place-items-center rounded-md bg-white/10 hover:bg-white/15 border border-white/10 text-white ${fxIcon}`}
-            >
-              <Instagram className="h-5 w-5" />
-            </a>
-          </div>
-        </div>
-
-        <div className="mt-8 text-xs text-gray-500 flex items-center justify-between">
-          <div>
-            <p>© {new Date().getFullYear()} ELEMENTAR — Parc de Știință și Curiozități.</p>
-            <p className="mt-1">powered by TINKA AI</p>
-          </div>
-          <div className="flex items-center gap-4">
-            <span className="inline-flex items-center gap-1">
-              <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                />
-              </svg>
-              +373 79 010 277
-            </span>
-            <span className="inline-flex items-center gap-1">
-              <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 002 2v10a2 2 0 002 2z"
-                />
-              </svg>
-              office@elementar.md
-            </span>
-          </div>
-        </div>
-      </div>
-    </footer>
   )
 }
