@@ -1,4 +1,3 @@
-import SiteHeader from "@/components/site-header"
 import type React from "react"
 import type { Metadata } from "next"
 import Link from "next/link"
@@ -8,7 +7,8 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { LanguageProvider } from "@/components/language-provider"
 import { Button } from "@/components/ui/button"
-import { Facebook, Instagram, Home, Phone, MapPin, Mail } from "lucide-react"
+import { ArrowRight, Facebook, Instagram, Home, Phone, MapPin, Mail } from "lucide-react"
+import NavLink from "@/components/nav-link"
 
 export const dynamic = "force-dynamic"
 export const revalidate = 0
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
       "Parcul de Știință și Curiozități – locul în care joaca, arta și experimentul te conduc la înțelegerea fenomenelor reale.",
     url: "https://elementar.md",
     siteName: "ELEMENTAR",
-    images: [{ url: "/logo-elementara-new.png", width: 1200, height: 630, alt: "ELEMENTAR" }],
+    images: [{ url: "/images/logo-elementara-new.png", width: 1200, height: 630, alt: "ELEMENTAR" }],
     locale: "ro_MD",
     type: "website",
   },
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     title: "ELEMENTAR — Parc de Știință și Curiozități",
     description:
       "Parcul de Știință și Curiozități – locul în care joaca, arta și experimentul te conduc la înțelegerea fenomenelor reale.",
-    images: ["/logo-elementara-new.png"],
+    images: ["/images/logo-elementara-new.png"],
   },
   robots: { index: true, follow: true },
   icons: {
@@ -57,6 +57,7 @@ const fxIcon =
   "grid h-10 w-10 place-items-center rounded-md border border-white/10 hover:bg-white/10 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
 
 /** înălțimi fixe: top padding pentru header = 64px, bottom padding pentru bara mobilă = 56px */
+const HEADER_H = "h-16"
 const BOTTOM_H = "h-14"
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -77,7 +78,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${inter.className} min-h-screen bg-background text-foreground pt-16 pb-14`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <LanguageProvider>
-            {/* BARA DE SUS — vine din componenta client @/components/site-header */}
+            {/* BARA DE SUS — inline în layout, cu NavLink (underline animat + activ) */}
             <SiteHeader />
 
             {/* conținutul paginii */}
@@ -90,6 +91,52 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </ThemeProvider>
       </body>
     </html>
+  )
+}
+
+/* ===== Header global (FIXED pe toate paginile) ===== */
+function SiteHeader() {
+  return (
+    <header
+      className={`fixed top-0 left-0 right-0 z-[100] bg-black/70 backdrop-blur supports-[backdrop-filter]:bg-black/50 border-b border-white/5 ${HEADER_H}`}
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <div className="h-16 flex items-center justify-between">
+          {/* Logo + link home */}
+          <Link href="/" className="flex items-center gap-3" aria-label="Acasă">
+            <img
+              src="/images/logo-elementara-new.png"
+              alt="Logo ELEMENTAR — Parc de Știință și Curiozități"
+              className="h-8 sm:h-9 md:h-10 w-auto select-none pointer-events-none"
+            />
+            <span className="sr-only">Parcul de Știință și Curiozități</span>
+          </Link>
+
+          {/* Meniul principal cu underline animat/activ */}
+          <nav className="hidden md:flex items-center gap-6">
+            <NavLink href="/">Acasă</NavLink>
+            <NavLink href="/domenii">Domenii</NavLink>
+            <NavLink href="/galerie">Galerie</NavLink>
+            <NavLink href="/faq">Întrebări</NavLink>
+            <NavLink href="/contact">Contact</NavLink>
+          </nav>
+
+          {/* Program + CTA */}
+          <div className="hidden md:flex items-center gap-2">
+            <div className="flex items-center gap-2 text-sm text-gray-300">
+              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>PROGRAM: Lu - Du, 10:00 - 22:00</span>
+            </div>
+            <Button className="bg-sky-500 text-white hover:bg-sky-400">
+              Programează o vizită
+              <ArrowRight className="ms-2 h-4 w-4" aria-hidden="true" />
+            </Button>
+          </div>
+        </div>
+      </div>
+    </header>
   )
 }
 
