@@ -2,6 +2,7 @@
 
 import type React from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import {
   ArrowRight,
@@ -158,13 +159,13 @@ export default function DomeniiPage() {
               </div>
             </div>
             <div className="relative">
-              <img
+              <Image
                 src="/images/hands-on-science-experiment.png"
                 alt="Experimente interdisciplinare"
                 width={600}
                 height={400}
                 className={`w-full h-auto rounded-2xl object-cover ${fx}`}
-                loading="lazy"
+                priority={false}
               />
             </div>
           </div>
@@ -245,14 +246,14 @@ function DomainCard({
 }) {
   return (
     <div className={`p-6 rounded-xl border border-white/10 bg-white/5 ${fx}`}>
-      <div className="mb-4">
-        <img
+      <div className="mb-4 relative h-48">
+        <Image
           src={image || "/placeholder.svg"}
           alt={title}
-          width={400}
-          height={240}
-          className="w-full h-48 object-cover rounded-lg"
-          loading="lazy"
+          fill
+          sizes="(max-width: 768px) 100vw, 400px"
+          className="object-cover rounded-lg"
+          priority={false}
         />
       </div>
       <div className="flex items-center gap-3 mb-4">
