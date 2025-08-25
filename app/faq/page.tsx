@@ -194,35 +194,32 @@ export default function FAQPage() {
           </div>
         </section>
 
-        {/* PAGINI CONEXE */}
+        {/* PAGINI CONEXE (fără „Experiențe”, centrat pe mijloc) */}
         <section className="py-16 sm:py-24 border-t border-white/5">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="mx-auto max-w-5xl px-4 sm:px-6">
             <h2 className="text-2xl font-bold text-gray-300 mb-8 text-center">Informații suplimentare</h2>
-            <div className="grid gap-6 md:grid-cols-4">
-              <Link
-                href="/experiente"
-                className={`p-6 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors ${fx}`}
-              >
-                <h3 className="text-lg font-bold text-gray-300 mb-2">Experiențe</h3>
-                <p className="text-gray-400 text-sm">Descoperă toate experiențele interactive</p>
-              </Link>
+
+            {/* Grilă 1/2/3 coloane, container îngustat și centrat */}
+            <div className="grid gap-6 justify-items-center sm:grid-cols-2 md:grid-cols-3">
               <Link
                 href="/domenii"
-                className={`p-6 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors ${fx}`}
+                className={`w-full p-6 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors ${fx}`}
               >
                 <h3 className="text-lg font-bold text-gray-300 mb-2">Domenii</h3>
                 <p className="text-gray-400 text-sm">Explorează domeniile științifice</p>
               </Link>
+
               <Link
                 href="/galerie"
-                className={`p-6 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors ${fx}`}
+                className={`w-full p-6 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors ${fx}`}
               >
                 <h3 className="text-lg font-bold text-gray-300 mb-2">Galerie</h3>
                 <p className="text-gray-400 text-sm">Vezi imagini din parcul nostru</p>
               </Link>
+
               <Link
                 href="/contact"
-                className={`p-6 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors ${fx}`}
+                className={`w-full p-6 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors ${fx}`}
               >
                 <h3 className="text-lg font-bold text-gray-300 mb-2">Contact</h3>
                 <p className="text-gray-400 text-sm">Programează vizita ta</p>
