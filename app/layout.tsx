@@ -178,7 +178,7 @@ function SiteFooter() {
 
         <div className="mt-8 text-xs text-gray-500 flex items-center justify-between">
           <p>© {new Date().getFullYear()} ELEMENTAR. Toate drepturile rezervate.</p>
-          <p>Made with curiosity.</p>
+          <p>Powered by TINKA AI.</p>
         </div>
       </div>
     </footer>
