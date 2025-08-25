@@ -63,11 +63,7 @@ export default function FAQPage() {
       questions: [
         {
           q: "Care sunt tarifele?",
-          a: "Biletul individual costă 35 MDL și include accesul la toate zonele plus participarea la un atelier. Pentru grupuri și școli, tariful este 30 MDL/persoană cu 2 ateliere incluse.",
-        },
-        {
-          q: "Există reduceri?",
-          a: "Da! Oferim reduceri pentru elevi, studenți și pensionari. Copiii sub 3 ani intră gratuit. Pentru grupuri de peste 10 persoane, oferim tarife speciale cu reducere de până la 15%.",
+          a: "Biletul individual costă 200 MDL și include accesul la toate zonele. Pentru grupuri și școli, tariful este 180 MDL/persoană.",
         },
         {
           q: "Ce metode de plată acceptați?",
