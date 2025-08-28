@@ -5,16 +5,7 @@ import Link from "next/link"
 import Image from "next/image"
 
 import { Button } from "@/components/ui/button"
-import {
-  ArrowRight,
-  Eye,
-  FlaskConical,
-  Puzzle,
-  Sparkles,
-  Waves,
-  Link2,
-  BadgeCheck,
-} from "lucide-react"
+import { ArrowRight, Eye, FlaskConical, Puzzle, Sparkles, Waves, Link2, BadgeCheck } from "lucide-react"
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
 import { useLanguage } from "@/components/language-provider"
 
@@ -149,9 +140,9 @@ export default function Page() {
             </div>
 
             <div>
-              {/* Imagine din /public (fără import) */}
+              {/* Imagine din /public/images (corectat pathul) */}
               <Image
-                src="/interactive-physics-experiment.png"
+                src="/images/interactive-physics-experiment.png"
                 alt="Copil experimentează pendulul lui Newton la un stand"
                 width={880}
                 height={620}
