@@ -19,7 +19,7 @@ import {
   Calendar,
   Users,
   BookOpen,
-  Image as ImageIcon, // alias ca să nu se lovească de Image global
+  Image as ImageIcon, // alias pentru a evita conflictul cu next/image
   HelpCircle,
 } from "lucide-react"
 
@@ -31,7 +31,7 @@ export default function ContactPage() {
   const fx =
     "transition-shadow duration-300 ease-out hover:shadow-[0_0_0_1px_rgba(56,189,248,0.35),0_0_28px_6px_rgba(168,85,247,0.25)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-400/70 rounded-md"
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setIsLoading(true)
     setResult(null)
@@ -89,7 +89,6 @@ export default function ContactPage() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data),
         })
-
         const r = await phpResponse.json()
         if (r.success) {
           setResult({ success: true, message: "Mesajul a fost trimis cu succes! Vă vom contacta în curând." })
@@ -106,12 +105,12 @@ export default function ContactPage() {
           message: "S-a deschis aplicația de email. Vă rugăm să trimiteți emailul din aplicația dumneavoastră.",
         })
       }
+    } finally {
+      setIsLoading(false)
     }
-
-    setIsLoading(false)
   }
 
-  const handleDirectEmail = async () => {
+  async function handleDirectEmail() {
     try {
       setIsLoading(true)
       const response = await fetch("/api/send-direct-email", {
@@ -123,7 +122,6 @@ export default function ContactPage() {
           message: "Un vizitator a solicitat contact direct prin butonul de email.",
         }),
       })
-
       if (response.ok) {
         setShowEmailSuccess(true)
         setTimeout(() => setShowEmailSuccess(false), 3000)
@@ -140,7 +138,7 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="min-h-dvh bg-black text-gray-200 antialiased pb-20">
+    <div className="min-h-screen bg-black text-gray-200 antialiased pb-20">
       <main>
         {/* HERO */}
         <section className="relative overflow-hidden border-b border-white/5">
@@ -411,7 +409,7 @@ export default function ContactPage() {
                   </div>
                 )}
 
-                {/* NAVIGARE RAPIDĂ – 3 carduri, cu lucide-react icons */}
+                {/* NAVIGARE RAPIDĂ */}
                 <div className="mt-8 p-6 bg-white/5 border border-white/10 rounded-xl">
                   <h3 className="text-lg font-bold text-gray-300 mb-4">Între timp, explorează:</h3>
                   <div className="mx-auto max-w-3xl grid gap-3 justify-items-center sm:grid-cols-2 md:grid-cols-3">
@@ -580,7 +578,7 @@ export default function ContactPage() {
   )
 }
 
-/* ————— Sub‑componente ————— */
+/* ————— Sub-componente ————— */
 
 function ContactInfo({
   fx,
