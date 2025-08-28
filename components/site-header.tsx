@@ -4,7 +4,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { Clock } from "lucide-react"
+import { Clock, ArrowRight } from "lucide-react"
 
 const NAV = [
   { href: "/",        label: "Acasă" },
@@ -28,13 +28,19 @@ export default function SiteHeader() {
   }
 
   return (
-    <header className="sticky top-0 z-[100] border-b border-white/10 bg-black/70 backdrop-blur supports-[backdrop-filter]:bg-black/50">
+    <header
+      className="fixed top-0 left-0 right-0 z-[110] border-b border-white/10
+                 bg-black/70 backdrop-blur supports-[backdrop-filter]:bg-black/50"
+      style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="h-16 flex items-center justify-between gap-4">
+
+        {/* DESKTOP (>= md) */}
+        <div className="hidden md:flex h-16 items-center justify-between gap-4">
           {/* LOGO */}
           <Link href="/" className="flex items-center gap-3" aria-label="Acasă">
             <Image
-              src="/logo-elementara-new.png"
+              src="/images/logo-elementara-new.png"  // dacă nu ai /images/, folosește "/logo-elementara-new.png"
               alt="Logo ELEMENTAR — Parc de Știință și Curiozități"
               width={150}
               height={34}
@@ -43,7 +49,7 @@ export default function SiteHeader() {
           </Link>
 
           {/* MENIU */}
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className="flex items-center gap-6">
             {NAV.map((item) => (
               <Link
                 key={item.href}
@@ -57,16 +63,65 @@ export default function SiteHeader() {
           </nav>
 
           {/* PROGRAM + CTA */}
-          <div className="hidden md:flex items-center gap-3">
-            <div className="flex items-center gap-2 text-sm text-gray-300">
+          <div className="flex items-center gap-3">
+            <div className="hidden lg:flex items-center gap-2 text-sm text-gray-300">
               <Clock className="h-4 w-4" />
               <span>PROGRAM: Lu – Du, 10:00 – 22:00</span>
             </div>
-            <Button className="bg-sky-500 text-white hover:bg-sky-400">
-              Programează o vizită
+            <Button className="bg-sky-500 text-white hover:bg-sky-400" asChild>
+              <Link href="/contact">
+                Programează o vizită
+                <ArrowRight className="ms-2 h-4 w-4" aria-hidden="true" />
+              </Link>
             </Button>
           </div>
         </div>
+
+        {/* MOBILE (< md) */}
+        <div className="md:hidden py-2">
+          {/* rând 1: logo + CTA mic */}
+          <div className="flex items-center justify-between h-12">
+            <Link href="/" className="flex items-center gap-3" aria-label="Acasă">
+              <Image
+                src="/images/logo-elementara-new.png"  // dacă nu ai /images/, folosește "/logo-elementara-new.png"
+                alt="Logo ELEMENTAR — Parc de Știință și Curiozități"
+                width={130}
+                height={30}
+                priority
+              />
+            </Link>
+            <Button size="sm" className="bg-sky-500 text-white hover:bg-sky-400" asChild>
+              <Link href="/contact">
+                Programează
+                <ArrowRight className="ms-1.5 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
+
+          {/* program în text mic */}
+          <p className="mt-1 text-xs text-gray-300 flex items-center gap-1">
+            <Clock className="h-3.5 w-3.5" />
+            PROGRAM: Lu – Du, 10:00 – 22:00
+          </p>
+
+          {/* rând 2: meniul vizibil, scroll orizontal dacă nu încape */}
+          <nav className="mt-2 -mx-4 px-4 overflow-x-auto no-scrollbar">
+            <ul className="flex gap-4 text-sm pb-1">
+              {NAV.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className={linkCls(item.href)}
+                    aria-current={pathname === item.href ? "page" : undefined}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+
       </div>
     </header>
   )
