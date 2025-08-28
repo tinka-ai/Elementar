@@ -29,8 +29,7 @@ export default function SiteHeader() {
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-[110] border-b border-white/10
-                 bg-black/70 backdrop-blur supports-[backdrop-filter]:bg-black/50"
+      className="fixed top-0 left-0 right-0 z-[110] border-b border-white/10 bg-black/70 backdrop-blur supports-[backdrop-filter]:bg-black/50"
       style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
@@ -40,7 +39,7 @@ export default function SiteHeader() {
           {/* LOGO */}
           <Link href="/" className="flex items-center gap-3" aria-label="Acasă">
             <Image
-              src="/images/logo-elementara-new.png"  // dacă nu ai /images/, folosește "/logo-elementara-new.png"
+              src="/images/logo-elementara-new.png"
               alt="Logo ELEMENTAR — Parc de Știință și Curiozități"
               width={150}
               height={34}
@@ -83,7 +82,7 @@ export default function SiteHeader() {
           <div className="flex items-center justify-between h-12">
             <Link href="/" className="flex items-center gap-3" aria-label="Acasă">
               <Image
-                src="/images/logo-elementara-new.png"  // dacă nu ai /images/, folosește "/logo-elementara-new.png"
+                src="/images/logo-elementara-new.png"
                 alt="Logo ELEMENTAR — Parc de Știință și Curiozități"
                 width={130}
                 height={30}
@@ -98,7 +97,7 @@ export default function SiteHeader() {
             </Button>
           </div>
 
-          {/* program în text mic */}
+          {/* program mic */}
           <p className="mt-1 text-xs text-gray-300 flex items-center gap-1">
             <Clock className="h-3.5 w-3.5" />
             PROGRAM: Lu – Du, 10:00 – 22:00
