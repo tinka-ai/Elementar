@@ -6,7 +6,7 @@ import "./globals.css"
 
 import { ThemeProvider } from "@/components/theme-provider"
 import { LanguageProvider } from "@/components/language-provider"
-import SiteHeader from "@/components/site-header" // ✅ folosim headerul din componentă
+import SiteHeader from "@/components/site-header"
 import { Facebook, Instagram, Home, Phone, MapPin, Mail } from "lucide-react"
 
 export const dynamic = "force-dynamic"
@@ -70,17 +70,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="manifest" href="/site.webmanifest" />
       </head>
 
-      {/* pt-24 pe mobil (headerul are 2 rânduri), pt-16 pe desktop; pb-14 pe mobil pentru bara fixă jos (56px) */}
-      <body className={`${inter.className} min-h-screen bg-background text-foreground pt-24 md:pt-16 pb-14 md:pb-0`}>
+      {/* pt-24 pe mobil (headerul are 2 rânduri), pt-16 pe desktop;
+          pb-14 pe mobil pentru bara fixă (56px) + safe-area pe dispozitive cu home indicator */}
+      <body
+        className={`${inter.className} min-h-screen bg-background text-foreground pt-24 md:pt-16 pb-14 supports-[env(safe-area-inset-top)]:pt-[calc(4rem+env(safe-area-inset-top))] supports-[env(safe-area-inset-bottom)]:pb-[calc(3.5rem+env(safe-area-inset-bottom))]`}
+      >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <LanguageProvider>
-            {/* Header global din componentă (are meniul vizibil pe mobil) */}
             <SiteHeader />
-
-            {/* Conținut pagină */}
             {children}
-
-            {/* Footer + bară mobilă jos */}
             <SiteFooter />
             <BottomBar />
           </LanguageProvider>
@@ -144,10 +142,13 @@ function BottomBar() {
         background: "rgba(0,0,0,0.82)",
         backdropFilter: "blur(10px)",
         WebkitBackdropFilter: "blur(10px)",
-        paddingBottom: "env(safe-area-inset-bottom, 0px)",
       }}
     >
-      <div className="h-14 flex items-center justify-around px-4 max-w-3xl mx-auto text-gray-300">
+      {/* h-14 (56px) + safe-area pe iOS */}
+      <div
+        className="h-14 flex items-center justify-around px-4 max-w-3xl mx-auto text-gray-300"
+        style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
+      >
         <Link href="/" className="flex flex-col items-center gap-1 text-xs hover:text-white">
           <Home className="h-5 w-5" />
           Acasă
