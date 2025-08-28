@@ -75,7 +75,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
 
       {/* padding top/bottom ca să nu fie acoperit conținutul de barele fixe */}
-      <body className={`${inter.className} min-h-screen bg-background text-foreground pt-16 pb-14`}>
+     <body className={`${inter.className} min-h-screen bg-background text-foreground pt-24 md:pt-16 pb-14`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <LanguageProvider>
             {/* BARA DE SUS — inline în layout, cu NavLink (underline animat + activ) */}
