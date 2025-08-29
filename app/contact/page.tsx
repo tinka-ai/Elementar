@@ -138,469 +138,429 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-gray-200 antialiased pb-20">
-      <main>
-        {/* HERO */}
-        <section className="relative overflow-hidden border-b border-white/5">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 py-16 sm:py-24">
-            <div className="text-center space-y-6">
-              <div
-                className={`inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-gray-300 ${fx}`}
-              >
-                <Sparkles className="h-3.5 w-3.5 text-sky-400" aria-hidden />
-                Contactează-ne
+    <main className="min-h-dvh bg-black text-gray-200 antialiased pb-20">
+      {/* HERO */}
+      <section className="relative overflow-hidden border-b border-white/5">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 py-16 sm:py-24">
+          <div className="text-center space-y-6">
+            <div
+              className={`inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-gray-300 ${fx}`}
+            >
+              <Sparkles className="h-3.5 w-3.5 text-sky-400" aria-hidden />
+              Contactează-ne
+            </div>
+            <h1 className="text-4xl sm:text-6xl xl:text-7xl font-extrabold tracking-tight leading-[1.05] bg-gradient-to-r from-pink-400 via-sky-400 to-violet-500 bg-clip-text text-transparent">
+              Hai să planificăm vizita
+            </h1>
+            <p className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto">
+              Suntem aici să răspundem la întrebările tale și să te ajutăm să organizezi o experiență de neuitat la
+              parcul nostru de știință.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* INFORMAȚII + FORMULAR */}
+      <section className="py-16 sm:py-24 border-b border-white/5">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="grid lg:grid-cols-2 gap-12">
+            {/* INFO */}
+            <div className="space-y-8">
+              <div>
+                <h2 className="text-3xl font-bold text-gray-300 mb-6">Informații de contact</h2>
+                <div className="space-y-6">
+                  <ContactInfo
+                    fx={fx}
+                    icon={<MapPin className="h-6 w-6" />}
+                    title="Adresa"
+                    info="Port Mall, Chișinău MD"
+                    details="Strada Mihai Sadoveanu 42/6, MD-2075"
+                  />
+                  <ContactInfo
+                    fx={fx}
+                    icon={<Phone className="h-6 w-6" />}
+                    title="Telefon"
+                    info="+373 79 010 277"
+                    details="Luni - Duminică, 10:00 - 22:00"
+                  />
+                  <ContactInfo
+                    fx={fx}
+                    icon={<Mail className="h-6 w-6" />}
+                    title="Email"
+                    info="office@elementar.md"
+                    details="Răspundem în maxim 24 de ore"
+                  />
+                  <ContactInfo
+                    fx={fx}
+                    icon={<Clock className="h-6 w-6" />}
+                    title="Program"
+                    info="Luni - Duminică"
+                    details="10:00 - 22:00 (ultimele intrări la 21:00)"
+                  />
+                </div>
               </div>
-              <h1 className="text-4xl sm:text-6xl xl:text-7xl font-extrabold tracking-tight leading-[1.05] bg-gradient-to-r from-pink-400 via-sky-400 to-violet-500 bg-clip-text text-transparent">
-                Hai să planificăm vizita
-              </h1>
-              <p className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto">
-                Suntem aici să răspundem la întrebările tale și să te ajutăm să organizezi o experiență de neuitat la
-                parcul nostru de știință.
-              </p>
+
+              {/* SOCIAL */}
+              <div>
+                <h3 className="text-xl font-bold text-gray-300 mb-4">Urmărește-ne</h3>
+                <div className="flex gap-4">
+                  <a
+                    href="https://facebook.com/elementara.ro"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`flex items-center gap-3 p-4 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition-colors ${fx}`}
+                  >
+                    <Facebook className="h-6 w-6 text-blue-400" />
+                    <div>
+                      <p className="font-medium text-gray-300">Facebook</p>
+                      <p className="text-sm text-gray-400">@elementara.ro</p>
+                    </div>
+                  </a>
+                  <a
+                    href="https://instagram.com/elementara.ro"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`flex items-center gap-3 p-4 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition-colors ${fx}`}
+                  >
+                    <Instagram className="h-6 w-6 text-pink-400" />
+                    <div>
+                      <p className="font-medium text-gray-300">Instagram</p>
+                      <p className="text-sm text-gray-400">@elementara.ro</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* FORMULAR */}
+            <div className={`p-8 rounded-xl border border-white/10 bg-white/5 ${fx}`}>
+              <h2 className="text-2xl font-bold text-gray-300 mb-6">Trimite-ne un mesaj</h2>
+
+              {result && (
+                <div
+                  className={`mb-6 p-4 rounded-lg ${result.success ? "bg-green-500/20 border border-green-500/30" : "bg-red-500/20 border border-red-500/30"}`}
+                >
+                  <p className={`text-sm ${result.success ? "text-green-300" : "text-red-300"}`}>
+                    {result.success ? result.message : result.error}
+                  </p>
+                </div>
+              )}
+
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
+                      Nume complet *
+                    </label>
+                    <Input
+                      id="name"
+                      name="name"
+                      type="text"
+                      required
+                      className="bg-white/10 border-white/20 text-gray-200 placeholder:text-gray-400"
+                      placeholder="Numele tău"
+                      disabled={isLoading}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+                      Email *
+                    </label>
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      required
+                      className="bg-white/10 border-white/20 text-gray-200 placeholder:text-gray-400"
+                      placeholder="email@exemplu.com"
+                      disabled={isLoading}
+                    />
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-2">
+                      Telefon
+                    </label>
+                    <Input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      className="bg-white/10 border border-white/20 rounded-md text-gray-200 placeholder:text-gray-400"
+                      placeholder="+373 XX XXX XXX"
+                      disabled={isLoading}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="visitType" className="block text-sm font-medium text-gray-300 mb-2">
+                      Tipul vizitei
+                    </label>
+                    <select
+                      id="visitType"
+                      name="visitType"
+                      className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-400"
+                      disabled={isLoading}
+                    >
+                      <option value="">Selectează</option>
+                      <option value="individual">Vizită individuală</option>
+                      <option value="familie">Vizită în familie</option>
+                      <option value="grup">Grup organizat</option>
+                      <option value="scoala">Excursie școlară</option>
+                      <option value="aniversare">Petrecere aniversară</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="groupSize" className="block text-sm font-medium text-gray-300 mb-2">
+                      Numărul de persoane
+                    </label>
+                    <Input
+                      id="groupSize"
+                      name="groupSize"
+                      type="number"
+                      min={1}
+                      className="bg-white/10 border border-white/20 rounded-md text-gray-200 placeholder:text-gray-400"
+                      placeholder="Ex: 5"
+                      disabled={isLoading}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="preferredDate" className="block text-sm font-medium text-gray-300 mb-2">
+                      Data preferată
+                    </label>
+                    <Input
+                      id="preferredDate"
+                      name="preferredDate"
+                      type="date"
+                      className="bg-white/10 border border-white/20 rounded-md text-gray-200"
+                      disabled={isLoading}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
+                    Mesaj *
+                  </label>
+                  <Textarea
+                    id="message"
+                    name="message"
+                    required
+                    rows={4}
+                    className="bg-white/10 border border-white/20 rounded-md text-gray-200 placeholder:text-gray-400"
+                    placeholder="Spune-ne mai multe despre vizita ta sau întreabă orice te interesează..."
+                    disabled={isLoading}
+                  />
+                </div>
+
+                <Button type="submit" disabled={isLoading} className={`w-full bg-sky-500 text-white hover:bg-sky-400 ${fx}`}>
+                  <Send className="mr-2 h-4 w-4" />
+                  {isLoading ? "Se trimite..." : "Trimite mesajul"}
+                </Button>
+              </form>
+
+              {/* CONTACT DIRECT */}
+              <div className="mt-6 p-4 bg-white/5 border border-white/10 rounded-xl">
+                <h3 className="text-sm font-bold text-gray-300 mb-2">Sau contactează-ne direct:</h3>
+                <div className="flex flex-col sm:flex-row gap-2">
+                  <Button
+                    asChild
+                    variant="outline"
+                    size="sm"
+                    className={`border-sky-700/60 text-sky-300 hover:bg-sky-500/10 bg-transparent ${fx}`}
+                  >
+                    <a href="tel:+37379010277">
+                      <Phone className="mr-2 h-4 w-4" />
+                      Sună acum
+                    </a>
+                  </Button>
+                  <Button
+                    onClick={handleDirectEmail}
+                    disabled={isLoading}
+                    variant="outline"
+                    size="sm"
+                    className={`border-sky-700/60 text-sky-300 hover:bg-sky-500/10 bg-transparent ${fx}`}
+                  >
+                    <Mail className="mr-2 h-4 w-4" />
+                    {isLoading ? "Se trimite..." : "Email direct"}
+                  </Button>
+                </div>
+              </div>
+
+              {/* POPUP SUCCES EMAIL DIRECT */}
+              {showEmailSuccess && (
+                <div className="fixed top-4 right-4 z-50 p-4 bg-green-500/90 border border-green-400 rounded-lg shadow-lg">
+                  <div className="flex items-center gap-2">
+                    <div className="w-5 h-5 bg-green-400 rounded-full flex items-center justify-center">
+                      <svg className="w-3 h-3 text-green-900" fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                          fillRule="evenodd"
+                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                    <p className="text-white font-medium">Mesajul a fost transmis cu succes!</p>
+                  </div>
+                </div>
+              )}
+
+              {/* NAVIGARE RAPIDĂ */}
+              <div className="mt-8 p-6 bg-white/5 border border-white/10 rounded-xl">
+                <h3 className="text-lg font-bold text-gray-300 mb-4">Între timp, explorează:</h3>
+                <div className="mx-auto max-w-3xl grid gap-3 justify-items-center sm:grid-cols-2 md:grid-cols-3">
+                  <Link
+                    href="/domenii"
+                    className={`w-full p-3 rounded-lg bg-white/10 hover:bg-white/15 text-center transition-colors ${fx}`}
+                  >
+                    <BookOpen className="mx-auto h-6 w-6 text-sky-400 mb-1" />
+                    <div className="text-sm text-gray-300">Domenii</div>
+                  </Link>
+                  <Link
+                    href="/galerie"
+                    className={`w-full p-3 rounded-lg bg-white/10 hover:bg-white/15 text-center transition-colors ${fx}`}
+                  >
+                    <ImageIcon className="mx-auto h-6 w-6 text-sky-400 mb-1" />
+                    <div className="text-sm text-gray-300">Galerie</div>
+                  </Link>
+                  <Link
+                    href="/faq"
+                    className={`w-full p-3 rounded-lg bg-white/10 hover:bg-white/15 text-center transition-colors ${fx}`}
+                  >
+                    <HelpCircle className="mx-auto h-6 w-6 text-sky-400 mb-1" />
+                    <div className="text-sm text-gray-300">FAQ</div>
+                  </Link>
+                </div>
+              </div>
+              {/* /NAVIGARE RAPIDĂ */}
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* INFORMAȚII + FORMULAR */}
-        <section className="py-16 sm:py-24 border-b border-white/5">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6">
-            <div className="grid lg:grid-cols-2 gap-12">
-              {/* INFO */}
-              <div className="space-y-8">
-                <div>
-                  <h2 className="text-3xl font-bold text-gray-300 mb-6">Informații de contact</h2>
-                  <div className="space-y-6">
-                    <ContactInfo
-                      fx={fx}
-                      icon={<MapPin className="h-6 w-6" />}
-                      title="Adresa"
-                      info="Port Mall, Chișinău MD"
-                      details="Strada Mihai Sadoveanu 42/6, MD-2075"
-                    />
-                    <ContactInfo
-                      fx={fx}
-                      icon={<Phone className="h-6 w-6" />}
-                      title="Telefon"
-                      info="+373 79 010 277"
-                      details="Luni - Duminică, 10:00 - 22:00"
-                    />
-                    <ContactInfo
-                      fx={fx}
-                      icon={<Mail className="h-6 w-6" />}
-                      title="Email"
-                      info="office@elementar.md"
-                      details="Răspundem în maxim 24 de ore"
-                    />
-                    <ContactInfo
-                      fx={fx}
-                      icon={<Clock className="h-6 w-6" />}
-                      title="Program"
-                      info="Luni - Duminică"
-                      details="10:00 - 22:00 (ultimele intrări la 21:00)"
-                    />
+      {/* INFORMAȚII UTILE */}
+      <section className="py-16 sm:py-24 border-t border-white/5">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          <h2 className="text-2xl font-bold text-gray-300 mb-8 text-center">Pregătește-te pentru vizită</h2>
+          <div className="grid gap-6 md:grid-cols-3">
+            <Link
+              href="/domenii"
+              className={`p-6 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors ${fx}`}
+            >
+              <h3 className="text-lg font-bold text-gray-300 mb-2">Ce să aștepți</h3>
+              <p className="text-gray-400 text-sm">Descoperă toate domeniile științifice care te așteaptă</p>
+            </Link>
+            <Link
+              href="/faq"
+              className={`p-6 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors ${fx}`}
+            >
+              <h3 className="text-lg font-bold text-gray-300 mb-2">Întrebări Frecvente</h3>
+              <p className="text-gray-400 text-sm">Găsește răspunsuri la întrebările despre vizită</p>
+            </Link>
+            <Link
+              href="/galerie"
+              className={`p-6 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors ${fx}`}
+            >
+              <h3 className="text-lg font-bold text-gray-300 mb-2">Vezi Galeria</h3>
+              <p className="text-gray-400 text-sm">Inspiră-te din experiențele altor vizitatori</p>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* HARTĂ ȘI ACCES */}
+      <section className="py-16 sm:py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-pink-400 via-sky-400 to-violet-500 bg-clip-text text-transparent mb-4">
+              Cum ajungi la noi
+            </h2>
+            <p className="text-lg text-gray-300">
+              Ne găsești în inima Chișinăului, în Port Mall, cu acces facil și parcare gratuită.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            {/* HARTĂ */}
+            <div className={`rounded-xl overflow-hidden ${fx}`}>
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2719.8234567890123!2d28.8638!3d47.0105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c97c3f7b123456%3A0x1234567890abcdef!2sPort%20Mall%2C%20Strada%20Mihai%20Sadoveanu%2042%2F6%2C%20Chi%C8%99in%C4%83u%20MD-2075%2C%20Moldova!5e0!3m2!1sen!2s!4v1234567890123!5m2!1sen!2s"
+                width="100%"
+                height="400"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Locația ELEMENTAR în Port Mall"
+              />
+            </div>
+
+            {/* INSTRUCȚIUNI */}
+            <div className="space-y-6">
+              <div className={`p-6 rounded-xl border border-white/10 bg-white/5 ${fx}`}>
+                <div className="flex items-start gap-4">
+                  <div className="grid h-10 w-10 place-items-center rounded-md bg-green-500/20 text-green-400">
+                    <MapPin className="h-5 w-5" />
                   </div>
-                </div>
-
-                {/* SOCIAL */}
-                <div>
-                  <h3 className="text-xl font-bold text-gray-300 mb-4">Urmărește-ne</h3>
-                  <div className="flex gap-4">
-                    <a
-                      href="https://facebook.com/elementara.ro"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`flex items-center gap-3 p-4 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition-colors ${fx}`}
-                    >
-                      <Facebook className="h-6 w-6 text-blue-400" />
-                      <div>
-                        <p className="font-medium text-gray-300">Facebook</p>
-                        <p className="text-sm text-gray-400">@elementara.ro</p>
-                      </div>
-                    </a>
-                    <a
-                      href="https://instagram.com/elementara.ro"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`flex items-center gap-3 p-4 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition-colors ${fx}`}
-                    >
-                      <Instagram className="h-6 w-6 text-pink-400" />
-                      <div>
-                        <p className="font-medium text-gray-300">Instagram</p>
-                        <p className="text-sm text-gray-400">@elementara.ro</p>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              {/* FORMULAR */}
-              <div className={`p-8 rounded-xl border border-white/10 bg-white/5 ${fx}`}>
-                <h2 className="text-2xl font-bold text-gray-300 mb-6">Trimite-ne un mesaj</h2>
-
-                {result && (
-                  <div
-                    className={`mb-6 p-4 rounded-lg ${result.success ? "bg-green-500/20 border border-green-500/30" : "bg-red-500/20 border border-red-500/30"}`}
-                  >
-                    <p className={`text-sm ${result.success ? "text-green-300" : "text-red-300"}`}>
-                      {result.success ? result.message : result.error}
+                  <div>
+                    <h3 className="font-semibold text-gray-300 mb-2">Cu mașina</h3>
+                    <p className="text-gray-400 text-sm">
+                      Parcare gratuită disponibilă în Port Mall. Intrarea principală pe Strada Mihai Sadoveanu. Parcul
+                      se află la etajul 2.
                     </p>
                   </div>
-                )}
+                </div>
+              </div>
 
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-                        Nume complet *
-                      </label>
-                      <Input
-                        id="name"
-                        name="name"
-                        type="text"
-                        required
-                        className="bg-white/10 border-white/20 text-gray-200 placeholder:text-gray-400"
-                        placeholder="Numele tău"
-                        disabled={isLoading}
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                        Email *
-                      </label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        required
-                        className="bg-white/10 border-white/20 text-gray-200 placeholder:text-gray-400"
-                        placeholder="email@exemplu.com"
-                        disabled={isLoading}
-                      />
-                    </div>
+              <div className={`p-6 rounded-xl border border-white/10 bg-white/5 ${fx}`}>
+                <div className="flex items-start gap-4">
+                  <div className="grid h-10 w-10 place-items-center rounded-md bg-blue-500/20 text-blue-400">
+                    <Users className="h-5 w-5" />
                   </div>
-
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-2">
-                        Telefon
-                      </label>
-                      <Input
-                        id="phone"
-                        name="phone"
-                        type="tel"
-                        className="bg-white/10 border border-white/20 rounded-md text-gray-200 placeholder:text-gray-400"
-                        placeholder="+373 XX XXX XXX"
-                        disabled={isLoading}
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="visitType" className="block text-sm font-medium text-gray-300 mb-2">
-                        Tipul vizitei
-                      </label>
-                      <select
-                        id="visitType"
-                        name="visitType"
-                        className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-400"
-                        disabled={isLoading}
-                      >
-                        <option value="">Selectează</option>
-                        <option value="individual">Vizită individuală</option>
-                        <option value="familie">Vizită în familie</option>
-                        <option value="grup">Grup organizat</option>
-                        <option value="scoala">Excursie școlară</option>
-                        <option value="aniversare">Petrecere aniversară</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="groupSize" className="block text-sm font-medium text-gray-300 mb-2">
-                        Numărul de persoane
-                      </label>
-                      <Input
-                        id="groupSize"
-                        name="groupSize"
-                        type="number"
-                        min={1}
-                        className="bg-white/10 border border-white/20 rounded-md text-gray-200 placeholder:text-gray-400"
-                        placeholder="Ex: 5"
-                        disabled={isLoading}
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="preferredDate" className="block text-sm font-medium text-gray-300 mb-2">
-                        Data preferată
-                      </label>
-                      <Input
-                        id="preferredDate"
-                        name="preferredDate"
-                        type="date"
-                        className="bg-white/10 border border-white/20 rounded-md text-gray-200"
-                        disabled={isLoading}
-                      />
-                    </div>
-                  </div>
-
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
-                      Mesaj *
-                    </label>
-                    <Textarea
-                      id="message"
-                      name="message"
-                      required
-                      rows={4}
-                      className="bg-white/10 border border-white/20 rounded-md text-gray-200 placeholder:text-gray-400"
-                      placeholder="Spune-ne mai multe despre vizita ta sau întreabă orice te interesează..."
-                      disabled={isLoading}
-                    />
-                  </div>
-
-                  <Button type="submit" disabled={isLoading} className={`w-full bg-sky-500 text-white hover:bg-sky-400 ${fx}`}>
-                    <Send className="mr-2 h-4 w-4" />
-                    {isLoading ? "Se trimite..." : "Trimite mesajul"}
-                  </Button>
-                </form>
-
-                {/* CONTACT DIRECT */}
-                <div className="mt-6 p-4 bg-white/5 border border-white/10 rounded-xl">
-                  <h3 className="text-sm font-bold text-gray-300 mb-2">Sau contactează-ne direct:</h3>
-                  <div className="flex flex-col sm:flex-row gap-2">
-                    <Button
-                      asChild
-                      variant="outline"
-                      size="sm"
-                      className={`border-sky-700/60 text-sky-300 hover:bg-sky-500/10 bg-transparent ${fx}`}
-                    >
-                      <a href="tel:+37379010277">
-                        <Phone className="mr-2 h-4 w-4" />
-                        Sună acum
-                      </a>
-                    </Button>
-                    <Button
-                      onClick={handleDirectEmail}
-                      disabled={isLoading}
-                      variant="outline"
-                      size="sm"
-                      className={`border-sky-700/60 text-sky-300 hover:bg-sky-500/10 bg-transparent ${fx}`}
-                    >
-                      <Mail className="mr-2 h-4 w-4" />
-                      {isLoading ? "Se trimite..." : "Email direct"}
-                    </Button>
+                    <h3 className="font-semibold text-gray-300 mb-2">Transport public</h3>
+                    <p className="text-gray-400 text-sm">
+                      Autobuzele 1, 22, 35 și troleibuzele 2, 8 opresc în apropierea mall-ului. Stația cea mai
+                      apropiată: „Port Mall".
+                    </p>
                   </div>
                 </div>
-
-                {/* POPUP SUCCES EMAIL DIRECT */}
-                {showEmailSuccess && (
-                  <div className="fixed top-4 right-4 z-50 p-4 bg-green-500/90 border border-green-400 rounded-lg shadow-lg">
-                    <div className="flex items-center gap-2">
-                      <div className="w-5 h-5 bg-green-400 rounded-full flex items-center justify-center">
-                        <svg className="w-3 h-3 text-green-900" fill="currentColor" viewBox="0 0 20 20">
-                          <path
-                            fillRule="evenodd"
-                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      </div>
-                      <p className="text-white font-medium">Mesajul a fost transmis cu succes!</p>
-                    </div>
-                  </div>
-                )}
-
-                {/* NAVIGARE RAPIDĂ */}
-                <div className="mt-8 p-6 bg-white/5 border border-white/10 rounded-xl">
-                  <h3 className="text-lg font-bold text-gray-300 mb-4">Între timp, explorează:</h3>
-                  <div className="mx-auto max-w-3xl grid gap-3 justify-items-center sm:grid-cols-2 md:grid-cols-3">
-                    <Link
-                      href="/domenii"
-                      className={`w-full p-3 rounded-lg bg-white/10 hover:bg-white/15 text-center transition-colors ${fx}`}
-                    >
-                      <BookOpen className="mx-auto h-6 w-6 text-sky-400 mb-1" />
-                      <div className="text-sm text-gray-300">Domenii</div>
-                    </Link>
-                    <Link
-                      href="/galerie"
-                      className={`w-full p-3 rounded-lg bg-white/10 hover:bg-white/15 text-center transition-colors ${fx}`}
-                    >
-                      <ImageIcon className="mx-auto h-6 w-6 text-sky-400 mb-1" />
-                      <div className="text-sm text-gray-300">Galerie</div>
-                    </Link>
-                    <Link
-                      href="/faq"
-                      className={`w-full p-3 rounded-lg bg-white/10 hover:bg-white/15 text-center transition-colors ${fx}`}
-                    >
-                      <HelpCircle className="mx-auto h-6 w-6 text-sky-400 mb-1" />
-                      <div className="text-sm text-gray-300">FAQ</div>
-                    </Link>
-                  </div>
-                </div>
-                {/* /NAVIGARE RAPIDĂ */}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* INFORMAȚII UTILE */}
-        <section className="py-16 sm:py-24 border-t border-white/5">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6">
-            <h2 className="text-2xl font-bold text-gray-300 mb-8 text-center">Pregătește-te pentru vizită</h2>
-            <div className="grid gap-6 md:grid-cols-3">
-              <Link
-                href="/domenii"
-                className={`p-6 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors ${fx}`}
-              >
-                <h3 className="text-lg font-bold text-gray-300 mb-2">Ce să aștepți</h3>
-                <p className="text-gray-400 text-sm">Descoperă toate domeniile științifice care te așteaptă</p>
-              </Link>
-              <Link
-                href="/faq"
-                className={`p-6 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors ${fx}`}
-              >
-                <h3 className="text-lg font-bold text-gray-300 mb-2">Întrebări Frecvente</h3>
-                <p className="text-gray-400 text-sm">Găsește răspunsuri la întrebările despre vizită</p>
-              </Link>
-              <Link
-                href="/galerie"
-                className={`p-6 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors ${fx}`}
-              >
-                <h3 className="text-lg font-bold text-gray-300 mb-2">Vezi Galeria</h3>
-                <p className="text-gray-400 text-sm">Inspiră-te din experiențele altor vizitatori</p>
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* HARTĂ ȘI ACCES */}
-        <section className="py-16 sm:py-24">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-pink-400 via-sky-400 to-violet-500 bg-clip-text text-transparent mb-4">
-                Cum ajungi la noi
-              </h2>
-              <p className="text-lg text-gray-300">
-                Ne găsești în inima Chișinăului, în Port Mall, cu acces facil și parcare gratuită.
-              </p>
-            </div>
-
-            <div className="grid lg:grid-cols-2 gap-12 items-start">
-              {/* HARTĂ */}
-              <div className={`rounded-xl overflow-hidden ${fx}`}>
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2719.8234567890123!2d28.8638!3d47.0105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c97c3f7b123456%3A0x1234567890abcdef!2sPort%20Mall%2C%20Strada%20Mihai%20Sadoveanu%2042%2F6%2C%20Chi%C8%99in%C4%83u%20MD-2075%2C%20Moldova!5e0!3m2!1sen!2s!4v1234567890123!5m2!1sen!2s"
-                  width="100%"
-                  height="400"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Locația ELEMENTAR în Port Mall"
-                />
               </div>
 
-              {/* INSTRUCȚIUNI */}
-              <div className="space-y-6">
-                <div className={`p-6 rounded-xl border border-white/10 bg-white/5 ${fx}`}>
-                  <div className="flex items-start gap-4">
-                    <div className="grid h-10 w-10 place-items-center rounded-md bg-green-500/20 text-green-400">
-                      <MapPin className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-300 mb-2">Cu mașina</h3>
-                      <p className="text-gray-400 text-sm">
-                        Parcare gratuită disponibilă în Port Mall. Intrarea principală pe Strada Mihai Sadoveanu. Parcul
-                        se află la etajul 2.
-                      </p>
-                    </div>
+              <div className={`p-6 rounded-xl border border-white/10 bg-white/5 ${fx}`}>
+                <div className="flex items-start gap-4">
+                  <div className="grid h-10 w-10 place-items-center rounded-md bg-purple-500/20 text-purple-400">
+                    <Calendar className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-300 mb-2">Rezervare recomandată</h3>
+                    <p className="text-gray-400 text-sm">
+                      Pentru o experiență optimă, recomandăm rezervarea în avans, mai ales pentru weekend și
+                      sărbători.
+                    </p>
                   </div>
                 </div>
-
-                <div className={`p-6 rounded-xl border border-white/10 bg-white/5 ${fx}`}>
-                  <div className="flex items-start gap-4">
-                    <div className="grid h-10 w-10 place-items-center rounded-md bg-blue-500/20 text-blue-400">
-                      <Users className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-300 mb-2">Transport public</h3>
-                      <p className="text-gray-400 text-sm">
-                        Autobuzele 1, 22, 35 și troleibuzele 2, 8 opresc în apropierea mall-ului. Stația cea mai
-                        apropiată: „Port Mall”.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className={`p-6 rounded-xl border border-white/10 bg-white/5 ${fx}`}>
-                  <div className="flex items-start gap-4">
-                    <div className="grid h-10 w-10 place-items-center rounded-md bg-purple-500/20 text-purple-400">
-                      <Calendar className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-300 mb-2">Rezervare recomandată</h3>
-                      <p className="text-gray-400 text-sm">
-                        Pentru o experiență optimă, recomandăm rezervarea în avans, mai ales pentru weekend și
-                        sărbători.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <Button asChild className={`w-full bg-sky-500 text-white hover:bg-sky-400 ${fx}`}>
-                  <a
-                    href="https://www.google.com/maps/dir//Port+Mall,+Strada+Mihai+Sadoveanu+42%2F6,+Chi%C8%99in%C4%83u+MD-2075,+Moldova/@47.0105,28.8638,17z"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <MapPin className="mr-2 h-4 w-4" />
-                    Deschide în Google Maps
-                  </a>
-                </Button>
-
-                <Button asChild className={`w-full bg-purple-500 text-white hover:bg-purple-400 mt-3 ${fx}`}>
-                  <a
-                    href="https://waze.com/ul?q=Port%20Mall%20Strada%20Mihai%20Sadoveanu%2042%2F6%20Chi%C8%99in%C4%83u%20MD-2075%20Moldova&navigate=yes"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <svg className="mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path d="M23.184 10.036c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10 10 4.477 10 10zm-10-8c-4.411 0-8 3.589-8 8s3.589 8 8 8 8-3.589 8-8-3.589-8-8-8zm0 14.5c-3.584 0-6.5-2.916-6.5-6.5s2.916-6.5 6.5-6.5 6.5 2.916 6.5 6.5-2.916 6.5-6.5-6.5zm0-11c-2.481 0-4.5 2.019-4.5 4.5s2.019 4.5 4.5 4.5 4.5-2.019 4.5-4.5-2.019-4.5-4.5-4.5z" />
-                    </svg>
-                    Deschide în WAZE
-                  </a>
-                </Button>
               </div>
-            </div>
-          </div>
-        </section>
-      </main>
-    </div>
-  )
-}
 
-/* ————— Sub-componente ————— */
+              <Button asChild className={`w-full bg-sky-500 text-white hover:bg-sky-400 ${fx}`}>
+                <a
+                  href="https://www.google.com/maps/dir//Port+Mall,+Strada+Mihai+Sadoveanu+42%2F6,+Chi%C8%99in%C4%83u+MD-2075,+Moldova/@47.0105,28.8638,17z"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <MapPin className="mr-2 h-4 w-4" />
+                  Deschide în Google Maps
+                </a>
+              </Button>
 
-function ContactInfo({
-  fx,
-  icon,
-  title,
-  info,
-  details,
-}: {
-  fx: string
-  icon: React.ReactNode
-  title: string
-  info: string
-  details: string
-}) {
-  return (
-    <div className={`flex items-start gap-4 p-4 rounded-lg border border-white/10 bg-white/5 ${fx}`}>
-      <div className="grid h-10 w-10 place-items-center rounded-md bg-white/8 text-sky-400">{icon}</div>
-      <div>
-        <h3 className="font-semibold text-gray-300">{title}</h3>
-        <p className="text-gray-300">{info}</p>
-        <p className="text-sm text-gray-400">{details}</p>
-      </div>
-    </div>
-  )
-}
+              <Button asChild className={`w-full bg-purple-500 text-white hover:bg-purple-400 mt-3 ${fx}`}>
+                <a
+                  href="https://waze.com/ul?q=Port%20Mall%20Strada%20Mihai%20Sadoveanu%2042%2F6%20Chi%C8%99in%C4%83u%20MD-2075%20Moldova&navigate=yes"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <svg className="mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M23.184 10.036c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10 10 4.477 10 10zm-10-8c-4.411 0-8 3.589-8 8s3.589 8 8 8 8-3.589 8-8-3
