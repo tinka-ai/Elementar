@@ -70,10 +70,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="manifest" href="/site.webmanifest" />
       </head>
 
-      {/* pt-24 pe mobil (headerul are 2 rânduri), pt-16 pe desktop;
-          pb-14 pe mobil pentru bara fixă (56px) + safe-area pe dispozitive cu home indicator */}
+      {/* pt-24 pe mobil (header are 2 rânduri), pt-16 pe desktop; pb-14 pentru bara fixă jos */}
       <body
-        className={`${inter.className} min-h-screen bg-background text-foreground pt-24 md:pt-16 pb-14 supports-[env(safe-area-inset-top)]:pt-[calc(4rem+env(safe-area-inset-top))] supports-[env(safe-area-inset-bottom)]:pb-[calc(3.5rem+env(safe-area-inset-bottom))]`}
+        className={`${inter.className} min-h-screen bg-background text-foreground pt-24 md:pt-16 pb-14 supports-[env(safe-area-inset-top)]:pt-[calc(4rem+env(safe-area-inset-top))]`}
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <LanguageProvider>
@@ -137,24 +136,18 @@ function SiteFooter() {
 function BottomBar() {
   return (
     <div
- <div
-  className="fixed bottom-0 left-0 right-0 z-[120] md:hidden border-t border-white/10"
-  style={{
-    background: "rgba(0,0,0,0.82)",
-    backdropFilter: "blur(10px)",
-    WebkitBackdropFilter: "blur(10px)",
-    paddingBottom: "env(safe-area-inset-bottom, 0px)", // <- important pe iPhone
-    transform: "translateZ(0)",        // <- previne jitter pe iOS
-    WebkitTransform: "translateZ(0)",
-    willChange: "transform"
-  }}
->
-
-      {/* h-14 (56px) + safe-area pe iOS */}
-      <div
-        className="h-14 flex items-center justify-around px-4 max-w-3xl mx-auto text-gray-300"
-        style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
-      >
+      className="fixed bottom-0 left-0 right-0 z-[120] md:hidden border-t border-white/10"
+      style={{
+        background: "rgba(0,0,0,0.82)",
+        backdropFilter: "blur(10px)",
+        WebkitBackdropFilter: "blur(10px)",
+        paddingBottom: "env(safe-area-inset-bottom, 0px)",
+        transform: "translateZ(0)",
+        WebkitTransform: "translateZ(0)",
+        willChange: "transform",
+      }}
+    >
+      <div className="h-14 flex items-center justify-around px-4 max-w-3xl mx-auto text-gray-300">
         <Link href="/" className="flex flex-col items-center gap-1 text-xs hover:text-white">
           <Home className="h-5 w-5" />
           Acasă
