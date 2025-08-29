@@ -57,7 +57,7 @@ const fxIcon =
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ro" className="scroll-smooth" suppressHydrationWarning>
+    <html lang="ro" className="scroll-smooth overscroll-y-contain" suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
