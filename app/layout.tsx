@@ -149,11 +149,11 @@ function BottomBar() {
     >
       <div className="h-14 flex items-center justify-around px-4 max-w-3xl mx-auto text-gray-300">
         <Link href="/" className="flex flex-col items-center gap-1 text-xs hover:text-white">
-          <Home className="h-5 w-5" />
+          <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none"><path d="M3 9.5L12 3l9 6.5V21a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1V9.5z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
           Acasă
         </Link>
         <a href="tel:+37379010277" className="flex flex-col items-center gap-1 text-xs hover:text-white">
-          <Phone className="h-5 w-5" />
+          <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v2a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 1h2a2 2 0 0 1 2 1.72c.12.9.32 1.78.6 2.62a2 2 0 0 1-.45 2.11L7 8.91a16 16 0 0 0 6 6l1.46-1.26a2 2 0 0 1 2.11-.45c.84.28 1.72.48 2.62.6A2 2 0 0 1 22 16.92z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
           Apelează
         </a>
         <a
@@ -162,14 +162,15 @@ function BottomBar() {
           rel="noopener noreferrer"
           className="flex flex-col items-center gap-1 text-xs hover:text-white"
         >
-          <MapPin className="h-5 w-5" />
+          <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 6-9 12-9 12S3 16 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3" fill="currentColor"/></svg>
           Locație
         </a>
         <a href="mailto:office@elementar.md" className="flex flex-col items-center gap-1 text-xs hover:text-white">
-          <Mail className="h-5 w-5" />
+          <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none"><path d="M4 4h16a2 2 0 0 1 2 2v1l-10 6L2 7V6a2 2 0 0 1 2-2z"/><path d="M22 8l-10 6L2 8"/><path d="M2 8v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
           Email
         </a>
       </div>
     </div>
   )
 }
+
