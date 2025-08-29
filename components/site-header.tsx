@@ -28,9 +28,14 @@ export default function SiteHeader() {
   }
 
   return (
-    <header
-  className="fixed top-0 left-0 right-0 z-[120] bg-black border-b border-white/10"
-  style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}
+   <header
+  className="fixed top-0 left-0 right-0 z-[110] border-b border-white/10 bg-black/70 backdrop-blur supports-[backdrop-filter]:bg-black/50"
+  style={{
+    paddingTop: "env(safe-area-inset-top, 0px)",
+    transform: "translateZ(0)",        // <- previne jitter pe iOS
+    WebkitTransform: "translateZ(0)",
+    willChange: "transform"
+  }}
 >
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
 
