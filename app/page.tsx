@@ -17,16 +17,16 @@ export default function Page() {
 
   return (
     <>
-      {/* VIDEO LOGO SECTION */}
-      <section className="relative w-full h-auto overflow-hidden flex items-center justify-center bg-black py-4">
-        <video className="max-w-full max-h-full object-contain" autoPlay loop muted playsInline>
-          <source
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/unwatermark_ELementar%20logo-IWmmAsRBKFrGVBf8T0e953xG8X72Y7.mp4"
-            type="video/mp4"
-          />
-          Your browser does not support the video tag.
-        </video>
-      </section>
+     {/* VIDEO LOGO SECTION */}
+<section className="relative w-full h-auto overflow-hidden flex items-center justify-center bg-black py-4 mt-24 md:mt-0">
+  <video className="max-w-full max-h-full object-contain" autoPlay loop muted playsInline>
+    <source
+      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/unwatermark_ELementar%20logo-IWmmAsRBKFrGVBf8T0e953xG8X72Y7.mp4"
+      type="video/mp4"
+    />
+    Your browser does not support the video tag.
+  </video>
+</section>
 
       <main>
         {/* HERO */}
