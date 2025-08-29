@@ -71,9 +71,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
 
       {/* pt-24 pe mobil (header are 2 rânduri), pt-16 pe desktop; pb-14 pentru bara fixă jos */}
-      <body
-        className={`${inter.className} min-h-screen bg-background text-foreground pt-24 md:pt-16 pb-14 supports-[env(safe-area-inset-top)]:pt-[calc(4rem+env(safe-area-inset-top))]`}
-      >
+     <body
+  className={`${inter.className}
+              bg-background text-foreground
+              min-h-screen supports-[height:100svh]:min-h-[100svh]
+              pt-24 md:pt-16 pb-14
+             `}
+>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <LanguageProvider>
             <SiteHeader />
