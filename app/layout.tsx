@@ -136,7 +136,7 @@ function SiteFooter() {
   )
 }
 
-/* ===== Bara fixă jos (mobil) ===== */
+/* ===== Bara fixă jos (mobil) — cu alegere Google Maps / Waze ===== */
 function BottomBar() {
   return (
     <div
@@ -155,15 +155,37 @@ function BottomBar() {
           Apelează
         </a>
 
-        <a
-          href="https://www.google.com/maps/dir/?api=1&destination=Port%20Mall%2C%20Strada%20Mihai%20Sadoveanu%2042%2F6%2C%20Chi%C8%99in%C4%83u%20MD-2075%2C%20Moldova"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex flex-col items-center gap-1 text-xs hover:text-white active:translate-y-px"
-        >
-          <MapPin className="h-5 w-5" aria-hidden="true" />
-          Locație
-        </a>
+        {/* Locație cu meniu de alegere */}
+        <details className="relative">
+          <summary
+            className="list-none [&::-webkit-details-marker]:hidden flex flex-col items-center gap-1 text-xs
+                       hover:text-white active:translate-y-px cursor-pointer select-none"
+          >
+            <MapPin className="h-5 w-5" aria-hidden="true" />
+            Locație
+          </summary>
+
+          {/* Meniul apare deasupra barei */}
+          <div
+            className="absolute bottom-12 left-1/2 -translate-x-1/2 z-[130] w-48 rounded-lg border border-white/10
+                       bg-black/90 backdrop-blur p-2 space-y-1 shadow-lg"
+          >
+            <a
+              href="https://www.google.com/maps/dir/?api=1&destination=Strada%20Mihai%20Sadoveanu%2042%2F6%2C%20Chi%C8%99in%C4%83u%2C%20MD-2075%2C%20Moldova"
+              className="block rounded-md px-3 py-2 text-sm hover:bg-white/10"
+              rel="noopener noreferrer"
+            >
+              Deschide în Google Maps
+            </a>
+            <a
+              href="https://waze.com/ul?q=Strada%20Mihai%20Sadoveanu%2042%2F6%2C%20Chi%C8%99in%C4%83u%2C%20MD-2075%2C%20Moldova&navigate=yes"
+              className="block rounded-md px-3 py-2 text-sm hover:bg-white/10"
+              rel="noopener noreferrer"
+            >
+              Deschide în Waze
+            </a>
+          </div>
+        </details>
 
         <a href="mailto:office@elementar.md" className="flex flex-col items-center gap-1 text-xs hover:text-white active:translate-y-px">
           <Mail className="h-5 w-5" aria-hidden="true" />
