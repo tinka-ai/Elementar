@@ -136,52 +136,51 @@ function SiteFooter() {
   )
 }
 
-/* ===== Bara fixă jos (mobil) — cu alegere Google Maps / Waze ===== */
+/* ===== Bara fixă jos (mobil) — funcțională + alegere Maps/Waze ===== */
 function BottomBar() {
   return (
     <div
-  className="fixed-layer inset-x-0 bottom-0 z-[120] md:hidden border-t border-white/10
-             bg-black/80 backdrop-blur-md supports-[backdrop-filter]:bg-black/60"
-  style={{
-    paddingBottom: "env(safe-area-inset-bottom, 0px)",
-  }}
->
-      <nav className="h-14 max-w-3xl mx-auto px-4 flex items-center justify-around text-gray-300">
-        <Link href="/" className="flex flex-col items-center gap-1 text-xs hover:text-white active:translate-y-px">
-          <Home className="h-5 w-5" aria-hidden="true" />
+      className="fixed bottom-0 left-0 right-0 z-[120] md:hidden border-t border-white/10
+                 bg-black/80 backdrop-blur-md supports-[backdrop-filter]:bg-black/60"
+      style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
+    >
+      <div className="h-14 flex items-center justify-around px-4 max-w-3xl mx-auto text-gray-300">
+
+        <Link href="/" className="flex flex-col items-center gap-1 text-xs hover:text-white">
+          <Home className="h-5 w-5" />
           Acasă
         </Link>
 
-        <a href="tel:+37379010277" className="flex flex-col items-center gap-1 text-xs hover:text-white active:translate-y-px">
-          <Phone className="h-5 w-5" aria-hidden="true" />
+        <a href="tel:+37379010277" className="flex flex-col items-center gap-1 text-xs hover:text-white">
+          <Phone className="h-5 w-5" />
           Apelează
         </a>
 
-        {/* Locație cu meniu de alegere */}
-        <details className="relative">
-          <summary
-            className="list-none [&::-webkit-details-marker]:hidden flex flex-col items-center gap-1 text-xs
-                       hover:text-white active:translate-y-px cursor-pointer select-none"
-          >
-            <MapPin className="h-5 w-5" aria-hidden="true" />
+        {/* Locație cu mini-meniu pentru Google Maps / Waze (fără JS) */}
+        <details className="relative group">
+          <summary className="list-none flex flex-col items-center gap-1 text-xs hover:text-white cursor-pointer">
+            <MapPin className="h-5 w-5" />
             Locație
           </summary>
 
-          {/* Meniul apare deasupra barei */}
+          {/* meniul apare deasupra iconiței */}
           <div
-            className="absolute bottom-12 left-1/2 -translate-x-1/2 z-[130] w-48 rounded-lg border border-white/10
-                       bg-black/90 backdrop-blur p-2 space-y-1 shadow-lg"
+            className="absolute bottom-[2.75rem] left-1/2 -translate-x-1/2 min-w-[180px]
+                       rounded-lg border border-white/10 bg-black/90 backdrop-blur
+                       shadow-lg p-2 text-sm"
           >
             <a
-              href="https://www.google.com/maps/dir/?api=1&destination=Strada%20Mihai%20Sadoveanu%2042%2F6%2C%20Chi%C8%99in%C4%83u%2C%20MD-2075%2C%20Moldova"
-              className="block rounded-md px-3 py-2 text-sm hover:bg-white/10"
+              className="block px-3 py-2 rounded-md hover:bg-white/10"
+              href="https://www.google.com/maps/dir/?api=1&destination=Strada%20Mihai%20Sadoveanu%2042%2F6%2C%20Chi%C8%99in%C4%83u%20MD-2075"
+              target="_blank"
               rel="noopener noreferrer"
             >
               Deschide în Google Maps
             </a>
             <a
-              href="https://waze.com/ul?q=Strada%20Mihai%20Sadoveanu%2042%2F6%2C%20Chi%C8%99in%C4%83u%2C%20MD-2075%2C%20Moldova&navigate=yes"
-              className="block rounded-md px-3 py-2 text-sm hover:bg-white/10"
+              className="mt-1 block px-3 py-2 rounded-md hover:bg-white/10"
+              href="https://waze.com/ul?q=Strada%20Mihai%20Sadoveanu%2042%2F6%2C%20Chi%C8%99in%C4%83u%20MD-2075&navigate=yes"
+              target="_blank"
               rel="noopener noreferrer"
             >
               Deschide în Waze
@@ -189,11 +188,11 @@ function BottomBar() {
           </div>
         </details>
 
-        <a href="mailto:office@elementar.md" className="flex flex-col items-center gap-1 text-xs hover:text-white active:translate-y-px">
-          <Mail className="h-5 w-5" aria-hidden="true" />
+        <a href="mailto:office@elementar.md" className="flex flex-col items-center gap-1 text-xs hover:text-white">
+          <Mail className="h-5 w-5" />
           Email
         </a>
-      </nav>
+      </div>
     </div>
   )
 }
