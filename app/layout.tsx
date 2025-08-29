@@ -140,10 +140,12 @@ function SiteFooter() {
 function BottomBar() {
   return (
     <div
-      className="fixed bottom-0 left-0 right-0 z-[120] md:hidden border-t border-white/10
-                 bg-black/80 backdrop-blur-md supports-[backdrop-filter]:bg-black/60"
-      style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
-    >
+  className="fixed-layer inset-x-0 bottom-0 z-[120] md:hidden border-t border-white/10
+             bg-black/80 backdrop-blur-md supports-[backdrop-filter]:bg-black/60"
+  style={{
+    paddingBottom: "env(safe-area-inset-bottom, 0px)",
+  }}
+>
       <nav className="h-14 max-w-3xl mx-auto px-4 flex items-center justify-around text-gray-300">
         <Link href="/" className="flex flex-col items-center gap-1 text-xs hover:text-white active:translate-y-px">
           <Home className="h-5 w-5" aria-hidden="true" />
