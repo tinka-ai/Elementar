@@ -137,13 +137,11 @@ function SiteFooter() {
 function BottomBar() {
   return (
     <div
-      className="fixed bottom-0 left-0 right-0 z-[120] md:hidden border-t border-white/10"
-      style={{
-        background: "rgba(0,0,0,0.82)",
-        backdropFilter: "blur(10px)",
-        WebkitBackdropFilter: "blur(10px)",
-      }}
-    >
+  className="fixed bottom-0 left-0 right-0 z-[120] md:hidden border-t border-white/10 bg-black"
+  style={{
+    paddingBottom: "env(safe-area-inset-bottom, 0px)", // pentru iPhone cu Dynamic Island / Home indicator
+  }}
+>
       {/* h-14 (56px) + safe-area pe iOS */}
       <div
         className="h-14 flex items-center justify-around px-4 max-w-3xl mx-auto text-gray-300"
