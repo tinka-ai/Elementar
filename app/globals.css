@@ -121,3 +121,12 @@
     @apply bg-background text-foreground;
   }
 }
+@layer utilities {
+  .fixed-layer {
+    position: fixed;              /* strat fix */
+    transform: translateZ(0);     /* promovează pe propriul layer GPU */
+    will-change: transform;       /* previne jitter la scroll */
+    backface-visibility: hidden;
+    contain: layout paint size;   /* izolează repaosul */
+  }
+}
