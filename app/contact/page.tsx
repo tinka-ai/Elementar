@@ -202,7 +202,7 @@ export default function ContactPage() {
                 <h3 className="text-xl font-bold text-gray-300 mb-4">Urmărește-ne</h3>
                 <div className="flex gap-4">
                   <a
-                    href="https://facebook.com/elementara.ro"
+                    href="https://facebook.com/elementar.md"
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`flex items-center gap-3 p-4 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition-colors ${fx}`}
@@ -210,11 +210,11 @@ export default function ContactPage() {
                     <Facebook className="h-6 w-6 text-blue-400" />
                     <div>
                       <p className="font-medium text-gray-300">Facebook</p>
-                      <p className="text-sm text-gray-400">@elementara.ro</p>
+                      <p className="text-sm text-gray-400">@elementar.md</p>
                     </div>
                   </a>
                   <a
-                    href="https://instagram.com/elementara.ro"
+                    href="https://instagram.com/elementar.md"
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`flex items-center gap-3 p-4 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition-colors ${fx}`}
@@ -222,7 +222,7 @@ export default function ContactPage() {
                     <Instagram className="h-6 w-6 text-pink-400" />
                     <div>
                       <p className="font-medium text-gray-300">Instagram</p>
-                      <p className="text-sm text-gray-400">@elementara.ro</p>
+                      <p className="text-sm text-gray-400">@elementar.md</p>
                     </div>
                   </a>
                 </div>
