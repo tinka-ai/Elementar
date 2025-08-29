@@ -19,7 +19,7 @@ import {
   Calendar,
   Users,
   BookOpen,
-  Image as ImageIcon, // alias pentru a evita conflictul cu next/image
+  Image as ImageIcon,
   HelpCircle,
 } from "lucide-react"
 
@@ -54,7 +54,6 @@ export default function ContactPage() {
     }
 
     try {
-      // Metoda 1: EmailJS
       const emailJSResponse = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -82,7 +81,6 @@ export default function ContactPage() {
         throw new Error("EmailJS failed")
       }
     } catch {
-      // Metoda 2: PHP (fallback)
       try {
         const phpResponse = await fetch("/wp-content/themes/elementar/send-email.php", {
           method: "POST",
@@ -97,7 +95,6 @@ export default function ContactPage() {
           throw new Error(r.error || "PHP endpoint failed")
         }
       } catch {
-        // Metoda 3: mailto (fallback universal)
         const mailtoLink = `mailto:office@elementar.md?subject=Mesaj nou de la ${data.name} - ${data.visitType || "Contact general"}&body=Nume: ${data.name}%0D%0AEmail: ${data.email}%0D%0A${data.phone ? `Telefon: ${data.phone}%0D%0A` : ""}${data.visitType ? `Tipul vizitei: ${data.visitType}%0D%0A` : ""}${data.groupSize ? `Numărul de persoane: ${data.groupSize}%0D%0A` : ""}${data.preferredDate ? `Data preferată: ${data.preferredDate}%0D%0A` : ""}%0D%0AMesaj:%0D%0A${data.message}`
         window.location.href = mailtoLink
         setResult({
@@ -435,7 +432,6 @@ export default function ContactPage() {
                   </Link>
                 </div>
               </div>
-              {/* /NAVIGARE RAPIDĂ */}
             </div>
           </div>
         </div>
@@ -562,5 +558,41 @@ export default function ContactPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <svg className="mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M23.184 10.036c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10 10 4.477 10 10zm-10-8c-4.411 0-8 3.589-8 8s3.589 8 8 8 8-3.589 8-8-3
+                  <MapPin className="mr-2 h-4 w-4" />
+                  Deschide în WAZE
+                </a>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  )
+}
+
+/* ————— Sub-componente ————— */
+
+function ContactInfo({
+  fx,
+  icon,
+  title,
+  info,
+  details,
+}: {
+  fx: string
+  icon: React.ReactNode
+  title: string
+  info: string
+  details: string
+}) {
+  return (
+    <div className={`flex items-start gap-4 p-4 rounded-lg border border-white/10 bg-white/5 ${fx}`}>
+      <div className="grid h-10 w-10 place-items-center rounded-md bg-white/8 text-sky-400">{icon}</div>
+      <div>
+        <h3 className="font-semibold text-gray-300">{title}</h3>
+        <p className="text-gray-300">{info}</p>
+        <p className="text-sm text-gray-400">{details}</p>
+      </div>
+    </div>
+  )
+}
