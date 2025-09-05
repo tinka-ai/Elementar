@@ -100,14 +100,14 @@ function SiteFooter() {
           <div className="space-y-2">
             <p className="text-gray-300 font-medium">Contact</p>
             <p className="text-sm text-gray-300">
-              Port Mall, Chișinău MD — Strada Mihai Sadoveanu 42/6, MD-2075
+              Port Mall, Chișinău MD — Strada Mihai Sadoveanu 42/6, et.4, MD-2075
             </p>
-            <p className="text-sm text-gray-300">+373 79 010 277 • office@elementar.md</p>
+            <p className="text-sm text-gray-300">+373 698 307 02 • office@elementar.md</p>
           </div>
 
           <div className="flex items-center gap-3">
             <a
-              href="https://facebook.com/elementara.ro"
+              href="https://facebook.com/elementar.md"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Facebook"
@@ -116,7 +116,7 @@ function SiteFooter() {
               <Facebook className="h-5 w-5" />
             </a>
             <a
-              href="https://instagram.com/elementara.ro"
+              href="https://instagram.com/elementar.md"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
@@ -151,7 +151,7 @@ function BottomBar() {
           Acasă
         </Link>
 
-        <a href="tel:+37379010277" className="flex flex-col items-center gap-1 text-xs hover:text-white">
+        <a href="tel:+37369830702" className="flex flex-col items-center gap-1 text-xs hover:text-white">
           <Phone className="h-5 w-5" />
           Apelează
         </a>
