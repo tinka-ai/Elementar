@@ -178,41 +178,40 @@ export default function Page() {
           </div>
         </section>
 
-        {/* PRICING */}
-        <section className="py-12 sm:py-16 border-b border-white/5">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6">
-            <SectionKicker>{t("pricing.kicker")}</SectionKicker>
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-300">{t("pricing.title")}</h2>
+       {/* PRICING */}
+<section className="py-12 sm:py-16 border-b border-white/5">
+  <div className="mx-auto max-w-7xl px-4 sm:px-6">
+    <SectionKicker>TARIFE</SectionKicker>
+    <h2 className="text-3xl sm:text-4xl font-bold text-gray-300">
+      Alege un plan potrivit vizitei tale
+    </h2>
 
-            <div className="mt-8 grid gap-6 sm:grid-cols-2">
-              <PricingCard
-                fx={fx}
-                title={t("pricing.individual.title")}
-                price={t("pricing.individual.price")}
-                perks={[
-                  t("pricing.individual.perks.0"),
-                  t("pricing.individual.perks.1"),
-                  t("pricing.individual.perks.2"),
-                  t("pricing.individual.perks.3"),
-                ]}
-                cta={t("pricing.individual.cta")}
-              />
-              <PricingCard
-                fx={fx}
-                highlight
-                title={t("pricing.group.title")}
-                price={t("pricing.group.price")}
-                perks={[
-                  t("pricing.group.perks.0"),
-                  t("pricing.group.perks.1"),
-                  t("pricing.group.perks.2"),
-                  t("pricing.group.perks.3"),
-                ]}
-                cta={t("pricing.group.cta")}
-              />
-            </div>
-          </div>
-        </section>
+    <div className="mt-8 grid gap-6 sm:grid-cols-2">
+      <PricingCard
+        fx={fx}
+        title="Individual"
+        price="250 MDL/copil; 100 MDL/ copil."
+        perks={[
+          "Acces la toate zonele",
+          "Ghidaj de sală",
+        ]}
+      />
+      <PricingCard
+        fx={fx}
+        highlight
+        title="Grup/Școli"
+        price="230 MDL/copil (min. 5 copii/ grup)"
+        perks={[
+          "Acces complet",
+          "Ghidaj de sală",
+          "Program personalizat",
+          "1 profesor gratuit / max. 20 elevi/ grup/ max 2 grupuri",
+        ]}
+      />
+    </div>
+  </div>
+</section>
+
 
         {/* FAQ */}
         <section id="faq" className="py-12 sm:py-16 border-b border-white/5">
@@ -330,25 +329,26 @@ function PricingCard({
   title,
   price,
   perks,
-  cta,
   highlight = false,
 }: {
   fx: string
   title: string
   price: string
   perks: string[]
-  cta: string
   highlight?: boolean
 }) {
   return (
     <div
-      className={`p-6 rounded-xl border ${highlight ? "border-sky-400/40" : "border-white/10"} bg-white/5 ${fx}`}
+      className={`p-6 rounded-xl border ${
+        highlight ? "border-sky-400/40" : "border-white/10"
+      } bg-white/5 ${fx}`}
       aria-label={`Plan ${title}`}
     >
       <div className="flex items-center justify-between">
         <h3 className="text-xl font-bold text-gray-300">{title}</h3>
         <span className="text-2xl font-extrabold text-gray-300">{price}</span>
       </div>
+
       <ul className="mt-4 space-y-2 text-sm text-gray-300">
         {perks.map((p, i) => (
           <li key={i} className="flex items-start gap-2">
@@ -357,13 +357,7 @@ function PricingCard({
           </li>
         ))}
       </ul>
-      <Button
-        className={`mt-5 w-full ${
-          highlight ? "bg-sky-500 hover:bg-sky-400 text-white" : "bg-white/10 hover:bg-white/15 text-white"
-        }`}
-      >
-        {cta}
-      </Button>
+      {/* no button */}
     </div>
   )
 }
