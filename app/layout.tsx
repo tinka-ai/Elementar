@@ -133,7 +133,7 @@ function SiteFooter() {
           <div className="lg:justify-end flex">
             <div className="flex items-center gap-4">
               <img
-                src="/images/fundatia-est-europeana.png"
+                src="/images/FUndatia%20Est%20Europeana%20MD%20(no%20bckg).png"
                 alt="Fundația Est-Europeană Moldova — logo"
                 className="h-12 w-auto object-contain select-none"
                 loading="lazy"
