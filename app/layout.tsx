@@ -148,7 +148,7 @@ function SiteFooter() {
 
         {/* rândul de jos */}
         <div className="mt-8 text-xs text-gray-500 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
-          <p>© {new Date().getFullYear()} ELEMENTAR. Toate drepturile rezervate.</p>
+          <p>© {new Date().getFullYear()} PRO-ELEMENTARY A.O.. Toate drepturile rezervate.</p>
           <p>Powered by TINKA AI.</p>
         </div>
       </div>
