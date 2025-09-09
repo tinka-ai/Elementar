@@ -178,7 +178,7 @@ export default function Page() {
           </div>
         </section>
 
-       {/* PRICING */}
+      {/* PRICING */}
 <section className="py-12 sm:py-16 border-b border-white/5">
   <div className="mx-auto max-w-7xl px-4 sm:px-6">
     <SectionKicker>TARIFE</SectionKicker>
@@ -190,35 +190,37 @@ export default function Page() {
       <PricingCard
         fx={fx}
         title="Individual"
-        price="250 MDL/copil; 100 MDL/ adult."
+        price="250 MDL/copil; 100 MDL/adult"
         perks={[
           "Acces la toate zonele",
           "Ghidaj de sală",
-          "Durata aporx. 1,5 ore".
-          
+          "Durata aprox. 1,5 ore",
         ]}
       />
+
       <PricingCard
         fx={fx}
         highlight
         title="Grup/Școli"
-        price="230 MDL/copil (min. 5 copii/ grup)"
+        price="230 MDL/copil (min. 5 copii/grup)"
         perks={[
           "Acces complet",
           "Ghidaj de sală",
           "Program personalizat",
-          "1 profesor gratuit /grup din max. 20 elevi/ 
-          "max. 2 grupuri simultan".
+          "1 profesor gratuit/grup (max. 20 elevi)",
+          "Max. 2 grupuri simultan",
         ]}
       />
     </div>
+
     {/* Notă valabilitate prețuri */}
-<p className="mt-6 pt-3 text-center text-sm text-gray-400 border-t border-white/10">
-  Prețurile afișate sunt valabile până la
-  <span className="font-medium text-gray-300"> 30 septembrie 2025 </span> (inclusiv).
-</p>
-</div>
+    <p className="mt-6 pt-3 text-center text-sm text-gray-400 border-t border-white/10">
+      Prețurile afișate sunt valabile până la{" "}
+      <span className="font-medium text-gray-300">30 septembrie 2025</span> (inclusiv).
+    </p>
+  </div>
 </section>
+
  
         {/* FAQ */}
         <section id="faq" className="py-12 sm:py-16 border-b border-white/5">
