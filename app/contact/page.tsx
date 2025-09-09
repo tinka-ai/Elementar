@@ -170,7 +170,7 @@ export default function ContactPage() {
                     fx={fx}
                     icon={<MapPin className="h-6 w-6" />}
                     title="Adresa"
-                    info="Port Mall, Chișinău MD"
+                    info="Port Mall, et. 4, Chișinău MD"
                     details="Strada Mihai Sadoveanu 42/6, MD-2075"
                   />
                   <ContactInfo
