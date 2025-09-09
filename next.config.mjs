@@ -1,5 +1,3 @@
-Iata ce cod am in acest fisier
-
 /** @type {import('next').NextConfig} */ 
 const nextConfig = {
   // NU folosi 'i18n' aici pentru App Router
