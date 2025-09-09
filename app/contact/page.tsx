@@ -177,7 +177,7 @@ export default function ContactPage() {
                     fx={fx}
                     icon={<Phone className="h-6 w-6" />}
                     title="Telefon"
-                    info="+373 79 010 277"
+                    info="+373 698 30 702"
                     details="Luni - Duminică, 10:00 - 22:00"
                   />
                   <ContactInfo
