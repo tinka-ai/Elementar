@@ -18,14 +18,17 @@ export default function SiteHeader() {
   const pathname = usePathname() || "/"
 
   const linkCls = (href: string) => {
-    const active = pathname === href
-    return [
-      "px-2 py-1 text-sm transition-colors",
-      active
-        ? "text-sky-300 underline decoration-sky-400 decoration-2 underline-offset-8"
-        : "text-gray-200 hover:text-white hover:underline decoration-sky-400 underline-offset-8",
-    ].join(" ")
-  }
+  const pathname = usePathname() || "/"
+  const active = pathname === href
+  return [
+    "relative group inline-block px-2 py-1 text-sm transition-colors",
+    active ? "text-white" : "text-gray-200 hover:text-white focus-visible:text-white",
+    "after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:rounded-full",
+    "after:bg-gradient-to-r after:from-pink-400 after:via-sky-400 after:to-violet-500 after:opacity-90",
+    "after:transition-transform after:duration-300 after:ease-out after:origin-left",
+    active ? "after:scale-x-100" : "after:scale-x-0 group-hover:after:scale-x-100 focus-visible:after:scale-x-100",
+  ].join(" ")
+}
 
   return (
    <header
