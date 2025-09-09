@@ -22,7 +22,11 @@ const linkCls = (href: string) => {
   const active = pathname === href
   return [
     "relative inline-block px-2 py-1 text-sm transition-colors",
-    active ? "text-white" : "text-gray-200 hover:text-white focus-visible:text-white",
+
+    // text: gradient pentru activ, gri->alb la hover pentru restul
+    active
+      ? "font-semibold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-sky-400 to-violet-500"
+      : "text-gray-200 hover:text-white focus-visible:text-white",
 
     // underline multicolor (pseudo-element)
     "after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:rounded-full",
@@ -30,9 +34,12 @@ const linkCls = (href: string) => {
     "after:transform after:transition-transform after:duration-300 after:ease-out after:origin-left",
 
     // activ = linie plină; altfel apare la hover/focus
-    active ? "after:scale-x-100" : "after:scale-x-0 hover:after:scale-x-100 focus-visible:after:scale-x-100",
+    active
+      ? "after:scale-x-100"
+      : "after:scale-x-0 hover:after:scale-x-100 focus-visible:after:scale-x-100",
   ].join(" ")
 }
+
 
   return (
    <header
