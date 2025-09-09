@@ -5,6 +5,7 @@ import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Clock, ArrowRight } from "lucide-react"
+import NavLink from "@/components/nav-link"
 
 const NAV = [
   { href: "/",        label: "Acasă" },
