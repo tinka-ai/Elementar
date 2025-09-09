@@ -209,10 +209,14 @@ export default function Page() {
         ]}
       />
     </div>
-  </div>
+    {/* Notă valabilitate prețuri */}
+<p className="mt-6 pt-3 text-center text-sm text-gray-400 border-t border-white/10">
+  Prețurile afișate sunt valabile până la
+  <span className="font-medium text-gray-300"> 30 septembrie</span> (inclusiv).
+</p>
+</div>
 </section>
-
-
+ 
         {/* FAQ */}
         <section id="faq" className="py-12 sm:py-16 border-b border-white/5">
           <div className="mx-auto max-w-4xl px-4 sm:px-6">
