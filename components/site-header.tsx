@@ -18,16 +18,25 @@ const NAV = [
 export default function SiteHeader() {
   const pathname = usePathname() || "/"
 
-  const linkCls = (href: string) => {
-  const pathname = usePathname() || "/"
-  const active = pathname === href
+const linkCls = (href: string) => {
+  const active = href === "/" ? pathname === "/" : pathname.startsWith(href)
+
   return [
-    "relative group inline-block px-2 py-1 text-sm transition-colors",
-    active ? "text-white" : "text-gray-200 hover:text-white focus-visible:text-white",
-    "after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:rounded-full",
+    // container link
+    "relative group inline-block px-2 pb-1.5 text-sm leading-6 overflow-visible transition-colors",
+
+    // text: gradient când e activ, altfel gri și devine alb la hover/focus
+    active
+      ? "font-semibold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-sky-400 to-violet-500"
+      : "text-gray-300 hover:text-white focus-visible:text-white",
+
+    // underline multicolor (pseudo-element)
+    "after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:rounded-full",
     "after:bg-gradient-to-r after:from-pink-400 after:via-sky-400 after:to-violet-500 after:opacity-90",
     "after:transition-transform after:duration-300 after:ease-out after:origin-left",
-    active ? "after:scale-x-100" : "after:scale-x-0 group-hover:after:scale-x-100 focus-visible:after:scale-x-100",
+
+    // activ: ascunde underline-ul; inactiv: animă de la stânga spre dreapta pe hover/focus
+    active ? "after:hidden" : "after:scale-x-0 group-hover:after:scale-x-100 focus-visible:after:scale-x-100",
   ].join(" ")
 }
 
