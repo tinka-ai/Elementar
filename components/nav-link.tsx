@@ -19,20 +19,21 @@ export default function NavLink({
   return (
     <Link
       href={href}
-      className={`group relative px-1 text-sm ${isActive ? "font-semibold" : ""} ${className}`}
+      aria-current={isActive ? "page" : undefined}
+      className={`group relative inline-block px-1 text-sm ${isActive ? "font-semibold" : ""} ${className}`}
     >
-      {/* text: gradient când e activ, altfel gri + devine alb pe hover */}
+      {/* Text: gradient când e activ; altfel gri și devine alb pe hover */}
       <span
         className={
           isActive
             ? "bg-gradient-to-r from-pink-400 via-sky-400 to-violet-500 bg-clip-text text-transparent"
-            : "text-gray-300 group-hover:text-white transition-colors"
+            : "text-gray-300 transition-colors group-hover:text-white"
         }
       >
         {children}
       </span>
 
-      {/* underline multicolor: doar la hover; ascuns pentru activ */}
+      {/* Underline multicolor: apare doar la hover pentru non-active și crește stânga→dreapta */}
       <span
         aria-hidden
         className={`pointer-events-none absolute left-0 -bottom-1 h-[2px] w-0
