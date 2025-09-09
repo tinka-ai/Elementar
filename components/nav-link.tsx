@@ -15,22 +15,24 @@ export default function NavLink({
 }) {
   const pathname = usePathname()
 
-  // e activ dacă suntem exact pe / sau pe o rută care începe cu href
+  // activ: exact "/" sau orice rută care începe cu href
   const isActive = href === "/" ? pathname === "/" : pathname.startsWith(href)
 
+  const linkColor = isActive ? "text-white" : "text-gray-300 hover:text-white"
+
   return (
-    <Link
-      href={href}
-      className={`group relative px-0.5 text-sm text-gray-300 hover:text-white transition-colors ${className}`}
-    >
+    <Link href={href} className={`relative group px-0.5 text-sm transition-colors ${linkColor} ${className}`}>
       <span>{children}</span>
 
-      {/* underline gradient – crește pe hover; rămâne plină când e activ */}
+      {/* underline gradient — crește pe hover; rămâne plină când e activ */}
       <span
         aria-hidden
-        className={`pointer-events-none absolute left-0 -bottom-1 h-[2px] w-0 bg-gradient-to-r
-          from-pink-400 via-sky-400 to-violet-500 transition-[width] duration-300
-          ${isActive ? "w-full" : "group-hover:w-full"}`}
+        className={[
+          "pointer-events-none absolute left-0 -bottom-1 h-[2px] w-full rounded-full",
+          "bg-gradient-to-r from-pink-400 via-sky-400 to-violet-500",
+          "origin-left transition-[transform,opacity] duration-300 ease-out",
+          isActive ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100",
+        ].join(" ")}
       />
     </Link>
   )
