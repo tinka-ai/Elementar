@@ -190,10 +190,12 @@ export default function Page() {
       <PricingCard
         fx={fx}
         title="Individual"
-        price="250 MDL/copil; 100 MDL/ copil."
+        price="250 MDL/copil; 100 MDL/ adult."
         perks={[
           "Acces la toate zonele",
           "Ghidaj de sală",
+          "Durata aporx. 1,5 ore".
+          
         ]}
       />
       <PricingCard
@@ -205,7 +207,8 @@ export default function Page() {
           "Acces complet",
           "Ghidaj de sală",
           "Program personalizat",
-          "1 profesor gratuit / max. 20 elevi/ grup/ max 2 grupuri",
+          "1 profesor gratuit /grup din max. 20 elevi/ 
+          "max. 2 grupuri simultan".
         ]}
       />
     </div>
