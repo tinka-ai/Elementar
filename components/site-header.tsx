@@ -9,11 +9,12 @@ import NavLink from "@/components/nav-link"
 
 const NAV = [
   { href: "/",        label: "Acasă" },
-  { href: "/domenii", label: "Domenii" },
+  { href: "/Domenii", label: "Domenii" }, 
   { href: "/galerie", label: "Galerie" },
   { href: "/faq",     label: "Întrebări" },
-  { href: "/contact", label: "Contact" },
+  { href: "/Contact", label: "Contact" },
 ]
+
 
 export default function SiteHeader() {
   const pathname = usePathname() || "/"
