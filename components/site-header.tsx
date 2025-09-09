@@ -66,7 +66,7 @@ const linkCls = (href: string) => {
           </Link>
 
           {/* MENIU */}
-          <nav className="flex items-center gap-6">
+          <nav className="flex items-center gap-6 overflow-visible">
             {NAV.map((item) => (
               <Link
                 key={item.href}
@@ -124,7 +124,7 @@ const linkCls = (href: string) => {
           </p>
 
           {/* MENIU – vizibil, cu wrap (fără scroll orizontal) */}
-          <nav className="mt-2">
+          <nav className="flex items-center gap-6 overflow-visible">
             <ul className="flex flex-wrap gap-x-3 gap-y-1">
               {NAV.map((item) => (
                 <li key={item.href}>
