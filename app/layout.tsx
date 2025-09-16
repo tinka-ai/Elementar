@@ -8,9 +8,10 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { LanguageProvider } from "@/components/language-provider"
 import SiteHeader from "@/components/site-header"
 import { Facebook, Instagram, Home, Phone, MapPin, Mail } from "lucide-react"
-import Script from "next/script" 
+import Script from "next/script"
+import GaRouteListener from "@/components/ga-route-listener" // <- pentru pageview la schimbarea rutei
 
-const GA_ID = "G-VHXGNT73PX" 
+const GA_ID = "G-VHXGNT73PX"
 
 export const dynamic = "force-dynamic"
 export const revalidate = 0
@@ -56,7 +57,7 @@ export const metadata: Metadata = {
   verification: {
     google: "Yfe3pUh08J0q7dCCXykSnLW8FQpFJCi32kuUv-CWPZw",
   },
-};
+}
 
 const fxIcon =
   "grid h-10 w-10 place-items-center rounded-md border border-white/10 hover:bg-white/10 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
@@ -74,28 +75,28 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="msapplication-TileColor" content="#000000" />
         <meta name="msapplication-config" content="/browserconfig.xml" />
         <link rel="manifest" href="/site.webmanifest" />
-    <Script
-    src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-    strategy="afterInteractive"
-  />
-  <Script id="ga-init" strategy="afterInteractive">
-    {`
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', '${GA_ID}', { anonymize_ip: true });
-    `}
-  </Script>
-</head>
+
+        {/* Google Analytics */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="ga-init" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GA_ID}', { anonymize_ip: true });`}
+        </Script>
+      </head>
 
       {/* pt-24 pe mobil (header are 2 rânduri), pt-16 pe desktop; pb-14 pentru bara fixă jos */}
-     <body
-  className={`${inter.className}
+      <body
+        className={`${inter.className}
               bg-background text-foreground
               min-h-screen supports-[height:100svh]:min-h-[100svh]
               pt-24 md:pt-16 pb-14
              `}
->
+      >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <LanguageProvider>
             <SiteHeader />
@@ -104,7 +105,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <BottomBar />
           </LanguageProvider>
         </ThemeProvider>
-       <GaRouteListener gaId={GA_ID} />  {
+
+        {/* Pageview la schimbarea rutei (SPA) */}
+        <GaRouteListener gaId={GA_ID} />
       </body>
     </html>
   )
@@ -175,7 +178,6 @@ function SiteFooter() {
   )
 }
 
-
 /* ===== Bara fixă jos (mobil) — funcțională + alegere Maps/Waze ===== */
 function BottomBar() {
   return (
@@ -185,7 +187,6 @@ function BottomBar() {
       style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
     >
       <div className="h-14 flex items-center justify-around px-4 max-w-3xl mx-auto text-gray-300">
-
         <Link href="/" className="flex flex-col items-center gap-1 text-xs hover:text-white">
           <Home className="h-5 w-5" />
           Acasă
