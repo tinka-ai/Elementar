@@ -51,6 +51,10 @@ export const metadata: Metadata = {
   },
   generator: "v0.app",
 }
+  verification: {
+    google: <meta name="google-site-verification" content="Yfe3pUh08J0q7dCCXykSnLW8FQpFJCi32kuUv-CWPZw" />
+  },
+}
 
 const fxIcon =
   "grid h-10 w-10 place-items-center rounded-md border border-white/10 hover:bg-white/10 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
