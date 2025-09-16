@@ -8,6 +8,9 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { LanguageProvider } from "@/components/language-provider"
 import SiteHeader from "@/components/site-header"
 import { Facebook, Instagram, Home, Phone, MapPin, Mail } from "lucide-react"
+import Script from "next/script" 
+
+const GA_ID = "G-VHXGNT73PX" 
 
 export const dynamic = "force-dynamic"
 export const revalidate = 0
@@ -71,7 +74,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="msapplication-TileColor" content="#000000" />
         <meta name="msapplication-config" content="/browserconfig.xml" />
         <link rel="manifest" href="/site.webmanifest" />
-      </head>
+    <Script
+    src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+    strategy="afterInteractive"
+  />
+  <Script id="ga-init" strategy="afterInteractive">
+    {`
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '${GA_ID}', { anonymize_ip: true });
+    `}
+  </Script>
+</head>
 
       {/* pt-24 pe mobil (header are 2 rânduri), pt-16 pe desktop; pb-14 pentru bara fixă jos */}
      <body
