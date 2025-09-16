@@ -104,6 +104,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <BottomBar />
           </LanguageProvider>
         </ThemeProvider>
+       <GaRouteListener gaId={GA_ID} />  {
       </body>
     </html>
   )
