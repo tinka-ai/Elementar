@@ -1,108 +1,126 @@
-// app/api/offer/route.ts
 import { NextResponse } from "next/server"
 import nodemailer from "nodemailer"
 
+export const runtime = "nodejs"  // asigură Node runtime (necesar pt nodemailer)
+export const dynamic = "force-dynamic"
+
 function listify(v: any) {
   if (v === undefined || v === null) return ""
-  if (Array.isArray(v)) return v.join(", ")
-  return String(v)
+  return Array.isArray(v) ? v.join(", ") : String(v)
+}
+
+function normalizeBody(obj: Record<string, any>) {
+  // aplatizează valori de tip File / Blob și curăță spații
+  const out: Record<string, any> = {}
+  for (const [k, v] of Object.entries(obj)) {
+    if (v instanceof File || v instanceof Blob) continue
+    out[k] = typeof v === "string" ? v.trim() : v
+  }
+  return out
+}
+
+function fromFormData(fd: FormData) {
+  const obj: Record<string, any> = {}
+  fd.forEach((v, k) => {
+    if (obj[k] !== undefined) {
+      obj[k] = Array.isArray(obj[k]) ? [...obj[k], String(v)] : [obj[k], String(v)]
+    } else {
+      obj[k] = String(v)
+    }
+  })
+  return obj
+}
+
+function toHTMLTable(obj: Record<string, any>) {
+  const entries = Object.entries(obj)
+    .filter(([k]) => k !== "agree") // excludem checkbox-ul GDPR dacă există
+    .map(([k, v]) => {
+      return `<tr>
+        <td style="padding:6px 10px;border-bottom:1px solid #eee;"><b>${k}</b></td>
+        <td style="padding:6px 10px;border-bottom:1px solid #eee;">${listify(v) || "-"}</td>
+      </tr>`
+    })
+    .join("")
+  return `<table style="border-collapse:collapse;width:100%;font-family:Inter,Arial">${entries}</table>`
 }
 
 export async function POST(req: Request) {
   try {
-    const data = await req.json()
+    // 1) Citim payload-ul indiferent dacă e JSON sau FormData
+    const ctype = req.headers.get("content-type") || ""
+    let data: Record<string, any> = {}
+    if (ctype.includes("application/json")) {
+      data = normalizeBody(await req.json())
+    } else {
+      data = normalizeBody(fromFormData(await req.formData()))
+    }
 
-    const {
-      name, email, phone, company, region,
-      about, audience, problems, links,
-      websiteGoals, kpi,
-      features, content, branding, refs, integrations, domain,
-      botChannels, botRole, botLangs, kb,
-      automations, other,
-      deadline, budget, notes,
-      uiLocale,
-    } = data
-
-    const toOwner = process.env.TO_EMAIL || process.env.SMTP_USER
     const brand = process.env.BRAND_NAME || "TINKA AI"
+
+    // câmpuri utile pentru subiect / reply-to
+    const clientEmail = String(data.email || "")
+    const who = data.company || data.name || clientEmail || "Ofertă nouă"
+
+    if (!clientEmail) {
+      return NextResponse.json({ ok: false, error: "no-email" }, { status: 400 })
+    }
+
+    // 2) Config SMTP (Gmail implicit). Poți folosi și alt provider via env.
+    const SMTP_HOST = process.env.SMTP_HOST || "smtp.gmail.com"
+    const SMTP_PORT = Number(process.env.SMTP_PORT || 465)
+    const SMTP_USER = process.env.SMTP_USER || process.env.MAIL_TO // fallback pe MAIL_TO
+    const SMTP_PASS = process.env.SMTP_PASS || process.env.GMAIL_APP_PASSWORD
+
+    if (!SMTP_USER || !SMTP_PASS) {
+      console.error("Lipsesc variabilele SMTP_USER / SMTP_PASS (sau MAIL_TO / GMAIL_APP_PASSWORD).")
+      return NextResponse.json({ ok: false, error: "smtp-misconfigured" }, { status: 500 })
+    }
+
+    const TO_OWNER = process.env.TO_EMAIL || SMTP_USER
+
     const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST || "smtp.gmail.com",
-      port: Number(process.env.SMTP_PORT || 465),
-      secure: true,
-      auth: { user: process.env.SMTP_USER!, pass: process.env.SMTP_PASS! },
+      host: SMTP_HOST,
+      port: SMTP_PORT,
+      secure: SMTP_PORT === 465, // true pt 465, false pt 587
+      auth: { user: SMTP_USER, pass: SMTP_PASS },
     })
 
-    const html = `
-      <h2>Nouă solicitare ofertă – Pachet lansare rapidă</h2>
-      <p><b>UI language:</b> ${uiLocale || "-"}</p>
-      <h3>Contact</h3>
-      <p><b>Nume:</b> ${name || "-"}<br/>
-         <b>Email:</b> ${email}<br/>
-         <b>Telefon:</b> ${phone || "-"}<br/>
-         <b>Companie:</b> ${company || "-"}<br/>
-         <b>Regiune:</b> ${region || "-"}</p>
+    // 3) HTML pentru e-mailuri
+    const summaryTable = toHTMLTable(data)
 
-      <h3>Afacere</h3>
-      <p><b>Descriere:</b> ${about || "-"}<br/>
-         <b>Public țintă:</b> ${audience || "-"}<br/>
-         <b>Probleme:</b> ${problems || "-"}<br/>
-         <b>Linkuri:</b> ${links || "-"}</p>
-
-      <h3>Obiective & KPI</h3>
-      <p><b>Scop website:</b> ${listify(websiteGoals)}<br/>
-         <b>KPI:</b> ${kpi || "-"}</p>
-
-      <h3>Website</h3>
-      <p><b>Funcții:</b> ${listify(features)}<br/>
-         <b>Conținut:</b> ${content || "-"}<br/>
-         <b>Branding:</b> ${branding || "-"}<br/>
-         <b>Referințe:</b> ${refs || "-"}<br/>
-         <b>Integrări:</b> ${integrations || "-"}<br/>
-         <b>Domeniu:</b> ${domain || "-"}</p>
-
-      <h3>Chatbot</h3>
-      <p><b>Canale:</b> ${listify(botChannels)}<br/>
-         <b>Rol:</b> ${listify(botRole)}<br/>
-         <b>Limbi:</b> ${botLangs || "-"}<br/>
-         <b>Knowledge base:</b> ${kb || "-"}</p>
-
-      <h3>Automatizări</h3>
-      <p><b>Acțiuni:</b> ${listify(automations)}<br/>
-         <b>Altele:</b> ${other || "-"}</p>
-
-      <h3>Constrângeri</h3>
-      <p><b>Deadline:</b> ${deadline || "-"}<br/>
-         <b>Buget:</b> ${budget || "-"}<br/>
-         <b>Note:</b> ${notes || "-"}</p>
+    const ownerHTML = `
+      <h2>Nouă solicitare de ofertă — ${brand}</h2>
+      ${summaryTable}
     `
 
-    // email către tine
+    const clientHTML = `
+      <p>Bună${data.name ? `, ${data.name}` : ""}!</p>
+      <p>Îți mulțumim pentru interesul în <b>${brand}</b>. Am primit detaliile tale și revenim cât mai curând cu o propunere.</p>
+      <p><b>Rezumatul trimis</b>:</p>
+      ${summaryTable}
+      <p>— Echipa ${brand}</p>
+    `
+
+    // 4) Email către tine
     await transporter.sendMail({
-      from: `"${brand} – Forms" <${process.env.SMTP_USER}>`,
-      to: toOwner,
-      subject: `Oferta ${brand}: ${company || name || email}`,
-      html,
-      replyTo: email, // ca să poți răspunde direct
+      from: `"${brand} – Forms" <${SMTP_USER}>`,
+      to: TO_OWNER,
+      subject: `Ofertă ${brand}: ${who}`,
+      html: ownerHTML,
+      replyTo: clientEmail,
     })
 
-    // auto-răspuns către client
+    // 5) Confirmare către client
     await transporter.sendMail({
-      from: `"${brand}" <${process.env.SMTP_USER}>`,
-      to: email,
+      from: `"${brand}" <${SMTP_USER}>`,
+      to: clientEmail,
       subject: `${brand}: am primit solicitarea ta`,
-      html: `
-        <p>Bună${name ? `, ${name}` : ""}!</p>
-        <p>Îți mulțumim pentru interesul în <b>Pachetul de lansare rapidă</b>. 
-        Am primit detaliile și revenim cât de curând cu o propunere.</p>
-        <p>Pe scurt, iată ce am primit:</p>
-        ${html}
-        <p>— Echipa ${brand}</p>
-      `,
+      html: clientHTML,
     })
 
     return NextResponse.json({ ok: true })
-  } catch (e) {
-    console.error(e)
+  } catch (err) {
+    console.error(err)
     return NextResponse.json({ ok: false }, { status: 500 })
   }
 }
