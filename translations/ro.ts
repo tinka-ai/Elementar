@@ -346,5 +346,3 @@ export const ro = {
     errorBody: "Nu am putut trimite formularul. Încearcă din nou sau scrie-ne pe office@tinka.md.",
   },
 }
-
-}
