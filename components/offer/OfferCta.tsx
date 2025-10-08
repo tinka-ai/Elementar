@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react"
 import { useLocale } from "@/contexts/locale-context"
 import { useOfferModal } from "@/components/offer/OfferModalProvider"
 
-export default function OfferCta({
+export default function OfferCTA({
   variant = "primary",
   className = "",
 }: {
@@ -23,9 +23,17 @@ export default function OfferCta({
       : "bg-transparent text-foreground hover:bg-muted/40"
 
   return (
-    <Button onClick={open} className={`${base} ${className}`} aria-label={label}>
-      {label}
-      <ArrowRight className="ml-2 h-4 w-4" />
+    <Button
+      onClick={open}
+      aria-label={label}
+      className={`group relative overflow-hidden ${base} ${className}
+        transition-transform duration-150 active:scale-[0.97] active:translate-y-[1px]`}
+    >
+      <span className="pointer-events-none">{label}</span>
+      <ArrowRight
+        className="ml-2 h-4 w-4 transition-transform duration-150
+                   group-hover:translate-x-1 group-active:translate-x-1"
+      />
     </Button>
   )
 }
