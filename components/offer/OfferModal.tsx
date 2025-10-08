@@ -14,6 +14,66 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Loader2, Send } from "lucide-react"
 
+/* ---------- helpers: bridges pentru shadcn -> FormData ---------- */
+
+// Checkbox shadcn + input real care ajunge în FormData
+function FormCB({
+  name,
+  value,
+  label,
+  defaultChecked = false,
+}: {
+  name: string
+  value?: string
+  label: React.ReactNode
+  defaultChecked?: boolean
+}) {
+  const [checked, setChecked] = useState<boolean>(defaultChecked)
+  return (
+    <label className="flex items-center gap-2 text-sm">
+      <Checkbox checked={checked} onCheckedChange={(v) => setChecked(!!v)} />
+      {/* input real care ajunge în FormData */}
+      <input
+        type="checkbox"
+        className="sr-only"
+        name={name}
+        value={value ?? "on"}
+        checked={checked}
+        onChange={() => {}}
+      />
+      <span>{label}</span>
+    </label>
+  )
+}
+
+// Select shadcn controlat + input hidden pentru FormData
+function FormSelect({
+  name,
+  placeholder,
+  children,
+  defaultValue = "",
+}: {
+  name: string
+  placeholder?: string
+  children: React.ReactNode
+  defaultValue?: string
+}) {
+  const [val, setVal] = useState(defaultValue)
+  return (
+    <>
+      <Select value={val} onValueChange={setVal}>
+        <SelectTrigger id={name}>
+          <SelectValue placeholder={placeholder} />
+        </SelectTrigger>
+        <SelectContent>{children}</SelectContent>
+      </Select>
+      <input type="hidden" name={name} value={val} />
+    </>
+  )
+}
+
+/* ---------- componenta principală ---------- */
+
 type OfferModalProps = { open: boolean; onOpenChange: (v: boolean) => void }
 
 const WEBSITE_GOALS_KEYS = ["leads","ecom","brand","info","support"] as const
@@ -21,11 +81,10 @@ const WEBSITE_FEATURES_KEYS = ["blog","portfolio","form","booking","payments","e
 const BOT_CHANNEL_KEYS = ["site","whatsapp","facebook","telegram","viber"] as const
 const BOT_ROLE_KEYS = ["sales","support","faq","booking"] as const
 const AUTOMATION_KEYS = ["crm","qualify","notify","schedule","followup","newsletter","other"] as const
-const BUDGET_KEYS = ["lt1k","1to5","5to10","gt10"] as const
 
 export default function OfferModal({ open, onOpenChange }: OfferModalProps) {
   const { t, locale } = useLocale() as any
-  const L = t?.offer // dicționarul de mai jos (secțiunea 2.4)
+  const L = t?.offer
   const [sending, setSending] = useState(false)
   const [sent, setSent] = useState<null | "ok" | "err">(null)
 
@@ -35,13 +94,46 @@ export default function OfferModal({ open, onOpenChange }: OfferModalProps) {
     setSent(null)
 
     const fd = new FormData(e.currentTarget)
-    // adăugăm și limba curentă în payload
-    fd.set("uiLocale", locale || "ro")
+    // adăugăm și limba UI
+    const uiLocale = String(locale || "ro")
+
+    // construim payload-ul; colectăm explicit array-urile
+    const getAll = (k: string) => fd.getAll(k).map(String).filter(Boolean)
+    const payload: any = {
+      uiLocale,
+      name: fd.get("name") || "",
+      email: fd.get("email") || "",
+      phone: fd.get("phone") || "",
+      company: fd.get("company") || "",
+      region: fd.get("region") || "",
+      about: fd.get("about") || "",
+      audience: fd.get("audience") || "",
+      problems: fd.get("problems") || "",
+      links: fd.get("links") || "",
+      websiteGoals: getAll("websiteGoals"),
+      kpi: fd.get("kpi") || "",
+      features: getAll("features"),
+      content: fd.get("content") || "",
+      branding: fd.get("branding") || "",
+      refs: fd.get("refs") || "",
+      integrations: fd.get("integrations") || "",
+      domain: fd.get("domain") || "",
+      botChannels: getAll("botChannels"),
+      botRole: getAll("botRole"),
+      botLangs: fd.get("botLangs") || "",
+      kb: fd.get("kb") || "",
+      automations: getAll("automations"),
+      other: fd.get("other") || "",
+      deadline: fd.get("deadline") || "",
+      budget: fd.get("budget") || "",
+      notes: fd.get("notes") || "",
+      gdpr: fd.get("gdpr") ? true : false,
+    }
 
     const res = await fetch("/api/offer", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(Object.fromEntries(fd.entries())),
+      body: JSON.stringify(payload),
     })
 
     setSending(false)
@@ -64,8 +156,12 @@ export default function OfferModal({ open, onOpenChange }: OfferModalProps) {
         {sent === "ok" ? (
           <div className="space-y-3">
             <p className="text-green-500 font-medium">{L?.successTitle ?? "Mulțumim! Formularul a fost trimis."}</p>
-            <p className="text-muted-foreground">{L?.successBody ?? "TINKA AI va analiza răspunsurile și revine în curând cu oferta. Ți-am trimis și un email de confirmare."}</p>
-            <Button onClick={() => onOpenChange(false)} className="mt-2">{L?.close ?? "Închide"}</Button>
+            <p className="text-muted-foreground">
+              {L?.successBody ?? "TINKA AI va analiza răspunsurile și revine în curând cu oferta. Ți-am trimis și un email de confirmare."}
+            </p>
+            <Button onClick={() => onOpenChange(false)} className="mt-2">
+              {L?.close ?? "Închide"}
+            </Button>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-8">
@@ -127,9 +223,7 @@ export default function OfferModal({ open, onOpenChange }: OfferModalProps) {
                   <Label>{L?.fields?.websiteGoals}</Label>
                   <div className="grid grid-cols-1 gap-2 mt-2">
                     {WEBSITE_GOALS_KEYS.map((k) => (
-                      <label key={k} className="flex items-center gap-2 text-sm">
-                        <Checkbox name="websiteGoals" value={k} /> <span>{L?.options?.websiteGoals?.[k]}</span>
-                      </label>
+                      <FormCB key={k} name="websiteGoals" value={k} label={L?.options?.websiteGoals?.[k]} />
                     ))}
                   </div>
                 </div>
@@ -148,32 +242,24 @@ export default function OfferModal({ open, onOpenChange }: OfferModalProps) {
                   <Label>{L?.fields?.features}</Label>
                   <div className="grid grid-cols-1 gap-2 mt-2">
                     {WEBSITE_FEATURES_KEYS.map((k) => (
-                      <label key={k} className="flex items-center gap-2 text-sm">
-                        <Checkbox name="features" value={k} /> <span>{L?.options?.features?.[k]}</span>
-                      </label>
+                      <FormCB key={k} name="features" value={k} label={L?.options?.features?.[k]} />
                     ))}
                   </div>
                 </div>
                 <div className="space-y-3">
                   <div>
                     <Label htmlFor="content">{L?.fields?.content}</Label>
-                    <Select name="content">
-                      <SelectTrigger id="content"><SelectValue placeholder={L?.placeholders?.content} /></SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="have">{L?.options?.content?.have}</SelectItem>
-                        <SelectItem value="need">{L?.options?.content?.need}</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <FormSelect name="content" placeholder={L?.placeholders?.content}>
+                      <SelectItem value="have">{L?.options?.content?.have}</SelectItem>
+                      <SelectItem value="need">{L?.options?.content?.need}</SelectItem>
+                    </FormSelect>
                   </div>
                   <div>
                     <Label htmlFor="branding">{L?.fields?.branding}</Label>
-                    <Select name="branding">
-                      <SelectTrigger id="branding"><SelectValue placeholder={L?.placeholders?.branding} /></SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="have">{L?.options?.branding?.have}</SelectItem>
-                        <SelectItem value="need">{L?.options?.branding?.need}</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <FormSelect name="branding" placeholder={L?.placeholders?.branding}>
+                      <SelectItem value="have">{L?.options?.branding?.have}</SelectItem>
+                      <SelectItem value="need">{L?.options?.branding?.need}</SelectItem>
+                    </FormSelect>
                   </div>
                   <div>
                     <Label htmlFor="refs">{L?.fields?.refs}</Label>
@@ -186,13 +272,10 @@ export default function OfferModal({ open, onOpenChange }: OfferModalProps) {
                 </div>
                 <div className="md:col-span-2">
                   <Label htmlFor="domain">{L?.fields?.domain}</Label>
-                  <Select name="domain">
-                    <SelectTrigger id="domain"><SelectValue placeholder={L?.placeholders?.domain} /></SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="have">{L?.options?.domain?.have}</SelectItem>
-                      <SelectItem value="need">{L?.options?.domain?.need}</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <FormSelect name="domain" placeholder={L?.placeholders?.domain}>
+                    <SelectItem value="have">{L?.options?.domain?.have}</SelectItem>
+                    <SelectItem value="need">{L?.options?.domain?.need}</SelectItem>
+                  </FormSelect>
                 </div>
               </div>
             </section>
@@ -205,9 +288,7 @@ export default function OfferModal({ open, onOpenChange }: OfferModalProps) {
                   <Label>{L?.fields?.botChannels}</Label>
                   <div className="grid grid-cols-1 gap-2 mt-2">
                     {BOT_CHANNEL_KEYS.map((k) => (
-                      <label key={k} className="flex items-center gap-2 text-sm">
-                        <Checkbox name="botChannels" value={k} /> <span>{L?.options?.botChannels?.[k]}</span>
-                      </label>
+                      <FormCB key={k} name="botChannels" value={k} label={L?.options?.botChannels?.[k]} />
                     ))}
                   </div>
                 </div>
@@ -215,9 +296,7 @@ export default function OfferModal({ open, onOpenChange }: OfferModalProps) {
                   <Label>{L?.fields?.botRole}</Label>
                   <div className="grid grid-cols-1 gap-2 mt-2">
                     {BOT_ROLE_KEYS.map((k) => (
-                      <label key={k} className="flex items-center gap-2 text-sm">
-                        <Checkbox name="botRole" value={k} /> <span>{L?.options?.botRole?.[k]}</span>
-                      </label>
+                      <FormCB key={k} name="botRole" value={k} label={L?.options?.botRole?.[k]} />
                     ))}
                   </div>
                 </div>
@@ -240,9 +319,7 @@ export default function OfferModal({ open, onOpenChange }: OfferModalProps) {
                   <Label>{L?.fields?.automations}</Label>
                   <div className="grid grid-cols-1 gap-2 mt-2">
                     {AUTOMATION_KEYS.map((k) => (
-                      <label key={k} className="flex items-center gap-2 text-sm">
-                        <Checkbox name="automations" value={k} /> <span>{L?.options?.automations?.[k]}</span>
-                      </label>
+                      <FormCB key={k} name="automations" value={k} label={L?.options?.automations?.[k]} />
                     ))}
                   </div>
                 </div>
@@ -263,24 +340,19 @@ export default function OfferModal({ open, onOpenChange }: OfferModalProps) {
                 </div>
                 <div>
                   <Label htmlFor="budget">{L?.fields?.budget}</Label>
-                  <Select name="budget">
-                    <SelectTrigger id="budget"><SelectValue placeholder={L?.placeholders?.budget} /></SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="lt1k">{L?.options?.budget?.lt1k}</SelectItem>
-                      <SelectItem value="1to5">{L?.options?.budget?.["1to5"]}</SelectItem>
-                      <SelectItem value="5to10">{L?.options?.budget?.["5to10"]}</SelectItem>
-                      <SelectItem value="gt10">{L?.options?.budget?.gt10}</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <FormSelect name="budget" placeholder={L?.placeholders?.budget}>
+                    <SelectItem value="lt1k">{L?.options?.budget?.lt1k}</SelectItem>
+                    <SelectItem value="1to5">{L?.options?.budget?.["1to5"]}</SelectItem>
+                    <SelectItem value="5to10">{L?.options?.budget?.["5to10"]}</SelectItem>
+                    <SelectItem value="gt10">{L?.options?.budget?.gt10}</SelectItem>
+                  </FormSelect>
                 </div>
                 <div className="md:col-span-2">
                   <Label htmlFor="notes">{L?.fields?.notes}</Label>
                   <Textarea id="notes" name="notes" rows={2} placeholder={L?.placeholders?.notes} />
                 </div>
               </div>
-              <label className="flex items-center gap-2 text-sm">
-                <Checkbox required name="gdpr" /> <span>{L?.fields?.gdpr}</span>
-              </label>
+              <FormCB name="gdpr" label={L?.fields?.gdpr ?? "Sunt de acord cu prelucrarea datelor."} defaultChecked={false} />
             </section>
 
             {sent === "err" && (
