@@ -9,24 +9,27 @@ import { ArrowRight, Eye, FlaskConical, Puzzle, Sparkles, Waves, Link2, BadgeChe
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
 import { useLanguage } from "@/components/language-provider"
 
+// ⬇️ import nou: butonul care deschide formularul
+import OfferCTA from "@/components/offer/OfferCTA"
+
 export default function Page() {
   const { t } = useLanguage()
 
   const fx =
-    "transition-shadow duration-300 ease-out hover:shadow-[0_0_0_1px_rgba(56,189,248,0.35),0_0_28px_6px_rgba(168,85,247,0.25)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-400/70 rounded-md";
+    "transition-shadow duration-300 ease-out hover:shadow-[0_0_0_1px_rgba(56,189,248,0.35),0_0_28px_6px_rgba(168,85,247,0.25)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-400/70 rounded-md"
 
   return (
     <>
-     {/* VIDEO LOGO SECTION */}
-<section className="relative w-full h-auto overflow-hidden flex items-center justify-center bg-black py-4 mt-24 md:mt-0">
-  <video className="max-w-full max-h-full object-contain" autoPlay loop muted playsInline>
-    <source
-      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/unwatermark_ELementar%20logo-IWmmAsRBKFrGVBf8T0e953xG8X72Y7.mp4"
-      type="video/mp4"
-    />
-    Your browser does not support the video tag.
-  </video>
-</section>
+      {/* VIDEO LOGO SECTION */}
+      <section className="relative w-full h-auto overflow-hidden flex items-center justify-center bg-black py-4 mt-24 md:mt-0">
+        <video className="max-w-full max-h-full object-contain" autoPlay loop muted playsInline>
+          <source
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/unwatermark_ELementar%20logo-IWmmAsRBKFrGVBf8T0e953xG8X72Y7.mp4"
+            type="video/mp4"
+          />
+          Your browser does not support the video tag.
+        </video>
+      </section>
 
       <main>
         {/* HERO */}
@@ -42,6 +45,8 @@ export default function Page() {
                   {t("hero.title")}
                 </h1>
                 <p className="text-lg sm:text-xl text-gray-300 max-w-2xl">{t("hero.description")}</p>
+
+                {/* CTA buttons */}
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Button asChild className={`bg-sky-500 text-white hover:bg-sky-400 ${fx}`}>
                     <Link href="/domenii" aria-label={t("aria.home")}>
@@ -49,15 +54,9 @@ export default function Page() {
                       <ArrowRight className="ms-2 h-4 w-4" aria-hidden />
                     </Link>
                   </Button>
-                  <Button
-                    asChild
-                    variant="outline"
-                    className={`border-sky-700/60 text-sky-300 hover:bg-sky-500/10 bg-transparent ${fx}`}
-                  >
-                    <Link href="/domenii" aria-label={t("hero.ctaSecondary")}>
-                      {t("hero.ctaSecondary")}
-                    </Link>
-                  </Button>
+
+                  {/* ⬇️ Butonul „Solicită ofertă” cu feedback vizual pe click */}
+                  <OfferCTA className={`${fx} active:scale-95 transition-transform`} />
                 </div>
               </div>
 
@@ -140,7 +139,6 @@ export default function Page() {
             </div>
 
             <div>
-              {/* Imagine din /public/images (corectat pathul) */}
               <Image
                 src="/images/interactive-physics-experiment.png"
                 alt="Copil experimentează pendulul lui Newton la un stand"
@@ -178,50 +176,42 @@ export default function Page() {
           </div>
         </section>
 
-      {/* PRICING */}
-<section className="py-12 sm:py-16 border-b border-white/5">
-  <div className="mx-auto max-w-7xl px-4 sm:px-6">
-    <SectionKicker>TARIFE</SectionKicker>
-    <h2 className="text-3xl sm:text-4xl font-bold text-gray-300">
-      Alege un plan potrivit vizitei tale
-    </h2>
+        {/* PRICING */}
+        <section className="py-12 sm:py-16 border-b border-white/5">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6">
+            <SectionKicker>TARIFE</SectionKicker>
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-300">Alege un plan potrivit vizitei tale</h2>
 
-    <div className="mt-8 grid gap-6 sm:grid-cols-2">
-      <PricingCard
-        fx={fx}
-        title="Individual"
-        price="250 MDL/copil; 100 MDL/adult"
-        perks={[
-          "Acces la toate zonele",
-          "Ghidaj de sală",
-          "Durata aprox. 1,5 ore",
-        ]}
-      />
+            <div className="mt-8 grid gap-6 sm:grid-cols-2">
+              <PricingCard
+                fx={fx}
+                title="Individual"
+                price="250 MDL/copil; 100 MDL/adult"
+                perks={["Acces la toate zonele", "Ghidaj de sală", "Durata aprox. 1,5 ore"]}
+              />
 
-      <PricingCard
-        fx={fx}
-        highlight
-        title="Grup/Școli"
-        price="230 MDL/copil (min. 5 copii/grup)"
-        perks={[
-          "Acces complet",
-          "Ghidaj de sală",
-          "Program personalizat",
-          "1 profesor gratuit/grup (max. 20 elevi)",
-          "Max. 2 grupuri simultan",
-        ]}
-      />
-    </div>
+              <PricingCard
+                fx={fx}
+                highlight
+                title="Grup/Școli"
+                price="230 MDL/copil (min. 5 copii/grup)"
+                perks={[
+                  "Acces complet",
+                  "Ghidaj de sală",
+                  "Program personalizat",
+                  "1 profesor gratuit/grup (max. 20 elevi)",
+                  "Max. 2 grupuri simultan",
+                ]}
+              />
+            </div>
 
-    {/* Notă valabilitate prețuri */}
-    <p className="mt-6 pt-3 text-center text-sm text-gray-400 border-t border-white/10">
-      Prețurile afișate sunt valabile până la{" "}
-      <span className="font-medium text-gray-300">30 septembrie 2025</span> (inclusiv).
-    </p>
-  </div>
-</section>
+            <p className="mt-6 pt-3 text-center text-sm text-gray-400 border-t border-white/10">
+              Prețurile afișate sunt valabile până la{" "}
+              <span className="font-medium text-gray-300">30 septembrie 2025</span> (inclusiv).
+            </p>
+          </div>
+        </section>
 
- 
         {/* FAQ */}
         <section id="faq" className="py-12 sm:py-16 border-b border-white/5">
           <div className="mx-auto max-w-4xl px-4 sm:px-6">
@@ -273,7 +263,14 @@ function Feature({
   text,
   link,
   learnMore,
-}: { fx: string; icon: React.ReactNode; title: string; text: string; link: string; learnMore: string }) {
+}: {
+  fx: string
+  icon: React.ReactNode
+  title: string
+  text: string
+  link: string
+  learnMore: string
+}) {
   return (
     <li className={`p-5 rounded-xl border border-white/10 bg-white/5 ${fx}`}>
       <div className="flex items-center gap-3">
@@ -348,9 +345,7 @@ function PricingCard({
 }) {
   return (
     <div
-      className={`p-6 rounded-xl border ${
-        highlight ? "border-sky-400/40" : "border-white/10"
-      } bg-white/5 ${fx}`}
+      className={`p-6 rounded-xl border ${highlight ? "border-sky-400/40" : "border-white/10"} bg-white/5 ${fx}`}
       aria-label={`Plan ${title}`}
     >
       <div className="flex items-center justify-between">
