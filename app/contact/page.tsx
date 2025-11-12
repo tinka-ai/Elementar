@@ -560,7 +560,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-100 mb-1">
-                    Vezi cum ajungi la ELEMENTAR din parcare până la etajul 4
+                    Apasa aici sa vezi cum ajungi din parcare până la etajul, 4 la ELEMENTAR
                   </h3>
                   <p className="text-sm text-gray-300">
                     Vezi pas cu pas drumul de la intrarea in mall până în parcul de știință ELEMENTAR.
