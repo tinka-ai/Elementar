@@ -519,8 +519,8 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold text-gray-300 mb-2">Transport public</h3>
                     <p className="text-gray-400 text-sm">
-                      Autobuze: PORT MALL oferă transport absolut gratuit pentru toți vizitatorii și clienții loiali.
-                      Autobuzul: 5 oprește în apropierea mall-ului. Stația cea mai
+                      PORT MALL oferă transport (auobuz) absolut gratuit pentru toți vizitatorii care circulă pe două rute principale: Ciocana și Râșcani.
+                      Din transport public circulă autobuzul de pe ruta Nr. 5, care oprește în apropierea mall-ului. Stația cea mai
                       apropiată: „Port Mall".
                     </p>
                   </div>
