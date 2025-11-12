@@ -21,12 +21,15 @@ import {
   BookOpen,
   Image as ImageIcon,
   HelpCircle,
+  PlayCircle,
+  X,
 } from "lucide-react"
 
 export default function ContactPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [result, setResult] = useState<{ success: boolean; message?: string; error?: string } | null>(null)
   const [showEmailSuccess, setShowEmailSuccess] = useState(false)
+  const [isVideoOpen, setIsVideoOpen] = useState(false)
 
   const fx =
     "transition-shadow duration-300 ease-out hover:shadow-[0_0_0_1px_rgba(56,189,248,0.35),0_0_28px_6px_rgba(168,85,247,0.25)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-400/70 rounded-md"
@@ -235,7 +238,11 @@ export default function ContactPage() {
 
               {result && (
                 <div
-                  className={`mb-6 p-4 rounded-lg ${result.success ? "bg-green-500/20 border border-green-500/30" : "bg-red-500/20 border border-red-500/30"}`}
+                  className={`mb-6 p-4 rounded-lg ${
+                    result.success
+                      ? "bg-green-500/20 border border-green-500/30"
+                      : "bg-red-500/20 border border-red-500/30"
+                  }`}
                 >
                   <p className={`text-sm ${result.success ? "text-green-300" : "text-red-300"}`}>
                     {result.success ? result.message : result.error}
@@ -494,7 +501,7 @@ export default function ContactPage() {
               />
             </div>
 
-            {/* INSTRUCȚIUNI */}
+            {/* INSTRUCȚIUNI + VIDEO */}
             <div className="space-y-6">
               <div className={`p-6 rounded-xl border border-white/10 bg-white/5 ${fx}`}>
                 <div className="flex items-start gap-4">
@@ -519,9 +526,9 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold text-gray-300 mb-2">Transport public</h3>
                     <p className="text-gray-400 text-sm">
-                      PORT MALL oferă transport (auobuz) absolut gratuit pentru toți vizitatorii care circulă pe două rute principale: Ciocana și Râșcani.
-                      Din transport public circulă autobuzul de pe ruta Nr. 5, care oprește în apropierea mall-ului. Stația cea mai
-                      apropiată: „Port Mall".
+                      PORT MALL oferă transport (auobuz) absolut gratuit pentru toți vizitatorii care circulă pe două
+                      rute principale: Ciocana și Râșcani. Din transport public circulă autobuzul de pe ruta Nr. 5, care
+                      oprește în apropierea mall-ului. Stația cea mai apropiată: „Port Mall".
                     </p>
                   </div>
                 </div>
@@ -541,6 +548,26 @@ export default function ContactPage() {
                   </div>
                 </div>
               </div>
+
+              {/* CARD VIDEO HOW TO GET TO */}
+              <button
+                type="button"
+                onClick={() => setIsVideoOpen(true)}
+                className={`w-full text-left p-6 rounded-xl border border-sky-500/40 bg-sky-500/10 hover:bg-sky-500/20 flex gap-4 items-center ${fx}`}
+              >
+                <div className="grid h-12 w-12 place-items-center rounded-full bg-sky-500/30 text-sky-100">
+                  <PlayCircle className="h-7 w-7" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-100 mb-1">
+                    Vezi cum ajungi la ELEMENTAR din parcare până la etajul 4
+                  </h3>
+                  <p className="text-sm text-gray-300">
+                    Un scurt video (9:16) care îți arată pas cu pas drumul de la parcare, intrarea în clădire și accesul
+                    până în parcul de știință.
+                  </p>
+                </div>
+              </button>
 
               <Button asChild className={`w-full bg-sky-500 text-white hover:bg-sky-400 ${fx}`}>
                 <a
@@ -567,6 +594,39 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      {/* MODAL VIDEO HOW TO GET TO */}
+      {isVideoOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4">
+          <div className="relative w-full max-w-[480px]">
+            <button
+              type="button"
+              aria-label="Închide video"
+              onClick={() => setIsVideoOpen(false)}
+              className="absolute -top-10 right-0 text-gray-200 hover:text-white"
+            >
+              <X className="h-6 w-6" />
+            </button>
+
+            <div className="aspect-[9/16] w-full overflow-hidden rounded-2xl border border-white/20 bg-black">
+              <video
+                src="/video/How%20to%20get%20to.webm"
+                controls
+                autoPlay
+                className="h-full w-full object-contain bg-black"
+              />
+            </div>
+          </div>
+
+          {/* click pe fundal închide modalul */}
+          <button
+            type="button"
+            className="fixed inset-0 -z-10"
+            aria-label="Închide video"
+            onClick={() => setIsVideoOpen(false)}
+          />
+        </div>
+      )}
     </main>
   )
 }
