@@ -563,8 +563,7 @@ export default function ContactPage() {
                     Vezi cum ajungi la ELEMENTAR din parcare până la etajul 4
                   </h3>
                   <p className="text-sm text-gray-300">
-                    Un scurt video (9:16) care îți arată pas cu pas drumul de la parcare, intrarea în clădire și accesul
-                    până în parcul de știință.
+                    Vezi pas cu pas drumul de la intrarea in mall până în parcul de știință ELEMENTAR.
                   </p>
                 </div>
               </button>
