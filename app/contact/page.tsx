@@ -505,7 +505,7 @@ export default function ContactPage() {
                     <h3 className="font-semibold text-gray-300 mb-2">Cu mașina</h3>
                     <p className="text-gray-400 text-sm">
                       Parcare gratuită disponibilă în Port Mall. Intrarea principală pe Strada Mihai Sadoveanu. Parcul
-                      se află la etajul 2.
+                      se află la etajul 4.
                     </p>
                   </div>
                 </div>
@@ -519,7 +519,8 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold text-gray-300 mb-2">Transport public</h3>
                     <p className="text-gray-400 text-sm">
-                      Autobuzele 1, 22, 35 și troleibuzele 2, 8 opresc în apropierea mall-ului. Stația cea mai
+                      Autobuze: PORT MALL oferă transport absolut gratuit pentru toți vizitatorii și clienții loiali.
+                      Autobuzul: 5 oprește în apropierea mall-ului. Stația cea mai
                       apropiată: „Port Mall".
                     </p>
                   </div>
