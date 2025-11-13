@@ -49,7 +49,7 @@ const galleryItems: GalleryItem[] = [
     id: "welcome",
     type: "image",
     src: "/images/welcome_to_elementar.webp",
-    category: "Welcome",
+    category: "Explorare",
     title: "Zonă foto cu logo-ul ELEMENTAR – Parc de știință și curiozități",
     alt: "Vizitatoare pozând lângă logo-ul ELEMENTAR – parc de știință și curiozități pentru copii și părinți.",
   },
@@ -57,7 +57,7 @@ const galleryItems: GalleryItem[] = [
     id: "harta",
     type: "image",
     src: "/images/harta.webp",
-    category: "Hărți & Explorare",
+    category: "Explorare",
     title: "Hartă luminoasă a Republicii Moldova la ELEMENTAR",
     alt: "Adolescent explorând harta luminoasă a Republicii Moldova la ELEMENTAR, hartă educativă cu județe iluminate.",
   },
@@ -65,7 +65,7 @@ const galleryItems: GalleryItem[] = [
     id: "harta_zoom",
     type: "image",
     src: "/images/hartazoom.webp",
-    category: "Hărți & Explorare",
+    category: "Explorare",
     title: "Zoom pe harta Republicii Moldova la ELEMENTAR",
     alt: "Detaliu cu degetul unui copil arătând orașul Chișinău pe harta Republicii Moldova la ELEMENTAR.",
   },
@@ -167,7 +167,7 @@ const galleryItems: GalleryItem[] = [
   },
 ]
 
-const categories = ["Toate", "Iluzii Optice", "Hărți & Explorare", "Experimente Practice", "Curse Auto", "Welcome", "Video"] as const
+const categories = ["Toate", "Iluzii Optice", "Explorare", "Experimente Practice", "Video"] as const
 
 export default function GaleriePage() {
   const [selectedCategory, setSelectedCategory] = useState<(typeof categories)[number]>("Toate")
