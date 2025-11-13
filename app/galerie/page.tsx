@@ -9,7 +9,7 @@ type BaseItem = {
   id: string
   title: string
   alt: string
-  category: "Iluzii Optice" | "Hărți & Explorare" | "Experimente Practice" | "Curse Auto" | "Welcome" | "Video"
+  category: "Iluzii Optice" | "Explorare" | "Experimente" | "Video"
 }
 
 type ImageItem = BaseItem & {
