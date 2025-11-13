@@ -44,7 +44,15 @@ const galleryItems: GalleryItem[] = [
     alt: "Iluzie optică la ELEMENTAR unde capul unei persoane pare a fi așezat pe o masă într-un decor alb-negru.",
   },
 
-  // HĂRȚI & EXPLORARE
+  // EXPLORARE
+  {
+    id: "welcome",
+    type: "image",
+    src: "/images/welcome_to_elementar.webp",
+    category: "Welcome",
+    title: "Zonă foto cu logo-ul ELEMENTAR – Parc de știință și curiozități",
+    alt: "Vizitatoare pozând lângă logo-ul ELEMENTAR – parc de știință și curiozități pentru copii și părinți.",
+  },
   {
     id: "harta",
     type: "image",
@@ -103,13 +111,11 @@ const galleryItems: GalleryItem[] = [
     title: "Puzzle anatomic colorat – organele umane",
     alt: "Familie rezolvând un puzzle anatomic colorat cu organele interne ale corpului uman la ELEMENTAR.",
   },
-
-  // CURSE AUTO
   {
     id: "race_trace",
     type: "image",
     src: "/images/race_trace.webp",
-    category: "Curse Auto",
+    category: "Experimente Practice",
     title: "Circuit auto interactiv pentru copii la ELEMENTAR",
     alt: "Mamă și copil jucându-se cu mașinuțe teleghidate pe circuitul auto interactiv la ELEMENTAR.",
   },
@@ -117,19 +123,9 @@ const galleryItems: GalleryItem[] = [
     id: "race_trace2",
     type: "image",
     src: "/images/race_trace2.webp",
-    category: "Curse Auto",
+    category: "Experimente Practice",
     title: "Copii la curse auto pe circuitul interactiv",
     alt: "Doi copii conducând mașinuțe pe un circuit auto complex cu curbe și poduri la ELEMENTAR.",
-  },
-
-  // WELCOME / LOGO
-  {
-    id: "welcome",
-    type: "image",
-    src: "/images/welcome_to_elementar.webp",
-    category: "Welcome",
-    title: "Zonă foto cu logo-ul ELEMENTAR – Parc de știință și curiozități",
-    alt: "Vizitatoare pozând lângă logo-ul ELEMENTAR – parc de știință și curiozități pentru copii și părinți.",
   },
 
   // VIDEO
