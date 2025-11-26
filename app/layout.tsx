@@ -120,13 +120,16 @@ function SiteFooter() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 py-10">
         {/* rândul principal */}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 items-start">
+
           {/* Contact */}
           <div className="space-y-2">
             <p className="text-gray-300 font-medium">Contact</p>
             <p className="text-sm text-gray-300">
               Port Mall, Chișinău MD — Strada Mihai Sadoveanu 42/6, MD-2075
             </p>
-            <p className="text-sm text-gray-300">+373 79 010 277 • office@elementar.md</p>
+            <p className="text-sm text-gray-300">
+              +373 79 010 277 • office@elementar.md
+            </p>
           </div>
 
           {/* Social */}
@@ -140,6 +143,7 @@ function SiteFooter() {
             >
               <Facebook className="h-5 w-5" />
             </a>
+
             <a
               href="https://instagram.com/elementara.ro"
               target="_blank"
@@ -151,104 +155,58 @@ function SiteFooter() {
             </a>
           </div>
 
-         {/* Sponsor */}
-<div className="lg:justify-end flex">
-  <div className="flex items-start gap-4">
-    {/* Logo Suedia */}
-    <img
-      src="/image/svirge.png"
-      alt="Suedia — suport financiar"
-      className="h-12 w-auto object-contain select-none"
-      loading="lazy"
-      decoding="async"
-    />
+          {/* Sponsor */}
+          <div className="lg:justify-end flex">
+            <div className="flex items-start gap-4">
 
-    {/* Logo Fundația Est-Europeană */}
-    <img
-      src="/images/FundatiaEstEuropeanaMD.png"
-      alt="Fundația Est-Europeană — logo"
-      className="h-12 w-auto object-contain select-none"
-      loading="lazy"
-      decoding="async"
-    />
+              {/* Logo Suedia */}
+              <img
+                src="/images/svirge.png"
+                alt="Suedia — suport financiar"
+                className="h-12 w-auto object-contain select-none"
+                loading="lazy"
+                decoding="async"
+              />
 
-    {/* Text */}
-    <p className="max-w-xs text-xs leading-snug text-gray-400">
-      Parcul de științe „ELEMENTAR” a fost creat de către A.O. „Pro-Elementary”
-      cu suportul financiar al Suediei, prin intermediul Fundației „Est-Europene”.
-      Conținutul acestui web-site aparține autorilor și nu reflectă neapărat
-      punctul de vedere al Suediei sau al Fundației „Est-Europene”.
-    </p>
-  </div>
-</div>
+              {/* Logo Fundația Est-Europeană */}
+              <img
+                src="/images/FundatiaEstEuropeanaMD.png"
+                alt="Fundația Est-Europeană — logo"
+                className="h-12 w-auto object-contain select-none"
+                loading="lazy"
+                decoding="async"
+              />
 
+              {/* Text */}
+              <p className="max-w-xs text-xs leading-snug text-gray-400">
+                Parcul de științe „ELEMENTAR” a fost creat de către A.O. „Pro-Elementary”
+                cu suportul financiar al Suediei, prin intermediul Fundației „Est-Europene”.
+                Conținutul acestui web-site aparține autorilor și nu reflectă neapărat
+                punctul de vedere al Suediei sau al Fundației „Est-Europene”.
+              </p>
+
+            </div>
+          </div>
+
+        </div>
 
         {/* rândul de jos */}
         <div className="mt-8 text-xs text-gray-500 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
           <p>© {new Date().getFullYear()} PRO-ELEMENTARY A.O.. Toate drepturile rezervate.</p>
-          <p>Powered by TINKA AI.</p>
+         <p>
+  <a
+    href="https://tinka.md/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="hover:text-white transition-colors"
+  >
+    Powered by TINKA AI
+  </a>
+  .
+</p>
+
         </div>
       </div>
     </footer>
-  )
-}
-
-/* ===== Bara fixă jos (mobil) — funcțională + alegere Maps/Waze ===== */
-function BottomBar() {
-  return (
-    <div
-      className="fixed bottom-0 left-0 right-0 z-[120] md:hidden border-t border-white/10
-                 bg-black/80 backdrop-blur-md supports-[backdrop-filter]:bg-black/60"
-      style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
-    >
-      <div className="h-14 flex items-center justify-around px-4 max-w-3xl mx-auto text-gray-300">
-        <Link href="/" className="flex flex-col items-center gap-1 text-xs hover:text-white">
-          <Home className="h-5 w-5" />
-          Acasă
-        </Link>
-
-        <a href="tel:+37369830702" className="flex flex-col items-center gap-1 text-xs hover:text-white">
-          <Phone className="h-5 w-5" />
-          Apelează
-        </a>
-
-        {/* Locație cu mini-meniu pentru Google Maps / Waze (fără JS) */}
-        <details className="relative group">
-          <summary className="list-none flex flex-col items-center gap-1 text-xs hover:text-white cursor-pointer">
-            <MapPin className="h-5 w-5" />
-            Locație
-          </summary>
-
-          {/* meniul apare deasupra iconiței */}
-          <div
-            className="absolute bottom-[2.75rem] left-1/2 -translate-x-1/2 min-w-[180px]
-                       rounded-lg border border-white/10 bg-black/90 backdrop-blur
-                       shadow-lg p-2 text-sm"
-          >
-            <a
-              className="block px-3 py-2 rounded-md hover:bg-white/10"
-              href="https://www.google.com/maps/dir/?api=1&destination=Strada%20Mihai%20Sadoveanu%2042%2F6%2C%20Chi%C8%99in%C4%83u%20MD-2075"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Deschide în Google Maps
-            </a>
-            <a
-              className="mt-1 block px-3 py-2 rounded-md hover:bg-white/10"
-              href="https://waze.com/ul?q=Strada%20Mihai%20Sadoveanu%2042%2F6%2C%20Chi%C8%99in%C4%83u%20MD-2075&navigate=yes"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Deschide în Waze
-            </a>
-          </div>
-        </details>
-
-        <a href="mailto:office@elementar.md" className="flex flex-col items-center gap-1 text-xs hover:text-white">
-          <Mail className="h-5 w-5" />
-          Email
-        </a>
-      </div>
-    </div>
   )
 }
