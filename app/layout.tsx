@@ -9,7 +9,7 @@ import SiteHeader from "@/components/site-header"
 import { Facebook, Instagram, Home, Phone, MapPin, Mail } from "lucide-react"
 import Script from "next/script"
 import GaRouteListener from "@/components/ga-route-listener" // <- pentru pageview la schimbarea rutei
-import SiteFooter from "@/app/components/site-footer"
+import SiteFooter from "@/components/site-footer"
 
 const GA_ID = "G-VHXGNT73PX"
 
