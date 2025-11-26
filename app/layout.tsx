@@ -6,11 +6,11 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { LanguageProvider } from "@/components/language-provider"
 import SiteHeader from "@/components/site-header"
+import SiteFooter from "@/components/site-footer"
+import BottomBar from "@/components/bottom-bar" 
 import { Facebook, Instagram, Home, Phone, MapPin, Mail } from "lucide-react"
 import Script from "next/script"
-import GaRouteListener from "@/components/ga-route-listener" // <- pentru pageview la schimbarea rutei
-import SiteFooter from "@/components/site-footer"
-
+import GaRouteListener from "@/components/ga-route-listener"
 const GA_ID = "G-VHXGNT73PX"
 
 export const dynamic = "force-dynamic"
