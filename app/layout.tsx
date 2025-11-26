@@ -118,6 +118,7 @@ function SiteFooter() {
   return (
     <footer id="contact" className="border-t border-white/5">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 py-10">
+
         {/* rândul principal */}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 items-start">
 
@@ -161,7 +162,7 @@ function SiteFooter() {
 
               {/* Logo Suedia */}
               <img
-                src="/images/svirge.png"
+                src="/images/sverige.png"
                 alt="Suedia — suport financiar"
                 className="h-12 w-auto object-contain select-none"
                 loading="lazy"
@@ -193,19 +194,20 @@ function SiteFooter() {
         {/* rândul de jos */}
         <div className="mt-8 text-xs text-gray-500 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
           <p>© {new Date().getFullYear()} PRO-ELEMENTARY A.O.. Toate drepturile rezervate.</p>
-         <p>
-  <a
-    href="https://tinka.md/"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="hover:text-white transition-colors"
-  >
-    Powered by TINKA AI
-  </a>
-  .
-</p>
 
+          <p>
+            <a
+              href="https://tinka.md/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors"
+            >
+              Powered by TINKA AI
+            </a>
+            .
+          </p>
         </div>
+
       </div>
     </footer>
   )
