@@ -28,20 +28,11 @@ export default function Page() {
       muted
       playsInline
     >
-      <source
-        src="/video/logo_desktop.webm"
-        type="video/webm"
-        media="(min-width: 640px)"
-      />
-      <source
-        src="/video/logo_mobile.mp4"
-        type="video/mp4"
-      />
+      <source src="/video/elementar_animated_logo.webm" type="video/webm" />
       Browserul tău nu suportă elementul video.
     </video>
   </div>
 </section>
-
 
       <main>
         {/* HERO */}
