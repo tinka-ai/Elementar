@@ -222,7 +222,7 @@ export default function Page() {
     {/* Notă valabilitate prețuri */}
     <p className="mt-6 pt-3 text-center text-sm text-gray-400 border-t border-white/10">
       Prețurile afișate sunt valabile până la{" "}
-      <span className="font-medium text-gray-300">30 septembrie 2025</span> (inclusiv).
+      <span className="font-medium text-gray-300">31 decembrie 2025</span> (inclusiv).
     </p>
   </div>
 </section>
