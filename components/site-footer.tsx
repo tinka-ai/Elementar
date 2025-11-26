@@ -60,7 +60,7 @@ export default function SiteFooter() {
               <img
                 src="/images/FundatiaEstEuropeanaMD.png"
                 alt="Fundația Est-Europeană — logo"
-                className="h-12 w-auto object-contain select-none"
+                className="h-14 w-auto object-contain select-none"
                 loading="lazy"
                 decoding="async"
               />
