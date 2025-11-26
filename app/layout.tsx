@@ -151,22 +151,37 @@ function SiteFooter() {
             </a>
           </div>
 
-          {/* Sponsor */}
-          <div className="lg:justify-end flex">
-            <div className="flex items-center gap-4">
-              <img
-                src="/images/FundatiaEstEuropeanaMD.png"
-                alt="Fundația Est-Europeană Moldova — logo"
-                className="h-12 w-auto object-contain select-none"
-                loading="lazy"
-                decoding="async"
-              />
-              <p className="max-w-xs text-xs leading-snug text-gray-400">
-                Proiectul este susținut financiar de Fundația Est-Europeană, din resursele oferite de Suedia.
-              </p>
-            </div>
-          </div>
-        </div>
+         {/* Sponsor */}
+<div className="lg:justify-end flex">
+  <div className="flex items-start gap-4">
+    {/* Logo Suedia */}
+    <img
+      src="/image/svirge.png"
+      alt="Suedia — suport financiar"
+      className="h-12 w-auto object-contain select-none"
+      loading="lazy"
+      decoding="async"
+    />
+
+    {/* Logo Fundația Est-Europeană */}
+    <img
+      src="/images/FundatiaEstEuropeanaMD.png"
+      alt="Fundația Est-Europeană — logo"
+      className="h-12 w-auto object-contain select-none"
+      loading="lazy"
+      decoding="async"
+    />
+
+    {/* Text */}
+    <p className="max-w-xs text-xs leading-snug text-gray-400">
+      Parcul de științe „ELEMENTAR” a fost creat de către A.O. „Pro-Elementary”
+      cu suportul financiar al Suediei, prin intermediul Fundației „Est-Europene”.
+      Conținutul acestui web-site aparține autorilor și nu reflectă neapărat
+      punctul de vedere al Suediei sau al Fundației „Est-Europene”.
+    </p>
+  </div>
+</div>
+
 
         {/* rândul de jos */}
         <div className="mt-8 text-xs text-gray-500 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
