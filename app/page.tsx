@@ -18,14 +18,22 @@ export default function Page() {
   return (
     <>
      {/* VIDEO LOGO SECTION */}
-<section className="relative w-full h-auto overflow-hidden flex items-center justify-center bg-black py-4 mt-24 md:mt-0">
-  <video className="max-w-full max-h-full object-contain" autoPlay loop muted playsInline>
-    <source
-      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/unwatermark_ELementar%20logo-IWmmAsRBKFrGVBf8T0e953xG8X72Y7.mp4"
-      type="video/mp4"
-    />
-    Your browser does not support the video tag.
-  </video>
+<section className="relative w-full bg-black py-4 mt-24 md:mt-0 border-b border-white/5">
+  <div className="mx-auto max-w-7xl px-4 sm:px-6 flex items-center justify-center">
+    <video
+      className="w-full max-w-4xl h-auto object-contain rounded-2xl"
+      autoPlay
+      loop
+      muted
+      playsInline
+    >
+      <source
+        src="/video/elementar_animated_logo.webm"
+        type="video/webm"
+      />
+      Browserul tău nu suportă elementul video.
+    </video>
+  </div>
 </section>
 
       <main>
