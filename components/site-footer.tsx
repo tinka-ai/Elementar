@@ -1,6 +1,6 @@
+// components/site-footer.tsx
 import { Facebook, Instagram } from "lucide-react"
 
-/* ===== Footer global ===== */
 export default function SiteFooter() {
   const fxIcon =
     "grid h-10 w-10 place-items-center rounded-md border border-white/10 hover:bg-white/10 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
