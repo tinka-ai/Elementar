@@ -7,10 +7,10 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { LanguageProvider } from "@/components/language-provider"
 import SiteHeader from "@/components/site-header"
 import SiteFooter from "@/components/site-footer"
-import BottomBar from "@/components/bottom-bar" 
 import { Facebook, Instagram, Home, Phone, MapPin, Mail } from "lucide-react"
 import Script from "next/script"
 import GaRouteListener from "@/components/ga-route-listener"
+
 const GA_ID = "G-VHXGNT73PX"
 
 export const dynamic = "force-dynamic"
@@ -59,9 +59,6 @@ export const metadata: Metadata = {
   },
 }
 
-const fxIcon =
-  "grid h-10 w-10 place-items-center rounded-md border border-white/10 hover:bg-white/10 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ro" className="scroll-smooth overscroll-y-contain" suppressHydrationWarning>
@@ -89,7 +86,6 @@ gtag('config', '${GA_ID}', { anonymize_ip: true });`}
         </Script>
       </head>
 
-      {/* pt-24 pe mobil (header are 2 rânduri), pt-16 pe desktop; pb-14 pentru bara fixă jos */}
       <body
         className={`${inter.className}
               bg-background text-foreground
@@ -102,7 +98,6 @@ gtag('config', '${GA_ID}', { anonymize_ip: true });`}
             <SiteHeader />
             {children}
             <SiteFooter />
-            <BottomBar />
           </LanguageProvider>
         </ThemeProvider>
 
