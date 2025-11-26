@@ -21,33 +21,27 @@ export default function Page() {
 {/* VIDEO LOGO RESPONSIV */}
 <section className="relative w-full bg-black py-4 mt-24 md:mt-0 border-b border-white/5">
   <div className="mx-auto max-w-7xl px-4 sm:px-6 flex items-center justify-center">
-
     <video
-      className="w-full max-w-4xl h-auto object-contain rounded-2xl"
+      className="w-full max-w-6xl h-auto object-contain rounded-2xl"
       autoPlay
       loop
       muted
       playsInline
     >
-
-      {/* Versiune desktop (webm) */}
       <source
-        src="/video/elementar_animated_logo.webm"
+        src="/video/logo_desktop.webm"
         type="video/webm"
         media="(min-width: 640px)"
       />
-
-      {/* Versiune mobil (mp4) */}
       <source
-        src="/video/elementar_animated_logo.webm"
-        type="video/webm"
+        src="/video/logo_mobile.mp4"
+        type="video/mp4"
       />
-
       Browserul tău nu suportă elementul video.
     </video>
-
   </div>
 </section>
+
 
       <main>
         {/* HERO */}
