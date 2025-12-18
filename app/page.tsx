@@ -17,7 +17,6 @@ export default function Page() {
 
   return (
     <>
-     {/* VIDEO LOGO SECTION */}
 {/* VIDEO LOGO RESPONSIV */}
 <section className="relative w-full bg-black py-4 mt-24 md:mt-0 border-b border-white/5">
   <div className="mx-auto max-w-7xl px-4 sm:px-6 flex items-center justify-center">
@@ -67,19 +66,19 @@ export default function Page() {
                 </div>
               </div>
 
-              <div className="relative">
-                <div className="absolute -inset-8 -z-10 rounded-[2rem] bg-[radial-gradient(circle_at_70%_30%,rgba(56,189,248,0.18),transparent_60%)]" />
-                <img
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ChatGPT%20Image%20Aug%206%2C%202025%2C%2002_14_52%20AM-z4nOUqVJRDW56Gv6MkCZE8fLK8cFkN.png"
-                  alt="Portret de copil cu inel luminos, simbol al mirării și al descoperirii"
-                  width={880}
-                  height={700}
-                  className="w-full h-auto rounded-2xl object-cover select-none pointer-events-none"
-                  loading="eager"
-                  fetchPriority="high"
-                  decoding="async"
-                />
-              </div>
+       <div className="relative">
+  <div className="absolute -inset-8 -z-10 rounded-[2rem] bg-[radial-gradient(circle_at_70%_30%,rgba(56,189,248,0.18),transparent_60%)]" />
+  <Image
+    src="/images/Portret-copil-cu-halou-luminos.png"
+    alt="Copil curios cu nimb luminos, simbol al descoperirii și al științei"
+    width={880}
+    height={700}
+    className="w-full h-auto rounded-2xl object-cover select-none pointer-events-none"
+    loading="lazy"
+    sizes="(max-width: 768px) 100vw, 50vw"
+  />
+</div>
+
             </div>
           </div>
         </section>
