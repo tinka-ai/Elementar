@@ -16,10 +16,20 @@ const videoRef = useRef<HTMLVideoElement>(null)
 const [playVideo, setPlayVideo] = useState(false)
 
 useEffect(() => {
+  if (typeof window === "undefined") return
+
+  const isDesktop = window.innerWidth >= 1024
+
+  if (isDesktop) {
+    setPlayVideo(true)
+    videoRef.current?.play().catch(() => {})
+    return
+  }
+
   const timer = setTimeout(() => {
     setPlayVideo(true)
     videoRef.current?.play().catch(() => {})
-  }, 1200) // delay sigur pentru mobile
+  }, 1200)
 
   return () => clearTimeout(timer)
 }, [])
@@ -34,15 +44,17 @@ useEffect(() => {
   <div className="mx-auto max-w-7xl px-4 sm:px-6 flex items-center justify-center">
 
     {/* POSTER – LCP PE MOBILE */}
-    {!playVideo && (
-      <Image
-        src="/logo-elementara-new-one.png"
-        alt="Elementar – logo animat"
-        width={420}
-        height={160}
-        priority
-      />
-    )}
+ {!playVideo && (
+  <Image
+    src="/logo-elementara-new-one.png"
+    alt="Elementar – logo animat"
+    width={420}
+    height={160}
+    priority
+    className="pointer-events-none select-none"
+    aria-hidden={playVideo}
+  />
+)}
 
     {/* VIDEO ANIMAT */}
     <video
