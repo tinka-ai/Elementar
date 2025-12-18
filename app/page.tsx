@@ -224,48 +224,79 @@ useEffect(() => {
           </div>
         </section>
 
-      {/* PRICING */}
+    {/* PRICING */}
 <section className="py-12 sm:py-16 border-b border-white/5">
   <div className="mx-auto max-w-7xl px-4 sm:px-6">
     <SectionKicker>TARIFE</SectionKicker>
+
     <h2 className="text-3xl sm:text-4xl font-bold text-gray-300">
-      Alege un plan potrivit vizitei tale
+      Tarife de acces – Parcul de Științe „Elementar”
     </h2>
 
-    <div className="mt-8 grid gap-6 sm:grid-cols-2">
+    <div className="mt-10 grid gap-6 md:grid-cols-3">
+
+      {/* ACCES INDIVIDUAL */}
       <PricingCard
         fx={fx}
-        title="Individual"
-        price="250 MDL/copil; 100 MDL/adult"
+        title="Acces individual"
+        price=""
         perks={[
-          "Acces la toate zonele",
-          "Ghidaj de sală",
-          "Durata aprox. 1,5 ore",
+          "Copii sub 5 ani – gratuit",
+          "Copii 6–12 ani – 200 lei",
+          "Adolescent 13–17 ani – 130 lei",
+          "Adult însoțitor – 100 lei",
+          "Adult (acces individual) – 130 lei",
+          "Excursia cu ghid este inclusă pentru copii",
         ]}
+        cta
       />
 
+      {/* PACHET FAMILIE – CEL MAI ALES */}
       <PricingCard
         fx={fx}
+        title="Pachet Familie"
+        price="400 lei"
         highlight
-        title="Grup/Școli"
-        price="230 MDL/copil (min. 5 copii/grup)"
+        badge="Cel mai ales"
         perks={[
-          "Acces complet",
-          "Ghidaj de sală",
-          "Program personalizat",
-          "1 profesor gratuit/grup (max. 20 elevi)",
-          "Max. 2 grupuri simultan",
+          "2 adulți + 1 copil",
+          "1 adult + 2 copii",
+          "Fiecare copil suplimentar: +100 lei",
+          "Acces complet + ghidaj inclus",
         ]}
+        cta
+      />
+
+      {/* TEEN PASS */}
+      <PricingCard
+        fx={fx}
+        title="Teen Pass (13–17 ani)"
+        price="100 lei / persoană"
+        perks={[
+          "Grup minim 3 adolescenți",
+          "Acces complet",
+          "Activități adaptate vârstei",
+        ]}
+        cta
       />
     </div>
 
-    {/* Notă valabilitate prețuri */}
+    {/* NOTĂ IMPORTANTĂ */}
+    <div className="mt-8 rounded-xl border border-white/10 bg-white/5 p-5 text-sm text-gray-300">
+      <p className="flex items-start gap-2">
+        <BadgeCheck className="mt-0.5 h-4 w-4 text-sky-400" />
+        Copiii până la <strong>9 ani</strong> pot intra doar însoțiți de un adult.
+      </p>
+    </div>
+
+    {/* Valabilitate */}
     <p className="mt-6 pt-3 text-center text-sm text-gray-400 border-t border-white/10">
-      Prețurile afișate sunt valabile până la{" "}
-      <span className="font-medium text-gray-300">31 decembrie 2025</span> (inclusiv).
+      Tarifele sunt valabile până la{" "}
+      <span className="font-medium text-gray-300">31 martie 2026</span> (inclusiv).
     </p>
   </div>
 </section>
+
 
  
         {/* FAQ */}
@@ -385,23 +416,36 @@ function PricingCard({
   price,
   perks,
   highlight = false,
+  badge,
+  cta = false,
 }: {
   fx: string
   title: string
   price: string
   perks: string[]
   highlight?: boolean
+  badge?: string
+  cta?: boolean
 }) {
   return (
     <div
-      className={`p-6 rounded-xl border ${
-        highlight ? "border-sky-400/40" : "border-white/10"
+      className={`relative p-6 rounded-xl border ${
+        highlight ? "border-sky-400/60" : "border-white/10"
       } bg-white/5 ${fx}`}
       aria-label={`Plan ${title}`}
     >
-      <div className="flex items-center justify-between">
+      {/* BADGE */}
+      {badge && (
+        <span className="absolute -top-3 right-4 rounded-full bg-sky-500 px-3 py-1 text-xs font-semibold text-white shadow-lg">
+          {badge}
+        </span>
+      )}
+
+      <div className="space-y-2">
         <h3 className="text-xl font-bold text-gray-300">{title}</h3>
-        <span className="text-2xl font-extrabold text-gray-300">{price}</span>
+        {price && (
+          <div className="text-2xl font-extrabold text-gray-300">{price}</div>
+        )}
       </div>
 
       <ul className="mt-4 space-y-2 text-sm text-gray-300">
@@ -412,7 +456,20 @@ function PricingCard({
           </li>
         ))}
       </ul>
-      {/* no button */}
+
+      {/* CTA */}
+      {cta && (
+        <div className="mt-6">
+          <Button
+            asChild
+            className="w-full bg-sky-500 text-white hover:bg-sky-400"
+          >
+            <Link href="/contact">
+              Rezervă vizita
+            </Link>
+          </Button>
+        </div>
+      )}
     </div>
   )
 }
