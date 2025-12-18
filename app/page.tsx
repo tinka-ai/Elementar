@@ -3,6 +3,7 @@
 import type React from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { useEffect, useRef, useState } from "react"
 
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Eye, FlaskConical, Puzzle, Sparkles, Waves, Link2, BadgeCheck } from "lucide-react"
@@ -11,6 +12,17 @@ import { useLanguage } from "@/components/language-provider"
 
 export default function Page() {
   const { t } = useLanguage()
+const videoRef = useRef<HTMLVideoElement>(null)
+const [playVideo, setPlayVideo] = useState(false)
+
+useEffect(() => {
+  const timer = setTimeout(() => {
+    setPlayVideo(true)
+    videoRef.current?.play().catch(() => {})
+  }, 1200) // delay sigur pentru mobile
+
+  return () => clearTimeout(timer)
+}, [])
 
   const fx =
     "transition-shadow duration-300 ease-out hover:shadow-[0_0_0_1px_rgba(56,189,248,0.35),0_0_28px_6px_rgba(168,85,247,0.25)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-400/70 rounded-md";
@@ -20,18 +32,35 @@ export default function Page() {
 {/* VIDEO LOGO RESPONSIV */}
 <section className="relative w-full bg-black py-4 mt-24 md:mt-0 border-b border-white/5">
   <div className="mx-auto max-w-7xl px-4 sm:px-6 flex items-center justify-center">
+
+    {/* POSTER – LCP PE MOBILE */}
+    {!playVideo && (
+      <Image
+        src="/logo-elementara-new-one.png"
+        alt="Elementar – logo animat"
+        width={420}
+        height={160}
+        priority
+      />
+    )}
+
+    {/* VIDEO ANIMAT */}
     <video
-      className="w-full max-w-6xl h-auto object-contain rounded-2xl"
-      autoPlay
-      loop
+      ref={videoRef}
+      className={`w-full max-w-6xl h-auto object-contain rounded-2xl transition-opacity duration-500 ${
+        playVideo ? "opacity-100" : "opacity-0"
+      }`}
       muted
+      loop
       playsInline
+      preload="metadata"
     >
       <source src="/video/elementar_animated_logo.webm" type="video/webm" />
-      Browserul tău nu suportă elementul video.
     </video>
+
   </div>
 </section>
+
 
       <main>
         {/* HERO */}
