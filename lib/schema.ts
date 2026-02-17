@@ -1,96 +1,66 @@
-// lib/schema.ts
-import { ELEMENTAR } from "./entity"
+// lib/entity.ts
+export const ELEMENTAR = {
+  name: "ELEMENTAR",
+  legalName: "ELEMENTAR — Parc de Știință și Curiozități",
+  url: "https://elementar.md",
 
-function clean<T extends Record<string, any>>(obj: T): T {
-  return JSON.parse(JSON.stringify(obj))
-}
+  logo: "/images/logo-elementara-new.png",
+  images: [
+    "/images/interactive-physics-experiment.png",
+    "/images/interactive-biology-microscope.png",
+    "/images/astronomie-planetariu-tehnologie.png",
+    "/images/optical-illusions-science-exhibit.png",
+  ],
 
-function absUrl(pathOrUrl?: string) {
-  if (!pathOrUrl) return undefined
-  if (pathOrUrl.startsWith("http://") || pathOrUrl.startsWith("https://")) return pathOrUrl
-  return `${ELEMENTAR.url}${pathOrUrl.startsWith("/") ? "" : "/"}${pathOrUrl}`
-}
+  // Locația (uman + AI)
+  locationName: "Port Mall Chișinău, etajul 4",
 
-// Fallback “real” (din linkul tău Google Maps)
-const FALLBACK_GEO = { latitude: 47.0706168, longitude: 28.8885452 }
-const FALLBACK_HAS_MAP =
-  "https://www.google.com/maps/place/ELEMENTAR/@47.0706204,28.8859703,17z/data=!4m6!3m5!1s0x40c97dd06a999bb7:0xd85eaf85ec5f5afc!8m2!3d47.0706168!4d28.8885452!16s%2Fg%2F11xyyqhxd8"
+  // Coordonate reale (din Google Maps)
+  geo: { latitude: 47.0706168, longitude: 28.8885452 },
 
-export function getElementarJsonLd() {
-  const geoFromEntity = (ELEMENTAR as any).geo
-  const hasMapFromEntity = (ELEMENTAR as any).hasMap
+  // Link hartă (Google Maps)
+  hasMap:
+    "https://www.google.com/maps/place/ELEMENTAR/@47.0706204,28.8859703,17z/data=!3m1!4b1!4m6!3m5!1s0x40c97dd06a999bb7:0xd85eaf85ec5f5afc!8m2!3d47.0706168!4d28.8885452!16s%2Fg%2F11xyyqhxd8?entry=tts",
 
-  const lat =
-    typeof geoFromEntity?.latitude === "number" ? geoFromEntity.latitude : FALLBACK_GEO.latitude
-  const lng =
-    typeof geoFromEntity?.longitude === "number" ? geoFromEntity.longitude : FALLBACK_GEO.longitude
+  descriptionShort:
+    "Elementar este un parc interactiv de știință din Chișinău, dedicat copiilor și excursiilor școlare, unde învățarea se realizează prin experimente practice de fizică, chimie și astronomie.",
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": ["Organization", "LocalBusiness", "EducationalOrganization"],
-    "@id": `${ELEMENTAR.url}/#organization`,
+  descriptionLong:
+    "Elementar este un parc interactiv de știință din Chișinău, dedicat copiilor, familiilor și excursiilor școlare. Aici copiii explorează știința prin experiențe practice și demonstrații ghidate, cu teme din fizică, chimie și astronomie. Parcul este situat în Port Mall, etajul 4, și oferă activități STEM adaptate diferitelor grupe de vârstă.",
 
-    name: ELEMENTAR.legalName,
-    alternateName: ELEMENTAR.name,
-    url: ELEMENTAR.url,
-    description: ELEMENTAR.descriptionShort,
+  phone: "+37379010277",
+  email: "office@elementar.md",
 
-    // Branding
-    logo: absUrl((ELEMENTAR as any).logo) || absUrl("/images/logo-elementara-new.png"),
-    image: ((ELEMENTAR as any).images?.length ? (ELEMENTAR as any).images : []).map(absUrl),
+  address: {
+    streetAddress: "Strada Mihai Sadoveanu 42/6",
+    addressLocality: "Chișinău",
+    addressRegion: "Municipiul Chișinău",
+    postalCode: "MD-2075",
+    addressCountry: "MD",
+  },
 
-    // Contact
-    telephone: ELEMENTAR.phone || undefined,
-    email: ELEMENTAR.email || undefined,
+  openingHours: ["Mo-Su 10:00-22:00"],
 
-    // Adresă (NAP)
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: ELEMENTAR.address.streetAddress,
-      addressLocality: ELEMENTAR.address.addressLocality,
-      addressRegion: ELEMENTAR.address.addressRegion,
-      postalCode: ELEMENTAR.address.postalCode || undefined,
-      addressCountry: ELEMENTAR.address.addressCountry,
-    },
+  sameAs: [
+    "https://facebook.com/elementara.ro",
+    "https://instagram.com/elementara.ro",
+  ],
 
-    // “Port Mall, etajul 4” ca Place (dacă ai locationName în entity)
-    location: (ELEMENTAR as any).locationName
-      ? {
-          "@type": "Place",
-          name: (ELEMENTAR as any).locationName,
-          address: {
-            "@type": "PostalAddress",
-            streetAddress: ELEMENTAR.address.streetAddress,
-            addressLocality: ELEMENTAR.address.addressLocality,
-            addressRegion: ELEMENTAR.address.addressRegion,
-            postalCode: ELEMENTAR.address.postalCode || undefined,
-            addressCountry: ELEMENTAR.address.addressCountry,
-          },
-        }
-      : undefined,
+  audience: ["Copii", "Adolescenți", "Familii", "Școli și grupuri organizate"],
 
-    // Program
-    openingHours: ELEMENTAR.openingHours?.length ? ELEMENTAR.openingHours : undefined,
+  topics: ["Fizică", "Chimie", "Biologie", "Astronomie", "Matematică", "STEM"],
 
-    // Geo (mereu prezent, cu fallback)
-    geo:
-      typeof lat === "number" && typeof lng === "number"
-        ? { "@type": "GeoCoordinates", latitude: lat, longitude: lng }
-        : undefined,
+  areaServed: ["Chișinău", "Republica Moldova"],
 
-    // Hartă (mereu prezent, cu fallback)
-    hasMap: hasMapFromEntity || FALLBACK_HAS_MAP,
+  // ✅ completări importante pentru AI
+  priceRange: "100–400 MDL", // (în acord cu tarifele tale actuale)
+  slogan: "Știință pe care o atingi. Curiozități pe care le înțelegi.",
+  serviceType: [
+    "Parc interactiv de știință",
+    "Activități educative STEM pentru copii",
+    "Excursii școlare ghidate",
+    "Ateliere și demonstrații științifice",
+  ],
 
-    // Relevanță conversațională (AI / GEO)
-    areaServed: (ELEMENTAR as any).areaServed?.length ? (ELEMENTAR as any).areaServed : undefined,
-    knowsAbout: (ELEMENTAR as any).topics?.length ? (ELEMENTAR as any).topics : undefined,
-    audience: (ELEMENTAR as any).audience?.length
-      ? (ELEMENTAR as any).audience.map((a: string) => ({ "@type": "Audience", name: a }))
-      : undefined,
-
-    // Social
-    sameAs: ELEMENTAR.sameAs?.length ? ELEMENTAR.sameAs : undefined,
-  }
-
-  return clean(jsonLd)
-}
+  // opțional (doar dacă vrei): foundingDate: "2025-01-01",
+} as const
