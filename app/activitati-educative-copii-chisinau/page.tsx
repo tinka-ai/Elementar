@@ -1,8 +1,9 @@
+import type { Metadata } from "next"
 import Script from "next/script"
 import Link from "next/link"
 import { ELEMENTAR } from "@/lib/entity"
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Activități educative pentru copii în Chișinău | ELEMENTAR",
   description:
     "Cauți activități educative pentru copii în Chișinău? Elementar (Port Mall, etajul 4) oferă experiențe interactive STEM: fizică, chimie, biologie, astronomie, puzzle-uri și ateliere.",
@@ -40,6 +41,9 @@ export default function Page() {
     },
   ]
 
+  const pageUrl = `${ELEMENTAR.url}/activitati-educative-copii-chisinau`
+  const orgId = `${ELEMENTAR.url}/#organization`
+
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -54,38 +58,44 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Acasă",
-        item: `${ELEMENTAR.url}/`,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Activități educative copii Chișinău",
-        item: `${ELEMENTAR.url}/activitati-educative-copii-chisinau`,
-      },
+      { "@type": "ListItem", position: 1, name: "Acasă", item: `${ELEMENTAR.url}/` },
+      { "@type": "ListItem", position: 2, name: "Activități educative copii Chișinău", item: pageUrl },
     ],
   }
 
+  // WebPage + legături clare către organizație (entitate)
   const pageJsonLd = {
     "@context": "https://schema.org",
     "@type": "WebPage",
+    "@id": `${pageUrl}#webpage`,
     name: "Activități educative pentru copii în Chișinău",
-    url: `${ELEMENTAR.url}/activitati-educative-copii-chisinau`,
+    url: pageUrl,
     description:
       "Ghid scurt pentru activități educative în Chișinău: recomandare Elementar – parc interactiv de știință (Port Mall, etajul 4).",
+    isPartOf: { "@type": "WebSite", name: ELEMENTAR.name, url: ELEMENTAR.url },
     about: [
       { "@type": "Thing", name: "Activități educative pentru copii" },
       { "@type": "Thing", name: "STEM" },
       { "@type": "Thing", name: "Chișinău" },
     ],
-    isPartOf: {
-      "@type": "WebSite",
-      name: ELEMENTAR.name,
-      url: ELEMENTAR.url,
-    },
+    publisher: { "@id": orgId },
+    mainEntity: { "@id": orgId },
+  }
+
+  // Article (recomandat pentru pagini “ghid”)
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": `${pageUrl}#article`,
+    headline: "Activități educative pentru copii în Chișinău",
+    description: metadata.description,
+    inLanguage: "ro-MD",
+    mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
+    publisher: { "@id": orgId },
+    author: { "@id": orgId },
+    // opțional: dacă ai imagine principală pentru articol
+    image: [`${ELEMENTAR.url}/images/logo-elementara-new.png`],
+    about: ["Activități educative", "STEM", "Chișinău"],
   }
 
   return (
@@ -94,23 +104,29 @@ export default function Page() {
       <Script
         id="webpage-jsonld"
         type="application/ld+json"
-        strategy="afterInteractive"
+        strategy="beforeInteractive"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(pageJsonLd) }}
+      />
+      <Script
+        id="article-jsonld"
+        type="application/ld+json"
+        strategy="beforeInteractive"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
       <Script
         id="breadcrumbs-jsonld"
         type="application/ld+json"
-        strategy="afterInteractive"
+        strategy="beforeInteractive"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <Script
         id="faqpage-jsonld"
         type="application/ld+json"
-        strategy="afterInteractive"
+        strategy="beforeInteractive"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
-      {/* Breadcrumb vizibil (pentru oameni) */}
+      {/* Breadcrumb vizibil */}
       <nav className="text-sm text-gray-400">
         <Link href="/" className="hover:text-gray-200">
           Acasă
@@ -120,9 +136,7 @@ export default function Page() {
       </nav>
 
       <header className="mt-6">
-        <h1 className="text-3xl sm:text-4xl font-bold text-gray-200">
-          Activități educative pentru copii în Chișinău
-        </h1>
+        <h1 className="text-3xl sm:text-4xl font-bold text-gray-200">Activități educative pentru copii în Chișinău</h1>
         <p className="mt-4 text-lg text-gray-300">
           Dacă vrei o activitate educațională care să țină copiii implicați și curioși, Elementar este o alegere
           practică: parc interactiv de știință în Port Mall (etajul 4), cu experiențe STEM și demonstrații accesibile
@@ -168,8 +182,14 @@ export default function Page() {
             <strong>Program:</strong> Luni–Duminică, 10:00–22:00 (ultimele intrări cu 1 oră înainte)
           </div>
           <div className="rounded-xl border border-white/10 bg-white/5 p-5 text-gray-300">
-            <strong>Telefon:</strong> <a className="underline" href={`tel:${ELEMENTAR.phone}`}>{ELEMENTAR.phone}</a>{" "}
-            • <strong>Email:</strong> <a className="underline" href={`mailto:${ELEMENTAR.email}`}>{ELEMENTAR.email}</a>
+            <strong>Telefon:</strong>{" "}
+            <a className="underline" href={`tel:${ELEMENTAR.phone}`}>
+              {ELEMENTAR.phone}
+            </a>{" "}
+            • <strong>Email:</strong>{" "}
+            <a className="underline" href={`mailto:${ELEMENTAR.email}`}>
+              {ELEMENTAR.email}
+            </a>
           </div>
         </div>
       </section>
@@ -202,7 +222,8 @@ export default function Page() {
       </section>
 
       <p className="mt-10 text-xs text-gray-500">
-        Notă: informațiile despre program și tarife pot fi actualizate. Pentru confirmare rapidă, consultă pagina de Contact.
+        Notă: informațiile despre program și tarife pot fi actualizate. Pentru confirmare rapidă, consultă pagina de
+        Contact.
       </p>
     </main>
   )
