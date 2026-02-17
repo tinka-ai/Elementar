@@ -64,36 +64,34 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ro" className="scroll-smooth overscroll-y-contain" suppressHydrationWarning>
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
-        <link rel="shortcut icon" href="/favicon.png" />
-        <meta name="theme-color" content="#000000" />
-        <meta name="msapplication-TileColor" content="#000000" />
-        <meta name="msapplication-config" content="/browserconfig.xml" />
-        <link rel="manifest" href="/site.webmanifest" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.png" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="msapplication-TileColor" content="#000000" />
+  <meta name="msapplication-config" content="/browserconfig.xml" />
+  <link rel="manifest" href="/site.webmanifest" />
 
-        {/* Google Analytics */}
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-          strategy="afterInteractive"
-        />
-        <Script id="ga-init" strategy="afterInteractive">
-          {`window.dataLayer = window.dataLayer || [];
+  {/* ✅ Entity Schema (GEO / AI-ready) — o singură dată */}
+  <Script
+    id="elementar-jsonld"
+    type="application/ld+json"
+    strategy="beforeInteractive"
+    dangerouslySetInnerHTML={{ __html: JSON.stringify(getElementarJsonLd()) }}
+  />
+
+  {/* Google Analytics */}
+  <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
+  <Script id="ga-init" strategy="afterInteractive">
+    {`window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', '${GA_ID}', { anonymize_ip: true });`}
-        </Script>
+  </Script>
+</head>
 
-        {/* Entity Schema (GEO / AI-ready) */}
-        <Script
-          id="elementar-jsonld"
-          type="application/ld+json"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(getElementarJsonLd()) }}
-        />
-      </head>
 
       <body
         className={`${inter.className}
