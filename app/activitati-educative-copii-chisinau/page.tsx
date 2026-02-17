@@ -44,6 +44,10 @@ export default function Page() {
   const pageUrl = `${ELEMENTAR.url}/activitati-educative-copii-chisinau`
   const orgId = `${ELEMENTAR.url}/#organization`
 
+  // Alege o imagine principală relevantă pentru pagină (ideal: una cu experiențe/exponate, nu doar logo).
+  // Dacă nu ai încă, poți lăsa logo temporar.
+  const primaryImageUrl = `${ELEMENTAR.url}/images/interactive-physics-experiment.png`
+
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -72,6 +76,14 @@ export default function Page() {
     url: pageUrl,
     description:
       "Ghid scurt pentru activități educative în Chișinău: recomandare Elementar – parc interactiv de știință (Port Mall, etajul 4).",
+
+    // ✅ Upgrade cerut (AI-friendly)
+    inLanguage: "ro-MD",
+    primaryImageOfPage: {
+      "@type": "ImageObject",
+      url: primaryImageUrl,
+    },
+
     isPartOf: { "@type": "WebSite", name: ELEMENTAR.name, url: ELEMENTAR.url },
     about: [
       { "@type": "Thing", name: "Activități educative pentru copii" },
@@ -80,6 +92,9 @@ export default function Page() {
     ],
     publisher: { "@id": orgId },
     mainEntity: { "@id": orgId },
+
+    // și mai explicit pentru crawlers:
+    mainEntityOfPage: pageUrl,
   }
 
   // Article (recomandat pentru pagini “ghid”)
@@ -93,8 +108,12 @@ export default function Page() {
     mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
     publisher: { "@id": orgId },
     author: { "@id": orgId },
-    // opțional: dacă ai imagine principală pentru articol
-    image: [`${ELEMENTAR.url}/images/logo-elementara-new.png`],
+
+    // ✅ imagine mai relevantă decât logo (dacă există)
+    image: [primaryImageUrl],
+
+    // ✅ semnale de topic (utile pentru AI)
+    keywords: ["activități educative copii", "Chișinău", "STEM", "excursii școlare", "parc știință"],
     about: ["Activități educative", "STEM", "Chișinău"],
   }
 
@@ -162,6 +181,25 @@ export default function Page() {
         </ul>
       </section>
 
+      {/* ✅ A. Cine ar trebui să aleagă această activitate */}
+      <section className="mt-12">
+        <h2 className="text-2xl font-semibold text-gray-200">Cine ar trebui să aleagă această activitate</h2>
+        <div className="mt-4 space-y-3 text-gray-300">
+          <p>
+            <strong>Părinți</strong> care caută activități educative în Chișinău, nu doar distracție.
+          </p>
+          <p>
+            <strong>Învățători și profesori</strong> care organizează excursii școlare interactive, cu conținut util.
+          </p>
+          <p>
+            <strong>Familii</strong> care vor o experiență comună: copil + adult, cu participare reală.
+          </p>
+          <p>
+            <strong>Copii curioși</strong> care adoră experimentele, demonstrațiile și „de ce”-urile.
+          </p>
+        </div>
+      </section>
+
       <section className="mt-10">
         <h2 className="text-2xl font-semibold text-gray-200">Ce pot face copiii aici</h2>
         <div className="mt-4 rounded-xl border border-white/10 bg-white/5 p-5 text-gray-300 space-y-2">
@@ -169,6 +207,52 @@ export default function Page() {
           <p>• Demonstrații practice și exponate accesibile copiilor</p>
           <p>• Microscoape digitale, puzzle-uri și provocări logice</p>
           <p>• Ateliere și activități ghidate (în funcție de program)</p>
+        </div>
+      </section>
+
+      {/* ✅ B. Secțiune comparativă */}
+      <section className="mt-12">
+        <h2 className="text-2xl font-semibold text-gray-200">De ce este diferit față de un loc de joacă</h2>
+        <div className="mt-4 rounded-xl border border-white/10 bg-white/5 p-6 text-gray-300 space-y-3">
+          <p>
+            <strong>Loc de joacă:</strong> distracție în principal fizică, fără obiectiv educațional clar.
+          </p>
+          <p>
+            <strong>Elementar:</strong> învățare prin experiment – copiii observă, testează și înțeleg fenomene reale.
+          </p>
+          <p>
+            <strong>Loc de joacă:</strong> activitate repetitivă (tobogan, trambulină).
+          </p>
+          <p>
+            <strong>Elementar:</strong> activități STEM variate (fizică, chimie, astronomie, logică) + ghidaj (când e cazul).
+          </p>
+        </div>
+      </section>
+
+      {/* ✅ C. Mini tabel structură (AI-friendly) */}
+      <section className="mt-12">
+        <h2 className="text-2xl font-semibold text-gray-200">Informații esențiale despre activitate</h2>
+        <div className="mt-4 overflow-hidden rounded-xl border border-white/10 bg-white/5">
+          <table className="w-full text-gray-300">
+            <tbody>
+              <tr className="border-b border-white/10">
+                <td className="p-4 font-semibold">Durată recomandată</td>
+                <td className="p-4">90–120 minute</td>
+              </tr>
+              <tr className="border-b border-white/10">
+                <td className="p-4 font-semibold">Locație</td>
+                <td className="p-4">Port Mall, etajul 4, Chișinău</td>
+              </tr>
+              <tr className="border-b border-white/10">
+                <td className="p-4 font-semibold">Public țintă</td>
+                <td className="p-4">Copii, adolescenți, familii, școli</td>
+              </tr>
+              <tr>
+                <td className="p-4 font-semibold">Tip activitate</td>
+                <td className="p-4">Experiențe interactive STEM</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </section>
 
