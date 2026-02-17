@@ -11,7 +11,20 @@ function absUrl(pathOrUrl?: string) {
   return `${ELEMENTAR.url}${pathOrUrl.startsWith("/") ? "" : "/"}${pathOrUrl}`
 }
 
+// Fallback “real” (din linkul tău Google Maps)
+const FALLBACK_GEO = { latitude: 47.0706168, longitude: 28.8885452 }
+const FALLBACK_HAS_MAP =
+  "https://www.google.com/maps/place/ELEMENTAR/@47.0706204,28.8859703,17z/data=!4m6!3m5!1s0x40c97dd06a999bb7:0xd85eaf85ec5f5afc!8m2!3d47.0706168!4d28.8885452!16s%2Fg%2F11xyyqhxd8"
+
 export function getElementarJsonLd() {
+  const geoFromEntity = (ELEMENTAR as any).geo
+  const hasMapFromEntity = (ELEMENTAR as any).hasMap
+
+  const lat =
+    typeof geoFromEntity?.latitude === "number" ? geoFromEntity.latitude : FALLBACK_GEO.latitude
+  const lng =
+    typeof geoFromEntity?.longitude === "number" ? geoFromEntity.longitude : FALLBACK_GEO.longitude
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": ["Organization", "LocalBusiness", "EducationalOrganization"],
@@ -22,12 +35,15 @@ export function getElementarJsonLd() {
     url: ELEMENTAR.url,
     description: ELEMENTAR.descriptionShort,
 
-    logo: absUrl(ELEMENTAR.logo) || absUrl("/images/logo-elementara-new.png"),
-    image: (ELEMENTAR.images?.length ? ELEMENTAR.images : []).map(absUrl),
+    // Branding
+    logo: absUrl((ELEMENTAR as any).logo) || absUrl("/images/logo-elementara-new.png"),
+    image: ((ELEMENTAR as any).images?.length ? (ELEMENTAR as any).images : []).map(absUrl),
 
+    // Contact
     telephone: ELEMENTAR.phone || undefined,
     email: ELEMENTAR.email || undefined,
 
+    // Adresă (NAP)
     address: {
       "@type": "PostalAddress",
       streetAddress: ELEMENTAR.address.streetAddress,
@@ -37,11 +53,11 @@ export function getElementarJsonLd() {
       addressCountry: ELEMENTAR.address.addressCountry,
     },
 
-    // “Port Mall, etajul 4”
-    location: ELEMENTAR.locationName
+    // “Port Mall, etajul 4” ca Place (dacă ai locationName în entity)
+    location: (ELEMENTAR as any).locationName
       ? {
           "@type": "Place",
-          name: ELEMENTAR.locationName,
+          name: (ELEMENTAR as any).locationName,
           address: {
             "@type": "PostalAddress",
             streetAddress: ELEMENTAR.address.streetAddress,
@@ -56,26 +72,23 @@ export function getElementarJsonLd() {
     // Program
     openingHours: ELEMENTAR.openingHours?.length ? ELEMENTAR.openingHours : undefined,
 
-    // Coordonate reale (opțional)
+    // Geo (mereu prezent, cu fallback)
     geo:
-      (ELEMENTAR as any).geo?.latitude && (ELEMENTAR as any).geo?.longitude
-        ? {
-            "@type": "GeoCoordinates",
-            latitude: (ELEMENTAR as any).geo.latitude,
-            longitude: (ELEMENTAR as any).geo.longitude,
-          }
+      typeof lat === "number" && typeof lng === "number"
+        ? { "@type": "GeoCoordinates", latitude: lat, longitude: lng }
         : undefined,
 
-    // Harta (opțional)
-    hasMap: (ELEMENTAR as any).hasMap || undefined,
+    // Hartă (mereu prezent, cu fallback)
+    hasMap: hasMapFromEntity || FALLBACK_HAS_MAP,
 
-    // Relevanță conversațională
+    // Relevanță conversațională (AI / GEO)
     areaServed: (ELEMENTAR as any).areaServed?.length ? (ELEMENTAR as any).areaServed : undefined,
-    knowsAbout: ELEMENTAR.topics?.length ? ELEMENTAR.topics : undefined,
-    audience: ELEMENTAR.audience?.length
-      ? ELEMENTAR.audience.map((a) => ({ "@type": "Audience", name: a }))
+    knowsAbout: (ELEMENTAR as any).topics?.length ? (ELEMENTAR as any).topics : undefined,
+    audience: (ELEMENTAR as any).audience?.length
+      ? (ELEMENTAR as any).audience.map((a: string) => ({ "@type": "Audience", name: a }))
       : undefined,
 
+    // Social
     sameAs: ELEMENTAR.sameAs?.length ? ELEMENTAR.sameAs : undefined,
   }
 
