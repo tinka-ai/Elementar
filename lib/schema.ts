@@ -15,8 +15,6 @@ export function getElementarJsonLd() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": ["Organization", "LocalBusiness", "EducationalOrganization"],
-
-    // ✅ Identitate stabilă (evită duplicările / ajută AI-ul să "lege" informațiile)
     "@id": `${ELEMENTAR.url}/#organization`,
 
     name: ELEMENTAR.legalName,
@@ -24,19 +22,12 @@ export function getElementarJsonLd() {
     url: ELEMENTAR.url,
     description: ELEMENTAR.descriptionShort,
 
-    // ✅ Branding (ideal cu URL absolut)
     logo: absUrl(ELEMENTAR.logo) || absUrl("/images/logo-elementara-new.png"),
-    image: (ELEMENTAR.images?.length ? ELEMENTAR.images : [
-      "/images/interactive-physics-experiment.png",
-      "/images/interactive-biology-microscope.png",
-      "/images/astronomie-planetariu-tehnologie.png",
-    ]).map(absUrl),
+    image: (ELEMENTAR.images?.length ? ELEMENTAR.images : []).map(absUrl),
 
-    // ✅ Contact
     telephone: ELEMENTAR.phone || undefined,
     email: ELEMENTAR.email || undefined,
 
-    // ✅ Adresă
     address: {
       "@type": "PostalAddress",
       streetAddress: ELEMENTAR.address.streetAddress,
@@ -46,11 +37,11 @@ export function getElementarJsonLd() {
       addressCountry: ELEMENTAR.address.addressCountry,
     },
 
-    // ✅ "Port Mall, etajul 4" ca semnal de locație (fără să inventăm)
+    // “Port Mall, etajul 4”
     location: ELEMENTAR.locationName
       ? {
           "@type": "Place",
-          name: ELEMENTAR.locationName, // ex: "Port Mall Chișinău, etajul 4"
+          name: ELEMENTAR.locationName,
           address: {
             "@type": "PostalAddress",
             streetAddress: ELEMENTAR.address.streetAddress,
@@ -62,40 +53,30 @@ export function getElementarJsonLd() {
         }
       : undefined,
 
-    // ✅ Program (dacă ai deja ca string list – păstrăm)
+    // Program
     openingHours: ELEMENTAR.openingHours?.length ? ELEMENTAR.openingHours : undefined,
 
-    // ✅ Coordonate (DOAR dacă sunt reale și existente)
+    // Coordonate reale (opțional)
     geo:
-      ELEMENTAR.geo?.latitude && ELEMENTAR.geo?.longitude
+      (ELEMENTAR as any).geo?.latitude && (ELEMENTAR as any).geo?.longitude
         ? {
             "@type": "GeoCoordinates",
-            latitude: ELEMENTAR.geo.latitude,
-            longitude: ELEMENTAR.geo.longitude,
+            latitude: (ELEMENTAR as any).geo.latitude,
+            longitude: (ELEMENTAR as any).geo.longitude,
           }
         : undefined,
 
-    // ✅ Hartă (dacă ai link)
-    hasMap: ELEMENTAR.hasMap || undefined,
+    // Harta (opțional)
+    hasMap: (ELEMENTAR as any).hasMap || undefined,
 
-    // ✅ Social
+    // Relevanță conversațională
+    areaServed: (ELEMENTAR as any).areaServed?.length ? (ELEMENTAR as any).areaServed : undefined,
+    knowsAbout: ELEMENTAR.topics?.length ? ELEMENTAR.topics : undefined,
+    audience: ELEMENTAR.audience?.length
+      ? ELEMENTAR.audience.map((a) => ({ "@type": "Audience", name: a }))
+      : undefined,
+
     sameAs: ELEMENTAR.sameAs?.length ? ELEMENTAR.sameAs : undefined,
-
-    // ✅ Relevanță conversațională (GEO)
-    areaServed: ELEMENTAR.areaServed?.length ? ELEMENTAR.areaServed : ["Chișinău", "Republica Moldova"],
-    knowsAbout: ELEMENTAR.knowsAbout?.length
-      ? ELEMENTAR.knowsAbout
-      : [
-          "activități educaționale pentru copii",
-          "experimente științifice interactive",
-          "STEM pentru copii",
-          "fizică",
-          "chimie",
-          "biologie",
-          "astronomie",
-          "puzzle-uri logice",
-          "excursii școlare",
-        ],
   }
 
   return clean(jsonLd)
