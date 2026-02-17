@@ -10,6 +10,7 @@ import SiteFooter from "@/components/site-footer"
 import { Facebook, Instagram, Home, Phone, MapPin, Mail } from "lucide-react"
 import Script from "next/script"
 import GaRouteListener from "@/components/ga-route-listener"
+import { getElementarJsonLd } from "@/lib/schema"
 
 const GA_ID = "G-VHXGNT73PX"
 
@@ -84,6 +85,14 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', '${GA_ID}', { anonymize_ip: true });`}
         </Script>
+
+        {/* Entity Schema (GEO / AI-ready) */}
+        <Script
+          id="elementar-jsonld"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(getElementarJsonLd()) }}
+        />
       </head>
 
       <body
