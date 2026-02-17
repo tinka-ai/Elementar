@@ -4,6 +4,23 @@ export const ELEMENTAR = {
   legalName: "ELEMENTAR — Parc de Știință și Curiozități",
   url: "https://elementar.md",
 
+  logo: "/images/logo-elementara-new.png",
+  images: [
+    "/images/interactive-physics-experiment.png",
+    "/images/interactive-biology-microscope.png",
+    "/images/astronomie-planetariu-tehnologie.png",
+    "/images/optical-illusions-science-exhibit.png",
+  ],
+
+  // ✅ Locația (separat, ca să o înțeleagă ușor AI)
+  locationName: "Port Mall Chișinău, etajul 4",
+
+  // ✅ DOAR dacă pui coordonate reale (din Google Maps)
+  // geo: { latitude: 47.XXXXXX, longitude: 28.XXXXXX },
+
+  // ✅ Link de hartă (dacă îl ai)
+  // hasMap: "https://www.google.com/maps?....",
+
   descriptionShort:
     "Elementar este un parc interactiv de știință din Chișinău, dedicat copiilor și excursiilor școlare, unde învățarea se realizează prin experimente practice de fizică, chimie și astronomie.",
 
@@ -14,7 +31,8 @@ export const ELEMENTAR = {
   email: "office@elementar.md",
 
   address: {
-    streetAddress: "Strada Mihai Sadoveanu 42/6, Port Mall, etajul 4",
+    // ✅ Strada separat, “Port Mall, etajul 4” e la locationName
+    streetAddress: "Strada Mihai Sadoveanu 42/6",
     addressLocality: "Chișinău",
     addressRegion: "Municipiul Chișinău",
     postalCode: "MD-2075",
@@ -22,7 +40,6 @@ export const ELEMENTAR = {
   },
 
   openingHours: [
-    // format Schema.org: "Mo-Su 10:00-22:00"
     "Mo-Su 10:00-22:00",
   ],
 
@@ -46,4 +63,6 @@ export const ELEMENTAR = {
     "Matematică",
     "STEM",
   ],
+
+  areaServed: ["Chișinău", "Republica Moldova"],
 } as const
