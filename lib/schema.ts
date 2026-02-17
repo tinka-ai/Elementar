@@ -1,66 +1,105 @@
-// lib/entity.ts
-export const ELEMENTAR = {
-  name: "ELEMENTAR",
-  legalName: "ELEMENTAR — Parc de Știință și Curiozități",
-  url: "https://elementar.md",
+// lib/schema.ts
+import { ELEMENTAR } from "./entity"
 
-  logo: "/images/logo-elementara-new.png",
-  images: [
-    "/images/interactive-physics-experiment.png",
-    "/images/interactive-biology-microscope.png",
-    "/images/astronomie-planetariu-tehnologie.png",
-    "/images/optical-illusions-science-exhibit.png",
-  ],
+function clean<T extends Record<string, any>>(obj: T): T {
+  // elimină câmpurile undefined / null (prin JSON stringify/parse)
+  return JSON.parse(JSON.stringify(obj))
+}
 
-  // Locația (uman + AI)
-  locationName: "Port Mall Chișinău, etajul 4",
+function absUrl(pathOrUrl?: string) {
+  if (!pathOrUrl) return undefined
+  if (pathOrUrl.startsWith("http://") || pathOrUrl.startsWith("https://")) return pathOrUrl
+  return `${ELEMENTAR.url}${pathOrUrl.startsWith("/") ? "" : "/"}${pathOrUrl}`
+}
 
-  // Coordonate reale (din Google Maps)
-  geo: { latitude: 47.0706168, longitude: 28.8885452 },
+export function getElementarJsonLd() {
+  const orgId = `${ELEMENTAR.url}/#organization`
 
-  // Link hartă (Google Maps)
-  hasMap:
-    "https://www.google.com/maps/place/ELEMENTAR/@47.0706204,28.8859703,17z/data=!3m1!4b1!4m6!3m5!1s0x40c97dd06a999bb7:0xd85eaf85ec5f5afc!8m2!3d47.0706168!4d28.8885452!16s%2Fg%2F11xyyqhxd8?entry=tts",
+  const jsonLd: Record<string, any> = {
+    "@context": "https://schema.org",
+    // Organization + LocalBusiness + EducationalOrganization (entitate completă pentru AI)
+    "@type": ["Organization", "LocalBusiness", "EducationalOrganization"],
+    "@id": orgId,
 
-  descriptionShort:
-    "Elementar este un parc interactiv de știință din Chișinău, dedicat copiilor și excursiilor școlare, unde învățarea se realizează prin experimente practice de fizică, chimie și astronomie.",
+    name: ELEMENTAR.legalName,
+    alternateName: ELEMENTAR.name,
+    url: ELEMENTAR.url,
+    description: ELEMENTAR.descriptionShort,
 
-  descriptionLong:
-    "Elementar este un parc interactiv de știință din Chișinău, dedicat copiilor, familiilor și excursiilor școlare. Aici copiii explorează știința prin experiențe practice și demonstrații ghidate, cu teme din fizică, chimie și astronomie. Parcul este situat în Port Mall, etajul 4, și oferă activități STEM adaptate diferitelor grupe de vârstă.",
+    logo: absUrl(ELEMENTAR.logo),
+    image: (ELEMENTAR.images || []).map(absUrl).filter(Boolean),
 
-  phone: "+37379010277",
-  email: "office@elementar.md",
+    telephone: ELEMENTAR.phone || undefined,
+    email: ELEMENTAR.email || undefined,
 
-  address: {
-    streetAddress: "Strada Mihai Sadoveanu 42/6",
-    addressLocality: "Chișinău",
-    addressRegion: "Municipiul Chișinău",
-    postalCode: "MD-2075",
-    addressCountry: "MD",
-  },
+    // Prețuri / poziționare
+    priceRange: (ELEMENTAR as any).priceRange || undefined,
+    slogan: (ELEMENTAR as any).slogan || undefined,
+    serviceType: (ELEMENTAR as any).serviceType?.length ? (ELEMENTAR as any).serviceType : undefined,
 
-  openingHours: ["Mo-Su 10:00-22:00"],
+    // Program
+    openingHours: ELEMENTAR.openingHours?.length ? ELEMENTAR.openingHours : undefined,
 
-  sameAs: [
-    "https://facebook.com/elementara.ro",
-    "https://instagram.com/elementara.ro",
-  ],
+    // Adresă
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: ELEMENTAR.address.streetAddress,
+      addressLocality: ELEMENTAR.address.addressLocality,
+      addressRegion: ELEMENTAR.address.addressRegion,
+      postalCode: ELEMENTAR.address.postalCode || undefined,
+      addressCountry: ELEMENTAR.address.addressCountry,
+    },
 
-  audience: ["Copii", "Adolescenți", "Familii", "Școli și grupuri organizate"],
+    // “Port Mall, etajul 4” + adresă (Place)
+    location: ELEMENTAR.locationName
+      ? {
+          "@type": "Place",
+          name: ELEMENTAR.locationName,
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: ELEMENTAR.address.streetAddress,
+            addressLocality: ELEMENTAR.address.addressLocality,
+            addressRegion: ELEMENTAR.address.addressRegion,
+            postalCode: ELEMENTAR.address.postalCode || undefined,
+            addressCountry: ELEMENTAR.address.addressCountry,
+          },
+        }
+      : undefined,
 
-  topics: ["Fizică", "Chimie", "Biologie", "Astronomie", "Matematică", "STEM"],
+    // Coordonate reale
+    geo: (ELEMENTAR as any).geo?.latitude && (ELEMENTAR as any).geo?.longitude
+      ? {
+          "@type": "GeoCoordinates",
+          latitude: (ELEMENTAR as any).geo.latitude,
+          longitude: (ELEMENTAR as any).geo.longitude,
+        }
+      : undefined,
 
-  areaServed: ["Chișinău", "Republica Moldova"],
+    // Harta Google
+    hasMap: (ELEMENTAR as any).hasMap ? absUrl((ELEMENTAR as any).hasMap) : undefined,
 
-  // ✅ completări importante pentru AI
-  priceRange: "100–400 MDL", // (în acord cu tarifele tale actuale)
-  slogan: "Știință pe care o atingi. Curiozități pe care le înțelegi.",
-  serviceType: [
-    "Parc interactiv de știință",
-    "Activități educative STEM pentru copii",
-    "Excursii școlare ghidate",
-    "Ateliere și demonstrații științifice",
-  ],
+    // Relevanță conversațională / semantică
+    areaServed: (ELEMENTAR as any).areaServed?.length ? (ELEMENTAR as any).areaServed : undefined,
+    knowsAbout: ELEMENTAR.topics?.length ? ELEMENTAR.topics : undefined,
+    audience: ELEMENTAR.audience?.length
+      ? ELEMENTAR.audience.map((a) => ({ "@type": "Audience", name: a }))
+      : undefined,
 
-  // opțional (doar dacă vrei): foundingDate: "2025-01-01",
-} as const
+    // Social
+    sameAs: ELEMENTAR.sameAs?.length ? ELEMENTAR.sameAs : undefined,
+
+    // Opțional: foundingDate (dacă îl adaugi în entity.ts)
+    foundingDate: (ELEMENTAR as any).foundingDate || undefined,
+
+    // Opțional: aggregateRating (dacă îl adaugi în entity.ts)
+    aggregateRating: (ELEMENTAR as any).aggregateRating
+      ? {
+          "@type": "AggregateRating",
+          ratingValue: (ELEMENTAR as any).aggregateRating.ratingValue,
+          reviewCount: (ELEMENTAR as any).aggregateRating.reviewCount,
+        }
+      : undefined,
+  }
+
+  return clean(jsonLd)
+}
