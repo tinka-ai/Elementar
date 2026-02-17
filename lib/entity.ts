@@ -12,14 +12,17 @@ export const ELEMENTAR = {
     "/images/optical-illusions-science-exhibit.png",
   ],
 
-  // ✅ Locația (separat, ca să o înțeleagă ușor AI)
+  // 📍 Locație clară pentru AI
   locationName: "Port Mall Chișinău, etajul 4",
 
-  // ✅ DOAR dacă pui coordonate reale (din Google Maps)
-  // geo: { latitude: 47.XXXXXX, longitude: 28.XXXXXX },
+  // 🔹 Adaugă coordonate reale dacă le confirmi din Google Maps
+  // geo: {
+  //   latitude: 47.XXXXXX,
+  //   longitude: 28.XXXXXX,
+  // },
 
-  // ✅ Link de hartă (dacă îl ai)
-  // hasMap: "https://www.google.com/maps?....",
+  // 🔹 Link hartă direct Google Maps (opțional dar recomandat)
+  // hasMap: "https://maps.app.goo.gl/N3kLzviesNELiM3s6",
 
   descriptionShort:
     "Elementar este un parc interactiv de știință din Chișinău, dedicat copiilor și excursiilor școlare, unde învățarea se realizează prin experimente practice de fizică, chimie și astronomie.",
@@ -31,7 +34,6 @@ export const ELEMENTAR = {
   email: "office@elementar.md",
 
   address: {
-    // ✅ Strada separat, “Port Mall, etajul 4” e la locationName
     streetAddress: "Strada Mihai Sadoveanu 42/6",
     addressLocality: "Chișinău",
     addressRegion: "Municipiul Chișinău",
@@ -39,9 +41,7 @@ export const ELEMENTAR = {
     addressCountry: "MD",
   },
 
-  openingHours: [
-    "Mo-Su 10:00-22:00",
-  ],
+  openingHours: ["Mo-Su 10:00-22:00"],
 
   sameAs: [
     "https://facebook.com/elementara.ro",
@@ -65,4 +65,23 @@ export const ELEMENTAR = {
   ],
 
   areaServed: ["Chișinău", "Republica Moldova"],
+
+  // ⭐ Google Reviews (valori reale din Google Maps)
+  aggregateRating: {
+    ratingValue: 4.8,
+    reviewCount: 6,
+  },
+
+  priceRange: "200 MDL",
+
+  slogan:
+    "Locul unde joaca, arta și experimentul se transformă în descoperire.",
+
+  foundingDate: "2023",
+
+  serviceType: [
+    "Parc interactiv de știință",
+    "Activități educative pentru copii",
+    "Excursii școlare STEM",
+  ],
 } as const
