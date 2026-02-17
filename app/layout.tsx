@@ -1,13 +1,11 @@
 import type React from "react"
 import type { Metadata } from "next"
-import Link from "next/link"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { LanguageProvider } from "@/components/language-provider"
 import SiteHeader from "@/components/site-header"
 import SiteFooter from "@/components/site-footer"
-import { Facebook, Instagram, Home, Phone, MapPin, Mail } from "lucide-react"
 import Script from "next/script"
 import GaRouteListener from "@/components/ga-route-listener"
 import { getElementarJsonLd } from "@/lib/schema"
@@ -64,41 +62,40 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ro" className="scroll-smooth overscroll-y-contain" suppressHydrationWarning>
       <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
-  <link rel="shortcut icon" href="/favicon.png" />
-  <meta name="theme-color" content="#000000" />
-  <meta name="msapplication-TileColor" content="#000000" />
-  <meta name="msapplication-config" content="/browserconfig.xml" />
-  <link rel="manifest" href="/site.webmanifest" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+        <link rel="shortcut icon" href="/favicon.png" />
+        <meta name="theme-color" content="#000000" />
+        <meta name="msapplication-TileColor" content="#000000" />
+        <meta name="msapplication-config" content="/browserconfig.xml" />
+        <link rel="manifest" href="/site.webmanifest" />
 
-  {/* ✅ Entity Schema (GEO / AI-ready) — o singură dată */}
-  <Script
-    id="elementar-jsonld"
-    type="application/ld+json"
-    strategy="beforeInteractive"
-    dangerouslySetInnerHTML={{ __html: JSON.stringify(getElementarJsonLd()) }}
-  />
+        {/* ✅ Entity Schema (GEO / AI-ready) — o singură dată, pe tot site-ul */}
+        <Script
+          id="elementar-jsonld"
+          type="application/ld+json"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(getElementarJsonLd()) }}
+        />
 
-  {/* Google Analytics */}
-  <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
-  <Script id="ga-init" strategy="afterInteractive">
-    {`window.dataLayer = window.dataLayer || [];
+        {/* Google Analytics */}
+        <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
+        <Script id="ga-init" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', '${GA_ID}', { anonymize_ip: true });`}
-  </Script>
-</head>
-
+        </Script>
+      </head>
 
       <body
         className={`${inter.className}
-              bg-background text-foreground
-              min-h-screen supports-[height:100svh]:min-h-[100svh]
-              pt-24 md:pt-16 pb-14
-             `}
+          bg-background text-foreground
+          min-h-screen supports-[height:100svh]:min-h-[100svh]
+          pt-24 md:pt-16 pb-14
+        `}
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <LanguageProvider>
