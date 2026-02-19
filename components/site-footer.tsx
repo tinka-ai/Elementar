@@ -9,9 +9,8 @@ export default function SiteFooter() {
   return (
     <footer id="contact" className="border-t border-white/5">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 py-10">
-        {/* rândul principal */}
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 items-start">
-          
+
           {/* Contact */}
           <div className="space-y-2">
             <p className="text-gray-300 font-medium">Contact</p>
@@ -23,10 +22,22 @@ export default function SiteFooter() {
             </p>
           </div>
 
-          {/* Ghiduri (GEO internal linking) */}
+          {/* Ghiduri (Hub AI corect) */}
           <div className="space-y-2">
             <p className="text-gray-300 font-medium">Ghiduri</p>
             <ul className="text-sm space-y-2">
+
+              {/* Hub principal */}
+              <li>
+                <Link
+                  href="/ghiduri"
+                  className="text-gray-400 hover:text-gray-200 transition-colors"
+                >
+                  Toate ghidurile educative
+                </Link>
+              </li>
+
+              {/* Ghid individual */}
               <li>
                 <Link
                   href="/activitati-educative-copii-chisinau"
@@ -36,17 +47,6 @@ export default function SiteFooter() {
                 </Link>
               </li>
 
-              {/* Viitor: maxim 1–2 ghiduri suplimentare */}
-              {/* 
-              <li>
-                <Link
-                  href="/excursii-scolare-chisinau"
-                  className="text-gray-400 hover:text-gray-200 transition-colors"
-                >
-                  Excursii școlare în Chișinău
-                </Link>
-              </li>
-              */}
             </ul>
           </div>
 
@@ -55,7 +55,7 @@ export default function SiteFooter() {
             <p className="text-gray-300 font-medium">Social</p>
             <div className="flex items-center gap-3">
               <a
-                href="https://facebook.com/elementara.ro"
+                href="https://www.facebook.com/share/1BrBpvo3o1/?mibextid=wwXIfr"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
@@ -65,7 +65,7 @@ export default function SiteFooter() {
               </a>
 
               <a
-                href="https://instagram.com/elementara.ro"
+                href="https://www.instagram.com/elementar.md?igsh=MjRidjk2aGJxcWw0&utm_source=qr"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
@@ -119,8 +119,7 @@ export default function SiteFooter() {
               className="hover:text-white transition-colors"
             >
               Powered by TINKA AI
-            </a>
-            .
+            </a>.
           </p>
         </div>
       </div>
