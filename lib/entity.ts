@@ -15,14 +15,15 @@ export const ELEMENTAR = {
   // 📍 Locație clară pentru AI
   locationName: "Port Mall Chișinău, etajul 4",
 
-  // 🔹 Adaugă coordonate reale dacă le confirmi din Google Maps
-  // geo: {
-  //   latitude: 47.XXXXXX,
-  //   longitude: 28.XXXXXX,
-  // },
+  // ✅ Coordonate reale Google Maps
+  geo: {
+    latitude: 47.0706168,
+    longitude: 28.8885452,
+  },
 
-  // 🔹 Link hartă direct Google Maps (opțional dar recomandat)
-  // hasMap: "https://maps.app.goo.gl/N3kLzviesNELiM3s6",
+  // ✅ Link Google Maps exact
+  hasMap:
+    "https://www.google.com/maps/place/ELEMENTAR/@47.0706168,28.8885452,17z/data=!3m1!4b1!4m6!3m5!1s0x40c97dd06a999bb7:0xd85eaf85ec5f5afc!8m2!3d47.0706168!4d28.8885452!16s%2Fg%2F11xyyqhxd8?entry=ttu",
 
   descriptionShort:
     "Elementar este un parc interactiv de știință din Chișinău, dedicat copiilor și excursiilor școlare, unde învățarea se realizează prin experimente practice de fizică, chimie și astronomie.",
@@ -66,8 +67,11 @@ export const ELEMENTAR = {
 
   areaServed: ["Chișinău", "Republica Moldova"],
 
-  // ⭐ Google Reviews (valori reale din Google Maps)
- aggregateRating: { ratingValue: 4.8, reviewCount: 6 },
+  // ⭐ Google Reviews (valori reale)
+  aggregateRating: {
+    ratingValue: 4.8,
+    reviewCount: 6,
+  },
 
   priceRange: "200 MDL",
 
