@@ -66,7 +66,7 @@ export function getElementarJsonLd() {
   const orgId = `${ELEMENTAR.url}/#organization`
 
   const geo = getGeoCoordinates()
-  const hasMap = (ELEMENTAR as any).hasMap || undefined
+  const hasMap = absUrl((ELEMENTAR as any).hasMap)
 
   const aggregateRating =
     (ELEMENTAR as any).aggregateRating?.ratingValue && (ELEMENTAR as any).aggregateRating?.reviewCount
@@ -88,7 +88,7 @@ export function getElementarJsonLd() {
     description: ELEMENTAR.descriptionShort,
 
     logo: absUrl(ELEMENTAR.logo),
-    image: (ELEMENTAR.images || []).map(absUrl),
+    image: (ELEMENTAR.images || []).map(absUrl).filter(Boolean),
 
     telephone: ELEMENTAR.phone || undefined,
     email: ELEMENTAR.email || undefined,
