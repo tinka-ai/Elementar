@@ -67,10 +67,7 @@ export const ELEMENTAR = {
   areaServed: ["Chișinău", "Republica Moldova"],
 
   // ⭐ Google Reviews (valori reale din Google Maps)
-  aggregateRating: {
-    ratingValue: 4.8,
-    reviewCount: 6,
-  },
+ aggregateRating: { ratingValue: 4.8, reviewCount: 6 },
 
   priceRange: "200 MDL",
 
