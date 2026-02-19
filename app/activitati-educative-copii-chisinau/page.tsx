@@ -7,7 +7,9 @@ export const metadata: Metadata = {
   title: "Activități educative pentru copii în Chișinău | ELEMENTAR",
   description:
     "Cauți activități educative pentru copii în Chișinău? Elementar (Port Mall, etajul 4) oferă experiențe interactive STEM: fizică, chimie, biologie, astronomie, puzzle-uri și ateliere.",
-  alternates: { canonical: "/activitati-educative-copii-chisinau" },
+  alternates: {
+  canonical: `${ELEMENTAR.url}/activitati-educative-copii-chisinau`,
+},
 }
 
 export default function Page() {
@@ -43,7 +45,12 @@ export default function Page() {
 
   const pageUrl = `${ELEMENTAR.url}/activitati-educative-copii-chisinau`
   const orgId = `${ELEMENTAR.url}/#organization`
-  const primaryImage = `${ELEMENTAR.url}${ELEMENTAR.images?.[0] ?? "/images/logo-elementara-new.png"}`
+  const primaryImage = ELEMENTAR.images?.[0]
+  ? ELEMENTAR.images[0].startsWith("http")
+    ? ELEMENTAR.images[0]
+    : `${ELEMENTAR.url}${ELEMENTAR.images[0].startsWith("/") ? "" : "/"}${ELEMENTAR.images[0]}`
+  : `${ELEMENTAR.url}/images/logo-elementara-new.png`
+
 
   const faqJsonLd = {
     "@context": "https://schema.org",
@@ -75,7 +82,7 @@ export default function Page() {
 
     // ✅ completări cerute (AI)
     inLanguage: "ro-MD",
-    publisher: { "@id": orgId },
+    publisher: { "@type": "Organization", "@id": orgId },
     primaryImageOfPage: {
       "@type": "ImageObject",
       url: primaryImage,
@@ -97,11 +104,11 @@ export default function Page() {
     "@type": "Article",
     "@id": `${pageUrl}#article`,
     headline: "Activități educative pentru copii în Chișinău",
-    description: metadata.description,
+    description: metadata.description ?? "",
     inLanguage: "ro-MD",
     mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
-    publisher: { "@id": orgId },
-    author: { "@id": orgId },
+    publisher: { "@type": "Organization", "@id": orgId },
+    author: { "@type": "Organization", "@id": orgId },
     image: [primaryImage],
     about: ["Activități educative", "STEM", "Chișinău"],
   }
