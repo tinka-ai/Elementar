@@ -16,6 +16,9 @@ export default function Page() {
   const pageUrl = `${ELEMENTAR.url}/ghiduri`
   const orgId = `${ELEMENTAR.url}/#organization`
 
+  // ✅ imagine principală robustă (url absolut)
+  const primaryImage = `${ELEMENTAR.url}${ELEMENTAR.images?.[0] ?? "/images/logo-elementara-new.png"}`
+
   const collectionJsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
@@ -25,7 +28,14 @@ export default function Page() {
     inLanguage: "ro-MD",
     description:
       "Colecție de ghiduri educaționale despre activități pentru copii, excursii școlare și experiențe STEM în Chișinău.",
+
+    // ✅ completări cerute (AI)
     publisher: { "@type": "Organization", "@id": orgId },
+    primaryImageOfPage: { "@type": "ImageObject", url: primaryImage },
+    isPartOf: { "@type": "WebSite", name: ELEMENTAR.name, url: ELEMENTAR.url },
+    mainEntity: { "@id": orgId },
+
+    // ✅ lista ghidurilor din hub
     mainEntity: {
       "@type": "ItemList",
       itemListElement: [
@@ -41,7 +51,6 @@ export default function Page() {
 
   return (
     <main className="mx-auto max-w-4xl px-4 py-12">
-
       <Script
         id="collection-jsonld"
         type="application/ld+json"
@@ -78,7 +87,6 @@ export default function Page() {
           </Link>
         </div>
       </section>
-
     </main>
   )
 }
