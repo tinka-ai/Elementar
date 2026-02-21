@@ -12,67 +12,64 @@ import { useLanguage } from "@/components/language-provider"
 
 export default function Page() {
   const { t } = useLanguage()
-const videoRef = useRef<HTMLVideoElement>(null)
-const [playVideo, setPlayVideo] = useState(false)
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [playVideo, setPlayVideo] = useState(false)
 
-useEffect(() => {
-  if (typeof window === "undefined") return
+  useEffect(() => {
+    if (typeof window === "undefined") return
 
-  const isDesktop = window.innerWidth >= 1024
+    const isDesktop = window.innerWidth >= 1024
 
-  if (isDesktop) {
-    setPlayVideo(true)
-    videoRef.current?.play().catch(() => {})
-    return
-  }
+    if (isDesktop) {
+      setPlayVideo(true)
+      videoRef.current?.play().catch(() => {})
+      return
+    }
 
-  const timer = setTimeout(() => {
-    setPlayVideo(true)
-    videoRef.current?.play().catch(() => {})
-  }, 1200)
+    const timer = setTimeout(() => {
+      setPlayVideo(true)
+      videoRef.current?.play().catch(() => {})
+    }, 1200)
 
-  return () => clearTimeout(timer)
-}, [])
+    return () => clearTimeout(timer)
+  }, [])
 
   const fx =
-    "transition-shadow duration-300 ease-out hover:shadow-[0_0_0_1px_rgba(56,189,248,0.35),0_0_28px_6px_rgba(168,85,247,0.25)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-400/70 rounded-md";
+    "transition-shadow duration-300 ease-out hover:shadow-[0_0_0_1px_rgba(56,189,248,0.35),0_0_28px_6px_rgba(168,85,247,0.25)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-400/70 rounded-md"
 
   return (
     <>
-{/* VIDEO LOGO RESPONSIV */}
-<section className="relative w-full bg-black py-4 mt-24 md:mt-0 border-b border-white/5">
-  <div className="mx-auto max-w-7xl px-4 sm:px-6 flex items-center justify-center">
+      {/* VIDEO LOGO RESPONSIV */}
+      <section className="relative w-full bg-black py-4 mt-24 md:mt-0 border-b border-white/5">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 flex items-center justify-center">
+          {/* POSTER – LCP PE MOBILE */}
+          {!playVideo && (
+            <Image
+              src="/logo-elementara-new-one.png"
+              alt="Elementar – logo animat"
+              width={420}
+              height={160}
+              priority
+              className="pointer-events-none select-none"
+              aria-hidden={playVideo}
+            />
+          )}
 
-    {/* POSTER – LCP PE MOBILE */}
- {!playVideo && (
-  <Image
-    src="/logo-elementara-new-one.png"
-    alt="Elementar – logo animat"
-    width={420}
-    height={160}
-    priority
-    className="pointer-events-none select-none"
-    aria-hidden={playVideo}
-  />
-)}
-
-    {/* VIDEO ANIMAT */}
-    <video
-      ref={videoRef}
-      className={`w-full max-w-6xl h-auto object-contain rounded-2xl transition-opacity duration-500 ${
-        playVideo ? "opacity-100" : "opacity-0"
-      }`}
-      muted
-      loop
-      playsInline
-      preload="metadata"
-    >
-      <source src="/video/elementar_animated_logo.webm" type="video/webm" />
-    </video>
-
-  </div>
-</section>
-
+          {/* VIDEO ANIMAT */}
+          <video
+            ref={videoRef}
+            className={`w-full max-w-6xl h-auto object-contain rounded-2xl transition-opacity duration-500 ${
+              playVideo ? "opacity-100" : "opacity-0"
+            }`}
+            muted
+            loop
+            playsInline
+            preload="metadata"
+          >
+            <source src="/video/elementar_animated_logo.webm" type="video/webm" />
+          </video>
+        </div>
+      </section>
 
       <main>
         {/* HERO */}
@@ -107,19 +104,18 @@ useEffect(() => {
                 </div>
               </div>
 
-       <div className="relative">
-  <div className="absolute -inset-8 -z-10 rounded-[2rem] bg-[radial-gradient(circle_at_70%_30%,rgba(56,189,248,0.18),transparent_60%)]" />
-  <Image
-    src="/images/Portret-copil-cu-halou-luminos.png"
-    alt="Copil curios cu nimb luminos, simbol al descoperirii și al științei"
-    width={880}
-    height={700}
-    className="w-full h-auto rounded-2xl object-cover select-none pointer-events-none"
-    loading="lazy"
-    sizes="(max-width: 768px) 100vw, 50vw"
-  />
-</div>
-
+              <div className="relative">
+                <div className="absolute -inset-8 -z-10 rounded-[2rem] bg-[radial-gradient(circle_at_70%_30%,rgba(56,189,248,0.18),transparent_60%)]" />
+                <Image
+                  src="/images/Portret-copil-cu-halou-luminos.png"
+                  alt="Copil curios cu nimb luminos, simbol al descoperirii și al științei"
+                  width={880}
+                  height={700}
+                  className="w-full h-auto rounded-2xl object-cover select-none pointer-events-none"
+                  loading="lazy"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
             </div>
           </div>
         </section>
@@ -186,7 +182,6 @@ useEffect(() => {
             </div>
 
             <div>
-              {/* Imagine din /public/images (corectat pathul) */}
               <Image
                 src="/images/interactive-physics-experiment.png"
                 alt="Copil experimentează pendulul lui Newton la un stand"
@@ -224,81 +219,84 @@ useEffect(() => {
           </div>
         </section>
 
-    {/* PRICING */}
-<section className="py-12 sm:py-16 border-b border-white/5">
-  <div className="mx-auto max-w-7xl px-4 sm:px-6">
-    <SectionKicker>TARIFE</SectionKicker>
+        {/* PRICING */}
+        <section className="py-12 sm:py-16 border-b border-white/5">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6">
+            <SectionKicker>TARIFE</SectionKicker>
 
-    <h2 className="text-3xl sm:text-4xl font-bold text-gray-300">
-      Tarife de acces – Parcul de Științe „Elementar”
-    </h2>
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-300">Tarife de acces – Parcul de Științe „Elementar”</h2>
 
-    <div className="mt-10 grid gap-6 md:grid-cols-3">
+            <div className="mt-10 grid gap-6 md:grid-cols-3">
+              <PricingCard
+                fx={fx}
+                title="Acces individual"
+                price=""
+                perks={[
+                  "Copii sub 5 ani – gratuit",
+                  "Copii 6–12 ani – 200 lei",
+                  "Adolescent 13–17 ani – 130 lei",
+                  "Adult însoțitor – 100 lei",
+                  "Adult (acces individual) – 130 lei",
+                  "Excursia cu ghid este inclusă pentru copii",
+                ]}
+                cta
+              />
 
-      {/* ACCES INDIVIDUAL */}
-      <PricingCard
-        fx={fx}
-        title="Acces individual"
-        price=""
-        perks={[
-          "Copii sub 5 ani – gratuit",
-          "Copii 6–12 ani – 200 lei",
-          "Adolescent 13–17 ani – 130 lei",
-          "Adult însoțitor – 100 lei",
-          "Adult (acces individual) – 130 lei",
-          "Excursia cu ghid este inclusă pentru copii",
-        ]}
-        cta
-      />
+              <PricingCard
+                fx={fx}
+                title="Pachet Familie"
+                price="400 lei"
+                highlight
+                badge="Cel mai ales"
+                perks={["2 adulți + 1 copil", "1 adult + 2 copii", "Fiecare copil suplimentar: +100 lei", "Acces complet + ghidaj inclus"]}
+                cta
+              />
 
-      {/* PACHET FAMILIE – CEL MAI ALES */}
-      <PricingCard
-        fx={fx}
-        title="Pachet Familie"
-        price="400 lei"
-        highlight
-        badge="Cel mai ales"
-        perks={[
-          "2 adulți + 1 copil",
-          "1 adult + 2 copii",
-          "Fiecare copil suplimentar: +100 lei",
-          "Acces complet + ghidaj inclus",
-        ]}
-        cta
-      />
+              <PricingCard
+                fx={fx}
+                title="Teen Pass (13–17 ani)"
+                price="100 lei / persoană"
+                perks={["Grup minim 3 adolescenți", "Acces complet", "Activități adaptate vârstei"]}
+                cta
+              />
+            </div>
 
-      {/* TEEN PASS */}
-      <PricingCard
-        fx={fx}
-        title="Teen Pass (13–17 ani)"
-        price="100 lei / persoană"
-        perks={[
-          "Grup minim 3 adolescenți",
-          "Acces complet",
-          "Activități adaptate vârstei",
-        ]}
-        cta
-      />
-    </div>
+            <div className="mt-8 rounded-xl border border-white/10 bg-white/5 p-5 text-sm text-gray-300">
+              <p className="flex items-start gap-2">
+                <BadgeCheck className="mt-0.5 h-4 w-4 text-sky-400" />
+                Copiii până la <strong>9 ani</strong> pot intra doar însoțiți de un adult.
+              </p>
+            </div>
 
-    {/* NOTĂ IMPORTANTĂ */}
-    <div className="mt-8 rounded-xl border border-white/10 bg-white/5 p-5 text-sm text-gray-300">
-      <p className="flex items-start gap-2">
-        <BadgeCheck className="mt-0.5 h-4 w-4 text-sky-400" />
-        Copiii până la <strong>9 ani</strong> pot intra doar însoțiți de un adult.
-      </p>
-    </div>
+            <p className="mt-6 pt-3 text-center text-sm text-gray-400 border-t border-white/10">
+              Tarifele sunt valabile până la <span className="font-medium text-gray-300">31 martie 2026</span> (inclusiv).
+            </p>
+          </div>
+        </section>
 
-    {/* Valabilitate */}
-    <p className="mt-6 pt-3 text-center text-sm text-gray-400 border-t border-white/10">
-      Tarifele sunt valabile până la{" "}
-      <span className="font-medium text-gray-300">31 martie 2026</span> (inclusiv).
-    </p>
-  </div>
-</section>
+        {/* ✅ AI HUB LINKS (Homepage → ghiduri + activități) */}
+        <section className="py-12 sm:py-16 border-b border-white/5">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-gray-200">Resurse educaționale pentru părinți și școli</h2>
 
+            <p className="mt-4 text-gray-300">
+              Descoperă{" "}
+              <Link href="/ghiduri" className="text-sky-400 hover:text-sky-300 font-semibold">
+                ghiduri educative pentru părinți și profesori
+              </Link>{" "}
+              despre activități interactive, excursii școlare și experiențe de știință pentru copii în Chișinău.
+            </p>
 
- 
+            <p className="mt-4 text-gray-300">
+              Vezi recomandarea noastră pentru{" "}
+              <Link href="/activitati-educative-copii-chisinau" className="text-sky-400 hover:text-sky-300 font-semibold">
+                activități educative pentru copii în Chișinău
+              </Link>{" "}
+              și planifică o vizită la ELEMENTAR.
+            </p>
+          </div>
+        </section>
+
         {/* FAQ */}
         <section id="faq" className="py-12 sm:py-16 border-b border-white/5">
           <div className="mx-auto max-w-4xl px-4 sm:px-6">
@@ -350,7 +348,14 @@ function Feature({
   text,
   link,
   learnMore,
-}: { fx: string; icon: React.ReactNode; title: string; text: string; link: string; learnMore: string }) {
+}: {
+  fx: string
+  icon: React.ReactNode
+  title: string
+  text: string
+  link: string
+  learnMore: string
+}) {
   return (
     <li className={`p-5 rounded-xl border border-white/10 bg-white/5 ${fx}`}>
       <div className="flex items-center gap-3">
@@ -358,10 +363,7 @@ function Feature({
         <p className="font-semibold text-gray-300">{title}</p>
       </div>
       <p className="mt-2 text-sm text-gray-300">{text}</p>
-      <Link
-        href={link}
-        className="mt-3 inline-flex items-center gap-2 text-sky-300 text-sm hover:text-white transition-colors"
-      >
+      <Link href={link} className="mt-3 inline-flex items-center gap-2 text-sky-300 text-sm hover:text-white transition-colors">
         <Link2 className="h-4 w-4" />
         {learnMore}
       </Link>
@@ -429,12 +431,9 @@ function PricingCard({
 }) {
   return (
     <div
-      className={`relative p-6 rounded-xl border ${
-        highlight ? "border-sky-400/60" : "border-white/10"
-      } bg-white/5 ${fx}`}
+      className={`relative p-6 rounded-xl border ${highlight ? "border-sky-400/60" : "border-white/10"} bg-white/5 ${fx}`}
       aria-label={`Plan ${title}`}
     >
-      {/* BADGE */}
       {badge && (
         <span className="absolute -top-3 right-4 rounded-full bg-sky-500 px-3 py-1 text-xs font-semibold text-white shadow-lg">
           {badge}
@@ -443,9 +442,7 @@ function PricingCard({
 
       <div className="space-y-2">
         <h3 className="text-xl font-bold text-gray-300">{title}</h3>
-        {price && (
-          <div className="text-2xl font-extrabold text-gray-300">{price}</div>
-        )}
+        {price && <div className="text-2xl font-extrabold text-gray-300">{price}</div>}
       </div>
 
       <ul className="mt-4 space-y-2 text-sm text-gray-300">
@@ -457,16 +454,10 @@ function PricingCard({
         ))}
       </ul>
 
-      {/* CTA */}
       {cta && (
         <div className="mt-6">
-          <Button
-            asChild
-            className="w-full bg-sky-500 text-white hover:bg-sky-400"
-          >
-            <Link href="/contact">
-              Rezervă vizita
-            </Link>
+          <Button asChild className="w-full bg-sky-500 text-white hover:bg-sky-400">
+            <Link href="/contact">Rezervă vizita</Link>
           </Button>
         </div>
       )}
