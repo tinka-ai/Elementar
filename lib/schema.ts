@@ -61,16 +61,15 @@ function getGeoCoordinates() {
 }
 
 function getAreaServed() {
-  // prefer: City Chișinău (stabil și clar pentru AI)
-  return {
-    "@type": "City",
-    name: "Chișinău",
-  }
+  // mai complet: Chișinău + Republica Moldova
+  return [
+    { "@type": "City", name: "Chișinău" },
+    { "@type": "Country", name: "Republica Moldova" },
+  ]
 }
 
 export function getElementarJsonLd() {
   const base = ELEMENTAR.url
-
   const orgId = `${base}/#organization`
   const businessId = `${base}/#localbusiness`
 
@@ -88,7 +87,12 @@ export function getElementarJsonLd() {
 
   const services: string[] = Array.isArray((ELEMENTAR as any).serviceType) ? (ELEMENTAR as any).serviceType : []
 
-  // Transformăm „serviceType” în obiecte Service (AICI este corect, fără warnings)
+  const audience =
+    Array.isArray((ELEMENTAR as any).audience) && (ELEMENTAR as any).audience.length
+      ? (ELEMENTAR as any).audience.map((a: string) => ({ "@type": "Audience", name: a }))
+      : undefined
+
+  // Service graph (corect și fără warnings)
   const serviceGraph = services.map((s, idx) => ({
     "@type": "Service",
     "@id": `${base}/#service-${idx + 1}`,
@@ -96,17 +100,13 @@ export function getElementarJsonLd() {
     serviceType: s,
     provider: { "@id": orgId },
     areaServed: getAreaServed(),
-    // opțional, dar valid pentru Service:
-    audience:
-      Array.isArray((ELEMENTAR as any).audience) && (ELEMENTAR as any).audience.length
-        ? (ELEMENTAR as any).audience.map((a: string) => ({ "@type": "Audience", name: a }))
-        : undefined,
+    audience,
   }))
 
   const jsonLd: AnyRecord = {
     "@context": "https://schema.org",
     "@graph": [
-      // 1) Organization (brand + identitate)
+      // 1) Organization
       {
         "@type": "Organization",
         "@id": orgId,
@@ -125,13 +125,13 @@ export function getElementarJsonLd() {
         foundingDate: (ELEMENTAR as any).foundingDate || undefined,
       },
 
-      // 2) LocalBusiness (date operaționale + locație)
+      // 2) LocalBusiness
       {
         "@type": "LocalBusiness",
         "@id": businessId,
         name: ELEMENTAR.name,
         url: base,
-        description: ELEMENTAR.descriptionShort,
+        description: ELEMENTAR.descriptionLong || ELEMENTAR.descriptionShort,
         parentOrganization: { "@id": orgId },
 
         telephone: ELEMENTAR.phone || undefined,
@@ -155,7 +155,7 @@ export function getElementarJsonLd() {
         aggregateRating,
       },
 
-      // 3) Place (opțional, dar util) — legăm explicit locația comercială
+      // 3) Place
       ELEMENTAR.locationName
         ? {
             "@type": "Place",
@@ -167,7 +167,7 @@ export function getElementarJsonLd() {
           }
         : undefined,
 
-      // 4) Servicii (corect în schema.org)
+      // 4) Services
       ...serviceGraph,
     ],
   }
