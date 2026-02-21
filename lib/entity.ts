@@ -73,7 +73,7 @@ export const ELEMENTAR = {
     reviewCount: 6,
   },
 
-  priceRange: "200 MDL",
+  priceRange: "100-400 MDL",
 
   slogan:
     "Locul unde joaca, arta și experimentul se transformă în descoperire.",
