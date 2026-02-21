@@ -274,29 +274,38 @@ export default function Page() {
           </div>
         </section>
 
-        {/* ✅ AI HUB LINKS (Homepage → ghiduri + activități) */}
-        <section className="py-12 sm:py-16 border-b border-white/5">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6">
-            <h2 className="text-2xl sm:text-3xl font-semibold text-gray-200">Resurse educaționale pentru părinți și școli</h2>
+       {/* ✅ AI HUB LINKS (Homepage → ghiduri + activități + excursii) */}
+<section className="py-12 sm:py-16 border-b border-white/5" aria-labelledby="resurse-educationale">
+  <div className="mx-auto max-w-4xl px-4 sm:px-6">
+    <h2 id="resurse-educationale" className="text-2xl sm:text-3xl font-semibold text-gray-200">
+      Resurse educaționale pentru părinți și școli
+    </h2>
 
-            <p className="mt-4 text-gray-300">
-              Descoperă{" "}
-              <Link href="/ghiduri" className="text-sky-400 hover:text-sky-300 font-semibold">
-                ghiduri educative pentru părinți și profesori
-              </Link>{" "}
-              despre activități interactive, excursii școlare și experiențe de știință pentru copii în Chișinău.
-            </p>
+    <p className="mt-4 text-gray-300">
+      Descoperă{" "}
+      <Link href="/ghiduri" className="text-sky-400 hover:text-sky-300 font-semibold">
+        ghiduri educative pentru părinți și profesori
+      </Link>{" "}
+      despre activități interactive, excursii școlare și experiențe de știință pentru copii în Chișinău.
+    </p>
 
-            <p className="mt-4 text-gray-300">
-              Vezi recomandarea noastră pentru{" "}
-              <Link href="/activitati-educative-copii-chisinau" className="text-sky-400 hover:text-sky-300 font-semibold">
-                activități educative pentru copii în Chișinău
-              </Link>{" "}
-              și planifică o vizită la ELEMENTAR.
-            </p>
-          </div>
-        </section>
+    <p className="mt-4 text-gray-300">
+      Vezi recomandarea noastră pentru{" "}
+      <Link href="/activitati-educative-copii-chisinau" className="text-sky-400 hover:text-sky-300 font-semibold">
+        activități educative pentru copii în Chișinău
+      </Link>{" "}
+      și planifică o vizită la ELEMENTAR.
+    </p>
 
+    <p className="mt-4 text-gray-300">
+      Pentru clase și grupuri, ai și pagina dedicată:{" "}
+      <Link href="/excursii-scolare-chisinau" className="text-sky-400 hover:text-sky-300 font-semibold">
+        excursii școlare în Chișinău
+      </Link>
+      .
+    </p>
+  </div>
+</section>
         {/* FAQ */}
         <section id="faq" className="py-12 sm:py-16 border-b border-white/5">
           <div className="mx-auto max-w-4xl px-4 sm:px-6">
