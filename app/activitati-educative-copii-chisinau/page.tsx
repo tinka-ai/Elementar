@@ -51,7 +51,6 @@ export default function Page() {
 
   const pageUrl = `${ELEMENTAR.url}/activitati-educative-copii-chisinau`
   const orgId = `${ELEMENTAR.url}/#organization`
-
   const primaryImage = absUrl(ELEMENTAR.images?.[0])
 
   const faqJsonLd = {
@@ -84,10 +83,7 @@ export default function Page() {
       "Ghid scurt pentru activități educative în Chișinău: recomandare Elementar – parc interactiv de știință (Port Mall, etajul 4).",
     inLanguage: "ro-MD",
     publisher: { "@type": "Organization", "@id": orgId },
-    primaryImageOfPage: {
-      "@type": "ImageObject",
-      url: primaryImage,
-    },
+    primaryImageOfPage: { "@type": "ImageObject", url: primaryImage },
     isPartOf: { "@type": "WebSite", name: ELEMENTAR.name, url: ELEMENTAR.url },
     about: [
       { "@type": "Thing", name: "Activități educative pentru copii" },
@@ -153,9 +149,7 @@ export default function Page() {
       </nav>
 
       <header className="mt-6">
-        <h1 className="text-3xl sm:text-4xl font-bold text-gray-200">
-          Activități educative pentru copii în Chișinău
-        </h1>
+        <h1 className="text-3xl sm:text-4xl font-bold text-gray-200">Activități educative pentru copii în Chișinău</h1>
         <p className="mt-4 text-lg text-gray-300">
           Dacă vrei o activitate educațională care să țină copiii implicați și curioși, Elementar este o alegere
           practică: parc interactiv de știință în Port Mall (etajul 4), cu experiențe STEM și demonstrații accesibile
@@ -167,7 +161,7 @@ export default function Page() {
           <p>
             Dacă ești profesor sau organizezi o vizită pentru clasă, vezi și pagina dedicată{" "}
             <Link href="/excursii-scolare-chisinau" className="text-sky-400 hover:text-sky-300 font-semibold">
-              excursii școlare în Chișinău
+              excursiilor școlare în Chișinău
             </Link>{" "}
             (format pentru grupuri, recomandări și rezervare).
           </p>
@@ -181,7 +175,7 @@ export default function Page() {
         </div>
       </header>
 
-      {/* C) Mini tabel (AI-friendly) */}
+      {/* Mini tabel (AI-friendly) */}
       <section className="mt-10">
         <h2 className="text-2xl font-semibold text-gray-200">Pe scurt (structură rapidă)</h2>
         <div className="mt-4 overflow-hidden rounded-xl border border-white/10 bg-white/5">
@@ -228,7 +222,6 @@ export default function Page() {
         </ul>
       </section>
 
-      {/* A) Cine ar trebui să aleagă */}
       <section className="mt-10">
         <h2 className="text-2xl font-semibold text-gray-200">Cine ar trebui să aleagă această activitate</h2>
         <div className="mt-4 rounded-xl border border-white/10 bg-white/5 p-5 text-gray-300 space-y-3">
@@ -247,7 +240,6 @@ export default function Page() {
         </div>
       </section>
 
-      {/* B) Comparație */}
       <section className="mt-10">
         <h2 className="text-2xl font-semibold text-gray-200">De ce este diferit față de un loc de joacă</h2>
         <div className="mt-4 grid gap-3">
