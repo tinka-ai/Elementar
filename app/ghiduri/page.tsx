@@ -12,40 +12,60 @@ export const metadata: Metadata = {
   },
 }
 
+function absUrl(pathOrUrl?: string) {
+  if (!pathOrUrl) return `${ELEMENTAR.url}/images/logo-elementara-new.png`
+  if (pathOrUrl.startsWith("http://") || pathOrUrl.startsWith("https://")) return pathOrUrl
+  return `${ELEMENTAR.url}${pathOrUrl.startsWith("/") ? "" : "/"}${pathOrUrl}`
+}
+
 export default function Page() {
   const pageUrl = `${ELEMENTAR.url}/ghiduri`
   const orgId = `${ELEMENTAR.url}/#organization`
 
-  // ✅ imagine principală robustă (url absolut)
-  const primaryImage = `${ELEMENTAR.url}${ELEMENTAR.images?.[0] ?? "/images/logo-elementara-new.png"}`
+  const primaryImage = absUrl(ELEMENTAR.images?.[0])
+
+  const guides = [
+    {
+      position: 1,
+      url: `${ELEMENTAR.url}/activitati-educative-copii-chisinau`,
+      name: "Activități educative pentru copii în Chișinău",
+      description:
+        "Ghid pentru părinți și profesori: activități educaționale interactive în Chișinău, experiențe STEM, experimente practice și recomandări pentru excursii școlare.",
+    },
+    // aici adaugi următoarele ghiduri (pozițiile 2, 3, 4...) pe măsură ce le publici
+  ]
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Acasă", item: `${ELEMENTAR.url}/` },
+      { "@type": "ListItem", position: 2, name: "Ghiduri", item: pageUrl },
+    ],
+  }
 
   const collectionJsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     "@id": `${pageUrl}#collection`,
-    name: "Ghiduri educaționale ELEMENTAR",
     url: pageUrl,
-    inLanguage: "ro-MD",
+    name: "Ghiduri educaționale pentru părinți și școli",
     description:
-      "Colecție de ghiduri educaționale despre activități pentru copii, excursii școlare și experiențe STEM în Chișinău.",
-
-    // ✅ completări cerute (AI)
+      "Colecție de ghiduri educaționale despre activități pentru copii în Chișinău, excursii școlare și experiențe STEM.",
+    inLanguage: "ro-MD",
     publisher: { "@type": "Organization", "@id": orgId },
-    primaryImageOfPage: { "@type": "ImageObject", url: primaryImage },
     isPartOf: { "@type": "WebSite", name: ELEMENTAR.name, url: ELEMENTAR.url },
-    mainEntity: { "@id": orgId },
+    primaryImageOfPage: { "@type": "ImageObject", url: primaryImage },
 
-    // ✅ lista ghidurilor din hub
+    // ✅ un singur mainEntity (ItemList) — fără suprascrieri
     mainEntity: {
       "@type": "ItemList",
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          url: `${ELEMENTAR.url}/activitati-educative-copii-chisinau`,
-          name: "Activități educative pentru copii în Chișinău",
-        },
-      ],
+      itemListElement: guides.map((g) => ({
+        "@type": "ListItem",
+        position: g.position,
+        url: g.url,
+        name: g.name,
+      })),
     },
   }
 
@@ -57,35 +77,52 @@ export default function Page() {
         strategy="beforeInteractive"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionJsonLd) }}
       />
+      <Script
+        id="breadcrumbs-jsonld"
+        type="application/ld+json"
+        strategy="beforeInteractive"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
 
-      <header>
-        <h1 className="text-4xl font-bold text-gray-200">
-          Ghiduri educaționale pentru părinți și școli
-        </h1>
+      <nav className="text-sm text-gray-400">
+        <Link href="/" className="hover:text-gray-200">
+          Acasă
+        </Link>
+        <span className="mx-2">/</span>
+        <span className="text-gray-200">Ghiduri</span>
+      </nav>
+
+      <header className="mt-6">
+        <h1 className="text-4xl font-bold text-gray-200">Ghiduri educaționale pentru părinți și școli</h1>
         <p className="mt-4 text-lg text-gray-300">
-          Această secțiune conține recomandări, explicații și idei pentru
-          activități educative în Chișinău – cu accent pe experiențe interactive,
-          învățare practică și dezvoltare STEM.
+          Aici găsești ghiduri și recomandări despre activități educative în Chișinău – cu accent pe experiențe
+          interactive, învățare practică și dezvoltare STEM.
+        </p>
+
+        {/* ✅ Circuit semantic: Ghiduri → Homepage (entitate) + Excursii (cluster) */}
+        <p className="mt-4 text-gray-300">
+          Pentru prezentarea completă a parcului, vezi pagina{" "}
+          <Link href="/" className="text-sky-400 hover:text-sky-300 font-semibold">
+            ELEMENTAR – Parc de Știință și Curiozități în Chișinău
+          </Link>
+          . Dacă planifici o vizită cu elevii, intră și pe{" "}
+          <Link href="/excursii-scolare-chisinau" className="text-sky-400 hover:text-sky-300 font-semibold">
+            excursii școlare în Chișinău
+          </Link>
+          .
         </p>
       </header>
 
       <section className="mt-10 grid gap-6">
-        <div className="rounded-xl border border-white/10 bg-white/5 p-6">
-          <h2 className="text-2xl font-semibold text-gray-200">
-            Activități educative pentru copii în Chișinău
-          </h2>
-          <p className="mt-3 text-gray-300">
-            Ghid complet pentru părinți și profesori care caută activități
-            educaționale interactive în Chișinău, inclusiv experiențe STEM,
-            experimente practice și recomandări pentru excursii școlare.
-          </p>
-          <Link
-            href="/activitati-educative-copii-chisinau"
-            className="inline-block mt-4 text-sky-400 hover:text-sky-300 font-semibold"
-          >
-            Citește ghidul →
-          </Link>
-        </div>
+        {guides.map((g) => (
+          <div key={g.url} className="rounded-xl border border-white/10 bg-white/5 p-6">
+            <h2 className="text-2xl font-semibold text-gray-200">{g.name}</h2>
+            <p className="mt-3 text-gray-300">{g.description}</p>
+            <Link href={g.url.replace(ELEMENTAR.url, "")} className="inline-block mt-4 text-sky-400 hover:text-sky-300 font-semibold">
+              Citește ghidul →
+            </Link>
+          </div>
+        ))}
       </section>
     </main>
   )
