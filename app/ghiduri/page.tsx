@@ -21,25 +21,7 @@ function absUrl(pathOrUrl?: string) {
 export default function Page() {
   const pageUrl = `${ELEMENTAR.url}/ghiduri`
   const orgId = `${ELEMENTAR.url}/#organization`
-
   const primaryImage = absUrl(ELEMENTAR.images?.[0])
-
-  const guides = [
-    {
-      position: 1,
-      url: `${ELEMENTAR.url}/activitati-educative-copii-chisinau`,
-      name: "Activități educative pentru copii în Chișinău",
-      description:
-        "Ghid complet pentru părinți și profesori: activități educaționale interactive, experiențe de știință și recomandări practice.",
-    },
-    {
-      position: 2,
-      url: `${ELEMENTAR.url}/excursii-scolare-chisinau`,
-      name: "Excursii școlare în Chișinău",
-      description:
-        "Pagina dedicată pentru clase și grupuri organizate: excursii interactive cu experimente și demonstrații ghidate.",
-    },
-  ]
 
   const collectionJsonLd = {
     "@context": "https://schema.org",
@@ -54,25 +36,32 @@ export default function Page() {
     primaryImageOfPage: { "@type": "ImageObject", url: primaryImage },
     isPartOf: { "@type": "WebSite", name: ELEMENTAR.name, url: ELEMENTAR.url },
 
-    // ✅ ItemList complet (2 ghiduri)
+    // ✅ ItemList complet (2 pagini)
     mainEntity: {
       "@type": "ItemList",
-      itemListOrder: "https://schema.org/ItemListOrderAscending",
-      numberOfItems: guides.length,
-      itemListElement: guides.map((g) => ({
-        "@type": "ListItem",
-        position: g.position,
-        url: g.url,
-        name: g.name,
-      })),
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          url: `${ELEMENTAR.url}/activitati-educative-copii-chisinau`,
+          name: "Activități educative pentru copii în Chișinău",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          url: `${ELEMENTAR.url}/excursii-scolare-chisinau`,
+          name: "Excursii școlare în Chișinău",
+        },
+      ],
     },
+  }
 
-    // ✅ context semantic pentru AI (fără “STEM” ca acronim în schema; îl poți păstra în text)
-    about: [
-      { "@type": "Thing", name: "Activități educative pentru copii" },
-      { "@type": "Thing", name: "Excursii școlare" },
-      { "@type": "Thing", name: "Experiențe interactive de știință" },
-      { "@type": "Thing", name: "Chișinău" },
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Acasă", item: `${ELEMENTAR.url}/` },
+      { "@type": "ListItem", position: 2, name: "Ghiduri", item: pageUrl },
     ],
   }
 
@@ -84,32 +73,49 @@ export default function Page() {
         strategy="beforeInteractive"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionJsonLd) }}
       />
+      <Script
+        id="breadcrumbs-jsonld"
+        type="application/ld+json"
+        strategy="beforeInteractive"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
 
-      <header>
+      {/* Breadcrumb vizibil */}
+      <nav className="text-sm text-gray-400">
+        <Link href="/" className="hover:text-gray-200">
+          Acasă
+        </Link>
+        <span className="mx-2">/</span>
+        <span className="text-gray-200">Ghiduri</span>
+      </nav>
+
+      <header className="mt-6">
         <h1 className="text-4xl font-bold text-gray-200">Ghiduri educaționale pentru părinți și școli</h1>
-
         <p className="mt-4 text-lg text-gray-300">
-          Această secțiune conține recomandări, explicații și idei pentru activități educative în Chișinău – cu accent pe
-          experiențe interactive, învățare practică și dezvoltarea curiozității.
+          Aici găsești recomandări și explicații clare despre activități educative pentru copii în Chișinău, excursii
+          școlare și experiențe interactive care dezvoltă curiozitatea și gândirea practică.
         </p>
 
-        {/* ✅ Circuit semantic: Ghiduri → Homepage (entitate) */}
-        <div className="mt-5 rounded-xl border border-white/10 bg-white/5 p-5 text-gray-300">
+        {/* ✅ Pasul 3: Ghiduri → Homepage (anchor strategic + entitate) */}
+        <div className="mt-6 rounded-xl border border-white/10 bg-white/5 p-5 text-gray-300">
           <p>
-            Dacă vrei o prezentare rapidă despre{" "}
+            Pentru context complet despre locație, program și tarife, vezi pagina principală a{" "}
             <Link href="/" className="text-sky-400 hover:text-sky-300 font-semibold">
-              ELEMENTAR – Parcul de Știință și Curiozități din Chișinău
+              Parcului de Știință și Curiozități în Chișinău
             </Link>
-            , începe de pe pagina principală.
+            .
           </p>
         </div>
       </header>
 
       <section className="mt-10 grid gap-6">
-        {/* Card 1 */}
+        {/* 1) Activități */}
         <div className="rounded-xl border border-white/10 bg-white/5 p-6">
-          <h2 className="text-2xl font-semibold text-gray-200">{guides[0].name}</h2>
-          <p className="mt-3 text-gray-300">{guides[0].description}</p>
+          <h2 className="text-2xl font-semibold text-gray-200">Activități educative pentru copii în Chișinău</h2>
+          <p className="mt-3 text-gray-300">
+            Ghid pentru părinți și profesori: experiențe interactive, experimente practice și idei pentru o vizită
+            educațională reușită.
+          </p>
           <Link
             href="/activitati-educative-copii-chisinau"
             className="inline-block mt-4 text-sky-400 hover:text-sky-300 font-semibold"
@@ -118,10 +124,13 @@ export default function Page() {
           </Link>
         </div>
 
-        {/* Card 2 */}
+        {/* 2) Excursii */}
         <div className="rounded-xl border border-white/10 bg-white/5 p-6">
-          <h2 className="text-2xl font-semibold text-gray-200">{guides[1].name}</h2>
-          <p className="mt-3 text-gray-300">{guides[1].description}</p>
+          <h2 className="text-2xl font-semibold text-gray-200">Excursii școlare în Chișinău</h2>
+          <p className="mt-3 text-gray-300">
+            Pagina dedicată claselor și grupurilor organizate: structură de vizită, durată recomandată și format
+            educațional prin experiment.
+          </p>
           <Link
             href="/excursii-scolare-chisinau"
             className="inline-block mt-4 text-sky-400 hover:text-sky-300 font-semibold"
