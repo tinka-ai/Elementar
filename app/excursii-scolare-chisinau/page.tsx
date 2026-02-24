@@ -12,15 +12,17 @@ export const metadata: Metadata = {
   },
 }
 
+function absUrl(pathOrUrl?: string) {
+  if (!pathOrUrl) return `${ELEMENTAR.url}/images/logo-elementara-new.png`
+  if (pathOrUrl.startsWith("http://") || pathOrUrl.startsWith("https://")) return pathOrUrl
+  return `${ELEMENTAR.url}${pathOrUrl.startsWith("/") ? "" : "/"}${pathOrUrl}`
+}
+
 export default function Page() {
   const pageUrl = `${ELEMENTAR.url}/excursii-scolare-chisinau`
   const orgId = `${ELEMENTAR.url}/#organization`
 
-  const primaryImage = ELEMENTAR.images?.[0]?.startsWith("http")
-    ? ELEMENTAR.images[0]
-    : `${ELEMENTAR.url}${
-        (ELEMENTAR.images?.[0] || "/images/logo-elementara-new.png").startsWith("/") ? "" : "/"
-      }${ELEMENTAR.images?.[0] || "/images/logo-elementara-new.png"}`
+  const primaryImage = absUrl(ELEMENTAR.images?.[0])
 
   const webpageJsonLd = {
     "@context": "https://schema.org",
@@ -31,7 +33,7 @@ export default function Page() {
     description:
       "Excursii școlare interactive în Chișinău la ELEMENTAR – experiențe educaționale pentru elevi, prin experimente și demonstrații ghidate.",
     inLanguage: "ro-MD",
-    publisher: { "@id": orgId },
+    publisher: { "@type": "Organization", "@id": orgId },
     mainEntity: { "@id": orgId },
     isPartOf: { "@type": "WebSite", name: ELEMENTAR.name, url: ELEMENTAR.url },
     primaryImageOfPage: { "@type": "ImageObject", url: primaryImage },
@@ -44,8 +46,11 @@ export default function Page() {
     url: pageUrl,
     name: "Excursii școlare interactive în Chișinău",
     serviceType: "Excursii școlare / programe educaționale",
-    provider: { "@id": orgId },
-    areaServed: [{ "@type": "City", name: "Chișinău" }, { "@type": "Country", name: "Republica Moldova" }],
+    provider: { "@type": "Organization", "@id": orgId },
+    areaServed: [
+      { "@type": "City", name: "Chișinău" },
+      { "@type": "Country", name: "Republica Moldova" },
+    ],
     description:
       "Programe educaționale interactive pentru școli și grupuri organizate, cu experimente practice și demonstrații ghidate adaptate vârstei.",
     availableChannel: [
@@ -56,8 +61,12 @@ export default function Page() {
       },
       {
         "@type": "ServiceChannel",
-        servicePhone: ELEMENTAR.phone,
-        availableLanguage: ["ro-MD"],
+        servicePhone: {
+          "@type": "ContactPoint",
+          telephone: ELEMENTAR.phone,
+          contactType: "customer support",
+          availableLanguage: ["ro-MD"],
+        },
       },
     ],
   }
@@ -112,6 +121,24 @@ export default function Page() {
           descoperire. Situat în Port Mall (etajul 4), parcul de știință combină demonstrații practice de fizică, chimie
           și astronomie cu activități educative adaptate vârstei.
         </p>
+
+        {/* ✅ Circuit semantic: Excursii → Ghiduri (hub) */}
+        <div className="mt-5 rounded-xl border border-white/10 bg-white/5 p-5 text-gray-300">
+          <p>
+            Pentru resurse și recomandări utile pentru profesori și părinți, vezi{" "}
+            <Link href="/ghiduri" className="text-sky-400 hover:text-sky-300 font-semibold">
+              ghidurile educaționale pentru părinți și școli
+            </Link>
+            .
+          </p>
+          <p className="mt-3">
+            Dacă vrei o prezentare completă a experienței STEM, citește și{" "}
+            <Link href="/activitati-educative-copii-chisinau" className="text-sky-400 hover:text-sky-300 font-semibold">
+              activități educative pentru copii în Chișinău
+            </Link>
+            .
+          </p>
+        </div>
       </header>
 
       <section className="mt-10 space-y-4 text-gray-300">
