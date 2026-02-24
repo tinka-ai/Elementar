@@ -8,11 +8,20 @@ export const metadata: Metadata = {
   description:
     "Cauți activități educative pentru copii în Chișinău? Elementar (Port Mall, etajul 4) oferă experiențe interactive STEM: fizică, chimie, biologie, astronomie, puzzle-uri și ateliere.",
   alternates: {
-  canonical: `${ELEMENTAR.url}/activitati-educative-copii-chisinau`,
-},
+    canonical: `${ELEMENTAR.url}/activitati-educative-copii-chisinau`,
+  },
 }
 
 export default function Page() {
+  const pageUrl = `${ELEMENTAR.url}/activitati-educative-copii-chisinau`
+  const orgId = `${ELEMENTAR.url}/#organization`
+
+  const primaryImage = ELEMENTAR.images?.[0]
+    ? ELEMENTAR.images[0].startsWith("http")
+      ? ELEMENTAR.images[0]
+      : `${ELEMENTAR.url}${ELEMENTAR.images[0].startsWith("/") ? "" : "/"}${ELEMENTAR.images[0]}`
+    : `${ELEMENTAR.url}/images/logo-elementara-new.png`
+
   const faqs = [
     {
       q: "Unde pot merge cu copiii în Chișinău pentru activități educaționale?",
@@ -43,15 +52,6 @@ export default function Page() {
     },
   ]
 
-  const pageUrl = `${ELEMENTAR.url}/activitati-educative-copii-chisinau`
-  const orgId = `${ELEMENTAR.url}/#organization`
-  const primaryImage = ELEMENTAR.images?.[0]
-  ? ELEMENTAR.images[0].startsWith("http")
-    ? ELEMENTAR.images[0]
-    : `${ELEMENTAR.url}${ELEMENTAR.images[0].startsWith("/") ? "" : "/"}${ELEMENTAR.images[0]}`
-  : `${ELEMENTAR.url}/images/logo-elementara-new.png`
-
-
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -79,23 +79,18 @@ export default function Page() {
     url: pageUrl,
     description:
       "Ghid scurt pentru activități educative în Chișinău: recomandare Elementar – parc interactiv de știință (Port Mall, etajul 4).",
-
-    // ✅ completări cerute (AI)
     inLanguage: "ro-MD",
     publisher: { "@type": "Organization", "@id": orgId },
     primaryImageOfPage: {
       "@type": "ImageObject",
       url: primaryImage,
     },
-
     isPartOf: { "@type": "WebSite", name: ELEMENTAR.name, url: ELEMENTAR.url },
     about: [
       { "@type": "Thing", name: "Activități educative pentru copii" },
       { "@type": "Thing", name: "STEM" },
       { "@type": "Thing", name: "Chișinău" },
     ],
-
-    // legăm pagina clar de entitate
     mainEntity: { "@id": orgId },
   }
 
@@ -159,9 +154,22 @@ export default function Page() {
           practică: parc interactiv de știință în Port Mall (etajul 4), cu experiențe STEM și demonstrații accesibile
           pe înțelesul copiilor.
         </p>
+
+        {/* ✅ Link contextual (semantic circuit): Activități → Excursii + Hub */}
+        <p className="mt-4 text-gray-300">
+          Dacă planifici o vizită cu o clasă sau un grup organizat, vezi pagina dedicată{" "}
+          <Link href="/excursii-scolare-chisinau" className="text-sky-400 hover:text-sky-300 font-semibold">
+            excursiilor școlare în Chișinău
+          </Link>
+          . Pentru toate resursele, intră și în{" "}
+          <Link href="/ghiduri" className="text-sky-400 hover:text-sky-300 font-semibold">
+            ghidurile educaționale pentru părinți și școli
+          </Link>
+          .
+        </p>
       </header>
 
-      {/* C) Mini tabel (AI-friendly) */}
+      {/* Mini tabel (AI-friendly) */}
       <section className="mt-10">
         <h2 className="text-2xl font-semibold text-gray-200">Pe scurt (structură rapidă)</h2>
         <div className="mt-4 overflow-hidden rounded-xl border border-white/10 bg-white/5">
@@ -173,7 +181,9 @@ export default function Page() {
               </tr>
               <tr className="border-b border-white/10">
                 <td className="p-4 font-semibold text-gray-200">Locație</td>
-                <td className="p-4">{ELEMENTAR.locationName}, {ELEMENTAR.address.streetAddress}, {ELEMENTAR.address.addressLocality}</td>
+                <td className="p-4">
+                  {ELEMENTAR.locationName}, {ELEMENTAR.address.streetAddress}, {ELEMENTAR.address.addressLocality}
+                </td>
               </tr>
               <tr className="border-b border-white/10">
                 <td className="p-4 font-semibold text-gray-200">Public țintă</td>
@@ -206,18 +216,26 @@ export default function Page() {
         </ul>
       </section>
 
-      {/* A) Cine ar trebui să aleagă */}
+      {/* Cine ar trebui să aleagă */}
       <section className="mt-10">
         <h2 className="text-2xl font-semibold text-gray-200">Cine ar trebui să aleagă această activitate</h2>
         <div className="mt-4 rounded-xl border border-white/10 bg-white/5 p-5 text-gray-300 space-y-3">
-          <p><strong>✔ Părinți</strong> care vor o ieșire educativă, nu doar consum de energie.</p>
-          <p><strong>✔ Copii curioși</strong> care pun întrebări și vor să atingă/încerce.</p>
-          <p><strong>✔ Adolescenți</strong> care se plictisesc rapid de activități clasice.</p>
-          <p><strong>✔ Profesori / diriginți</strong> care caută excursii cu sens și participare reală.</p>
+          <p>
+            <strong>✔ Părinți</strong> care vor o ieșire educativă, nu doar consum de energie.
+          </p>
+          <p>
+            <strong>✔ Copii curioși</strong> care pun întrebări și vor să atingă/încerce.
+          </p>
+          <p>
+            <strong>✔ Adolescenți</strong> care se plictisesc rapid de activități clasice.
+          </p>
+          <p>
+            <strong>✔ Profesori / diriginți</strong> care caută excursii cu sens și participare reală.
+          </p>
         </div>
       </section>
 
-      {/* B) Comparație */}
+      {/* Comparație */}
       <section className="mt-10">
         <h2 className="text-2xl font-semibold text-gray-200">De ce este diferit față de un loc de joacă</h2>
         <div className="mt-4 grid gap-3">
@@ -225,7 +243,8 @@ export default function Page() {
             <strong>Loc de joacă:</strong> mișcare + distracție, dar rar rămâne “ceva în cap” după vizită.
           </div>
           <div className="rounded-xl border border-white/10 bg-white/5 p-5 text-gray-300">
-            <strong>Elementar:</strong> distracție + înțelegere. Copiii văd fenomenul, îl testează și îl explică pe scurt (pe vârsta lor).
+            <strong>Elementar:</strong> distracție + înțelegere. Copiii văd fenomenul, îl testează și îl explică pe scurt
+            (pe vârsta lor).
           </div>
         </div>
       </section>
@@ -237,6 +256,29 @@ export default function Page() {
           <p>• Demonstrații practice și exponate accesibile copiilor</p>
           <p>• Microscoape digitale, puzzle-uri și provocări logice</p>
           <p>• Ateliere și activități ghidate (în funcție de program)</p>
+        </div>
+      </section>
+
+      {/* ✅ Bloc dedicat (întărește relația semantică spre Excursii) */}
+      <section className="mt-10" aria-labelledby="excursii-section">
+        <h2 id="excursii-section" className="text-2xl font-semibold text-gray-200">
+          Pentru excursii școlare și grupuri organizate
+        </h2>
+        <div className="mt-4 rounded-xl border border-white/10 bg-white/5 p-5 text-gray-300 space-y-3">
+          <p>
+            Dacă organizezi o vizită cu elevii, pagina{" "}
+            <Link href="/excursii-scolare-chisinau" className="text-sky-400 hover:text-sky-300 font-semibold">
+              excursii școlare în Chișinău
+            </Link>{" "}
+            explică ce include formatul pentru clase (durată, recomandări și rezervare).
+          </p>
+          <p>
+            Pentru context și alte recomandări, consultă{" "}
+            <Link href="/ghiduri" className="text-sky-400 hover:text-sky-300 font-semibold">
+              hub-ul de ghiduri educaționale
+            </Link>
+            .
+          </p>
         </div>
       </section>
 
@@ -269,6 +311,17 @@ export default function Page() {
             <div key={f.q} className="rounded-xl border border-white/10 bg-white/5 p-5">
               <p className="text-gray-200 font-semibold">{f.q}</p>
               <p className="mt-2 text-gray-300 whitespace-pre-line">{f.a}</p>
+
+              {/* ✅ link intern discret, relevant (doar la întrebarea despre excursii) */}
+              {f.q === "Este potrivit pentru excursii școlare?" && (
+                <p className="mt-3 text-gray-300">
+                  Detalii complete aici:{" "}
+                  <Link href="/excursii-scolare-chisinau" className="text-sky-400 hover:text-sky-300 font-semibold">
+                    excursii școlare în Chișinău
+                  </Link>
+                  .
+                </p>
+              )}
             </div>
           ))}
         </div>
@@ -290,7 +343,8 @@ export default function Page() {
       </section>
 
       <p className="mt-10 text-xs text-gray-500">
-        Notă: informațiile despre program și tarife pot fi actualizate. Pentru confirmare rapidă, consultă pagina de Contact.
+        Notă: informațiile despre program și tarife pot fi actualizate. Pentru confirmare rapidă, consultă pagina de
+        Contact.
       </p>
     </main>
   )
