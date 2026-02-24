@@ -46,7 +46,10 @@ export default function Page() {
     name: "Excursii școlare interactive în Chișinău",
     serviceType: "Excursii școlare / programe educaționale",
     provider: { "@type": "Organization", "@id": orgId },
-    areaServed: [{ "@type": "City", name: "Chișinău" }, { "@type": "Country", name: "Republica Moldova" }],
+    areaServed: [
+      { "@type": "City", name: "Chișinău" },
+      { "@type": "Country", name: "Republica Moldova" },
+    ],
     description:
       "Programe educaționale interactive pentru școli și grupuri organizate, cu experimente practice și demonstrații ghidate adaptate vârstei.",
     availableChannel: [
@@ -61,8 +64,8 @@ export default function Page() {
           "@type": "ContactPoint",
           telephone: ELEMENTAR.phone,
           contactType: "customer support",
+          availableLanguage: ["ro-MD"],
         },
-        availableLanguage: ["ro-MD"],
       },
     ],
   }
@@ -118,16 +121,12 @@ export default function Page() {
           și astronomie cu activități educative adaptate vârstei.
         </p>
 
-        {/* ✅ Link contextual (Pasul 2): Excursii → Ghiduri + Activități */}
-        <div className="mt-6 rounded-xl border border-white/10 bg-white/5 p-5 text-gray-300">
+        {/* ✅ Circuit semantic: Excursii → Ghiduri (link contextual) */}
+        <div className="mt-5 rounded-xl border border-white/10 bg-white/5 p-5 text-gray-300">
           <p>
-            Pentru context și recomandări practice, vezi{" "}
+            Pentru resurse și recomandări (pentru părinți și școli), vezi hub-ul de{" "}
             <Link href="/ghiduri" className="text-sky-400 hover:text-sky-300 font-semibold">
-              ghidurile educaționale pentru părinți și școli
-            </Link>
-            , iar dacă vrei o opțiune pentru familie, pornește de la{" "}
-            <Link href="/activitati-educative-copii-chisinau" className="text-sky-400 hover:text-sky-300 font-semibold">
-              activități educative pentru copii în Chișinău
+              ghiduri educaționale pentru părinți și școli
             </Link>
             .
           </p>
