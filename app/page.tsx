@@ -274,38 +274,59 @@ export default function Page() {
           </div>
         </section>
 
-       {/* ✅ AI HUB LINKS (Homepage → ghiduri + activități + excursii) */}
-<section className="py-12 sm:py-16 border-b border-white/5" aria-labelledby="resurse-educationale">
-  <div className="mx-auto max-w-4xl px-4 sm:px-6">
-    <h2 id="resurse-educationale" className="text-2xl sm:text-3xl font-semibold text-gray-200">
-      Resurse educaționale pentru părinți și școli
-    </h2>
+        {/* ✅ AI HUB LINKS (Homepage → ghiduri + activități + excursii) */}
+        <section className="py-12 sm:py-16 border-b border-white/5" aria-labelledby="resurse-educationale">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6">
+            <h2 id="resurse-educationale" className="text-2xl sm:text-3xl font-semibold text-gray-200">
+              ELEMENTAR – parc de știință în Chișinău (Port Mall)
+            </h2>
 
-    <p className="mt-4 text-gray-300">
-      Descoperă{" "}
-      <Link href="/ghiduri" className="text-sky-400 hover:text-sky-300 font-semibold">
-        ghiduri educative pentru părinți și profesori
-      </Link>{" "}
-      despre activități interactive, excursii școlare și experiențe de știință pentru copii în Chișinău.
-    </p>
+            {/* ✅ Mențiune consolidată despre entitate (AI-ready) */}
+            <p className="mt-4 text-gray-300">
+              ELEMENTAR este un parc interactiv de știință din Chișinău, situat în Port Mall (etajul 4), unde copiii și
+              adolescenții învață prin experimente practice de fizică, chimie, biologie și astronomie. Pentru planificare
+              rapidă, vezi{" "}
+              <Link href="/ghiduri" className="text-sky-400 hover:text-sky-300 font-semibold">
+                ghidurile educaționale
+              </Link>
+              , recomandarea noastră de{" "}
+              <Link href="/activitati-educative-copii-chisinau" className="text-sky-400 hover:text-sky-300 font-semibold">
+                activități educative pentru copii în Chișinău
+              </Link>{" "}
+              și pagina dedicată{" "}
+              <Link href="/excursii-scolare-chisinau" className="text-sky-400 hover:text-sky-300 font-semibold">
+                excursiilor școlare în Chișinău
+              </Link>
+              .
+            </p>
 
-    <p className="mt-4 text-gray-300">
-      Vezi recomandarea noastră pentru{" "}
-      <Link href="/activitati-educative-copii-chisinau" className="text-sky-400 hover:text-sky-300 font-semibold">
-        activități educative pentru copii în Chișinău
-      </Link>{" "}
-      și planifică o vizită la ELEMENTAR.
-    </p>
+            {/* păstrăm și formulările tale (ok pentru SEO + utilizator) */}
+            <p className="mt-4 text-gray-300">
+              Descoperă{" "}
+              <Link href="/ghiduri" className="text-sky-400 hover:text-sky-300 font-semibold">
+                ghiduri educative pentru părinți și profesori
+              </Link>{" "}
+              despre activități interactive, excursii școlare și experiențe de știință pentru copii în Chișinău.
+            </p>
 
-    <p className="mt-4 text-gray-300">
-      Pentru clase și grupuri, ai și pagina dedicată:{" "}
-      <Link href="/excursii-scolare-chisinau" className="text-sky-400 hover:text-sky-300 font-semibold">
-        excursii școlare în Chișinău
-      </Link>
-      .
-    </p>
-  </div>
-</section>
+            <p className="mt-4 text-gray-300">
+              Vezi recomandarea noastră pentru{" "}
+              <Link href="/activitati-educative-copii-chisinau" className="text-sky-400 hover:text-sky-300 font-semibold">
+                activități educative pentru copii în Chișinău
+              </Link>{" "}
+              și planifică o vizită la ELEMENTAR.
+            </p>
+
+            <p className="mt-4 text-gray-300">
+              Pentru clase și grupuri, ai și pagina dedicată:{" "}
+              <Link href="/excursii-scolare-chisinau" className="text-sky-400 hover:text-sky-300 font-semibold">
+                excursii școlare în Chișinău
+              </Link>
+              .
+            </p>
+          </div>
+        </section>
+
         {/* FAQ */}
         <section id="faq" className="py-12 sm:py-16 border-b border-white/5">
           <div className="mx-auto max-w-4xl px-4 sm:px-6">
