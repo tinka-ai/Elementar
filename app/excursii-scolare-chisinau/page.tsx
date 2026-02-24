@@ -21,7 +21,6 @@ function absUrl(pathOrUrl?: string) {
 export default function Page() {
   const pageUrl = `${ELEMENTAR.url}/excursii-scolare-chisinau`
   const orgId = `${ELEMENTAR.url}/#organization`
-
   const primaryImage = absUrl(ELEMENTAR.images?.[0])
 
   const webpageJsonLd = {
@@ -47,10 +46,7 @@ export default function Page() {
     name: "Excursii școlare interactive în Chișinău",
     serviceType: "Excursii școlare / programe educaționale",
     provider: { "@type": "Organization", "@id": orgId },
-    areaServed: [
-      { "@type": "City", name: "Chișinău" },
-      { "@type": "Country", name: "Republica Moldova" },
-    ],
+    areaServed: [{ "@type": "City", name: "Chișinău" }, { "@type": "Country", name: "Republica Moldova" }],
     description:
       "Programe educaționale interactive pentru școli și grupuri organizate, cu experimente practice și demonstrații ghidate adaptate vârstei.",
     availableChannel: [
@@ -65,8 +61,8 @@ export default function Page() {
           "@type": "ContactPoint",
           telephone: ELEMENTAR.phone,
           contactType: "customer support",
-          availableLanguage: ["ro-MD"],
         },
+        availableLanguage: ["ro-MD"],
       },
     ],
   }
@@ -122,17 +118,14 @@ export default function Page() {
           și astronomie cu activități educative adaptate vârstei.
         </p>
 
-        {/* ✅ Circuit semantic: Excursii → Ghiduri (hub) */}
-        <div className="mt-5 rounded-xl border border-white/10 bg-white/5 p-5 text-gray-300">
+        {/* ✅ Link contextual (Pasul 2): Excursii → Ghiduri + Activități */}
+        <div className="mt-6 rounded-xl border border-white/10 bg-white/5 p-5 text-gray-300">
           <p>
-            Pentru resurse și recomandări utile pentru profesori și părinți, vezi{" "}
+            Pentru context și recomandări practice, vezi{" "}
             <Link href="/ghiduri" className="text-sky-400 hover:text-sky-300 font-semibold">
               ghidurile educaționale pentru părinți și școli
             </Link>
-            .
-          </p>
-          <p className="mt-3">
-            Dacă vrei o prezentare completă a experienței STEM, citește și{" "}
+            , iar dacă vrei o opțiune pentru familie, pornește de la{" "}
             <Link href="/activitati-educative-copii-chisinau" className="text-sky-400 hover:text-sky-300 font-semibold">
               activități educative pentru copii în Chișinău
             </Link>
