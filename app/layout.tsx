@@ -12,9 +12,6 @@ import { getElementarJsonLd } from "@/lib/schema"
 
 const GA_ID = "G-VHXGNT73PX"
 
-export const dynamic = "force-dynamic"
-export const revalidate = 0
-
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
@@ -72,11 +69,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="msapplication-config" content="/browserconfig.xml" />
         <link rel="manifest" href="/site.webmanifest" />
 
-        {/* ✅ Entity Schema (GEO / AI-ready) — o singură dată, pe tot site-ul */}
+        {/* ✅ Entity Schema (AI-ready) — o singură dată, pe tot site-ul */}
         <Script
           id="elementar-jsonld"
           type="application/ld+json"
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(getElementarJsonLd()) }}
         />
 
