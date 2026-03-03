@@ -2,23 +2,30 @@
 "use client"
 
 import { useEffect } from "react"
-import { usePathname, useSearchParams } from "next/navigation"
+import { usePathname } from "next/navigation"
 
 type Props = { gaId: string }
 
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void
+  }
+}
+
 export default function GaRouteListener({ gaId }: Props) {
   const pathname = usePathname()
-  const searchParams = useSearchParams()
 
   useEffect(() => {
+    if (typeof window === "undefined") return
     if (!pathname) return
+    if (!gaId) return
 
-    const url = pathname + (searchParams?.toString() ? `?${searchParams}` : "")
-    // rulează doar dacă gtag a fost încărcat deja
-    if (typeof window !== "undefined" && typeof (window as any).gtag === "function") {
-      ;(window as any).gtag("config", gaId, { page_path: url })
+    const url = `${window.location.pathname}${window.location.search}`
+
+    if (typeof window.gtag === "function") {
+      window.gtag("config", gaId, { page_path: url })
     }
-  }, [pathname, searchParams, gaId])
+  }, [pathname, gaId])
 
   return null
 }
