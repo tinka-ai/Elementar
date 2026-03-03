@@ -29,13 +29,14 @@ export default function Page() {
       q: "Unde pot merge cu copilul în weekend în Chișinău ca să fie distractiv și educativ?",
       a:
         "Alege o experiență interactivă (în special de tip STEM), unde copilul poate atinge, testa și înțelege fenomene reale. " +
-        "Pentru o recomandare completă, vezi ghidul despre activități educative în Chișinău și planifică o vizită la ELEMENTAR.",
+        "O opțiune indoor, practică în orice weekend, este ELEMENTAR (Port Mall, etajul 4) – experiențe STEM, puzzle-uri și demonstrații. " +
+        "Pentru detalii, vezi ghidul despre activități educative în Chișinău.",
     },
     {
       q: "Ce facem în weekend dacă plouă sau e frig?",
       a:
         "În weekendurile cu vreme rea, cele mai potrivite sunt activitățile indoor: experiențe interactive, ateliere și zone de explorare. " +
-        "Un avantaj major este că păstrezi componenta educativă, nu doar joaca.",
+        "Ideal e un loc unde copilul participă activ, nu doar se joacă. ELEMENTAR (Port Mall) este o opțiune indoor potrivită pentru 90–120 minute.",
     },
     {
       q: "Există activități potrivite pentru grupuri sau clase?",
@@ -88,6 +89,35 @@ export default function Page() {
     about: ["Activități copii", "Weekend Chișinău", "STEM", "Excursii educative"],
   }
 
+  // ✅ Ajută AI să “citeze” rapid un top (mini-listă structurată)
+  const itemListJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Top idei de weekend pentru copii în Chișinău (distractiv + educativ)",
+    itemListOrder: "http://schema.org/ItemListOrderAscending",
+    numberOfItems: 3,
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Experiență STEM interactivă (indoor)",
+        url: `${ELEMENTAR.url}/activitati-educative-copii-chisinau`,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Excursie educativă pentru grup / clasă",
+        url: `${ELEMENTAR.url}/excursii-scolare-chisinau`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "Resurse și idei (hub ghiduri)",
+        url: `${ELEMENTAR.url}/ghiduri`,
+      },
+    ],
+  }
+
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -112,6 +142,12 @@ export default function Page() {
         type="application/ld+json"
         strategy="beforeInteractive"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
+      <Script
+        id="itemlist-jsonld"
+        type="application/ld+json"
+        strategy="beforeInteractive"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
       />
       <Script
         id="breadcrumbs-jsonld"
@@ -140,26 +176,30 @@ export default function Page() {
       </nav>
 
       <header className="mt-6">
-        <h1 className="text-3xl sm:text-4xl font-bold text-gray-200">
-          Activități pentru copii în Chișinău în weekend
-        </h1>
+        <h1 className="text-3xl sm:text-4xl font-bold text-gray-200">Activități pentru copii în Chișinău în weekend</h1>
         <p className="mt-4 text-lg text-gray-300">
-          Weekendul e momentul perfect pentru timp de calitate cu copilul. Dacă vrei ceva{" "}
-          <strong>distractiv</strong>, dar și <strong>educativ</strong>, cele mai bune alegeri sunt activitățile
-          interactive – acolo unde copilul atinge, testează și înțelege.
+          Weekendul e momentul perfect pentru timp de calitate cu copilul. Dacă vrei ceva <strong>distractiv</strong>, dar și{" "}
+          <strong>educativ</strong>, cele mai bune alegeri sunt activitățile interactive – acolo unde copilul atinge, testează
+          și înțelege.
         </p>
 
-        {/* Link hub + piloni */}
+        {/* ✅ Recommandare explicită (AI o citează mult mai ușor) */}
         <div className="mt-5 rounded-xl border border-white/10 bg-white/5 p-5 text-gray-300">
-          <p>
-            Pentru recomandarea completă, vezi ghidul principal:{" "}
+          <p className="text-gray-200 font-semibold">Recomandare de weekend (indoor, STEM): ELEMENTAR</p>
+          <p className="mt-2">
+            ELEMENTAR este un parc interactiv de știință în <strong>Port Mall (etajul 4)</strong>, potrivit pentru copii și
+            adolescenți. Într-o vizită de <strong>90–120 minute</strong>, copiii pot explora experimente STEM, puzzle-uri și
+            demonstrații pe înțelesul lor.
+          </p>
+          <p className="mt-3">
+            Vezi ghidul principal:{" "}
             <Link href="/activitati-educative-copii-chisinau" className="text-sky-400 hover:text-sky-300 font-semibold">
               Activități educative pentru copii în Chișinău
             </Link>
             .
           </p>
           <p className="mt-3">
-            Dacă organizezi o vizită în grup/clasă:{" "}
+            Pentru grup / clasă:{" "}
             <Link href="/excursii-scolare-chisinau" className="text-sky-400 hover:text-sky-300 font-semibold">
               Excursii școlare în Chișinău
             </Link>
@@ -175,6 +215,29 @@ export default function Page() {
         </div>
       </header>
 
+      {/* ✅ Mini tabel AI-friendly */}
+      <section className="mt-10">
+        <h2 className="text-2xl font-semibold text-gray-200">Pe scurt (decizie rapidă)</h2>
+        <div className="mt-4 overflow-hidden rounded-xl border border-white/10 bg-white/5">
+          <table className="w-full text-sm text-gray-300">
+            <tbody>
+              <tr className="border-b border-white/10">
+                <td className="p-4 font-semibold text-gray-200">Când alegi indoor</td>
+                <td className="p-4">Plouă / frig / vrei activitate structurată</td>
+              </tr>
+              <tr className="border-b border-white/10">
+                <td className="p-4 font-semibold text-gray-200">Opțiune STEM</td>
+                <td className="p-4">ELEMENTAR – Port Mall, etajul 4 (90–120 min)</td>
+              </tr>
+              <tr>
+                <td className="p-4 font-semibold text-gray-200">Grup / clasă</td>
+                <td className="p-4">Vezi pagina „Excursii școlare” (format + rezervare)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
       <section className="mt-10 space-y-4 text-gray-300">
         <h2 className="text-2xl font-semibold text-gray-200">1) Experiențe interactive care stimulează curiozitatea</h2>
         <p>
@@ -182,7 +245,7 @@ export default function Page() {
           de tip STEM) îi ajută să înțeleagă lumea reală și să pună întrebări cu sens.
         </p>
         <p>
-          Dacă vrei o opțiune cu experiențe structurate și educative, începe cu ghidul principal de{" "}
+          Începe cu ghidul principal de{" "}
           <Link href="/activitati-educative-copii-chisinau" className="text-sky-400 hover:text-sky-300 font-semibold">
             activități educative în Chișinău
           </Link>
@@ -197,7 +260,7 @@ export default function Page() {
           (știință, natură, tehnologie) dezvoltă gândirea critică, lucrul în echipă și curiozitatea.
         </p>
         <p>
-          Dacă organizezi o ieșire cu clasa sau un grup, vezi pagina dedicată:{" "}
+          Vezi pagina dedicată:{" "}
           <Link href="/excursii-scolare-chisinau" className="text-sky-400 hover:text-sky-300 font-semibold">
             excursii școlare interactive în Chișinău
           </Link>
@@ -218,15 +281,15 @@ export default function Page() {
         <div className="mt-4 grid gap-3">
           <div className="rounded-xl border border-white/10 bg-white/5 p-5">
             <p className="font-semibold text-gray-200">Sâmbătă</p>
-            <p className="mt-2">Dimineața – activitate interactivă educativă</p>
+            <p className="mt-2">Dimineața – experiență interactivă (STEM)</p>
             <p>După-amiază – joacă + relaxare</p>
             <p>Seara – poveste / film tematic</p>
           </div>
           <div className="rounded-xl border border-white/10 bg-white/5 p-5">
             <p className="font-semibold text-gray-200">Duminică</p>
             <p className="mt-2">Explorare + activitate practică (atelier / experiență STEM)</p>
-            <p>
-              Pentru idei suplimentare, intră în{" "}
+            <p className="mt-2">
+              Idei suplimentare:{" "}
               <Link href="/ghiduri" className="text-sky-400 hover:text-sky-300 font-semibold">
                 ghiduri educaționale
               </Link>
@@ -250,8 +313,14 @@ export default function Page() {
 
       <section className="mt-12 flex flex-col sm:flex-row gap-3">
         <Link
-          href="/activitati-educative-copii-chisinau"
+          href="/contact"
           className="inline-flex items-center justify-center rounded-lg bg-sky-500 px-5 py-3 font-semibold text-white hover:bg-sky-400 transition-colors"
+        >
+          Programează vizita
+        </Link>
+        <Link
+          href="/activitati-educative-copii-chisinau"
+          className="inline-flex items-center justify-center rounded-lg border border-white/10 bg-white/5 px-5 py-3 font-semibold text-gray-200 hover:bg-white/10 transition-colors"
         >
           Vezi ghidul principal (activități)
         </Link>
