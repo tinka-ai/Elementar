@@ -220,56 +220,92 @@ export default function Page() {
         </section>
 
         {/* PRICING */}
-        <section className="py-12 sm:py-16 border-b border-white/5">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6">
-            <SectionKicker>TARIFE</SectionKicker>
+       {/* PRICING */}
+<section className="py-12 sm:py-16 border-b border-white/5">
+  <div className="mx-auto max-w-7xl px-4 sm:px-6">
+    <SectionKicker>TARIFE</SectionKicker>
 
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-300">Tarife de acces – Parcul de Științe „Elementar”</h2>
+    <h2 className="text-3xl sm:text-4xl font-bold text-gray-300">
+      Tarife de acces – Parcul de Științe „Elementar”
+    </h2>
 
-            <div className="mt-10 grid gap-6 md:grid-cols-3">
-              <PricingCard
-                fx={fx}
-                title="Acces individual"
-                price=""
-                perks={[
-                  "Copii sub 5 ani – gratuit",
-                  "Copii 6–12 ani – 200 lei",
-                  "Adolescent 13–17 ani – 130 lei",
-                  "Adult însoțitor – 100 lei",
-                  "Adult (acces individual) – 130 lei",
-                  "Excursia cu ghid este inclusă pentru copii",
-                ]}
-                cta
-              />
+    <p className="mt-4 text-gray-300">
+      Excursii din oră în oră: zilnic, între{" "}
+      <span className="font-semibold text-gray-200">10:00</span> și{" "}
+      <span className="font-semibold text-gray-200">21:00</span> (ultima la 21:00).
+    </p>
 
-              <PricingCard
-                fx={fx}
-                title="Pachet Familie"
-                price="400 lei"
-                highlight
-                badge="Cel mai ales"
-                perks={["2 adulți + 1 copil", "1 adult + 2 copii", "Fiecare copil suplimentar: +100 lei", "Acces complet + ghidaj inclus"]}
-                cta
-              />
+    <div className="mt-10 grid gap-6 md:grid-cols-3">
+      <PricingCard
+        fx={fx}
+        title="Pachet Individual"
+        price=""
+        perks={[
+          "Copil (4–17 ani) – 200 lei",
+          "Adult (18+) – 150 lei",
+          "Excursia cu ghid este inclusă pentru copii",
+        ]}
+        cta
+      />
 
-              <PricingCard
-                fx={fx}
-                title="Teen Pass (13–17 ani)"
-                price="100 lei / persoană"
-                perks={["Grup minim 3 adolescenți", "Acces complet", "Activități adaptate vârstei"]}
-                cta
-              />
-            </div>
+      <PricingCard
+        fx={fx}
+        title="Pachet Familie"
+        price=""
+        highlight
+        badge="Cel mai ales"
+        perks={[
+          "1 adult + 1 copil – 300 lei",
+          "1 adult + 2 copii – 500 lei",
+          "2 adulți + 1 copil – 400 lei",
+          "Acces complet + ghidaj inclus",
+        ]}
+        cta
+      />
 
-            <div className="mt-8 rounded-xl border border-white/10 bg-white/5 p-5 text-sm text-gray-300">
-              <p className="flex items-start gap-2">
-                <BadgeCheck className="mt-0.5 h-4 w-4 text-sky-400" />
-                Copiii până la <strong>9 ani</strong> pot intra doar însoțiți de un adult.
-              </p>
-            </div>
+      <PricingCard
+        fx={fx}
+        title="Pachet Prieteni (12–17 ani)"
+        price="150 lei / persoană"
+        perks={[
+          "Grup minim 3 persoane",
+          "450 lei pentru 3 persoane",
+          "Achitat pe același bon",
+          "Acces complet",
+        ]}
+        cta
+      />
+    </div>
+
+    <div className="mt-8 grid gap-4 md:grid-cols-2">
+      <div className="rounded-xl border border-white/10 bg-white/5 p-5 text-sm text-gray-300">
+        <h3 className="text-lg font-semibold text-gray-200">Gratuități</h3>
+        <div className="mt-3 space-y-3">
+          <p className="flex items-start gap-2">
+            <BadgeCheck className="mt-0.5 h-4 w-4 text-sky-400" />
+            Copiii sub 4 ani beneficiază de acces gratuit.
+          </p>
+
+          <p className="flex items-start gap-2">
+            <BadgeCheck className="mt-0.5 h-4 w-4 text-sky-400" />
+            Seniorii cu vârsta peste 80 ani beneficiază de acces gratuit.
+          </p>
+        </div>
+      </div>
+
+      <div className="rounded-xl border border-white/10 bg-white/5 p-5 text-sm text-gray-300">
+        <h3 className="text-lg font-semibold text-gray-200">Reguli și siguranță</h3>
+        <p className="mt-3 flex items-start gap-2">
+          <BadgeCheck className="mt-0.5 h-4 w-4 text-sky-400" />
+          Copiii sub 9 ani trebuie să fie însoțiți și supravegheați permanent de un adult.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 
             <p className="mt-6 pt-3 text-center text-sm text-gray-400 border-t border-white/10">
-              Tarifele sunt valabile până la <span className="font-medium text-gray-300">31 martie 2026</span> (inclusiv).
+              Tarifele sunt valabile până la <span className="font-medium text-gray-300">30 septembrie 2026</span> (inclusiv).
             </p>
           </div>
         </section>
