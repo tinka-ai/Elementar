@@ -42,7 +42,6 @@ export default function Page() {
       {/* VIDEO LOGO RESPONSIV */}
       <section className="relative w-full bg-black py-4 mt-24 md:mt-0 border-b border-white/5">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 flex items-center justify-center">
-          {/* POSTER – LCP PE MOBILE */}
           {!playVideo && (
             <Image
               src="/logo-elementara-new-one.png"
@@ -55,7 +54,6 @@ export default function Page() {
             />
           )}
 
-          {/* VIDEO ANIMAT */}
           <video
             ref={videoRef}
             className={`w-full max-w-6xl h-auto object-contain rounded-2xl transition-opacity duration-500 ${
@@ -125,38 +123,10 @@ export default function Page() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <SectionTitle title={t("features.title")} />
             <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              <Feature
-                fx={fx}
-                icon={<Puzzle className="h-6 w-6" />}
-                title={t("features.items.puzzles.title")}
-                text={t("features.items.puzzles.description")}
-                link="/domenii"
-                learnMore={t("features.learnMore")}
-              />
-              <Feature
-                fx={fx}
-                icon={<Waves className="h-6 w-6" />}
-                title={t("features.items.sensory.title")}
-                text={t("features.items.sensory.description")}
-                link="/domenii"
-                learnMore={t("features.learnMore")}
-              />
-              <Feature
-                fx={fx}
-                icon={<Eye className="h-6 w-6" />}
-                title={t("features.items.illusions.title")}
-                text={t("features.items.illusions.description")}
-                link="/domenii"
-                learnMore={t("features.learnMore")}
-              />
-              <Feature
-                fx={fx}
-                icon={<FlaskConical className="h-6 w-6" />}
-                title={t("features.items.workshops.title")}
-                text={t("features.items.workshops.description")}
-                link="/domenii"
-                learnMore={t("features.learnMore")}
-              />
+              <Feature fx={fx} icon={<Puzzle className="h-6 w-6" />} title={t("features.items.puzzles.title")} text={t("features.items.puzzles.description")} link="/domenii" learnMore={t("features.learnMore")} />
+              <Feature fx={fx} icon={<Waves className="h-6 w-6" />} title={t("features.items.sensory.title")} text={t("features.items.sensory.description")} link="/domenii" learnMore={t("features.learnMore")} />
+              <Feature fx={fx} icon={<Eye className="h-6 w-6" />} title={t("features.items.illusions.title")} text={t("features.items.illusions.description")} link="/domenii" learnMore={t("features.learnMore")} />
+              <Feature fx={fx} icon={<FlaskConical className="h-6 w-6" />} title={t("features.items.workshops.title")} text={t("features.items.workshops.description")} link="/domenii" learnMore={t("features.learnMore")} />
             </ul>
           </div>
         </section>
@@ -220,104 +190,100 @@ export default function Page() {
         </section>
 
         {/* PRICING */}
-       {/* PRICING */}
-<section className="py-12 sm:py-16 border-b border-white/5">
-  <div className="mx-auto max-w-7xl px-4 sm:px-6">
-    <SectionKicker>TARIFE</SectionKicker>
+        <section className="py-12 sm:py-16 border-b border-white/5">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6">
+            <SectionKicker>TARIFE</SectionKicker>
 
-    <h2 className="text-3xl sm:text-4xl font-bold text-gray-300">
-      Tarife de acces – Parcul de Științe „Elementar”
-    </h2>
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-300">
+              Tarife de acces – Parcul de Științe „Elementar”
+            </h2>
 
-    <p className="mt-4 text-gray-300">
-      Excursii din oră în oră: zilnic, între{" "}
-      <span className="font-semibold text-gray-200">10:00</span> și{" "}
-      <span className="font-semibold text-gray-200">21:00</span> (ultima la 21:00).
-    </p>
+            <p className="mt-4 text-gray-300">
+              Excursii din oră în oră: zilnic, între{" "}
+              <span className="font-semibold text-gray-200">10:00</span> și{" "}
+              <span className="font-semibold text-gray-200">21:00</span> (ultima la 21:00).
+            </p>
 
-    <div className="mt-10 grid gap-6 md:grid-cols-3">
-      <PricingCard
-        fx={fx}
-        title="Pachet Individual"
-        price=""
-        perks={[
-          "Copil (4–17 ani) – 200 lei",
-          "Adult (18+) – 150 lei",
-          "Excursia cu ghid este inclusă pentru copii",
-        ]}
-        cta
-      />
+            <div className="mt-10 grid gap-6 md:grid-cols-3">
+              <PricingCard
+                fx={fx}
+                title="Pachet Individual"
+                price=""
+                perks={[
+                  "Copil (4–17 ani) – 200 lei",
+                  "Adult (18+) – 150 lei",
+                  "Excursia cu ghid este inclusă pentru copii",
+                ]}
+                cta
+              />
 
-      <PricingCard
-        fx={fx}
-        title="Pachet Familie"
-        price=""
-        highlight
-        badge="Cel mai ales"
-        perks={[
-          "1 adult + 1 copil – 300 lei",
-          "1 adult + 2 copii – 500 lei",
-          "2 adulți + 1 copil – 400 lei",
-          "Acces complet + ghidaj inclus",
-        ]}
-        cta
-      />
+              <PricingCard
+                fx={fx}
+                title="Pachet Familie"
+                price=""
+                highlight
+                badge="Cel mai ales"
+                perks={[
+                  "1 adult + 1 copil – 300 lei",
+                  "1 adult + 2 copii – 500 lei",
+                  "2 adulți + 1 copil – 400 lei",
+                  "Acces complet + ghidaj inclus",
+                ]}
+                cta
+              />
 
-      <PricingCard
-        fx={fx}
-        title="Pachet Prieteni (12–17 ani)"
-        price="150 lei / persoană"
-        perks={[
-          "Grup minim 3 persoane",
-          "450 lei pentru 3 persoane",
-          "Achitat pe același bon",
-          "Acces complet",
-        ]}
-        cta
-      />
-    </div>
+              <PricingCard
+                fx={fx}
+                title="Pachet Prieteni (12–17 ani)"
+                price="150 lei / persoană"
+                perks={[
+                  "Grup minim 3 persoane",
+                  "450 lei pentru 3 persoane",
+                  "Achitat pe același bon",
+                  "Acces complet",
+                ]}
+                cta
+              />
+            </div>
 
-    <div className="mt-8 grid gap-4 md:grid-cols-2">
-      <div className="rounded-xl border border-white/10 bg-white/5 p-5 text-sm text-gray-300">
-        <h3 className="text-lg font-semibold text-gray-200">Gratuități</h3>
-        <div className="mt-3 space-y-3">
-          <p className="flex items-start gap-2">
-            <BadgeCheck className="mt-0.5 h-4 w-4 text-sky-400" />
-            Copiii sub 4 ani beneficiază de acces gratuit.
-          </p>
+            <div className="mt-8 grid gap-4 md:grid-cols-2">
+              <div className="rounded-xl border border-white/10 bg-white/5 p-5 text-sm text-gray-300">
+                <h3 className="text-lg font-semibold text-gray-200">Gratuități</h3>
+                <div className="mt-3 space-y-3">
+                  <p className="flex items-start gap-2">
+                    <BadgeCheck className="mt-0.5 h-4 w-4 text-sky-400" />
+                    Copiii sub 4 ani beneficiază de acces gratuit.
+                  </p>
+                  <p className="flex items-start gap-2">
+                    <BadgeCheck className="mt-0.5 h-4 w-4 text-sky-400" />
+                    Seniorii cu vârsta peste 80 ani beneficiază de acces gratuit.
+                  </p>
+                </div>
+              </div>
 
-          <p className="flex items-start gap-2">
-            <BadgeCheck className="mt-0.5 h-4 w-4 text-sky-400" />
-            Seniorii cu vârsta peste 80 ani beneficiază de acces gratuit.
-          </p>
-        </div>
-      </div>
-
-      <div className="rounded-xl border border-white/10 bg-white/5 p-5 text-sm text-gray-300">
-        <h3 className="text-lg font-semibold text-gray-200">Reguli și siguranță</h3>
-        <p className="mt-3 flex items-start gap-2">
-          <BadgeCheck className="mt-0.5 h-4 w-4 text-sky-400" />
-          Copiii sub 9 ani trebuie să fie însoțiți și supravegheați permanent de un adult.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
+              <div className="rounded-xl border border-white/10 bg-white/5 p-5 text-sm text-gray-300">
+                <h3 className="text-lg font-semibold text-gray-200">Reguli și siguranță</h3>
+                <p className="mt-3 flex items-start gap-2">
+                  <BadgeCheck className="mt-0.5 h-4 w-4 text-sky-400" />
+                  Copiii sub 9 ani trebuie să fie însoțiți și supravegheați permanent de un adult.
+                </p>
+              </div>
+            </div>
 
             <p className="mt-6 pt-3 text-center text-sm text-gray-400 border-t border-white/10">
-              Tarifele sunt valabile până la <span className="font-medium text-gray-300">30 septembrie 2026</span> (inclusiv).
+              Tarifele sunt valabile până la{" "}
+              <span className="font-medium text-gray-300">30 septembrie 2026</span> (inclusiv).
             </p>
           </div>
         </section>
 
-        {/* ✅ AI HUB LINKS (Homepage → ghiduri + activități + excursii) */}
+        {/* ✅ AI HUB LINKS */}
         <section className="py-12 sm:py-16 border-b border-white/5" aria-labelledby="resurse-educationale">
           <div className="mx-auto max-w-4xl px-4 sm:px-6">
             <h2 id="resurse-educationale" className="text-2xl sm:text-3xl font-semibold text-gray-200">
               ELEMENTAR – parc de știință în Chișinău (Port Mall)
             </h2>
 
-            {/* ✅ Mențiune consolidată despre entitate (AI-ready) */}
             <p className="mt-4 text-gray-300">
               ELEMENTAR este un parc interactiv de știință din Chișinău, situat în Port Mall (etajul 4), unde copiii și
               adolescenții învață prin experimente practice de fizică, chimie, biologie și astronomie. Pentru planificare
@@ -336,7 +302,6 @@ export default function Page() {
               .
             </p>
 
-            {/* păstrăm și formulările tale (ok pentru SEO + utilizator) */}
             <p className="mt-4 text-gray-300">
               Descoperă{" "}
               <Link href="/ghiduri" className="text-sky-400 hover:text-sky-300 font-semibold">
