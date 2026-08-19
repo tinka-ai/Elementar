@@ -111,7 +111,14 @@ export default function SiteFooter() {
             © {new Date().getFullYear()} PRO-ELEMENTARY A.O.. Toate drepturile rezervate.
           </p>
 
-          <p>
+          <p className="flex items-center gap-3">
+            <Link
+              href="/politica-de-confidentialitate"
+              className="hover:text-white transition-colors"
+            >
+              Politica de Confidențialitate
+            </Link>
+            <span className="text-gray-700">•</span>
             <a
               href="https://tinka.md/"
               target="_blank"

@@ -166,14 +166,6 @@ export default function Page() {
         </p>
       </section>
 
-      <section className="mt-12 flex gap-3">
-        <Link
-          href="/contact"
-          className="rounded-lg bg-sky-500 px-6 py-3 font-semibold text-white hover:bg-sky-400 transition-colors"
-        >
-          Rezervă excursie
-        </Link>
-      </section>
     </main>
   )
 }

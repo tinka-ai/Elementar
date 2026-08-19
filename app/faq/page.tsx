@@ -292,7 +292,7 @@ export default function FAQPage() {
     className={`w-full p-6 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors ${fx}`}
   >
     <h3 className="text-lg font-bold text-gray-300 mb-2">Contact</h3>
-    <p className="text-gray-400 text-sm">Programează vizita ta</p>
+    <p className="text-gray-400 text-sm">Scrie-ne un mesaj</p>
   </Link>
 </div>
 

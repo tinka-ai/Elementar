@@ -3,8 +3,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Clock, ArrowRight } from "lucide-react"
+import { Clock } from "lucide-react"
 import NavLink from "@/components/nav-link"
 
 const NAV = [
@@ -81,24 +80,18 @@ const linkCls = (href: string) => {
             ))}
           </nav>
 
-          {/* PROGRAM + CTA */}
+          {/* PROGRAM */}
           <div className="flex items-center gap-3">
             <div className="hidden lg:flex items-center gap-2 text-sm text-gray-300">
               <Clock className="h-4 w-4" />
               <span>PROGRAM: Lu – Du, 10:00 – 22:00</span>
             </div>
-            <Button className="bg-sky-500 text-white hover:bg-sky-400" asChild>
-              <Link href="/contact">
-                Programează o vizită
-                <ArrowRight className="ms-2 h-4 w-4" aria-hidden />
-              </Link>
-            </Button>
           </div>
         </div>
 
         {/* MOBILE (< md) – o singură zonă cu wrap ca să fie totul vizibil */}
         <div className="md:hidden py-2">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center">
             {/* LOGO */}
             <Link href="/" className="flex items-center gap-3" aria-label="Acasă">
               <Image
@@ -109,14 +102,6 @@ const linkCls = (href: string) => {
                 priority
               />
             </Link>
-
-            {/* CTA mic */}
-            <Button size="sm" className="bg-sky-500 text-white hover:bg-sky-400" asChild>
-              <Link href="/contact">
-                Programează
-                <ArrowRight className="ms-1.5 h-4 w-4" />
-              </Link>
-            </Button>
           </div>
 
           {/* Program (vizibil pe mobil) */}

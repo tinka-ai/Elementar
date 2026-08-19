@@ -131,13 +131,6 @@ export default function DomeniiPage() {
                 <ArrowRight className="ms-2 h-4 w-4" aria-hidden="true" />
               </Link>
             </Button>
-            <Button
-              asChild
-              variant="outline"
-              className={`border-sky-700/60 text-sky-300 hover:bg-sky-500/10 bg-transparent ${fx}`}
-            >
-              <Link href="/contact">Programează vizita</Link>
-            </Button>
           </div>
         </div>
       </section>

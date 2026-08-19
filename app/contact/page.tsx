@@ -16,7 +16,6 @@ import {
   Mail,
   Clock,
   Send,
-  Calendar,
   Users,
   BookOpen,
   Image as ImageIcon,
@@ -41,17 +40,22 @@ export default function ContactPage() {
 
     const formData = new FormData(e.currentTarget)
     const data = {
-      name: formData.get("name") as string,
-      email: formData.get("email") as string,
-      phone: formData.get("phone") as string,
-      visitType: formData.get("visitType") as string,
-      groupSize: formData.get("groupSize") as string,
-      preferredDate: formData.get("preferredDate") as string,
-      message: formData.get("message") as string,
+      message: (formData.get("message") as string)?.trim() || "",
+      contactInfo: (formData.get("contactInfo") as string)?.trim() || "",
+      consent: formData.get("consent") === "on",
     }
 
-    if (!data.name || !data.email || !data.message) {
-      setResult({ success: false, error: "Câmpurile obligatorii nu sunt completate." })
+    if (!data.message || data.message.length < 5) {
+      setResult({ success: false, error: "Te rugăm să scrii un mesaj." })
+      setIsLoading(false)
+      return
+    }
+
+    if (!data.consent) {
+      setResult({
+        success: false,
+        error: "Pentru a trimite mesajul, bifează căsuța de mai jos ca să confirmi că ai citit informarea.",
+      })
       setIsLoading(false)
       return
     }
@@ -65,13 +69,8 @@ export default function ContactPage() {
           template_id: "template_contact",
           user_id: "your_emailjs_user_id",
           template_params: {
-            from_name: data.name,
-            from_email: data.email,
-            phone: data.phone,
-            visit_type: data.visitType,
-            group_size: data.groupSize,
-            preferred_date: data.preferredDate,
             message: data.message,
+            contact_info: data.contactInfo || "Nu a fost oferită nicio informație de contact.",
             to_email: "office@elementar.md",
           },
         }),
@@ -98,7 +97,17 @@ export default function ContactPage() {
           throw new Error(r.error || "PHP endpoint failed")
         }
       } catch {
-        const mailtoLink = `mailto:office@elementar.md?subject=Mesaj nou de la ${data.name} - ${data.visitType || "Contact general"}&body=Nume: ${data.name}%0D%0AEmail: ${data.email}%0D%0A${data.phone ? `Telefon: ${data.phone}%0D%0A` : ""}${data.visitType ? `Tipul vizitei: ${data.visitType}%0D%0A` : ""}${data.groupSize ? `Numărul de persoane: ${data.groupSize}%0D%0A` : ""}${data.preferredDate ? `Data preferată: ${data.preferredDate}%0D%0A` : ""}%0D%0AMesaj:%0D%0A${data.message}`
+        const bodyLines = [
+          "Mesaj:",
+          data.message,
+          "",
+          data.contactInfo
+            ? `Informație de contact oferită voluntar: ${data.contactInfo}`
+            : "Nu a fost oferită nicio informație de contact.",
+        ].join("\n")
+        const mailtoLink = `mailto:office@elementar.md?subject=${encodeURIComponent(
+          "Mesaj nou de pe site-ul ELEMENTAR",
+        )}&body=${encodeURIComponent(bodyLines)}`
         window.location.href = mailtoLink
         setResult({
           success: true,
@@ -234,7 +243,10 @@ export default function ContactPage() {
 
             {/* FORMULAR */}
             <div className={`p-8 rounded-xl border border-white/10 bg-white/5 ${fx}`}>
-              <h2 className="text-2xl font-bold text-gray-300 mb-6">Trimite-ne un mesaj</h2>
+              <h2 className="text-2xl font-bold text-gray-300 mb-2">Trimite-ne un mesaj</h2>
+              <p className="text-sm text-gray-400 mb-6">
+                Nu solicităm și nu colectăm date cu caracter personal. Singurul câmp obligatoriu este mesajul tău.
+              </p>
 
               {result && (
                 <div
@@ -251,100 +263,6 @@ export default function ContactPage() {
               )}
 
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-                      Nume complet *
-                    </label>
-                    <Input
-                      id="name"
-                      name="name"
-                      type="text"
-                      required
-                      className="bg-white/10 border-white/20 text-gray-200 placeholder:text-gray-400"
-                      placeholder="Numele tău"
-                      disabled={isLoading}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                      Email *
-                    </label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      required
-                      className="bg-white/10 border-white/20 text-gray-200 placeholder:text-gray-400"
-                      placeholder="email@exemplu.com"
-                      disabled={isLoading}
-                    />
-                  </div>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-2">
-                      Telefon
-                    </label>
-                    <Input
-                      id="phone"
-                      name="phone"
-                      type="tel"
-                      className="bg-white/10 border border-white/20 rounded-md text-gray-200 placeholder:text-gray-400"
-                      placeholder="+373 XX XXX XXX"
-                      disabled={isLoading}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="visitType" className="block text-sm font-medium text-gray-300 mb-2">
-                      Tipul vizitei
-                    </label>
-                    <select
-                      id="visitType"
-                      name="visitType"
-                      className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-400"
-                      disabled={isLoading}
-                    >
-                      <option value="">Selectează</option>
-                      <option value="individual">Vizită individuală</option>
-                      <option value="familie">Vizită în familie</option>
-                      <option value="grup">Grup organizat</option>
-                      <option value="scoala">Excursie școlară</option>
-                      <option value="aniversare">Petrecere aniversară</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="groupSize" className="block text-sm font-medium text-gray-300 mb-2">
-                      Numărul de persoane
-                    </label>
-                    <Input
-                      id="groupSize"
-                      name="groupSize"
-                      type="number"
-                      min={1}
-                      className="bg-white/10 border border-white/20 rounded-md text-gray-200 placeholder:text-gray-400"
-                      placeholder="Ex: 5"
-                      disabled={isLoading}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="preferredDate" className="block text-sm font-medium text-gray-300 mb-2">
-                      Data preferată
-                    </label>
-                    <Input
-                      id="preferredDate"
-                      name="preferredDate"
-                      type="date"
-                      className="bg-white/10 border border-white/20 rounded-md text-gray-200"
-                      disabled={isLoading}
-                    />
-                  </div>
-                </div>
-
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
                     Mesaj *
@@ -353,11 +271,55 @@ export default function ContactPage() {
                     id="message"
                     name="message"
                     required
-                    rows={4}
+                    rows={5}
                     className="bg-white/10 border border-white/20 rounded-md text-gray-200 placeholder:text-gray-400"
                     placeholder="Spune-ne mai multe despre vizita ta sau întreabă orice te interesează..."
                     disabled={isLoading}
                   />
+                </div>
+
+                <div>
+                  <label htmlFor="contactInfo" className="block text-sm font-medium text-gray-300 mb-2">
+                    Cum preferi să primești răspunsul? <span className="text-gray-500">(opțional)</span>
+                  </label>
+                  <Input
+                    id="contactInfo"
+                    name="contactInfo"
+                    type="text"
+                    className="bg-white/10 border-white/20 text-gray-200 placeholder:text-gray-400"
+                    placeholder="Ex: email, telefon, sau altă modalitate de contact — la alegerea ta"
+                    disabled={isLoading}
+                  />
+                  <p className="mt-1.5 text-xs text-gray-500">
+                    Nu îți cerem acest lucru — poți lăsa câmpul necompletat. Dacă alegi să ne oferi o modalitate de
+                    contact, o faci din proprie inițiativă și pe propria răspundere.
+                  </p>
+                </div>
+
+                {/* INFORMARE — fără colectare de date personale */}
+                <div className="rounded-lg border border-white/10 bg-white/5 p-4 space-y-3">
+                  <p className="text-xs text-gray-400 leading-relaxed">
+                    ELEMENTAR nu solicită și nu colectează date cu caracter personal prin acest formular. Singurul
+                    câmp obligatoriu este mesajul. Dacă alegi, din proprie inițiativă, să incluzi în mesaj sau în
+                    câmpul de mai sus date de contact (nume, email, telefon etc.), o faci pe propria răspundere —
+                    le vom folosi exclusiv pentru a-ți răspunde, fără a le folosi în alt scop.
+                  </p>
+                  <label className="flex items-start gap-2.5 text-xs text-gray-300">
+                    <input
+                      type="checkbox"
+                      name="consent"
+                      required
+                      disabled={isLoading}
+                      className="mt-0.5 h-4 w-4 shrink-0 rounded border-white/30 bg-white/10 accent-sky-500"
+                    />
+                    <span>
+                      Am citit și sunt de acord cu cele de mai sus (semnătură electronică), conform{" "}
+                      <Link href="/politica-de-confidentialitate" className="text-sky-400 hover:text-sky-300 underline">
+                        Notei privind protecția datelor
+                      </Link>
+                      . *
+                    </span>
+                  </label>
                 </div>
 
                 <Button type="submit" disabled={isLoading} className={`w-full bg-sky-500 text-white hover:bg-sky-400 ${fx}`}>
@@ -529,21 +491,6 @@ export default function ContactPage() {
                       PORT MALL oferă transport (auobuz) absolut gratuit pentru toți vizitatorii care circulă pe două
                       rute principale: Ciocana și Râșcani. Din transport public circulă autobuzul de pe ruta Nr. 5, care
                       oprește în apropierea mall-ului. Stația cea mai apropiată: „Port Mall".
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className={`p-6 rounded-xl border border-white/10 bg-white/5 ${fx}`}>
-                <div className="flex items-start gap-4">
-                  <div className="grid h-10 w-10 place-items-center rounded-md bg-purple-500/20 text-purple-400">
-                    <Calendar className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-300 mb-2">Rezervare recomandată</h3>
-                    <p className="text-gray-400 text-sm">
-                      Pentru o experiență optimă, recomandăm rezervarea în avans, mai ales pentru weekend și
-                      sărbători.
                     </p>
                   </div>
                 </div>

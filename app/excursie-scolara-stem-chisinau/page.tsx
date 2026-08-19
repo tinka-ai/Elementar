@@ -172,12 +172,6 @@ export default function Page() {
       {/* CTA */}
       <section className="mt-12 flex flex-col sm:flex-row gap-3">
         <Link
-          href="/contact"
-          className="inline-flex items-center justify-center rounded-lg bg-sky-500 px-5 py-3 font-semibold text-white hover:bg-sky-400 transition-colors"
-        >
-          Rezervă excursie (Contact)
-        </Link>
-        <Link
           href="/excursii-scolare-chisinau"
           className="inline-flex items-center justify-center rounded-lg border border-white/10 bg-white/5 px-5 py-3 font-semibold text-gray-200 hover:bg-white/10 transition-colors"
         >
