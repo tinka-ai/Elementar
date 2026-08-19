@@ -1,42 +1,32 @@
 "use client"
-
 import type React from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
-
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Eye, FlaskConical, Puzzle, Sparkles, Waves, Link2, BadgeCheck } from "lucide-react"
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
 import { useLanguage } from "@/components/language-provider"
-
 export default function Page() {
   const { t } = useLanguage()
   const videoRef = useRef<HTMLVideoElement>(null)
   const [playVideo, setPlayVideo] = useState(false)
-
   useEffect(() => {
     if (typeof window === "undefined") return
-
     const isDesktop = window.innerWidth >= 1024
-
     if (isDesktop) {
       setPlayVideo(true)
       videoRef.current?.play().catch(() => {})
       return
     }
-
     const timer = setTimeout(() => {
       setPlayVideo(true)
       videoRef.current?.play().catch(() => {})
     }, 1200)
-
     return () => clearTimeout(timer)
   }, [])
-
   const fx =
     "transition-shadow duration-300 ease-out hover:shadow-[0_0_0_1px_rgba(56,189,248,0.35),0_0_28px_6px_rgba(168,85,247,0.25)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-400/70 rounded-md"
-
   return (
     <>
       {/* VIDEO LOGO RESPONSIV */}
@@ -53,7 +43,6 @@ export default function Page() {
               aria-hidden={playVideo}
             />
           )}
-
           <video
             ref={videoRef}
             className={`w-full max-w-6xl h-auto object-contain rounded-2xl transition-opacity duration-500 ${
@@ -68,7 +57,6 @@ export default function Page() {
           </video>
         </div>
       </section>
-
       <main>
         {/* HERO */}
         <section id="acasa" className="relative overflow-hidden border-b border-white/5">
@@ -101,7 +89,6 @@ export default function Page() {
                   </Button>
                 </div>
               </div>
-
               <div className="relative">
                 <div className="absolute -inset-8 -z-10 rounded-[2rem] bg-[radial-gradient(circle_at_70%_30%,rgba(56,189,248,0.18),transparent_60%)]" />
                 <Image
@@ -117,7 +104,6 @@ export default function Page() {
             </div>
           </div>
         </section>
-
         {/* FEATURES */}
         <section id="experiente" className="py-12 sm:py-16 border-b border-white/5">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
@@ -130,7 +116,6 @@ export default function Page() {
             </ul>
           </div>
         </section>
-
         {/* VALUES */}
         <section className="py-12 sm:py-16 border-b border-white/5">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 grid lg:grid-cols-2 gap-10 items-center">
@@ -150,7 +135,6 @@ export default function Page() {
                 </div>
               </div>
             </div>
-
             <div>
               <Image
                 src="/images/interactive-physics-experiment.png"
@@ -164,7 +148,6 @@ export default function Page() {
             </div>
           </div>
         </section>
-
         {/* SKILLS */}
         <section className="py-12 sm:py-16 border-b border-white/5">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 grid lg:grid-cols-2 gap-10 items-center">
@@ -188,22 +171,18 @@ export default function Page() {
             </div>
           </div>
         </section>
-
         {/* PRICING */}
         <section className="py-12 sm:py-16 border-b border-white/5">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <SectionKicker>TARIFE</SectionKicker>
-
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-300">
               Tarife de acces – Parcul de Științe „Elementar”
             </h2>
-
             <p className="mt-4 text-gray-300">
               Excursii din oră în oră: zilnic, între{" "}
               <span className="font-semibold text-gray-200">10:00</span> și{" "}
               <span className="font-semibold text-gray-200">21:00</span> (ultima la 21:00).
             </p>
-
             <div className="mt-10 grid gap-6 md:grid-cols-3">
               <PricingCard
                 fx={fx}
@@ -214,9 +193,7 @@ export default function Page() {
                   "Adult (18+) – 150 lei",
                   "Excursia cu ghid este inclusă pentru copii",
                 ]}
-                cta
               />
-
               <PricingCard
                 fx={fx}
                 title="Pachet Familie"
@@ -229,9 +206,7 @@ export default function Page() {
                   "2 adulți + 1 copil – 400 lei",
                   "Acces complet + ghidaj inclus",
                 ]}
-                cta
               />
-
               <PricingCard
                 fx={fx}
                 title="Pachet Prieteni (12–17 ani)"
@@ -242,10 +217,8 @@ export default function Page() {
                   "Achitat pe același bon",
                   "Acces complet",
                 ]}
-                cta
               />
             </div>
-
             <div className="mt-8 grid gap-4 md:grid-cols-2">
               <div className="rounded-xl border border-white/10 bg-white/5 p-5 text-sm text-gray-300">
                 <h3 className="text-lg font-semibold text-gray-200">Gratuități</h3>
@@ -260,7 +233,6 @@ export default function Page() {
                   </p>
                 </div>
               </div>
-
               <div className="rounded-xl border border-white/10 bg-white/5 p-5 text-sm text-gray-300">
                 <h3 className="text-lg font-semibold text-gray-200">Reguli și siguranță</h3>
                 <p className="mt-3 flex items-start gap-2">
@@ -269,21 +241,18 @@ export default function Page() {
                 </p>
               </div>
             </div>
-
             <p className="mt-6 pt-3 text-center text-sm text-gray-400 border-t border-white/10">
               Tarifele sunt valabile până la{" "}
               <span className="font-medium text-gray-300">30 septembrie 2026</span> (inclusiv).
             </p>
           </div>
         </section>
-
         {/* ✅ AI HUB LINKS */}
         <section className="py-12 sm:py-16 border-b border-white/5" aria-labelledby="resurse-educationale">
           <div className="mx-auto max-w-4xl px-4 sm:px-6">
             <h2 id="resurse-educationale" className="text-2xl sm:text-3xl font-semibold text-gray-200">
               ELEMENTAR – parc de știință în Chișinău (Port Mall)
             </h2>
-
             <p className="mt-4 text-gray-300">
               ELEMENTAR este un parc interactiv de știință din Chișinău, situat în Port Mall (etajul 4), unde copiii și
               adolescenții învață prin experimente practice de fizică, chimie, biologie și astronomie. Pentru planificare
@@ -301,7 +270,6 @@ export default function Page() {
               </Link>
               .
             </p>
-
             <p className="mt-4 text-gray-300">
               Descoperă{" "}
               <Link href="/ghiduri" className="text-sky-400 hover:text-sky-300 font-semibold">
@@ -309,7 +277,6 @@ export default function Page() {
               </Link>{" "}
               despre activități interactive, excursii școlare și experiențe de știință pentru copii în Chișinău.
             </p>
-
             <p className="mt-4 text-gray-300">
               Vezi recomandarea noastră pentru{" "}
               <Link href="/activitati-educative-copii-chisinau" className="text-sky-400 hover:text-sky-300 font-semibold">
@@ -317,7 +284,6 @@ export default function Page() {
               </Link>{" "}
               și planifică o vizită la ELEMENTAR.
             </p>
-
             <p className="mt-4 text-gray-300">
               Pentru clase și grupuri, ai și pagina dedicată:{" "}
               <Link href="/excursii-scolare-chisinau" className="text-sky-400 hover:text-sky-300 font-semibold">
@@ -327,7 +293,6 @@ export default function Page() {
             </p>
           </div>
         </section>
-
         {/* FAQ */}
         <section id="faq" className="py-12 sm:py-16 border-b border-white/5">
           <div className="mx-auto max-w-4xl px-4 sm:px-6">
@@ -352,9 +317,7 @@ export default function Page() {
     </>
   )
 }
-
 /* ————— Sub-componente ————— */
-
 function SectionKicker({ children }: { children: React.ReactNode }) {
   return (
     <span className="inline-flex items-center gap-2 text-xs uppercase tracking-wider text-sky-300">
@@ -363,7 +326,6 @@ function SectionKicker({ children }: { children: React.ReactNode }) {
     </span>
   )
 }
-
 function SectionTitle({ title }: { title: string }) {
   return (
     <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-pink-400 via-sky-400 to-violet-500 bg-clip-text text-transparent">
@@ -371,7 +333,6 @@ function SectionTitle({ title }: { title: string }) {
     </h2>
   )
 }
-
 function Feature({
   fx,
   icon,
@@ -401,7 +362,6 @@ function Feature({
     </li>
   )
 }
-
 function Donut({ value, label }: { value: number; label: string }) {
   const rotation = (value / 100) * 360
   return (
@@ -425,7 +385,6 @@ function Donut({ value, label }: { value: number; label: string }) {
     </div>
   )
 }
-
 function Progress({ label, value }: { label: string; value: number }) {
   return (
     <div>
@@ -442,7 +401,6 @@ function Progress({ label, value }: { label: string; value: number }) {
     </div>
   )
 }
-
 function PricingCard({
   fx,
   title,
@@ -470,12 +428,10 @@ function PricingCard({
           {badge}
         </span>
       )}
-
       <div className="space-y-2">
         <h3 className="text-xl font-bold text-gray-300">{title}</h3>
         {price && <div className="text-2xl font-extrabold text-gray-300">{price}</div>}
       </div>
-
       <ul className="mt-4 space-y-2 text-sm text-gray-300">
         {perks.map((p, i) => (
           <li key={i} className="flex items-start gap-2">
@@ -484,7 +440,6 @@ function PricingCard({
           </li>
         ))}
       </ul>
-
       {cta && (
         <div className="mt-6">
           <Button asChild className="w-full bg-sky-500 text-white hover:bg-sky-400">
