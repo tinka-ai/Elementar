@@ -29,6 +29,8 @@ export default function ContactPage() {
   const [result, setResult] = useState<{ success: boolean; message?: string; error?: string } | null>(null)
   const [showEmailSuccess, setShowEmailSuccess] = useState(false)
   const [isVideoOpen, setIsVideoOpen] = useState(false)
+  const [manualFallback, setManualFallback] = useState<{ mailtoLink: string; plainText: string } | null>(null)
+  const [copied, setCopied] = useState(false)
 
   const fx =
     "transition-shadow duration-300 ease-out hover:shadow-[0_0_0_1px_rgba(56,189,248,0.35),0_0_28px_6px_rgba(168,85,247,0.25)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-400/70 rounded-md"
@@ -37,6 +39,9 @@ export default function ContactPage() {
     e.preventDefault()
     setIsLoading(true)
     setResult(null)
+
+    setManualFallback(null)
+    setCopied(false)
 
     const formData = new FormData(e.currentTarget)
     const data = {
@@ -61,59 +66,42 @@ export default function ContactPage() {
     }
 
     try {
-      const emailJSResponse = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+      const response = await fetch("/api/send-contact-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          service_id: "service_elementar",
-          template_id: "template_contact",
-          user_id: "your_emailjs_user_id",
-          template_params: {
-            message: data.message,
-            contact_info: data.contactInfo || "Nu a fost oferită nicio informație de contact.",
-            to_email: "office@elementar.md",
-          },
+          message: data.message,
+          contactInfo: data.contactInfo,
         }),
       })
 
-      if (emailJSResponse.ok) {
+      if (response.ok) {
         setResult({ success: true, message: "Mesajul a fost trimis cu succes! Vă vom contacta în curând." })
         ;(e.target as HTMLFormElement).reset()
       } else {
-        throw new Error("EmailJS failed")
+        throw new Error("send-contact-email failed")
       }
     } catch {
-      try {
-        const phpResponse = await fetch("/wp-content/themes/elementar/send-email.php", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        })
-        const r = await phpResponse.json()
-        if (r.success) {
-          setResult({ success: true, message: "Mesajul a fost trimis cu succes! Vă vom contacta în curând." })
-          ;(e.target as HTMLFormElement).reset()
-        } else {
-          throw new Error(r.error || "PHP endpoint failed")
-        }
-      } catch {
-        const bodyLines = [
-          "Mesaj:",
-          data.message,
-          "",
-          data.contactInfo
-            ? `Informație de contact oferită voluntar: ${data.contactInfo}`
-            : "Nu a fost oferită nicio informație de contact.",
-        ].join("\n")
-        const mailtoLink = `mailto:office@elementar.md?subject=${encodeURIComponent(
-          "Mesaj nou de pe site-ul ELEMENTAR",
-        )}&body=${encodeURIComponent(bodyLines)}`
-        window.location.href = mailtoLink
-        setResult({
-          success: true,
-          message: "S-a deschis aplicația de email. Vă rugăm să trimiteți emailul din aplicația dumneavoastră.",
-        })
-      }
+      // Ultimă soluție, doar dacă serverul nu răspunde: pregătim un link mailto + textul brut,
+      // ca vizitatorul să poată trimite manual, indiferent dacă are sau nu un client de email
+      // asociat implicit în browser/sistemul de operare (mailto: nu are efect dacă nu are).
+      const plainText = [
+        "Mesaj:",
+        data.message,
+        "",
+        data.contactInfo
+          ? `Informație de contact oferită voluntar: ${data.contactInfo}`
+          : "Nu a fost oferită nicio informație de contact.",
+      ].join("\n")
+      const mailtoLink = `mailto:office@elementar.md?subject=${encodeURIComponent(
+        "Mesaj nou de pe site-ul ELEMENTAR",
+      )}&body=${encodeURIComponent(plainText)}`
+      setManualFallback({ mailtoLink, plainText })
+      setResult({
+        success: false,
+        error:
+          "Nu am putut trimite automat mesajul chiar acum. Apasă butonul de mai jos ca să-l trimiți din aplicația ta de email, sau copiază-l și trimite-l manual la office@elementar.md.",
+      })
     } finally {
       setIsLoading(false)
     }
@@ -259,6 +247,40 @@ export default function ContactPage() {
                   <p className={`text-sm ${result.success ? "text-green-300" : "text-red-300"}`}>
                     {result.success ? result.message : result.error}
                   </p>
+
+                  {manualFallback && (
+                    <div className="mt-4 space-y-3">
+                      <Button asChild className={`w-full bg-sky-500 text-white hover:bg-sky-400 ${fx}`}>
+                        <a href={manualFallback.mailtoLink}>
+                          <Mail className="mr-2 h-4 w-4" />
+                          Deschide aplicația de email
+                        </a>
+                      </Button>
+                      <div className="rounded-md border border-white/10 bg-black/30 p-3">
+                        <p className="text-xs text-gray-400 mb-2">
+                          Sau copiază mesajul și trimite-l manual la <strong className="text-gray-300">office@elementar.md</strong>:
+                        </p>
+                        <pre className="whitespace-pre-wrap text-xs text-gray-300 mb-2">{manualFallback.plainText}</pre>
+                        <Button
+                          type="button"
+                          size="sm"
+                          variant="outline"
+                          className={`border-sky-700/60 text-sky-300 hover:bg-sky-500/10 bg-transparent ${fx}`}
+                          onClick={async () => {
+                            try {
+                              await navigator.clipboard.writeText(manualFallback.plainText)
+                              setCopied(true)
+                              setTimeout(() => setCopied(false), 2500)
+                            } catch {
+                              // clipboard API poate fi indisponibilă — vizitatorul poate copia manual textul de mai sus
+                            }
+                          }}
+                        >
+                          {copied ? "Copiat!" : "Copiază mesajul"}
+                        </Button>
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
 
