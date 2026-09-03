@@ -91,8 +91,9 @@ gtag('config', '${GA_ID}', { anonymize_ip: true });`}
         className={`${inter.className}
           bg-background text-foreground
           min-h-screen supports-[height:100svh]:min-h-[100svh]
-          pt-24 md:pt-16 pb-14
+          pb-14
         `}
+        style={{ paddingTop: "var(--site-header-h, 8.5rem)" }}
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <LanguageProvider>

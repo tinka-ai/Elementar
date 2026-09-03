@@ -3,7 +3,8 @@
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
-import { Clock } from "lucide-react"
+import { useEffect, useRef } from "react"
+import { Clock, Truck } from "lucide-react"
 import NavLink from "@/components/nav-link"
 
 const NAV = [
@@ -17,6 +18,27 @@ const NAV = [
 
 export default function SiteHeader() {
   const pathname = usePathname() || "/"
+  const headerRef = useRef<HTMLElement>(null)
+
+  // Măsurăm înălțimea reală a header-ului (variază din cauza banner-ului
+  // informativ) și o expunem ca variabilă CSS, ca să putem seta corect
+  // padding-top-ul din <body> (vezi app/layout.tsx), indiferent de câte
+  // rânduri are banner-ul pe ecrane mici.
+  useEffect(() => {
+    const el = headerRef.current
+    if (!el) return
+    const setVar = () => {
+      document.documentElement.style.setProperty("--site-header-h", `${el.offsetHeight}px`)
+    }
+    setVar()
+    const ro = new ResizeObserver(setVar)
+    ro.observe(el)
+    window.addEventListener("resize", setVar)
+    return () => {
+      ro.disconnect()
+      window.removeEventListener("resize", setVar)
+    }
+  }, [])
 
 const linkCls = (href: string) => {
   const active = pathname === href
@@ -43,6 +65,7 @@ const linkCls = (href: string) => {
 
   return (
    <header
+  ref={headerRef}
   className="fixed top-0 left-0 right-0 z-[110] border-b border-white/10 bg-black/70 backdrop-blur supports-[backdrop-filter]:bg-black/50"
   style={{
     paddingTop: "env(safe-area-inset-top, 0px)",
@@ -51,6 +74,19 @@ const linkCls = (href: string) => {
     willChange: "transform"
   }}
 >
+      {/* Banner informativ — relocare, septembrie */}
+      <div className="w-full bg-gradient-to-r from-pink-500 via-sky-500 to-violet-500">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 py-2">
+          <p className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center text-[11px] leading-snug text-white sm:text-xs md:text-sm font-medium">
+            <Truck className="h-4 w-4 shrink-0" aria-hidden="true" />
+            <span>
+              Ne mutăm într-un loc nou! Pe durata lunii septembrie activitatea ELEMENTAR este suspendată
+              pentru relocare — revenim cât mai curând posibil. Mulțumim pentru înțelegere!
+            </span>
+          </p>
+        </div>
+      </div>
+
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
 
         {/* DESKTOP (>= md) */}
