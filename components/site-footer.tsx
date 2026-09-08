@@ -111,7 +111,7 @@ export default function SiteFooter() {
             © {new Date().getFullYear()} PRO-ELEMENTARY A.O.. Toate drepturile rezervate.
           </p>
 
-          <p className="flex items-center gap-3">
+          <p className="flex flex-wrap items-center gap-3">
             <Link
               href="/politica-de-confidentialitate"
               className="hover:text-white transition-colors"

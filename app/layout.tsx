@@ -7,10 +7,7 @@ import { LanguageProvider } from "@/components/language-provider"
 import SiteHeader from "@/components/site-header"
 import SiteFooter from "@/components/site-footer"
 import Script from "next/script"
-import GaRouteListener from "@/components/ga-route-listener"
 import { getElementarJsonLd } from "@/lib/schema"
-
-const GA_ID = "G-VHXGNT73PX"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -76,15 +73,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(getElementarJsonLd()) }}
         />
-
-        {/* Google Analytics */}
-        <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
-        <Script id="ga-init" strategy="afterInteractive">
-          {`window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', '${GA_ID}', { anonymize_ip: true });`}
-        </Script>
       </head>
 
       <body
@@ -103,8 +91,6 @@ gtag('config', '${GA_ID}', { anonymize_ip: true });`}
           </LanguageProvider>
         </ThemeProvider>
 
-        {/* Pageview la schimbarea rutei (SPA) */}
-        <GaRouteListener gaId={GA_ID} />
       </body>
     </html>
   )
