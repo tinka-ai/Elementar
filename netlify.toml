@@ -4,3 +4,17 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+# Security headers — site-ul nu solicită geolocație/camera/microfon și nu are
+# dependențe externe (fonturi auto-hostate, fără analytics/pixeli), așa că
+# putem restrânge Permissions-Policy explicit. CSP folosește 'unsafe-inline'
+# la script/style pentru compatibilitate cu hidratarea Next.js și cu clasele
+# Tailwind inline — testați vizual după deploy înainte de a-l restrânge mai mult.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
+    Permissions-Policy = "geolocation=(), camera=(), microphone=()"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'"

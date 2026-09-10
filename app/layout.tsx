@@ -83,7 +83,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         `}
         style={{ paddingTop: "var(--site-header-h, 8.5rem)" }}
       >
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+        {/* forcedTheme="dark": tema rămâne fixă pe dark, fără comutator vizibil pe site —
+            next-themes nu mai citește/scrie nimic în localStorage în acest mod. */}
+        <ThemeProvider attribute="class" forcedTheme="dark" disableTransitionOnChange>
           <LanguageProvider>
             <SiteHeader />
             {children}

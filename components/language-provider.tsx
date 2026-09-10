@@ -15,25 +15,13 @@ const DEFAULT_LOCALE: Locale = "ro"
 const LanguageContext = React.createContext<LanguageContextType | null>(null)
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
+  // Nu mai persistăm preferința de limbă (fără localStorage/cookies) — nu există
+  // niciun comutator de limbă vizibil pe site, deci limba rămâne mereu "ro".
+  // Comportamentul afișat vizitatorilor este identic cu cel de dinainte.
   const [locale, setLocaleState] = React.useState<Locale>(DEFAULT_LOCALE)
-
-  // Citește preferința din localStorage după montare (evită mismatch)
-  React.useEffect(() => {
-    try {
-      const saved = (localStorage.getItem("elementar-locale") as Locale) || DEFAULT_LOCALE
-      setLocaleState(saved)
-    } catch {
-      // dacă localStorage nu e disponibil, rămâne "ro"
-    }
-  }, [])
 
   const setLocale = (next: Locale) => {
     setLocaleState(next)
-    try {
-      localStorage.setItem("elementar-locale", next)
-    } catch {
-      /* noop */
-    }
   }
 
   const t = (key: string): string => {

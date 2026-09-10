@@ -40,7 +40,7 @@ export default function PoliticaDeConfidentialitatePage() {
               <a href="mailto:office@elementar.md" className="text-sky-400 hover:text-sky-300 underline">
                 office@elementar.md
               </a>{" "}
-              sau la telefon +373 698 30 702.
+              sau la telefon +373 79 010 277.
             </p>
           </div>
 
