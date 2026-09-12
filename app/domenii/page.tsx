@@ -126,8 +126,8 @@ export default function DomeniiPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild className={`bg-sky-500 text-white hover:bg-sky-400 ${fx}`}>
-              <Link href="/galerie">
-                Vezi galeria
+              <Link href="/contact">
+                Contactează-ne
                 <ArrowRight className="ms-2 h-4 w-4" aria-hidden="true" />
               </Link>
             </Button>
@@ -267,13 +267,6 @@ function DomainCard({
           ))}
         </ul>
       </div>
-      <Link
-        href="/galerie"
-        className="inline-flex items-center gap-2 text-sky-300 text-sm hover:text-white transition-colors"
-      >
-        <ArrowRight className="h-4 w-4" />
-        Vezi galeria
-      </Link>
     </div>
   )
 }

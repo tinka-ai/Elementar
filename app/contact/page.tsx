@@ -15,7 +15,6 @@ import {
   Clock,
   Users,
   BookOpen,
-  Image as ImageIcon,
   HelpCircle,
   PlayCircle,
   X,
@@ -169,20 +168,13 @@ export default function ContactPage() {
               {/* NAVIGARE RAPIDĂ */}
               <div className="mt-8 p-6 bg-white/5 border border-white/10 rounded-xl">
                 <h3 className="text-lg font-bold text-gray-300 mb-4">Între timp, explorează:</h3>
-                <div className="mx-auto max-w-3xl grid gap-3 justify-items-center sm:grid-cols-2 md:grid-cols-3">
+                <div className="mx-auto max-w-3xl grid gap-3 justify-items-center sm:grid-cols-2">
                   <Link
                     href="/domenii"
                     className={`w-full p-3 rounded-lg bg-white/10 hover:bg-white/15 text-center transition-colors ${fx}`}
                   >
                     <BookOpen className="mx-auto h-6 w-6 text-sky-400 mb-1" />
                     <div className="text-sm text-gray-300">Domenii</div>
-                  </Link>
-                  <Link
-                    href="/galerie"
-                    className={`w-full p-3 rounded-lg bg-white/10 hover:bg-white/15 text-center transition-colors ${fx}`}
-                  >
-                    <ImageIcon className="mx-auto h-6 w-6 text-sky-400 mb-1" />
-                    <div className="text-sm text-gray-300">Galerie</div>
                   </Link>
                   <Link
                     href="/faq"
@@ -202,7 +194,7 @@ export default function ContactPage() {
       <section className="py-16 sm:py-24 border-t border-white/5">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <h2 className="text-2xl font-bold text-gray-300 mb-8 text-center">Pregătește-te pentru vizită</h2>
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2">
             <Link
               href="/domenii"
               className={`p-6 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors ${fx}`}
@@ -216,13 +208,6 @@ export default function ContactPage() {
             >
               <h3 className="text-lg font-bold text-gray-300 mb-2">Întrebări Frecvente</h3>
               <p className="text-gray-400 text-sm">Găsește răspunsuri la întrebările despre vizită</p>
-            </Link>
-            <Link
-              href="/galerie"
-              className={`p-6 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors ${fx}`}
-            >
-              <h3 className="text-lg font-bold text-gray-300 mb-2">Vezi Galeria</h3>
-              <p className="text-gray-400 text-sm">Inspiră-te din experiențele altor vizitatori</p>
             </Link>
           </div>
         </div>

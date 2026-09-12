@@ -272,14 +272,6 @@ export default function FAQPage() {
   </Link>
 
   <Link
-    href="/galerie"
-    className={`w-full p-6 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors ${fx}`}
-  >
-    <h3 className="text-lg font-bold text-gray-300 mb-2">Galerie</h3>
-    <p className="text-gray-400 text-sm">Vezi imagini din parcul nostru</p>
-  </Link>
-
-  <Link
     href="/activitati-educative-copii-chisinau"
     className={`w-full p-6 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors ${fx}`}
   >

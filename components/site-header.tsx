@@ -9,8 +9,7 @@ import NavLink from "@/components/nav-link"
 
 const NAV = [
   { href: "/",        label: "Acasă" },
-  { href: "/domenii", label: "Domenii" }, 
-  { href: "/galerie", label: "Galerie" },
+  { href: "/domenii", label: "Domenii" },
   { href: "/faq",     label: "Întrebări" },
   { href: "/contact", label: "Contact" },
 ]
