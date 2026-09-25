@@ -4,12 +4,12 @@ export const ELEMENTAR = {
   legalName: "ELEMENTAR — Parc de Știință și Curiozități",
   url: "https://elementar.md",
 
-  logo: "/images/logo-elementara-new.png",
+  logo: "/images/logo-elementara-new.webp",
   images: [
-    "/images/interactive-physics-experiment.png",
-    "/images/interactive-biology-microscope.png",
-    "/images/astronomie-planetariu-tehnologie.png",
-    "/images/optical-illusions-science-exhibit.png",
+    "/images/interactive-physics-experiment.webp",
+    "/images/interactive-biology-microscope.webp",
+    "/images/astronomie-planetariu-tehnologie.webp",
+    "/images/optical-illusions-science-exhibit.webp",
   ],
 
   // 📍 Locație clară pentru AI

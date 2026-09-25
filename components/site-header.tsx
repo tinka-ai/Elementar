@@ -10,6 +10,7 @@ import NavLink from "@/components/nav-link"
 const NAV = [
   { href: "/",        label: "Acasă" },
   { href: "/domenii", label: "Domenii" },
+  { href: "/despre",  label: "Despre" },
   { href: "/faq",     label: "Întrebări" },
   { href: "/contact", label: "Contact" },
 ]
@@ -93,7 +94,7 @@ const linkCls = (href: string) => {
           {/* LOGO */}
           <Link href="/" className="flex items-center gap-3" aria-label="Acasă">
             <Image
-              src="/images/logo-elementara-new.png"
+              src="/images/logo-elementara-new.webp"
               alt="Logo ELEMENTAR — Parc de Știință și Curiozități"
               width={150}
               height={34}
@@ -130,7 +131,7 @@ const linkCls = (href: string) => {
             {/* LOGO */}
             <Link href="/" className="flex items-center gap-3" aria-label="Acasă">
               <Image
-                src="/images/logo-elementara-new.png"
+                src="/images/logo-elementara-new.webp"
                 alt="Logo ELEMENTAR — Parc de Știință și Curiozități"
                 width={130}
                 height={30}

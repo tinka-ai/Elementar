@@ -1,4 +1,20 @@
+import type { Metadata } from "next"
 import { ELEMENTAR } from "@/lib/entity"
+
+export const metadata: Metadata = {
+  title: "Despre ELEMENTAR — Parcul de Știință din Chișinău",
+  description:
+    "Cine suntem, ce oferim și cui ne adresăm la ELEMENTAR — parc educațional interactiv în Port Mall, Chișinău, cu experimente de fizică, chimie și astronomie pentru copii.",
+  alternates: {
+    canonical: `${ELEMENTAR.url}/despre`,
+  },
+  openGraph: {
+    title: "Despre ELEMENTAR — Parcul de Știință din Chișinău",
+    description:
+      "Cine suntem, ce oferim și cui ne adresăm la ELEMENTAR — parc educațional interactiv în Port Mall, Chișinău.",
+    url: `${ELEMENTAR.url}/despre`,
+  },
+}
 
 export default function DesprePage() {
   return (

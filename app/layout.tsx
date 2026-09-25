@@ -26,7 +26,7 @@ export const metadata: Metadata = {
       "Parcul de Știință și Curiozități – locul în care joaca, arta și experimentul te conduc la înțelegerea fenomenelor reale.",
     url: "https://elementar.md",
     siteName: "ELEMENTAR",
-    images: [{ url: "/images/logo-elementara-new.png", width: 1200, height: 630, alt: "ELEMENTAR" }],
+    images: [{ url: "/images/logo-elementara-new.webp", width: 1200, height: 630, alt: "ELEMENTAR" }],
     locale: "ro_MD",
     type: "website",
   },
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     title: "ELEMENTAR — Parc de Știință și Curiozități",
     description:
       "Parcul de Știință și Curiozități – locul în care joaca, arta și experimentul te conduc la înțelegerea fenomenelor reale.",
-    images: ["/images/logo-elementara-new.png"],
+    images: ["/images/logo-elementara-new.webp"],
   },
   robots: { index: true, follow: true },
   icons: {

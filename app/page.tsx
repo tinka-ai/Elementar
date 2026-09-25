@@ -92,7 +92,7 @@ export default function Page() {
               <div className="relative">
                 <div className="absolute -inset-8 -z-10 rounded-[2rem] bg-[radial-gradient(circle_at_70%_30%,rgba(56,189,248,0.18),transparent_60%)]" />
                 <Image
-                  src="/images/Portret-copil-cu-halou-luminos.png"
+                  src="/images/Portret-copil-cu-halou-luminos.webp"
                   alt="Copil curios cu nimb luminos, simbol al descoperirii și al științei"
                   width={880}
                   height={700}
@@ -137,7 +137,7 @@ export default function Page() {
             </div>
             <div>
               <Image
-                src="/images/interactive-physics-experiment.png"
+                src="/images/interactive-physics-experiment.webp"
                 alt="Copil experimentează pendulul lui Newton la un stand"
                 width={880}
                 height={620}
@@ -153,7 +153,7 @@ export default function Page() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 grid lg:grid-cols-2 gap-10 items-center">
             <div>
               <img
-                src="/images/optical-illusions-science-exhibit.png"
+                src="/images/optical-illusions-science-exhibit.webp"
                 alt="Copii și adulți explorează iluziile optice într-o sală interactivă cu modele geometrice colorate"
                 width={880}
                 height={620}

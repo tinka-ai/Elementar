@@ -4,7 +4,7 @@ import Link from "next/link"
 import { ELEMENTAR } from "@/lib/entity"
 
 export const metadata: Metadata = {
-  title: "Ghiduri educaționale pentru părinți și școli | ELEMENTAR",
+  title: "Ghiduri educaționale pentru părinți și școli",
   description:
     "Ghiduri educaționale despre activități pentru copii în Chișinău, excursii școlare, experiențe STEM și recomandări pentru părinți.",
   alternates: {
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 }
 
 function absUrl(pathOrUrl?: string) {
-  if (!pathOrUrl) return `${ELEMENTAR.url}/images/logo-elementara-new.png`
+  if (!pathOrUrl) return `${ELEMENTAR.url}/images/logo-elementara-new.webp`
   if (pathOrUrl.startsWith("http://") || pathOrUrl.startsWith("https://")) return pathOrUrl
   return `${ELEMENTAR.url}${pathOrUrl.startsWith("/") ? "" : "/"}${pathOrUrl}`
 }

@@ -1,4 +1,4 @@
-"use client"
+import type { Metadata } from "next"
 import Link from "next/link"
 import Script from "next/script"
 import { Button } from "@/components/ui/button"
@@ -14,6 +14,21 @@ import {
   MessageCircle,
 } from "lucide-react"
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
+import { ELEMENTAR } from "@/lib/entity"
+
+export const metadata: Metadata = {
+  title: "Întrebări Frecvente — Program, tarife, acces",
+  description:
+    "Răspunsuri la cele mai frecvente întrebări despre ELEMENTAR: program de vizitare, tarife, rezervări, acces pentru persoane cu dizabilități și facilități din parc.",
+  alternates: {
+    canonical: `${ELEMENTAR.url}/faq`,
+  },
+  openGraph: {
+    title: "Întrebări Frecvente — ELEMENTAR",
+    description: "Program, tarife, rezervări și facilități — răspunsuri rapide despre vizita la ELEMENTAR.",
+    url: `${ELEMENTAR.url}/faq`,
+  },
+}
 
 export default function FAQPage() {
   const fx =

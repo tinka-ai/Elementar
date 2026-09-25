@@ -1,6 +1,5 @@
-"use client"
-
 import type React from "react"
+import type { Metadata } from "next"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
@@ -14,6 +13,22 @@ import {
   Beaker,
   Brain,
 } from "lucide-react"
+import { ELEMENTAR } from "@/lib/entity"
+
+export const metadata: Metadata = {
+  title: "Domenii Științifice — Fizică, Chimie, Biologie, Astronomie",
+  description:
+    "Explorează domeniile științifice de la ELEMENTAR: fizică, chimie, biologie, astronomie, matematică și psihologie perceptivă, prin experimente interactive pentru copii și școli.",
+  alternates: {
+    canonical: `${ELEMENTAR.url}/domenii`,
+  },
+  openGraph: {
+    title: "Domenii Științifice — ELEMENTAR",
+    description:
+      "Fizică, chimie, biologie, astronomie, matematică și psihologie perceptivă — explorate prin experimente interactive.",
+    url: `${ELEMENTAR.url}/domenii`,
+  },
+}
 
 export default function DomeniiPage() {
   const fx =
@@ -59,7 +74,7 @@ export default function DomeniiPage() {
                 "Termodinamică",
                 "Fizica modernă",
               ]}
-              image="/images/interactive-physics-experiment.png"
+              image="/images/interactive-physics-experiment.webp"
               color="from-blue-400 to-cyan-400"
             />
             <DomainCard
@@ -68,7 +83,7 @@ export default function DomeniiPage() {
               title="Chimie"
               description="Explorează lumea atomilor și moleculelor prin reacții spectaculoase și experimente interactive sigure."
               topics={["Reacții chimice", "Structura atomică", "Chimie organică", "Cristalografie", "Electrochimie"]}
-              image="/images/colorful-chemistry-experiments.png"
+              image="/images/colorful-chemistry-experiments.webp"
               color="from-green-400 to-emerald-400"
             />
             <DomainCard
@@ -77,7 +92,7 @@ export default function DomeniiPage() {
               title="Biologie"
               description="Pătrunde în secretele vieții, de la celule microscopice la ecosisteme complexe."
               topics={["Biologia celulară", "Genetică", "Ecologie", "Anatomie", "Microbiologie"]}
-              image="/images/interactive-biology-microscope.png"
+              image="/images/interactive-biology-microscope.webp"
               color="from-purple-400 to-violet-400"
             />
             <DomainCard
@@ -92,7 +107,7 @@ export default function DomeniiPage() {
                 "Explorarea spațială",
                 "Astrobiologie",
               ]}
-              image="/images/astronomie-planetariu-tehnologie.png"
+              image="/images/astronomie-planetariu-tehnologie.webp"
               color="from-indigo-400 to-purple-400"
             />
             <DomainCard
@@ -101,7 +116,7 @@ export default function DomeniiPage() {
               title="Matematică"
               description="Descoperă frumusețea matematicii prin puzzle-uri, jocuri logice și demonstrații vizuale."
               topics={["Geometrie", "Algebră", "Statistică", "Logică", "Matematică aplicată"]}
-              image="/images/provocari-logice-puzzle-stiinta.png"
+              image="/images/provocari-logice-puzzle-stiinta.webp"
               color="from-orange-400 to-red-400"
             />
             <DomainCard
@@ -110,7 +125,7 @@ export default function DomeniiPage() {
               title="Psihologie și Percepție"
               description="Înțelege cum funcționează mintea umană prin experimente cu iluzii optice și cognitive."
               topics={["Iluzii optice", "Percepția senzorială", "Memoria", "Atenția", "Procesarea informației"]}
-              image="/images/optical-illusions-science-exhibit.png"
+              image="/images/optical-illusions-science-exhibit.webp"
               color="from-pink-400 to-rose-400"
             />
           </div>
@@ -153,7 +168,7 @@ export default function DomeniiPage() {
             </div>
             <div className="relative">
               <Image
-                src="/images/hands-on-science-experiment.png"
+                src="/images/hands-on-science-experiment.webp"
                 alt="Experimente interdisciplinare"
                 width={600}
                 height={400}

@@ -1,5 +1,16 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import { Sparkles, ArrowRight } from "lucide-react"
+import { ELEMENTAR } from "@/lib/entity"
+
+export const metadata: Metadata = {
+  title: "Galerie Foto & Video — revenim în curând",
+  description: "Galeria foto și video ELEMENTAR este în curs de actualizare cu imagini noi.",
+  alternates: {
+    canonical: `${ELEMENTAR.url}/galerie`,
+  },
+  robots: { index: false, follow: true },
+}
 
 export default function GaleriePage() {
   return (
