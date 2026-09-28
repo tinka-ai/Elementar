@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import Script from "next/script"
 import Link from "next/link"
 import { ELEMENTAR } from "@/lib/entity"
 
@@ -82,23 +81,20 @@ export default function Page() {
 
   return (
     <main className="mx-auto max-w-4xl px-4 py-12">
-      <Script
+      <script
         id="webpage-jsonld"
         type="application/ld+json"
-        strategy="beforeInteractive"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(webpageJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webpageJsonLd).replace(/</g, "\\u003c") }}
       />
-      <Script
+      <script
         id="service-jsonld"
         type="application/ld+json"
-        strategy="beforeInteractive"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd).replace(/</g, "\\u003c") }}
       />
-      <Script
+      <script
         id="breadcrumbs-jsonld"
         type="application/ld+json"
-        strategy="beforeInteractive"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd).replace(/</g, "\\u003c") }}
       />
 
       <nav className="text-sm text-gray-400">

@@ -44,9 +44,12 @@ export const ELEMENTAR = {
 
   openingHours: ["Mo-Su 10:00-22:00"],
 
+  // Verificate manual (2026-09-28): profilul de Instagram confirmat "elementar.md";
+  // link-ul de Facebook e cel folosit si in footer (share-link verificat, redirectioneaza
+  // catre pagina reala "Element Ar | Chisinau").
   sameAs: [
-    "https://facebook.com/elementara.ro",
-    "https://instagram.com/elementara.ro",
+    "https://www.facebook.com/share/1BrBpvo3o1/",
+    "https://www.instagram.com/elementar.md/",
   ],
 
   audience: [

@@ -1,7 +1,23 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { BadgeCheck } from "lucide-react"
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
 import { ELEMENTAR } from "@/lib/entity"
+
+const desprefaqs = [
+  {
+    q: "Cine a creat parcul Elementar din Chișinău?",
+    a: `Elementar a fost creat de A.O. „Pro-Elementary” cu suportul financiar al Suediei, prin intermediul Fundației „Est-Europene”. Parcul funcționează din ${ELEMENTAR.foundingDate} în Port Mall, Chișinău.`,
+  },
+  {
+    q: "Ce face parcul Elementar diferit de alte locuri pentru copii din Chișinău?",
+    a: "Elementar este un parc interactiv de știință, nu un loc de joacă obișnuit: exponatele sunt experimente reale de fizică, chimie, biologie și astronomie, pe care copiii le ating și le testează singuri, ghidați de educatori.",
+  },
+  {
+    q: "Pentru ce vârste este potrivit Elementar?",
+    a: "Elementar este gândit pentru copii, adolescenți, familii și grupuri școlare organizate, cu activități adaptate diferitelor grupe de vârstă.",
+  },
+]
 
 export const metadata: Metadata = {
   title: "Despre ELEMENTAR — Parcul de Știință din Chișinău",
@@ -41,6 +57,10 @@ export default function DesprePage() {
         <p className="text-gray-300">
           Elementar este un parc educațional interactiv în care copiii învață prin experiment și explorare ghidată.
           Conceptele științifice sunt prezentate simplu, prin demonstrații și activități practice.
+        </p>
+        <p className="text-gray-300">
+          Parcul a fost creat de A.O. „Pro-Elementary”, cu suportul financiar al Suediei, prin intermediul Fundației
+          „Est-Europene”, și funcționează din {ELEMENTAR.foundingDate} în Port Mall, Chișinău.
         </p>
       </section>
 
@@ -105,6 +125,36 @@ export default function DesprePage() {
           </p>
         </div>
       </section>
+
+      <section className="mt-10 space-y-4">
+        <h2 className="text-2xl font-semibold text-gray-200">Întrebări despre parc</h2>
+        <Accordion type="single" collapsible className="space-y-2">
+          {desprefaqs.map((item, i) => (
+            <AccordionItem key={i} value={`q-${i}`} className="border border-white/10 bg-white/5 rounded-lg px-2">
+              <AccordionTrigger className="text-left px-4 py-3 hover:no-underline">
+                <span className="text-gray-300 font-medium">{item.q}</span>
+              </AccordionTrigger>
+              <AccordionContent className="px-4 pb-4 text-gray-300">{item.a}</AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </section>
+
+      <script
+        id="despre-faq-jsonld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: desprefaqs.map((item) => ({
+              "@type": "Question",
+              name: item.q,
+              acceptedAnswer: { "@type": "Answer", text: item.a },
+            })),
+          }).replace(/</g, "\\u003c"),
+        }}
+      />
     </main>
   )
 }

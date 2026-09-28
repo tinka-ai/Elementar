@@ -1,6 +1,5 @@
 // app/activitati-copii-chisinau-weekend/page.tsx
 import type { Metadata } from "next"
-import Script from "next/script"
 import Link from "next/link"
 import { ELEMENTAR } from "@/lib/entity"
 
@@ -131,35 +130,30 @@ export default function Page() {
   return (
     <main className="mx-auto max-w-3xl px-4 py-10">
       {/* Schemas */}
-      <Script
+      <script
         id="webpage-jsonld"
         type="application/ld+json"
-        strategy="beforeInteractive"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(pageJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(pageJsonLd).replace(/</g, "\\u003c") }}
       />
-      <Script
+      <script
         id="article-jsonld"
         type="application/ld+json"
-        strategy="beforeInteractive"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd).replace(/</g, "\\u003c") }}
       />
-      <Script
+      <script
         id="itemlist-jsonld"
         type="application/ld+json"
-        strategy="beforeInteractive"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd).replace(/</g, "\\u003c") }}
       />
-      <Script
+      <script
         id="breadcrumbs-jsonld"
         type="application/ld+json"
-        strategy="beforeInteractive"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd).replace(/</g, "\\u003c") }}
       />
-      <Script
+      <script
         id="faqpage-jsonld"
         type="application/ld+json"
-        strategy="beforeInteractive"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd).replace(/</g, "\\u003c") }}
       />
 
       {/* Breadcrumb vizibil */}

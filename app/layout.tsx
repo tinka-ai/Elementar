@@ -6,7 +6,6 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { LanguageProvider } from "@/components/language-provider"
 import SiteHeader from "@/components/site-header"
 import SiteFooter from "@/components/site-footer"
-import Script from "next/script"
 import { getElementarJsonLd } from "@/lib/schema"
 
 const inter = Inter({ subsets: ["latin"] })
@@ -67,11 +66,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="manifest" href="/site.webmanifest" />
 
         {/* ✅ Entity Schema (AI-ready) — o singură dată, pe tot site-ul */}
-        <Script
+        <script
           id="elementar-jsonld"
           type="application/ld+json"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(getElementarJsonLd()) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(getElementarJsonLd()).replace(/</g, "\\u003c") }}
         />
       </head>
 

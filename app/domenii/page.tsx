@@ -13,7 +13,23 @@ import {
   Beaker,
   Brain,
 } from "lucide-react"
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
 import { ELEMENTAR } from "@/lib/entity"
+
+const domeniifaqs = [
+  {
+    q: "Ce domenii științifice pot explora copiii la Elementar?",
+    a: "La Elementar copiii explorează fizică, chimie, biologie, astronomie, matematică și psihologia percepției, prin exponate interactive și experimente ghidate.",
+  },
+  {
+    q: "Are Elementar planetariu sau exponate de astronomie?",
+    a: "Da, zona de astronomie include un planetariu interactiv unde vizitatorii pot explora sistemul solar, stelele și galaxiile.",
+  },
+  {
+    q: "Sunt experimentele de chimie sigure pentru copii?",
+    a: "Da, toate experimentele de chimie sunt sigure și supravegheate de educatori calificați, adaptate vârstei participanților.",
+  },
+]
 
 export const metadata: Metadata = {
   title: "Domenii Științifice — Fizică, Chimie, Biologie, Astronomie",
@@ -209,6 +225,39 @@ export default function DomeniiPage() {
           </div>
         </div>
       </section>
+
+      {/* INTREBARI CONVERSATIONALE (GEO / AI) */}
+      <section className="py-16 sm:py-24 border-t border-white/5">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6">
+          <SectionTitle title="Întrebări despre domenii" />
+          <Accordion type="single" collapsible className="mt-8 space-y-2">
+            {domeniifaqs.map((item, i) => (
+              <AccordionItem key={i} value={`q-${i}`} className={`border border-white/10 bg-white/5 rounded-lg px-2 ${fx}`}>
+                <AccordionTrigger className="text-left px-4 py-3 hover:no-underline">
+                  <span className="text-gray-300 font-medium">{item.q}</span>
+                </AccordionTrigger>
+                <AccordionContent className="px-4 pb-4 text-gray-300">{item.a}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
+
+      <script
+        id="domenii-faq-jsonld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: domeniifaqs.map((item) => ({
+              "@type": "Question",
+              name: item.q,
+              acceptedAnswer: { "@type": "Answer", text: item.a },
+            })),
+          }).replace(/</g, "\\u003c"),
+        }}
+      />
     </main>
   )
 }

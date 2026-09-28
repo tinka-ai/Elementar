@@ -1,6 +1,5 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import Script from "next/script"
 import { Button } from "@/components/ui/button"
 import {
   ArrowRight,
@@ -184,11 +183,10 @@ export default function FAQPage() {
   return (
     <div className="min-h-dvh bg-black text-gray-200 antialiased pb-20">
       {/* ✅ FAQ Schema (GEO / AI-ready) */}
-      <Script
+      <script
         id="faq-jsonld"
         type="application/ld+json"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd).replace(/</g, "\\u003c") }}
       />
 
       <main>

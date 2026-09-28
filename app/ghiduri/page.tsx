@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import Script from "next/script"
 import Link from "next/link"
 import { ELEMENTAR } from "@/lib/entity"
 
@@ -67,17 +66,15 @@ export default function Page() {
 
   return (
     <main className="mx-auto max-w-4xl px-4 py-12">
-      <Script
+      <script
         id="collection-jsonld"
         type="application/ld+json"
-        strategy="beforeInteractive"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionJsonLd).replace(/</g, "\\u003c") }}
       />
-      <Script
+      <script
         id="breadcrumbs-jsonld"
         type="application/ld+json"
-        strategy="beforeInteractive"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd).replace(/</g, "\\u003c") }}
       />
 
       {/* Breadcrumb vizibil */}
