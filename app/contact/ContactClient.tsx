@@ -64,7 +64,17 @@ export default function ContactClient() {
                     fx={fx}
                     icon={<Phone className="h-6 w-6" />}
                     title="Telefon"
-                    info="+373 79 010 277"
+                    info={
+                      <>
+                        <a href="tel:+37379010277" className="hover:text-sky-300 transition-colors">
+                          +373 79 010 277
+                        </a>
+                        {" · "}
+                        <a href="tel:+37369830702" className="hover:text-sky-300 transition-colors">
+                          +373 69 830 702
+                        </a>
+                      </>
+                    }
                     details="Luni - Duminică, 10:00 - 22:00"
                   />
                   <ContactInfo
@@ -145,6 +155,20 @@ export default function ContactClient() {
                     <span className="flex flex-col items-start text-left">
                       <span className="font-semibold">Sună-ne</span>
                       <span className="text-xs font-normal text-gray-400">+373 79 010 277</span>
+                    </span>
+                  </a>
+                </Button>
+
+                <Button
+                  asChild
+                  variant="outline"
+                  className={`w-full h-auto py-4 border-sky-700/60 text-sky-300 hover:bg-sky-500/10 bg-transparent ${fx}`}
+                >
+                  <a href="tel:+37369830702">
+                    <Phone className="mr-3 h-5 w-5 shrink-0" />
+                    <span className="flex flex-col items-start text-left">
+                      <span className="font-semibold">Sună-ne</span>
+                      <span className="text-xs font-normal text-gray-400">+373 69 830 702</span>
                     </span>
                   </a>
                 </Button>
@@ -308,7 +332,7 @@ function ContactInfo({
   fx: string
   icon: React.ReactNode
   title: string
-  info: string
+  info: React.ReactNode
   details: string
 }) {
   return (
