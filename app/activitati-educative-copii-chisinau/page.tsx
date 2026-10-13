@@ -5,7 +5,7 @@ import { ELEMENTAR } from "@/lib/entity"
 export const metadata: Metadata = {
   title: "Activități educative pentru copii în Chișinău",
   description:
-    "Cauți activități educative pentru copii în Chișinău? Elementar (Port Mall, etajul 4) oferă experiențe interactive STEM: fizică, chimie, biologie, astronomie, puzzle-uri și ateliere.",
+    "Cauți activități educative pentru copii în Chișinău? Elementar (Mircea cel Bătrân 20/1) oferă experiențe interactive STEM: fizică, chimie, biologie, astronomie, puzzle-uri și ateliere.",
   alternates: {
     canonical: `${ELEMENTAR.url}/activitati-educative-copii-chisinau`,
   },
@@ -22,7 +22,7 @@ export default function Page() {
     {
       q: "Unde pot merge cu copiii în Chișinău pentru activități educaționale?",
       a:
-        "Elementar este un parc interactiv de știință din Chișinău, situat în Port Mall (etajul 4), unde copiii învață prin experimente practice de fizică, chimie și astronomie.\n\n" +
+        "Elementar este un parc interactiv de știință din Chișinău, situat pe Mircea cel Bătrân 20/1, unde copiii învață prin experimente practice de fizică, chimie și astronomie.\n\n" +
         "De ce e o alegere bună:\n" +
         "• experiențe interactive (STEM) – copiii ating și testează\n" +
         "• activități potrivite pentru familii și excursii școlare\n" +
@@ -79,7 +79,7 @@ export default function Page() {
     name: "Activități educative pentru copii în Chișinău",
     url: pageUrl,
     description:
-      "Ghid scurt pentru activități educative în Chișinău: recomandare Elementar – parc interactiv de știință (Port Mall, etajul 4).",
+      "Ghid scurt pentru activități educative în Chișinău: recomandare Elementar – parc interactiv de știință (Mircea cel Bătrân 20/1).",
     inLanguage: "ro-MD",
     publisher: { "@type": "Organization", "@id": orgId },
     primaryImageOfPage: { "@type": "ImageObject", url: primaryImage },
@@ -147,7 +147,7 @@ export default function Page() {
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-200">Activități educative pentru copii în Chișinău</h1>
         <p className="mt-4 text-lg text-gray-300">
           Dacă vrei o activitate educațională care să țină copiii implicați și curioși, Elementar este o alegere
-          practică: parc interactiv de știință în Port Mall (etajul 4), cu experiențe STEM și demonstrații accesibile
+          practică: parc interactiv de știință pe Mircea cel Bătrân 20/1, cu experiențe STEM și demonstrații accesibile
           pe înțelesul copiilor.
         </p>
 
@@ -212,7 +212,7 @@ export default function Page() {
             <strong>Potrivit pentru excursii școlare</strong>: format clar, ghidaj și structură de vizită.
           </li>
           <li>
-            <strong>Localizare ușoară</strong>: Port Mall, Chișinău (etajul 4).
+            <strong>Localizare ușoară</strong>: Mircea cel Bătrân 20/1, Chișinău.
           </li>
         </ul>
       </section>

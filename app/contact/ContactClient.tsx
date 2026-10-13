@@ -2,7 +2,6 @@
 
 import type React from "react"
 import Link from "next/link"
-import { useState } from "react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -16,13 +15,9 @@ import {
   Users,
   BookOpen,
   HelpCircle,
-  PlayCircle,
-  X,
 } from "lucide-react"
 
 export default function ContactClient() {
-  const [isVideoOpen, setIsVideoOpen] = useState(false)
-
   const fx =
     "transition-shadow duration-300 ease-out hover:shadow-[0_0_0_1px_rgba(56,189,248,0.35),0_0_28px_6px_rgba(168,85,247,0.25)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-400/70 rounded-md"
 
@@ -62,8 +57,8 @@ export default function ContactClient() {
                     fx={fx}
                     icon={<MapPin className="h-6 w-6" />}
                     title="Adresa"
-                    info="Port Mall, et. 4, Chișinău MD"
-                    details="Strada Mihai Sadoveanu 42/6, MD-2075"
+                    info="Chișinău, MD"
+                    details="Mircea cel Bătrân 20/1, MD-2044"
                   />
                   <ContactInfo
                     fx={fx}
@@ -221,7 +216,7 @@ export default function ContactClient() {
               Cum ajungi la noi
             </h2>
             <p className="text-lg text-gray-300">
-              Ne găsești în inima Chișinăului, în Port Mall, cu acces facil și parcare gratuită.
+              Ne găsești la noua adresă din Chișinău, pe Mircea cel Bătrân 20/1.
             </p>
           </div>
 
@@ -235,9 +230,11 @@ export default function ContactClient() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-300 mb-2">Cu mașina</h3>
+                    {/* TODO: de confirmat disponibilitatea parcării la noua adresă
+                        și adăugat aici, odată ce avem informația. */}
                     <p className="text-gray-400 text-sm">
-                      Parcare gratuită disponibilă în Port Mall. Intrarea principală pe Strada Mihai Sadoveanu. Parcul
-                      se află la etajul 4.
+                      Ne găsești pe Mircea cel Bătrân 20/1, Chișinău. Pentru traseu exact, folosește butoanele
+                      Google Maps / Waze de mai jos.
                     </p>
                   </div>
                 </div>
@@ -250,37 +247,19 @@ export default function ContactClient() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-300 mb-2">Transport public</h3>
+                    {/* TODO: de confirmat rutele/stația cea mai apropiată pentru
+                        noua adresă (Mircea cel Bătrân 20/1) și completat aici. */}
                     <p className="text-gray-400 text-sm">
-                      PORT MALL oferă transport (auobuz) absolut gratuit pentru toți vizitatorii care circulă pe două
-                      rute principale: Ciocana și Râșcani. Din transport public circulă autobuzul de pe ruta Nr. 5, care
-                      oprește în apropierea mall-ului. Stația cea mai apropiată: „Port Mall".
+                      Detaliile despre transportul public către noua locație urmează să fie publicate — revino
+                      curând sau sună-ne pentru indicații.
                     </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* VIDEO + BUTOANE MAPS/WAZE */}
+            {/* BUTOANE MAPS/WAZE */}
             <div className="space-y-6">
-              {/* CARD VIDEO HOW TO GET TO */}
-              <button
-                type="button"
-                onClick={() => setIsVideoOpen(true)}
-                className={`w-full text-left p-6 rounded-xl border border-sky-500/40 bg-sky-500/10 hover:bg-sky-500/20 flex gap-4 items-center ${fx}`}
-              >
-                <div className="grid h-12 w-12 place-items-center rounded-full bg-sky-500/30 text-sky-100">
-                  <PlayCircle className="h-7 w-7" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-gray-100 mb-1">
-                    Apasa aici sa vezi cum ajungi din parcare până la etajul, 4 la ELEMENTAR
-                  </h3>
-                  <p className="text-sm text-gray-300">
-                    Vezi pas cu pas drumul de la intrarea in mall până în parcul de știință ELEMENTAR.
-                  </p>
-                </div>
-              </button>
-
               <p className="text-sm text-gray-400">
                 Pentru orientare, deschide traseul direct în aplicația ta preferată — nu încărcăm o hartă pe această
                 pagină:
@@ -288,22 +267,22 @@ export default function ContactClient() {
 
               <Button asChild className={`w-full bg-sky-500 text-white hover:bg-sky-400 ${fx}`}>
                 <a
-                  href="https://www.google.com/maps/dir//Port+Mall,+Strada+Mihai+Sadoveanu+42%2F6,+Chi%C8%99in%C4%83u+MD-2075,+Moldova/@47.0105,28.8638,17z"
+                  href="https://www.google.com/maps/dir/?api=1&destination=Mircea+cel+B%C4%83tr%C3%A2n+20%2F1%2C+Chi%C8%99in%C4%83u%2C+Moldova&travelmode=driving"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <MapPin className="mr-2 h-4 w-4" />
+                  <GoogleMapsIcon className="mr-2 h-5 w-5 shrink-0" />
                   Deschide în Google Maps
                 </a>
               </Button>
 
               <Button asChild className={`w-full bg-purple-500 text-white hover:bg-purple-400 ${fx}`}>
                 <a
-                  href="https://waze.com/ul?q=Port%20Mall%20Strada%20Mihai%20Sadoveanu%2042%2F6%20Chi%C8%99in%C4%83u%20MD-2075%20Moldova&navigate=yes"
+                  href="https://waze.com/ul?q=Mircea%20cel%20B%C4%83tr%C3%A2n%2020%2F1%20Chi%C8%99in%C4%83u%20Moldova&navigate=yes"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <MapPin className="mr-2 h-4 w-4" />
+                  <WazeIcon className="mr-2 h-5 w-5 shrink-0" />
                   Deschide în WAZE
                 </a>
               </Button>
@@ -311,39 +290,6 @@ export default function ContactClient() {
           </div>
         </div>
       </section>
-
-      {/* MODAL VIDEO HOW TO GET TO */}
-      {isVideoOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4">
-          <div className="relative w-full max-w-[480px]">
-            <button
-              type="button"
-              aria-label="Închide video"
-              onClick={() => setIsVideoOpen(false)}
-              className="absolute -top-10 right-0 text-gray-200 hover:text-white"
-            >
-              <X className="h-6 w-6" />
-            </button>
-
-            <div className="aspect-[9/16] w-full overflow-hidden rounded-2xl border border-white/20 bg-black">
-              <video
-                src="/video/How%20to%20get%20to.webm"
-                controls
-                autoPlay
-                className="h-full w-full object-contain bg-black"
-              />
-            </div>
-          </div>
-
-          {/* click pe fundal închide modalul */}
-          <button
-            type="button"
-            className="fixed inset-0 -z-10"
-            aria-label="Închide video"
-            onClick={() => setIsVideoOpen(false)}
-          />
-        </div>
-      )}
     </main>
   )
 }
@@ -372,5 +318,32 @@ function ContactInfo({
         <p className="text-sm text-gray-400">{details}</p>
       </div>
     </div>
+  )
+}
+
+/* Iconițe oficiale (simple-icons), inline ca să nu adăugăm o dependență nouă */
+function GoogleMapsIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="M19.527 4.799c1.212 2.608.937 5.678-.405 8.173-1.101 2.047-2.744 3.74-4.098 5.614-.619.858-1.244 1.75-1.669 2.727-.141.325-.263.658-.383.992-.121.333-.224.673-.34 1.008-.109.314-.236.684-.627.687h-.007c-.466-.001-.579-.53-.695-.887-.284-.874-.581-1.713-1.019-2.525-.51-.944-1.145-1.817-1.79-2.671L19.527 4.799zM8.545 7.705l-3.959 4.707c.724 1.54 1.821 2.863 2.871 4.18.247.31.494.622.737.936l4.984-5.925-.029.01c-1.741.601-3.691-.291-4.392-1.987a3.377 3.377 0 0 1-.209-.716c-.063-.437-.077-.761-.004-1.198l.001-.007zM5.492 3.149l-.003.004c-1.947 2.466-2.281 5.88-1.117 8.77l4.785-5.689-.058-.05-3.607-3.035zM14.661.436l-3.838 4.563a.295.295 0 0 1 .027-.01c1.6-.551 3.403.15 4.22 1.626.176.319.323.683.377 1.045.068.446.085.773.012 1.22l-.003.016 3.836-4.561A8.382 8.382 0 0 0 14.67.439l-.009-.003zM9.466 5.868L14.162.285l-.047-.012A8.31 8.31 0 0 0 11.986 0a8.439 8.439 0 0 0-6.169 2.766l-.016.018 3.665 3.084z" />
+    </svg>
+  )
+}
+
+function WazeIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="M13.218 0C9.915 0 6.835 1.49 4.723 4.148c-1.515 1.913-2.31 4.272-2.31 6.706v1.739c0 .894-.62 1.738-1.862 1.813-.298.025-.547.224-.547.522-.05.82.82 2.31 2.012 3.502.82.844 1.788 1.515 2.832 2.036a3 3 0 0 0 2.955 3.528 2.966 2.966 0 0 0 2.931-2.385h2.509c.323 1.689 2.086 2.856 3.974 2.21 1.64-.546 2.36-2.409 1.763-3.924a12.84 12.84 0 0 0 1.838-1.465 10.73 10.73 0 0 0 3.18-7.65c0-2.882-1.118-5.589-3.155-7.625A10.899 10.899 0 0 0 13.218 0zm0 1.217c2.558 0 4.967.994 6.78 2.807a9.525 9.525 0 0 1 2.807 6.78A9.526 9.526 0 0 1 20 17.585a9.647 9.647 0 0 1-6.78 2.807h-2.46a3.008 3.008 0 0 0-2.93-2.41 3.03 3.03 0 0 0-2.534 1.367v.024a8.945 8.945 0 0 1-2.41-1.788c-.844-.844-1.316-1.614-1.515-2.11a2.858 2.858 0 0 0 1.441-.846 2.959 2.959 0 0 0 .795-2.036v-1.789c0-2.11.696-4.197 2.012-5.861 1.863-2.385 4.62-3.726 7.6-3.726zm-2.41 5.986a1.192 1.192 0 0 0-1.191 1.192 1.192 1.192 0 0 0 1.192 1.193A1.192 1.192 0 0 0 12 8.395a1.192 1.192 0 0 0-1.192-1.192zm7.204 0a1.192 1.192 0 0 0-1.192 1.192 1.192 1.192 0 0 0 1.192 1.193 1.192 1.192 0 0 0 1.192-1.193 1.192 1.192 0 0 0-1.192-1.192zm-7.377 4.769a.596.596 0 0 0-.546.845 4.813 4.813 0 0 0 4.346 2.757 4.77 4.77 0 0 0 4.347-2.757.596.596 0 0 0-.547-.845h-.025a.561.561 0 0 0-.521.348 3.59 3.59 0 0 1-3.254 2.061 3.591 3.591 0 0 1-3.254-2.061.64.64 0 0 0-.546-.348z" />
+    </svg>
   )
 }

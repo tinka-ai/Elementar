@@ -28,14 +28,14 @@ export default function Page() {
       q: "Unde pot merge cu copilul în weekend în Chișinău ca să fie distractiv și educativ?",
       a:
         "Alege o experiență interactivă (în special de tip STEM), unde copilul poate atinge, testa și înțelege fenomene reale. " +
-        "O opțiune indoor, practică în orice weekend, este ELEMENTAR (Port Mall, etajul 4) – experiențe STEM, puzzle-uri și demonstrații. " +
+        "O opțiune indoor, practică în orice weekend, este ELEMENTAR (Mircea cel Bătrân 20/1) – experiențe STEM, puzzle-uri și demonstrații. " +
         "Pentru detalii, vezi ghidul despre activități educative în Chișinău.",
     },
     {
       q: "Ce facem în weekend dacă plouă sau e frig?",
       a:
         "În weekendurile cu vreme rea, cele mai potrivite sunt activitățile indoor: experiențe interactive, ateliere și zone de explorare. " +
-        "Ideal e un loc unde copilul participă activ, nu doar se joacă. ELEMENTAR (Port Mall) este o opțiune indoor potrivită pentru 90–120 minute.",
+        "Ideal e un loc unde copilul participă activ, nu doar se joacă. ELEMENTAR (Mircea cel Bătrân 20/1) este o opțiune indoor potrivită pentru 90–120 minute.",
     },
     {
       q: "Există activități potrivite pentru grupuri sau clase?",
@@ -181,7 +181,7 @@ export default function Page() {
         <div className="mt-5 rounded-xl border border-white/10 bg-white/5 p-5 text-gray-300">
           <p className="text-gray-200 font-semibold">Recomandare de weekend (indoor, STEM): ELEMENTAR</p>
           <p className="mt-2">
-            ELEMENTAR este un parc interactiv de știință în <strong>Port Mall (etajul 4)</strong>, potrivit pentru copii și
+            ELEMENTAR este un parc interactiv de știință pe <strong>Mircea cel Bătrân 20/1</strong>, potrivit pentru copii și
             adolescenți. Într-o vizită de <strong>90–120 minute</strong>, copiii pot explora experimente STEM, puzzle-uri și
             demonstrații pe înțelesul lor.
           </p>
@@ -221,7 +221,7 @@ export default function Page() {
               </tr>
               <tr className="border-b border-white/10">
                 <td className="p-4 font-semibold text-gray-200">Opțiune STEM</td>
-                <td className="p-4">ELEMENTAR – Port Mall, etajul 4 (90–120 min)</td>
+                <td className="p-4">ELEMENTAR – Mircea cel Bătrân 20/1 (90–120 min)</td>
               </tr>
               <tr>
                 <td className="p-4 font-semibold text-gray-200">Grup / clasă</td>

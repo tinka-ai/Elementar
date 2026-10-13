@@ -5,7 +5,7 @@ import { ELEMENTAR } from "@/lib/entity"
 export const metadata: Metadata = {
   title: "Excursii școlare în Chișinău",
   description:
-    "Excursii școlare interactive în Chișinău la ELEMENTAR – parc de știință din Port Mall. Experimente practice de fizică, chimie și astronomie pentru clase și grupuri organizate.",
+    "Excursii școlare interactive în Chișinău la ELEMENTAR – parc de știință pe Mircea cel Bătrân 20/1. Experimente practice de fizică, chimie și astronomie pentru clase și grupuri organizate.",
   alternates: {
     canonical: `${ELEMENTAR.url}/excursii-scolare-chisinau`,
   },
@@ -113,7 +113,7 @@ export default function Page() {
         <h1 className="text-4xl font-bold text-gray-200">Excursii școlare în Chișinău</h1>
         <p className="mt-4 text-lg text-gray-300">
           ELEMENTAR oferă excursii școlare interactive în Chișinău, dedicate elevilor care învață prin experiment și
-          descoperire. Situat în Port Mall (etajul 4), parcul de știință combină demonstrații practice de fizică, chimie
+          descoperire. Situat pe Mircea cel Bătrân 20/1, parcul de știință combină demonstrații practice de fizică, chimie
           și astronomie cu activități educative adaptate vârstei.
         </p>
 
