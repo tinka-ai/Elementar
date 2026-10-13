@@ -271,7 +271,7 @@ export default function ContactClient() {
                 rel="noopener noreferrer"
                 className={`flex items-center gap-4 rounded-xl p-3 hover:bg-white/5 transition-colors ${fx}`}
               >
-                <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-sky-500">
+                <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-white">
                   <GoogleMapsIcon className="h-9 w-9" />
                 </span>
                 <span className="text-gray-200 font-semibold text-lg">Deschide în Google Maps</span>
