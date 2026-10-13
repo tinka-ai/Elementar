@@ -58,8 +58,19 @@ export default function Page() {
         </div>
       </section>
       {/* POSTER — Marea Deschidere 24 octombrie, prioritizat pentru mobil */}
-      <section className="w-full bg-black py-6 sm:py-8 border-b border-white/5">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 flex justify-center">
+      <section className="relative w-full overflow-hidden bg-black py-6 sm:py-10 border-b border-white/5">
+        {/* Fundal viu de Halloween — doar pe desktop (md+); pe mobil ramane simplu (negru) */}
+        <div className="hidden md:block absolute inset-0" aria-hidden="true">
+          <div className="absolute inset-0 bg-gradient-to-br from-orange-950 via-purple-950 to-black" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_25%,rgba(249,115,22,0.35),transparent_42%),radial-gradient(circle_at_85%_15%,rgba(168,85,247,0.4),transparent_40%),radial-gradient(circle_at_50%_95%,rgba(234,88,12,0.3),transparent_50%)]" />
+          <HalloweenMoon className="absolute top-6 right-[12%] h-16 w-16 text-orange-200/50" />
+          <HalloweenBat className="absolute top-10 left-[10%] h-7 w-7 text-white/40 animate-bounce [animation-duration:3.5s]" />
+          <HalloweenBat className="absolute top-20 left-[22%] h-5 w-5 text-white/30 animate-bounce [animation-duration:4.5s] [animation-delay:0.5s]" />
+          <HalloweenBat className="absolute bottom-16 right-[20%] h-6 w-6 text-white/35 animate-bounce [animation-duration:4s] [animation-delay:1s]" />
+          <HalloweenPumpkin className="absolute bottom-8 left-[14%] h-10 w-10 text-orange-400/60 animate-pulse" />
+          <HalloweenPumpkin className="absolute bottom-10 right-[10%] h-8 w-8 text-orange-500/50 animate-pulse [animation-delay:0.7s]" />
+        </div>
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 flex justify-center">
           <Link
             href="/contact"
             aria-label="Marea Deschidere ELEMENTAR — 24 octombrie, ora 11:00, Mircea cel Bătrân 20/1"
@@ -468,5 +479,31 @@ function PricingCard({
         </div>
       )}
     </div>
+  )
+}
+
+/* ————— Decoruri Halloween (doar desktop, vezi sectiunea posterului) ————— */
+
+function HalloweenBat({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M12 6c-1.1-2-3.3-3.3-5.7-2.9C8 4 8.8 5.6 9.4 6.8 6.6 6.2 3.8 7 1.5 9c2 .3 3.9 1.1 5.4 2.4-1.7.4-3.3 1.3-4.5 2.6 2-.2 4-.7 5.7-1.7-.3 1.6-.2 3.2.3 4.7.9-1.2 1.6-2.6 2-4.1.9 1.3 1.6 2.8 2 4.3.5-1.5.6-3.1.3-4.7 1.7 1 3.6 1.6 5.6 1.8-1.2-1.4-2.8-2.3-4.5-2.8 1.5-1.3 3.4-2.1 5.4-2.5-2.3-1.9-5.1-2.6-7.8-2C15.2 5.5 16 3.9 17.7 3c-2.4-.3-4.6 1-5.7 3Z" />
+    </svg>
+  )
+}
+
+function HalloweenPumpkin({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M11 2v2.2C7.4 4.7 5 7.6 5 12c0 5 3.1 9 7 9s7-4 7-9c0-4.4-2.4-7.3-6-7.8V2h-2Zm-.5 6c.5 1.2.5 2.8 0 4-.9-.3-1.5-1.4-1.5-2s.6-1.7 1.5-2Zm3 0c.9.3 1.5 1.4 1.5 2s-.6 1.7-1.5 2c-.5-1.2-.5-2.8 0-4Z" />
+    </svg>
+  )
+}
+
+function HalloweenMoon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M20.7 14.6A9 9 0 1 1 9.4 3.3a7 7 0 0 0 11.3 11.3Z" />
+    </svg>
   )
 }
