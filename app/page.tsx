@@ -7,6 +7,58 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight, Eye, FlaskConical, Puzzle, Sparkles, Waves, Link2, BadgeCheck } from "lucide-react"
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
 import { useLanguage } from "@/components/language-provider"
+
+/* ————— Generare determinista a decorurilor Halloween (~4x mai multe, culori/marimi variate) —————
+   Foloseste o functie pseudo-aleatoare bazata pe index (nu Math.random), ca server si client
+   sa randeze exact aceleasi pozitii — altfel React ar arunca eroare de hydration mismatch. */
+function seeded(i: number) {
+  const x = Math.sin(i * 12.9898 + 78.233) * 43758.5453
+  return x - Math.floor(x)
+}
+
+const BAT_COLORS = ["text-orange-300/60", "text-purple-300/55", "text-pink-300/50", "text-amber-200/55", "text-sky-200/45", "text-white/45", "text-rose-300/50", "text-violet-300/50"]
+const PUMPKIN_COLORS = ["text-orange-400/60", "text-orange-500/55", "text-amber-400/55", "text-red-400/50", "text-yellow-400/50"]
+const STAR_COLORS = ["text-amber-200/70", "text-orange-200/65", "text-yellow-200/70", "text-white/60", "text-pink-200/55", "text-purple-200/55"]
+const GHOST_COLORS = ["text-purple-100/30", "text-violet-200/28", "text-indigo-100/25", "text-pink-100/25", "text-white/25"]
+const SIZES = ["h-3 w-3", "h-4 w-4", "h-5 w-5", "h-6 w-6", "h-7 w-7", "h-8 w-8", "h-10 w-10", "h-12 w-12", "h-14 w-14"]
+const ANIMS = ["animate-drift-y", "animate-drift-x"]
+
+function genDecor(
+  Icon: (p: { className?: string; style?: React.CSSProperties }) => React.JSX.Element,
+  count: number,
+  colors: string[],
+  seedOffset: number,
+) {
+  return Array.from({ length: count }, (_, i) => {
+    const n = seedOffset + i
+    const top = seeded(n * 4 + 1) * 94 + 2
+    const onLeft = seeded(n * 4 + 2) > 0.5
+    const side = seeded(n * 4 + 3) * 40 + 1
+    const duration = (seeded(n * 4 + 4) * 6 + 4).toFixed(1) + "s"
+    const delay = (seeded(n * 4 + 1.5) * 3).toFixed(1) + "s"
+    return {
+      Icon,
+      color: colors[Math.floor(seeded(n * 3 + 1) * colors.length)],
+      size: SIZES[Math.floor(seeded(n * 3 + 2) * SIZES.length)],
+      anim: ANIMS[Math.floor(seeded(n * 3 + 3) * ANIMS.length)],
+      duration,
+      delay,
+      pos: {
+        top: `${top.toFixed(1)}%`,
+        ...(onLeft ? { left: `${side.toFixed(1)}%` } : { right: `${side.toFixed(1)}%` }),
+      } as React.CSSProperties,
+    }
+  })
+}
+
+const HALLOWEEN_DECOR = [
+  ...genDecor(HalloweenBat, 24, BAT_COLORS, 0),
+  ...genDecor(HalloweenPumpkin, 12, PUMPKIN_COLORS, 100),
+  ...genDecor(HalloweenStar, 16, STAR_COLORS, 200),
+  ...genDecor(HalloweenGhost, 8, GHOST_COLORS, 300),
+  ...genDecor(HalloweenSpider, 4, BAT_COLORS, 400),
+]
+
 export default function Page() {
   const { t } = useLanguage()
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -64,33 +116,17 @@ export default function Page() {
           <div className="absolute inset-0 bg-gradient-to-br from-orange-950 via-purple-950 to-black" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_25%,rgba(249,115,22,0.35),transparent_42%),radial-gradient(circle_at_85%_15%,rgba(168,85,247,0.4),transparent_40%),radial-gradient(circle_at_50%_95%,rgba(234,88,12,0.3),transparent_50%)]" />
 
-          {/* luna + stele */}
           <HalloweenMoon className="absolute top-6 right-[12%] h-16 w-16 text-orange-200/50" />
-          <HalloweenStar className="absolute top-10 right-[22%] h-4 w-4 text-orange-100/70 animate-twinkle" />
-          <HalloweenStar className="absolute top-24 right-[8%] h-3 w-3 text-orange-100/60 animate-twinkle [animation-delay:1s]" />
-          <HalloweenStar className="absolute top-1/3 left-[6%] h-3 w-3 text-orange-100/50 animate-twinkle [animation-delay:1.8s]" />
-          <HalloweenStar className="absolute bottom-1/4 right-[30%] h-3 w-3 text-orange-100/50 animate-twinkle [animation-delay:0.6s]" />
-
-          {/* lilieci in zbor, linie subtire */}
-          <HalloweenBat className="absolute top-10 left-[10%] h-8 w-8 text-white/50 animate-drift-y [animation-duration:5s]" />
-          <HalloweenBat className="absolute top-24 left-[24%] h-6 w-6 text-white/35 animate-drift-y [animation-duration:6.5s] [animation-delay:0.8s]" />
-          <HalloweenBat className="absolute top-16 right-[32%] h-5 w-5 text-white/30 animate-drift-x [animation-duration:7s] [animation-delay:1.4s]" />
-          <HalloweenBat className="absolute bottom-24 left-[30%] h-6 w-6 text-white/35 animate-drift-y [animation-duration:5.5s] [animation-delay:0.4s]" />
-          <HalloweenBat className="absolute bottom-16 right-[20%] h-7 w-7 text-white/45 animate-drift-x [animation-duration:6s] [animation-delay:1s]" />
-          <HalloweenBat className="absolute top-1/2 left-[4%] h-5 w-5 text-white/25 animate-drift-y [animation-duration:8s] [animation-delay:2s]" />
-
-          {/* dovleci, contur */}
-          <HalloweenPumpkin className="absolute bottom-8 left-[14%] h-10 w-10 text-orange-400/60 animate-drift-y [animation-duration:5s]" />
-          <HalloweenPumpkin className="absolute bottom-10 right-[10%] h-8 w-8 text-orange-500/50 animate-drift-y [animation-duration:6s] [animation-delay:0.7s]" />
-          <HalloweenPumpkin className="absolute top-1/3 right-[6%] h-6 w-6 text-orange-400/40 animate-drift-x [animation-duration:7s] [animation-delay:1.6s]" />
-
-          {/* paianjen + panza, colt */}
           <HalloweenSpiderweb className="absolute -top-2 -left-2 h-24 w-24 text-white/20" />
-          <HalloweenSpider className="absolute top-16 left-[3%] h-6 w-6 text-white/40 animate-drift-y [animation-duration:4s]" />
+          <HalloweenSpiderweb className="absolute -top-3 -right-3 h-20 w-20 text-white/15 -scale-x-100" />
 
-          {/* fantoma, plutind */}
-          <HalloweenGhost className="absolute top-1/4 right-[4%] h-10 w-10 text-purple-100/30 animate-drift-x [animation-duration:8s] [animation-delay:0.5s]" />
-          <HalloweenGhost className="absolute bottom-1/3 left-[8%] h-8 w-8 text-purple-100/25 animate-drift-x [animation-duration:9s] [animation-delay:2.2s]" />
+          {HALLOWEEN_DECOR.map((d, i) => (
+            <d.Icon
+              key={i}
+              className={`absolute ${d.size} ${d.color} ${d.anim}`}
+              style={{ ...d.pos, animationDuration: d.duration, animationDelay: d.delay }}
+            />
+          ))}
         </div>
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 flex justify-center">
           <Link
@@ -506,18 +542,18 @@ function PricingCard({
 
 /* ————— Decoruri Halloween, stil line-art (doar desktop, vezi sectiunea posterului) ————— */
 
-function HalloweenBat({ className }: { className?: string }) {
+function HalloweenBat({ className, style }: { className?: string; style?: React.CSSProperties }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" className={className} style={style} aria-hidden="true">
       <path d="M12 7c-1-2-3-3.3-5.2-3-1 1.7 0 3.4 1 4.6C5 8 2.5 9 1 10.8c1.8 0 3.6.4 5.1 1.3-1.5.6-2.8 1.6-3.7 2.9 1.8-.3 3.6-.9 5.1-1.9-.1 1.5.2 3 .8 4.4.7-1.2 1.2-2.6 1.4-4 .6 1.3 1 2.7 1.3 4.1.5-1.4.7-2.9.6-4.4 1.5 1 3.3 1.6 5.1 1.9-1-1.3-2.3-2.3-3.8-2.9 1.6-.9 3.4-1.3 5.2-1.3-1.5-1.8-3.9-2.8-6.3-2.4 1.2-1.1 2.2-2.9 1.2-4.6C15 3.6 13 4.9 12 7Z" />
       <circle cx="12" cy="8.5" r="0.6" fill="currentColor" stroke="none" />
     </svg>
   )
 }
 
-function HalloweenPumpkin({ className }: { className?: string }) {
+function HalloweenPumpkin({ className, style }: { className?: string; style?: React.CSSProperties }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" className={className} style={style} aria-hidden="true">
       <path d="M11 2v2.2" />
       <path d="M9.5 4.6c1.6-.8 3.4-.8 5 0" />
       <ellipse cx="12" cy="12.5" rx="7" ry="8.5" />
@@ -527,25 +563,25 @@ function HalloweenPumpkin({ className }: { className?: string }) {
   )
 }
 
-function HalloweenMoon({ className }: { className?: string }) {
+function HalloweenMoon({ className, style }: { className?: string; style?: React.CSSProperties }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" className={className} style={style} aria-hidden="true">
       <path d="M20.7 14.6A9 9 0 1 1 9.4 3.3a7 7 0 0 0 11.3 11.3Z" />
     </svg>
   )
 }
 
-function HalloweenStar({ className }: { className?: string }) {
+function HalloweenStar({ className, style }: { className?: string; style?: React.CSSProperties }) {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} style={style} aria-hidden="true">
       <path d="M12 2l1.8 6.3L20 10l-6.2 1.7L12 18l-1.8-6.3L4 10l6.2-1.7L12 2Z" />
     </svg>
   )
 }
 
-function HalloweenGhost({ className }: { className?: string }) {
+function HalloweenGhost({ className, style }: { className?: string; style?: React.CSSProperties }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" className={className} style={style} aria-hidden="true">
       <path d="M5 20V11a7 7 0 0 1 14 0v9l-2.3-1.8L14.7 20l-2.3-1.8L10.1 20l-2.4-1.8L5 20Z" />
       <circle cx="9.5" cy="11" r="0.7" fill="currentColor" stroke="none" />
       <circle cx="14.5" cy="11" r="0.7" fill="currentColor" stroke="none" />
@@ -553,9 +589,9 @@ function HalloweenGhost({ className }: { className?: string }) {
   )
 }
 
-function HalloweenSpider({ className }: { className?: string }) {
+function HalloweenSpider({ className, style }: { className?: string; style?: React.CSSProperties }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" className={className} style={style} aria-hidden="true">
       <ellipse cx="12" cy="13" rx="2.6" ry="3.2" />
       <circle cx="12" cy="8.3" r="1.6" />
       <path d="M9 11.5 3.5 9M9 13.5l-6 .5M9.8 16l-5 3M15 11.5l5.5-2.5M15 13.5l6 .5M14.2 16l5 3" />
@@ -563,9 +599,9 @@ function HalloweenSpider({ className }: { className?: string }) {
   )
 }
 
-function HalloweenSpiderweb({ className }: { className?: string }) {
+function HalloweenSpiderweb({ className, style }: { className?: string; style?: React.CSSProperties }) {
   return (
-    <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="1" className={className} aria-hidden="true">
+    <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="1" className={className} style={style} aria-hidden="true">
       <path d="M0 0 100 0M0 0 65 25M0 0 40 55M0 0 25 90M0 0 0 100" />
       <path d="M48 2a65 65 0 0 0-46 46M68 4a85 85 0 0 0-64 64M86 8a97 97 0 0 0-78 78" />
     </svg>
