@@ -265,27 +265,29 @@ export default function ContactClient() {
                 pagină:
               </p>
 
-              <Button asChild className={`w-full bg-sky-500 text-white hover:bg-sky-400 ${fx}`}>
-                <a
-                  href="https://www.google.com/maps/dir/?api=1&destination=Mircea+cel+B%C4%83tr%C3%A2n+20%2F1%2C+Chi%C8%99in%C4%83u%2C+Moldova&travelmode=driving"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <GoogleMapsIcon className="mr-2 h-5 w-5 shrink-0" />
-                  Deschide în Google Maps
-                </a>
-              </Button>
+              <a
+                href="https://www.google.com/maps/dir/?api=1&destination=Mircea+cel+B%C4%83tr%C3%A2n+20%2F1%2C+Chi%C8%99in%C4%83u%2C+Moldova&travelmode=driving"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`flex items-center gap-4 rounded-xl p-3 hover:bg-white/5 transition-colors ${fx}`}
+              >
+                <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-sky-500">
+                  <GoogleMapsIcon className="h-9 w-9" />
+                </span>
+                <span className="text-gray-200 font-semibold text-lg">Deschide în Google Maps</span>
+              </a>
 
-              <Button asChild className={`w-full bg-[#33CCFF] text-black hover:bg-[#1EC2F7] ${fx}`}>
-                <a
-                  href="https://waze.com/ul?q=Mircea%20cel%20B%C4%83tr%C3%A2n%2020%2F1%20Chi%C8%99in%C4%83u%20Moldova&navigate=yes"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <WazeIcon className="mr-2 h-5 w-5 shrink-0" />
-                  Deschide în WAZE
-                </a>
-              </Button>
+              <a
+                href="https://waze.com/ul?q=Mircea%20cel%20B%C4%83tr%C3%A2n%2020%2F1%20Chi%C8%99in%C4%83u%20Moldova&navigate=yes"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`flex items-center gap-4 rounded-xl p-3 hover:bg-white/5 transition-colors ${fx}`}
+              >
+                <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-[#33CCFF]">
+                  <WazeIcon className="h-9 w-9" />
+                </span>
+                <span className="text-gray-200 font-semibold text-lg">Deschide în WAZE</span>
+              </a>
             </div>
           </div>
         </div>
