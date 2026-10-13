@@ -63,12 +63,34 @@ export default function Page() {
         <div className="hidden md:block absolute inset-0" aria-hidden="true">
           <div className="absolute inset-0 bg-gradient-to-br from-orange-950 via-purple-950 to-black" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_25%,rgba(249,115,22,0.35),transparent_42%),radial-gradient(circle_at_85%_15%,rgba(168,85,247,0.4),transparent_40%),radial-gradient(circle_at_50%_95%,rgba(234,88,12,0.3),transparent_50%)]" />
+
+          {/* luna + stele */}
           <HalloweenMoon className="absolute top-6 right-[12%] h-16 w-16 text-orange-200/50" />
-          <HalloweenBat className="absolute top-10 left-[10%] h-7 w-7 text-white/40 animate-bounce [animation-duration:3.5s]" />
-          <HalloweenBat className="absolute top-20 left-[22%] h-5 w-5 text-white/30 animate-bounce [animation-duration:4.5s] [animation-delay:0.5s]" />
-          <HalloweenBat className="absolute bottom-16 right-[20%] h-6 w-6 text-white/35 animate-bounce [animation-duration:4s] [animation-delay:1s]" />
-          <HalloweenPumpkin className="absolute bottom-8 left-[14%] h-10 w-10 text-orange-400/60 animate-pulse" />
-          <HalloweenPumpkin className="absolute bottom-10 right-[10%] h-8 w-8 text-orange-500/50 animate-pulse [animation-delay:0.7s]" />
+          <HalloweenStar className="absolute top-10 right-[22%] h-4 w-4 text-orange-100/70 animate-twinkle" />
+          <HalloweenStar className="absolute top-24 right-[8%] h-3 w-3 text-orange-100/60 animate-twinkle [animation-delay:1s]" />
+          <HalloweenStar className="absolute top-1/3 left-[6%] h-3 w-3 text-orange-100/50 animate-twinkle [animation-delay:1.8s]" />
+          <HalloweenStar className="absolute bottom-1/4 right-[30%] h-3 w-3 text-orange-100/50 animate-twinkle [animation-delay:0.6s]" />
+
+          {/* lilieci in zbor, linie subtire */}
+          <HalloweenBat className="absolute top-10 left-[10%] h-8 w-8 text-white/50 animate-drift-y [animation-duration:5s]" />
+          <HalloweenBat className="absolute top-24 left-[24%] h-6 w-6 text-white/35 animate-drift-y [animation-duration:6.5s] [animation-delay:0.8s]" />
+          <HalloweenBat className="absolute top-16 right-[32%] h-5 w-5 text-white/30 animate-drift-x [animation-duration:7s] [animation-delay:1.4s]" />
+          <HalloweenBat className="absolute bottom-24 left-[30%] h-6 w-6 text-white/35 animate-drift-y [animation-duration:5.5s] [animation-delay:0.4s]" />
+          <HalloweenBat className="absolute bottom-16 right-[20%] h-7 w-7 text-white/45 animate-drift-x [animation-duration:6s] [animation-delay:1s]" />
+          <HalloweenBat className="absolute top-1/2 left-[4%] h-5 w-5 text-white/25 animate-drift-y [animation-duration:8s] [animation-delay:2s]" />
+
+          {/* dovleci, contur */}
+          <HalloweenPumpkin className="absolute bottom-8 left-[14%] h-10 w-10 text-orange-400/60 animate-drift-y [animation-duration:5s]" />
+          <HalloweenPumpkin className="absolute bottom-10 right-[10%] h-8 w-8 text-orange-500/50 animate-drift-y [animation-duration:6s] [animation-delay:0.7s]" />
+          <HalloweenPumpkin className="absolute top-1/3 right-[6%] h-6 w-6 text-orange-400/40 animate-drift-x [animation-duration:7s] [animation-delay:1.6s]" />
+
+          {/* paianjen + panza, colt */}
+          <HalloweenSpiderweb className="absolute -top-2 -left-2 h-24 w-24 text-white/20" />
+          <HalloweenSpider className="absolute top-16 left-[3%] h-6 w-6 text-white/40 animate-drift-y [animation-duration:4s]" />
+
+          {/* fantoma, plutind */}
+          <HalloweenGhost className="absolute top-1/4 right-[4%] h-10 w-10 text-purple-100/30 animate-drift-x [animation-duration:8s] [animation-delay:0.5s]" />
+          <HalloweenGhost className="absolute bottom-1/3 left-[8%] h-8 w-8 text-purple-100/25 animate-drift-x [animation-duration:9s] [animation-delay:2.2s]" />
         </div>
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 flex justify-center">
           <Link
@@ -133,6 +155,52 @@ export default function Page() {
                 />
               </div>
             </div>
+          </div>
+        </section>
+        {/* ✅ AI HUB LINKS — mutat imediat dupa Hero, inainte era ingropat sub Pricing */}
+        <section className="py-12 sm:py-16 border-b border-white/5" aria-labelledby="resurse-educationale">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6">
+            <h2 id="resurse-educationale" className="text-2xl sm:text-3xl font-semibold text-gray-200">
+              ELEMENTAR – parc de știință în Chișinău (Mircea cel Bătrân 20/1)
+            </h2>
+            <p className="mt-4 text-gray-300">
+              ELEMENTAR este un parc interactiv de știință din Chișinău, situat pe Mircea cel Bătrân 20/1, unde copiii și
+              adolescenții învață prin experimente practice de fizică, chimie, biologie și astronomie. Pentru planificare
+              rapidă, vezi{" "}
+              <Link href="/ghiduri" className="text-sky-400 hover:text-sky-300 font-semibold">
+                ghidurile educaționale
+              </Link>
+              , recomandarea noastră de{" "}
+              <Link href="/activitati-educative-copii-chisinau" className="text-sky-400 hover:text-sky-300 font-semibold">
+                activități educative pentru copii în Chișinău
+              </Link>{" "}
+              și pagina dedicată{" "}
+              <Link href="/excursii-scolare-chisinau" className="text-sky-400 hover:text-sky-300 font-semibold">
+                excursiilor școlare în Chișinău
+              </Link>
+              .
+            </p>
+            <p className="mt-4 text-gray-300">
+              Descoperă{" "}
+              <Link href="/ghiduri" className="text-sky-400 hover:text-sky-300 font-semibold">
+                ghiduri educative pentru părinți și profesori
+              </Link>{" "}
+              despre activități interactive, excursii școlare și experiențe de știință pentru copii în Chișinău.
+            </p>
+            <p className="mt-4 text-gray-300">
+              Vezi recomandarea noastră pentru{" "}
+              <Link href="/activitati-educative-copii-chisinau" className="text-sky-400 hover:text-sky-300 font-semibold">
+                activități educative pentru copii în Chișinău
+              </Link>{" "}
+              și planifică o vizită la ELEMENTAR.
+            </p>
+            <p className="mt-4 text-gray-300">
+              Pentru clase și grupuri, ai și pagina dedicată:{" "}
+              <Link href="/excursii-scolare-chisinau" className="text-sky-400 hover:text-sky-300 font-semibold">
+                excursii școlare în Chișinău
+              </Link>
+              .
+            </p>
           </div>
         </section>
         {/* FEATURES */}
@@ -275,52 +343,6 @@ export default function Page() {
             <p className="mt-6 pt-3 text-center text-sm text-gray-400 border-t border-white/10">
               Tarifele sunt valabile până la{" "}
               <span className="font-medium text-gray-300">30 septembrie 2026</span> (inclusiv).
-            </p>
-          </div>
-        </section>
-        {/* ✅ AI HUB LINKS */}
-        <section className="py-12 sm:py-16 border-b border-white/5" aria-labelledby="resurse-educationale">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6">
-            <h2 id="resurse-educationale" className="text-2xl sm:text-3xl font-semibold text-gray-200">
-              ELEMENTAR – parc de știință în Chișinău (Mircea cel Bătrân 20/1)
-            </h2>
-            <p className="mt-4 text-gray-300">
-              ELEMENTAR este un parc interactiv de știință din Chișinău, situat pe Mircea cel Bătrân 20/1, unde copiii și
-              adolescenții învață prin experimente practice de fizică, chimie, biologie și astronomie. Pentru planificare
-              rapidă, vezi{" "}
-              <Link href="/ghiduri" className="text-sky-400 hover:text-sky-300 font-semibold">
-                ghidurile educaționale
-              </Link>
-              , recomandarea noastră de{" "}
-              <Link href="/activitati-educative-copii-chisinau" className="text-sky-400 hover:text-sky-300 font-semibold">
-                activități educative pentru copii în Chișinău
-              </Link>{" "}
-              și pagina dedicată{" "}
-              <Link href="/excursii-scolare-chisinau" className="text-sky-400 hover:text-sky-300 font-semibold">
-                excursiilor școlare în Chișinău
-              </Link>
-              .
-            </p>
-            <p className="mt-4 text-gray-300">
-              Descoperă{" "}
-              <Link href="/ghiduri" className="text-sky-400 hover:text-sky-300 font-semibold">
-                ghiduri educative pentru părinți și profesori
-              </Link>{" "}
-              despre activități interactive, excursii școlare și experiențe de știință pentru copii în Chișinău.
-            </p>
-            <p className="mt-4 text-gray-300">
-              Vezi recomandarea noastră pentru{" "}
-              <Link href="/activitati-educative-copii-chisinau" className="text-sky-400 hover:text-sky-300 font-semibold">
-                activități educative pentru copii în Chișinău
-              </Link>{" "}
-              și planifică o vizită la ELEMENTAR.
-            </p>
-            <p className="mt-4 text-gray-300">
-              Pentru clase și grupuri, ai și pagina dedicată:{" "}
-              <Link href="/excursii-scolare-chisinau" className="text-sky-400 hover:text-sky-300 font-semibold">
-                excursii școlare în Chișinău
-              </Link>
-              .
             </p>
           </div>
         </section>
@@ -482,28 +504,70 @@ function PricingCard({
   )
 }
 
-/* ————— Decoruri Halloween (doar desktop, vezi sectiunea posterului) ————— */
+/* ————— Decoruri Halloween, stil line-art (doar desktop, vezi sectiunea posterului) ————— */
 
 function HalloweenBat({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
-      <path d="M12 6c-1.1-2-3.3-3.3-5.7-2.9C8 4 8.8 5.6 9.4 6.8 6.6 6.2 3.8 7 1.5 9c2 .3 3.9 1.1 5.4 2.4-1.7.4-3.3 1.3-4.5 2.6 2-.2 4-.7 5.7-1.7-.3 1.6-.2 3.2.3 4.7.9-1.2 1.6-2.6 2-4.1.9 1.3 1.6 2.8 2 4.3.5-1.5.6-3.1.3-4.7 1.7 1 3.6 1.6 5.6 1.8-1.2-1.4-2.8-2.3-4.5-2.8 1.5-1.3 3.4-2.1 5.4-2.5-2.3-1.9-5.1-2.6-7.8-2C15.2 5.5 16 3.9 17.7 3c-2.4-.3-4.6 1-5.7 3Z" />
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="M12 7c-1-2-3-3.3-5.2-3-1 1.7 0 3.4 1 4.6C5 8 2.5 9 1 10.8c1.8 0 3.6.4 5.1 1.3-1.5.6-2.8 1.6-3.7 2.9 1.8-.3 3.6-.9 5.1-1.9-.1 1.5.2 3 .8 4.4.7-1.2 1.2-2.6 1.4-4 .6 1.3 1 2.7 1.3 4.1.5-1.4.7-2.9.6-4.4 1.5 1 3.3 1.6 5.1 1.9-1-1.3-2.3-2.3-3.8-2.9 1.6-.9 3.4-1.3 5.2-1.3-1.5-1.8-3.9-2.8-6.3-2.4 1.2-1.1 2.2-2.9 1.2-4.6C15 3.6 13 4.9 12 7Z" />
+      <circle cx="12" cy="8.5" r="0.6" fill="currentColor" stroke="none" />
     </svg>
   )
 }
 
 function HalloweenPumpkin({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
-      <path d="M11 2v2.2C7.4 4.7 5 7.6 5 12c0 5 3.1 9 7 9s7-4 7-9c0-4.4-2.4-7.3-6-7.8V2h-2Zm-.5 6c.5 1.2.5 2.8 0 4-.9-.3-1.5-1.4-1.5-2s.6-1.7 1.5-2Zm3 0c.9.3 1.5 1.4 1.5 2s-.6 1.7-1.5 2c-.5-1.2-.5-2.8 0-4Z" />
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="M11 2v2.2" />
+      <path d="M9.5 4.6c1.6-.8 3.4-.8 5 0" />
+      <ellipse cx="12" cy="12.5" rx="7" ry="8.5" />
+      <path d="M9 5.5c-2.4 1.7-3.6 4.4-3.6 7 0 1.5.3 3 .9 4.3M15 5.5c2.4 1.7 3.6 4.4 3.6 7 0 1.5-.3 3-.9 4.3" />
+      <path d="M9.8 9.5c.5 1.3.5 2.9 0 4.2M14.2 9.5c-.5 1.3-.5 2.9 0 4.2" />
     </svg>
   )
 }
 
 function HalloweenMoon({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
       <path d="M20.7 14.6A9 9 0 1 1 9.4 3.3a7 7 0 0 0 11.3 11.3Z" />
+    </svg>
+  )
+}
+
+function HalloweenStar({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M12 2l1.8 6.3L20 10l-6.2 1.7L12 18l-1.8-6.3L4 10l6.2-1.7L12 2Z" />
+    </svg>
+  )
+}
+
+function HalloweenGhost({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="M5 20V11a7 7 0 0 1 14 0v9l-2.3-1.8L14.7 20l-2.3-1.8L10.1 20l-2.4-1.8L5 20Z" />
+      <circle cx="9.5" cy="11" r="0.7" fill="currentColor" stroke="none" />
+      <circle cx="14.5" cy="11" r="0.7" fill="currentColor" stroke="none" />
+    </svg>
+  )
+}
+
+function HalloweenSpider({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <ellipse cx="12" cy="13" rx="2.6" ry="3.2" />
+      <circle cx="12" cy="8.3" r="1.6" />
+      <path d="M9 11.5 3.5 9M9 13.5l-6 .5M9.8 16l-5 3M15 11.5l5.5-2.5M15 13.5l6 .5M14.2 16l5 3" />
+    </svg>
+  )
+}
+
+function HalloweenSpiderweb({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="1" className={className} aria-hidden="true">
+      <path d="M0 0 100 0M0 0 65 25M0 0 40 55M0 0 25 90M0 0 0 100" />
+      <path d="M48 2a65 65 0 0 0-46 46M68 4a85 85 0 0 0-64 64M86 8a97 97 0 0 0-78 78" />
     </svg>
   )
 }
