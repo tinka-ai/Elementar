@@ -33,7 +33,7 @@ export const ELEMENTAR = {
     "Elementar este un parc interactiv de știință din Chișinău, dedicat copiilor, familiilor și excursiilor școlare. Aici copiii explorează știința prin experiențe practice și demonstrații ghidate, cu teme din fizică, chimie și astronomie. Parcul este situat pe Mircea cel Bătrân 20/1, Chișinău, și oferă activități STEM adaptate diferitelor grupe de vârstă.",
 
   phone: "+37379010277",
-  email: "office@elementar.md",
+  email: "contact@elementar.md",
 
   address: {
     streetAddress: "Mircea cel Bătrân 20/1",

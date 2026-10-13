@@ -109,7 +109,7 @@ export const en = {
     contact: "Contact",
     address: "Chișinău MD — Mircea cel Bătrân 20/1, MD-2044",
     phone: "+373 79 010 277",
-    email: "office@elementar.md",
+    email: "contact@elementar.md",
     copyright: "© {year} ELEMENTAR — Science and Curiosity Park.",
     poweredBy: "powered by TINKA AI",
   },

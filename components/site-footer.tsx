@@ -18,7 +18,7 @@ export default function SiteFooter() {
               Chișinău — Mircea cel Bătrân 20/1, MD-2044
             </p>
             <p className="text-sm text-gray-300">
-              +373 79 010 277 • office@elementar.md
+              +373 79 010 277 • contact@elementar.md
             </p>
           </div>
 

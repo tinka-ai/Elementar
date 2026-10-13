@@ -71,7 +71,7 @@ export default function ContactClient() {
                     fx={fx}
                     icon={<Mail className="h-6 w-6" />}
                     title="Email"
-                    info="office@elementar.md"
+                    info="contact@elementar.md"
                     details="Răspundem în maxim 24 de ore"
                   />
                   <ContactInfo
@@ -126,11 +126,11 @@ export default function ContactClient() {
 
               <div className="space-y-4">
                 <Button asChild className={`w-full h-auto py-4 bg-sky-500 text-white hover:bg-sky-400 ${fx}`}>
-                  <a href="mailto:office@elementar.md">
+                  <a href="mailto:contact@elementar.md">
                     <Mail className="mr-3 h-5 w-5 shrink-0" />
                     <span className="flex flex-col items-start text-left">
                       <span className="font-semibold">Trimite-ne un email</span>
-                      <span className="text-xs font-normal text-sky-100/80">office@elementar.md</span>
+                      <span className="text-xs font-normal text-sky-100/80">contact@elementar.md</span>
                     </span>
                   </a>
                 </Button>

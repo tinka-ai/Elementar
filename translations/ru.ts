@@ -114,7 +114,7 @@ export const ru = {
     contact: "Контакты",
     address: "Кишинэу МД — Mircea cel Bătrân 20/1, MD-2044",
     phone: "+373 79 010 277",
-    email: "office@elementar.md",
+    email: "contact@elementar.md",
     copyright: "© {year} ELEMENTAR — Парк Науки и Любопытства.",
     poweredBy: "при поддержке TINKA AI",
   },

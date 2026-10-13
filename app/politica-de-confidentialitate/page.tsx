@@ -46,8 +46,8 @@ export default function PoliticaDeConfidentialitatePage() {
               <p>Chișinău, Republica Moldova</p>
               <p>
                 Email:{" "}
-                <a href="mailto:office@elementar.md" className="text-sky-400 hover:text-sky-300 underline">
-                  office@elementar.md
+                <a href="mailto:contact@elementar.md" className="text-sky-400 hover:text-sky-300 underline">
+                  contact@elementar.md
                 </a>
               </p>
               <p>
@@ -294,8 +294,8 @@ export default function PoliticaDeConfidentialitatePage() {
             </p>
             <p className="mt-3">
               Pentru exercitarea drepturilor sau pentru întrebări privind prelucrarea datelor, ne poți contacta la{" "}
-              <a href="mailto:office@elementar.md" className="text-sky-400 hover:text-sky-300 underline">
-                office@elementar.md
+              <a href="mailto:contact@elementar.md" className="text-sky-400 hover:text-sky-300 underline">
+                contact@elementar.md
               </a>
               .
             </p>
