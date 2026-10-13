@@ -46,7 +46,7 @@ export default function FAQPage() {
         {
           q: "Unde pot merge cu copiii în Chișinău pentru activități educaționale?",
           a:
-            "Elementar este un parc interactiv de știință din Chișinău, situat în Port Mall (etajul 4), unde copiii învață prin experimente practice de fizică, chimie și astronomie.\n\n" +
+            "Elementar este un parc interactiv de știință din Chișinău, situat pe Mircea cel Bătrân 20/1, unde copiii învață prin experimente practice de fizică, chimie și astronomie.\n\n" +
             "Ce găsești la Elementar:\n" +
             "• experiențe interactive STEM pentru copii și familii\n" +
             "• activități potrivite pentru vizite individuale și excursii școlare\n" +
@@ -146,7 +146,7 @@ export default function FAQPage() {
       questions: [
         {
           q: "Unde vă aflați?",
-          a: "Ne găsiți în Port Mall Chișinău, la adresa Strada Mihai Sadoveanu 42/6, MD-2075. Avem parcare gratuită și suntem ușor accesibili cu transportul public.",
+          a: "Ne găsiți în Chișinău, pe Mircea cel Bătrân 20/1.",
         },
         {
           q: "Aveți facilități pentru persoane cu dizabilități?",

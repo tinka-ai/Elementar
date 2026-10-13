@@ -57,6 +57,26 @@ export default function Page() {
           </video>
         </div>
       </section>
+      {/* POSTER — Marea Deschidere 24 octombrie, prioritizat pentru mobil */}
+      <section className="w-full bg-black py-6 sm:py-8 border-b border-white/5">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 flex justify-center">
+          <Link
+            href="/contact"
+            aria-label="Marea Deschidere ELEMENTAR — 24 octombrie, ora 11:00, Mircea cel Bătrân 20/1"
+            className="block w-full max-w-sm sm:max-w-md rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_30px_rgba(168,85,247,0.15)] transition-transform duration-300 hover:scale-[1.01] focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-400/70"
+          >
+            <Image
+              src="/images/poster-marea-deschidere-24-octombrie.webp"
+              alt="Afiș Marea Deschidere ELEMENTAR — Parc de Știință și Curiozități, 24 octombrie, ora 11:00, Mircea cel Bătrân 20/1, Chișinău"
+              width={563}
+              height={800}
+              className="w-full h-auto"
+              sizes="(max-width: 640px) 100vw, 400px"
+              priority
+            />
+          </Link>
+        </div>
+      </section>
       <main>
         {/* HERO */}
         <section id="acasa" className="relative overflow-hidden border-b border-white/5">
@@ -251,10 +271,10 @@ export default function Page() {
         <section className="py-12 sm:py-16 border-b border-white/5" aria-labelledby="resurse-educationale">
           <div className="mx-auto max-w-4xl px-4 sm:px-6">
             <h2 id="resurse-educationale" className="text-2xl sm:text-3xl font-semibold text-gray-200">
-              ELEMENTAR – parc de știință în Chișinău (Port Mall)
+              ELEMENTAR – parc de știință în Chișinău (Mircea cel Bătrân 20/1)
             </h2>
             <p className="mt-4 text-gray-300">
-              ELEMENTAR este un parc interactiv de știință din Chișinău, situat în Port Mall (etajul 4), unde copiii și
+              ELEMENTAR este un parc interactiv de știință din Chișinău, situat pe Mircea cel Bătrân 20/1, unde copiii și
               adolescenții învață prin experimente practice de fizică, chimie, biologie și astronomie. Pentru planificare
               rapidă, vezi{" "}
               <Link href="/ghiduri" className="text-sky-400 hover:text-sky-300 font-semibold">

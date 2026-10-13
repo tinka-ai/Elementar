@@ -5,7 +5,7 @@ import { ELEMENTAR } from "@/lib/entity"
 export const metadata: Metadata = {
   title: "Excursie școlară STEM în Chișinău | Program, durată, rezervare",
   description:
-    "Cauți o excursie școlară STEM în Chișinău? La ELEMENTAR (Port Mall, etajul 4) elevii învață prin experimente practice. Durată 90–120 min, recomandări pentru clase și rezervare.",
+    "Cauți o excursie școlară STEM în Chișinău? La ELEMENTAR (Mircea cel Bătrân 20/1) elevii învață prin experimente practice. Durată 90–120 min, recomandări pentru clase și rezervare.",
   alternates: {
     canonical: `${ELEMENTAR.url}/excursie-scolara-stem-chisinau`,
   },
@@ -97,7 +97,7 @@ export default function Page() {
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-200">Excursie școlară STEM în Chișinău</h1>
         <p className="mt-4 text-lg text-gray-300">
           Dacă vrei o excursie care să fie și distractivă, și educativă, formatul STEM e cea mai sigură alegere:
-          elevii învață prin experimente, demonstrații și implicare directă. La ELEMENTAR (Port Mall, etajul 4),
+          elevii învață prin experimente, demonstrații și implicare directă. La ELEMENTAR (Mircea cel Bătrân 20/1),
           excursiile sunt gândite pentru clase și grupuri organizate.
         </p>
 

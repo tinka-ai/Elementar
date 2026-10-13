@@ -15,7 +15,7 @@ export default function SiteFooter() {
           <div className="space-y-2">
             <p className="text-gray-300 font-medium">Contact</p>
             <p className="text-sm text-gray-300">
-              Port Mall, Chișinău — Strada Mihai Sadoveanu 42/6, MD-2075
+              Chișinău — Mircea cel Bătrân 20/1, MD-2044
             </p>
             <p className="text-sm text-gray-300">
               +373 79 010 277 • office@elementar.md

@@ -2,7 +2,6 @@
 
 import type React from "react"
 import Link from "next/link"
-import { useState } from "react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -16,13 +15,9 @@ import {
   Users,
   BookOpen,
   HelpCircle,
-  PlayCircle,
-  X,
 } from "lucide-react"
 
 export default function ContactClient() {
-  const [isVideoOpen, setIsVideoOpen] = useState(false)
-
   const fx =
     "transition-shadow duration-300 ease-out hover:shadow-[0_0_0_1px_rgba(56,189,248,0.35),0_0_28px_6px_rgba(168,85,247,0.25)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-400/70 rounded-md"
 
@@ -62,8 +57,8 @@ export default function ContactClient() {
                     fx={fx}
                     icon={<MapPin className="h-6 w-6" />}
                     title="Adresa"
-                    info="Port Mall, et. 4, Chișinău MD"
-                    details="Strada Mihai Sadoveanu 42/6, MD-2075"
+                    info="Chișinău, MD"
+                    details="Mircea cel Bătrân 20/1, MD-2044"
                   />
                   <ContactInfo
                     fx={fx}
@@ -221,7 +216,7 @@ export default function ContactClient() {
               Cum ajungi la noi
             </h2>
             <p className="text-lg text-gray-300">
-              Ne găsești în inima Chișinăului, în Port Mall, cu acces facil și parcare gratuită.
+              Ne găsești la noua adresă din Chișinău, pe Mircea cel Bătrân 20/1.
             </p>
           </div>
 
@@ -235,9 +230,11 @@ export default function ContactClient() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-300 mb-2">Cu mașina</h3>
+                    {/* TODO: de confirmat disponibilitatea parcării la noua adresă
+                        și adăugat aici, odată ce avem informația. */}
                     <p className="text-gray-400 text-sm">
-                      Parcare gratuită disponibilă în Port Mall. Intrarea principală pe Strada Mihai Sadoveanu. Parcul
-                      se află la etajul 4.
+                      Ne găsești pe Mircea cel Bătrân 20/1, Chișinău. Pentru traseu exact, folosește butoanele
+                      Google Maps / Waze de mai jos.
                     </p>
                   </div>
                 </div>
@@ -250,37 +247,19 @@ export default function ContactClient() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-300 mb-2">Transport public</h3>
+                    {/* TODO: de confirmat rutele/stația cea mai apropiată pentru
+                        noua adresă (Mircea cel Bătrân 20/1) și completat aici. */}
                     <p className="text-gray-400 text-sm">
-                      PORT MALL oferă transport (auobuz) absolut gratuit pentru toți vizitatorii care circulă pe două
-                      rute principale: Ciocana și Râșcani. Din transport public circulă autobuzul de pe ruta Nr. 5, care
-                      oprește în apropierea mall-ului. Stația cea mai apropiată: „Port Mall".
+                      Detaliile despre transportul public către noua locație urmează să fie publicate — revino
+                      curând sau sună-ne pentru indicații.
                     </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* VIDEO + BUTOANE MAPS/WAZE */}
+            {/* BUTOANE MAPS/WAZE */}
             <div className="space-y-6">
-              {/* CARD VIDEO HOW TO GET TO */}
-              <button
-                type="button"
-                onClick={() => setIsVideoOpen(true)}
-                className={`w-full text-left p-6 rounded-xl border border-sky-500/40 bg-sky-500/10 hover:bg-sky-500/20 flex gap-4 items-center ${fx}`}
-              >
-                <div className="grid h-12 w-12 place-items-center rounded-full bg-sky-500/30 text-sky-100">
-                  <PlayCircle className="h-7 w-7" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-gray-100 mb-1">
-                    Apasa aici sa vezi cum ajungi din parcare până la etajul, 4 la ELEMENTAR
-                  </h3>
-                  <p className="text-sm text-gray-300">
-                    Vezi pas cu pas drumul de la intrarea in mall până în parcul de știință ELEMENTAR.
-                  </p>
-                </div>
-              </button>
-
               <p className="text-sm text-gray-400">
                 Pentru orientare, deschide traseul direct în aplicația ta preferată — nu încărcăm o hartă pe această
                 pagină:
@@ -288,7 +267,7 @@ export default function ContactClient() {
 
               <Button asChild className={`w-full bg-sky-500 text-white hover:bg-sky-400 ${fx}`}>
                 <a
-                  href="https://www.google.com/maps/dir//Port+Mall,+Strada+Mihai+Sadoveanu+42%2F6,+Chi%C8%99in%C4%83u+MD-2075,+Moldova/@47.0105,28.8638,17z"
+                  href="https://www.google.com/maps/dir/?api=1&destination=Mircea+cel+B%C4%83tr%C3%A2n+20%2F1%2C+Chi%C8%99in%C4%83u%2C+Moldova"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -299,7 +278,7 @@ export default function ContactClient() {
 
               <Button asChild className={`w-full bg-purple-500 text-white hover:bg-purple-400 ${fx}`}>
                 <a
-                  href="https://waze.com/ul?q=Port%20Mall%20Strada%20Mihai%20Sadoveanu%2042%2F6%20Chi%C8%99in%C4%83u%20MD-2075%20Moldova&navigate=yes"
+                  href="https://waze.com/ul?q=Mircea%20cel%20B%C4%83tr%C3%A2n%2020%2F1%20Chi%C8%99in%C4%83u%20Moldova&navigate=yes"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -311,39 +290,6 @@ export default function ContactClient() {
           </div>
         </div>
       </section>
-
-      {/* MODAL VIDEO HOW TO GET TO */}
-      {isVideoOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4">
-          <div className="relative w-full max-w-[480px]">
-            <button
-              type="button"
-              aria-label="Închide video"
-              onClick={() => setIsVideoOpen(false)}
-              className="absolute -top-10 right-0 text-gray-200 hover:text-white"
-            >
-              <X className="h-6 w-6" />
-            </button>
-
-            <div className="aspect-[9/16] w-full overflow-hidden rounded-2xl border border-white/20 bg-black">
-              <video
-                src="/video/How%20to%20get%20to.webm"
-                controls
-                autoPlay
-                className="h-full w-full object-contain bg-black"
-              />
-            </div>
-          </div>
-
-          {/* click pe fundal închide modalul */}
-          <button
-            type="button"
-            className="fixed inset-0 -z-10"
-            aria-label="Închide video"
-            onClick={() => setIsVideoOpen(false)}
-          />
-        </div>
-      )}
     </main>
   )
 }

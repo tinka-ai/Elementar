@@ -7,7 +7,7 @@ import { ELEMENTAR } from "@/lib/entity"
 const desprefaqs = [
   {
     q: "Cine a creat parcul Elementar din Chișinău?",
-    a: `Elementar a fost creat de A.O. „Pro-Elementary” cu suportul financiar al Suediei, prin intermediul Fundației „Est-Europene”. Parcul funcționează din ${ELEMENTAR.foundingDate} în Port Mall, Chișinău.`,
+    a: `Elementar a fost creat de A.O. „Pro-Elementary” cu suportul financiar al Suediei, prin intermediul Fundației „Est-Europene”. Parcul funcționează din ${ELEMENTAR.foundingDate}, în Chișinău, pe Mircea cel Bătrân 20/1.`,
   },
   {
     q: "Ce face parcul Elementar diferit de alte locuri pentru copii din Chișinău?",
@@ -22,14 +22,14 @@ const desprefaqs = [
 export const metadata: Metadata = {
   title: "Despre ELEMENTAR — Parcul de Știință din Chișinău",
   description:
-    "Cine suntem, ce oferim și cui ne adresăm la ELEMENTAR — parc educațional interactiv în Port Mall, Chișinău, cu experimente de fizică, chimie și astronomie pentru copii.",
+    "Cine suntem, ce oferim și cui ne adresăm la ELEMENTAR — parc educațional interactiv în Chișinău, pe Mircea cel Bătrân 20/1, cu experimente de fizică, chimie și astronomie pentru copii.",
   alternates: {
     canonical: `${ELEMENTAR.url}/despre`,
   },
   openGraph: {
     title: "Despre ELEMENTAR — Parcul de Știință din Chișinău",
     description:
-      "Cine suntem, ce oferim și cui ne adresăm la ELEMENTAR — parc educațional interactiv în Port Mall, Chișinău.",
+      "Cine suntem, ce oferim și cui ne adresăm la ELEMENTAR — parc educațional interactiv în Chișinău, pe Mircea cel Bătrân 20/1.",
     url: `${ELEMENTAR.url}/despre`,
   },
 }
@@ -60,7 +60,7 @@ export default function DesprePage() {
         </p>
         <p className="text-gray-300">
           Parcul a fost creat de A.O. „Pro-Elementary”, cu suportul financiar al Suediei, prin intermediul Fundației
-          „Est-Europene”, și funcționează din {ELEMENTAR.foundingDate} în Port Mall, Chișinău.
+          „Est-Europene”, și funcționează din {ELEMENTAR.foundingDate}, în Chișinău, pe Mircea cel Bătrân 20/1.
         </p>
       </section>
 

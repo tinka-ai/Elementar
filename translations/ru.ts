@@ -112,7 +112,7 @@ export const ru = {
   },
   footer: {
     contact: "Контакты",
-    address: "Порт Молл, Кишинэу МД — ул. Михай Садовяну 42/6, MD-2075",
+    address: "Кишинэу МД — Mircea cel Bătrân 20/1, MD-2044",
     phone: "+373 79 010 277",
     email: "office@elementar.md",
     copyright: "© {year} ELEMENTAR — Парк Науки и Любопытства.",

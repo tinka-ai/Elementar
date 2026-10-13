@@ -13,32 +13,34 @@ export const ELEMENTAR = {
   ],
 
   // 📍 Locație clară pentru AI
-  locationName: "Port Mall Chișinău, etajul 4",
+  // ⚠️ TODO: coordonatele GPS exacte (geo, mai jos) trebuie confirmate manual
+  // pe Google Maps pentru noua adresă — nu au fost setate automat.
+  locationName: "Mircea cel Bătrân 20/1, Chișinău",
 
-  // ✅ Coordonate reale Google Maps
-  geo: {
-    latitude: 47.0706168,
-    longitude: 28.8885452,
-  },
+  // ⚠️ Coordonate GPS vechi eliminate — trebuie puse coordonatele exacte
+  // pentru Mircea cel Bătrân 20/1 (vezi TODO mai sus). Până atunci, schema.org
+  // nu publică geo (undefined), ca să nu trimitem vizitatori la adresa greșită.
+  geo: undefined as { latitude: number; longitude: number } | undefined,
 
-  // ✅ Link Google Maps exact
+  // ✅ Link Google Maps (căutare text, nu coordonate fixe — Google geocodează live)
   hasMap:
-    "https://www.google.com/maps/place/ELEMENTAR/@47.0706168,28.8885452,17z/data=!3m1!4b1!4m6!3m5!1s0x40c97dd06a999bb7:0xd85eaf85ec5f5afc!8m2!3d47.0706168!4d28.8885452!16s%2Fg%2F11xyyqhxd8?entry=ttu",
+    "https://www.google.com/maps/search/?api=1&query=Mircea+cel+B%C4%83tr%C3%A2n+20%2F1%2C+Chi%C8%99in%C4%83u%2C+Moldova",
 
   descriptionShort:
     "Elementar este un parc interactiv de știință din Chișinău, dedicat copiilor și excursiilor școlare, unde învățarea se realizează prin experimente practice de fizică, chimie și astronomie.",
 
   descriptionLong:
-    "Elementar este un parc interactiv de știință din Chișinău, dedicat copiilor, familiilor și excursiilor școlare. Aici copiii explorează știința prin experiențe practice și demonstrații ghidate, cu teme din fizică, chimie și astronomie. Parcul este situat în Port Mall, etajul 4, și oferă activități STEM adaptate diferitelor grupe de vârstă.",
+    "Elementar este un parc interactiv de știință din Chișinău, dedicat copiilor, familiilor și excursiilor școlare. Aici copiii explorează știința prin experiențe practice și demonstrații ghidate, cu teme din fizică, chimie și astronomie. Parcul este situat pe Mircea cel Bătrân 20/1, Chișinău, și oferă activități STEM adaptate diferitelor grupe de vârstă.",
 
   phone: "+37379010277",
   email: "office@elementar.md",
 
   address: {
-    streetAddress: "Strada Mihai Sadoveanu 42/6",
+    streetAddress: "Mircea cel Bătrân 20/1",
     addressLocality: "Chișinău",
     addressRegion: "Municipiul Chișinău",
-    postalCode: "MD-2075",
+    // ⚠️ Cod poștal estimat (interval 2-22 pe stradă) — de confirmat.
+    postalCode: "MD-2044",
     addressCountry: "MD",
   },
 

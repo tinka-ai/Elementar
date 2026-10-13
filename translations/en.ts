@@ -107,7 +107,7 @@ export const en = {
   },
   footer: {
     contact: "Contact",
-    address: "Port Mall, Chișinău MD — Mihai Sadoveanu Street 42/6, MD-2075",
+    address: "Chișinău MD — Mircea cel Bătrân 20/1, MD-2044",
     phone: "+373 79 010 277",
     email: "office@elementar.md",
     copyright: "© {year} ELEMENTAR — Science and Curiosity Park.",
