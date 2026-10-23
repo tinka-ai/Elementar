@@ -128,7 +128,8 @@ export default function Page() {
             />
           ))}
         </div>
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 flex justify-center">
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 flex flex-col items-center">
+          <OpeningCountdown />
           <Link
             href="/contact"
             aria-label="Marea Deschidere ELEMENTAR — 24 octombrie, ora 11:00, Mircea cel Bătrân 20/1"
@@ -406,6 +407,74 @@ export default function Page() {
     </>
   )
 }
+/* ————— Numărătoare inversă — Marea Deschidere, 24 octombrie, ora 11:00 (Chișinău, UTC+3) ————— */
+const OPENING_DATE = "2026-10-24T11:00:00+03:00"
+
+function useCountdown(targetIso: string) {
+  const [left, setLeft] = useState<{ d: number; h: number; m: number; s: number } | null>(null)
+  const [done, setDone] = useState(false)
+  useEffect(() => {
+    const target = new Date(targetIso).getTime()
+    const tick = () => {
+      const diff = target - Date.now()
+      if (diff <= 0) {
+        setDone(true)
+        setLeft({ d: 0, h: 0, m: 0, s: 0 })
+        return
+      }
+      setLeft({
+        d: Math.floor(diff / 86400000),
+        h: Math.floor((diff % 86400000) / 3600000),
+        m: Math.floor((diff % 3600000) / 60000),
+        s: Math.floor((diff % 60000) / 1000),
+      })
+    }
+    tick()
+    const id = setInterval(tick, 1000)
+    return () => clearInterval(id)
+  }, [targetIso])
+  return { left, done }
+}
+
+function OpeningCountdown() {
+  const { left, done } = useCountdown(OPENING_DATE)
+
+  if (done) {
+    return (
+      <div className="mb-6 w-full max-w-sm sm:max-w-md text-center rounded-2xl border border-orange-400/30 bg-gradient-to-r from-orange-500/20 via-purple-500/20 to-orange-500/20 px-4 py-3">
+        <p className="text-lg font-extrabold bg-gradient-to-r from-orange-300 via-pink-300 to-purple-300 bg-clip-text text-transparent">
+          🎉 Am deschis! Te așteptăm la Mircea cel Bătrân 20/1
+        </p>
+      </div>
+    )
+  }
+
+  return (
+    <div className="mb-6 w-full max-w-sm sm:max-w-md text-center">
+      <p className="text-sm font-semibold text-orange-300 tracking-wide">
+        ⏳ Mai sunt până la Marea Deschidere:
+      </p>
+      <div className="mt-3 grid grid-cols-4 gap-2" aria-live="polite">
+        <CountdownUnit value={left?.d} label="zile" />
+        <CountdownUnit value={left?.h} label="ore" />
+        <CountdownUnit value={left?.m} label="min" />
+        <CountdownUnit value={left?.s} label="sec" />
+      </div>
+    </div>
+  )
+}
+
+function CountdownUnit({ value, label }: { value: number | undefined; label: string }) {
+  return (
+    <div className="rounded-xl border border-orange-400/30 bg-black/40 py-2">
+      <div className="text-2xl sm:text-3xl font-extrabold bg-gradient-to-b from-orange-300 to-purple-300 bg-clip-text text-transparent tabular-nums">
+        {value === undefined ? "–" : String(value).padStart(2, "0")}
+      </div>
+      <div className="text-[10px] uppercase tracking-wider text-gray-400">{label}</div>
+    </div>
+  )
+}
+
 /* ————— Sub-componente ————— */
 function SectionKicker({ children }: { children: React.ReactNode }) {
   return (
