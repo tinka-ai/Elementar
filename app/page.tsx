@@ -441,10 +441,11 @@ function OpeningCountdown() {
 
   if (done) {
     return (
-      <div className="mb-6 w-full max-w-sm sm:max-w-md text-center rounded-2xl border border-orange-400/30 bg-gradient-to-r from-orange-500/20 via-purple-500/20 to-orange-500/20 px-4 py-3">
-        <p className="text-lg font-extrabold bg-gradient-to-r from-orange-300 via-pink-300 to-purple-300 bg-clip-text text-transparent">
-          🎉 Am deschis! Te așteptăm la Mircea cel Bătrân 20/1
+      <div className="mb-6 w-full max-w-sm sm:max-w-md text-center rounded-2xl border border-orange-400/40 bg-gradient-to-r from-orange-500/20 via-purple-500/20 to-orange-500/20 px-4 py-5 animate-pulse">
+        <p className="text-2xl sm:text-3xl font-extrabold tracking-tight bg-gradient-to-r from-orange-300 via-pink-300 to-purple-300 bg-clip-text text-transparent">
+          🎉 NE-AM REDESCHIS!!! 🎉
         </p>
+        <p className="mt-2 text-sm text-gray-300">Te așteptăm la Mircea cel Bătrân 20/1</p>
       </div>
     )
   }
