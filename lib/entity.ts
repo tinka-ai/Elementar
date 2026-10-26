@@ -44,7 +44,7 @@ export const ELEMENTAR = {
     addressCountry: "MD",
   },
 
-  openingHours: ["Mo-Su 10:00-22:00"],
+  openingHours: ["Mo-Su 10:00-20:00"],
 
   // Verificate manual (2026-09-28): profilul de Instagram confirmat "elementar.md";
   // link-ul de Facebook e cel folosit si in footer (share-link verificat, redirectioneaza

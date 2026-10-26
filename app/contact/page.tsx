@@ -5,7 +5,7 @@ import ContactClient from "./ContactClient"
 export const metadata: Metadata = {
   title: "Contact — Program, adresă și telefon",
   description:
-    "Contactează ELEMENTAR: Mircea cel Bătrân 20/1, Chișinău. Telefon +373 79 010 277, program zilnic 10:00-22:00. Fără formular — scrii sau suni direct.",
+    "Contactează ELEMENTAR: Mircea cel Bătrân 20/1, Chișinău. Telefon +373 79 010 277, program zilnic 10:00-20:00. Fără formular — scrii sau suni direct.",
   alternates: {
     canonical: `${ELEMENTAR.url}/contact`,
   },

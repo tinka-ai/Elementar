@@ -130,21 +130,6 @@ export default function Page() {
         </div>
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 flex flex-col items-center">
           <OpeningCountdown />
-          <Link
-            href="/contact"
-            aria-label="Marea Deschidere ELEMENTAR — 24 octombrie, ora 11:00, Mircea cel Bătrân 20/1"
-            className="block w-full max-w-sm sm:max-w-md rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_30px_rgba(168,85,247,0.15)] transition-transform duration-300 hover:scale-[1.01] focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-400/70"
-          >
-            <Image
-              src="/images/poster-marea-deschidere-24-octombrie.webp"
-              alt="Afiș Marea Deschidere ELEMENTAR — Parc de Știință și Curiozități, 24 octombrie, ora 11:00, Mircea cel Bătrân 20/1, Chișinău"
-              width={563}
-              height={800}
-              className="w-full h-auto"
-              sizes="(max-width: 640px) 100vw, 400px"
-              priority
-            />
-          </Link>
         </div>
       </section>
       <main>
@@ -317,7 +302,7 @@ export default function Page() {
             <p className="mt-4 text-gray-300">
               Excursii din oră în oră: zilnic, între{" "}
               <span className="font-semibold text-gray-200">10:00</span> și{" "}
-              <span className="font-semibold text-gray-200">21:00</span> (ultima la 21:00).
+              <span className="font-semibold text-gray-200">20:00</span> (ultima la 19:00).
             </p>
             <div className="mt-10 grid gap-6 md:grid-cols-3">
               <PricingCard

@@ -75,7 +75,7 @@ export default function ContactClient() {
                         </a>
                       </>
                     }
-                    details="Luni - Duminică, 10:00 - 22:00"
+                    details="Luni - Duminică, 10:00 - 20:00"
                   />
                   <ContactInfo
                     fx={fx}
@@ -89,7 +89,7 @@ export default function ContactClient() {
                     icon={<Clock className="h-6 w-6" />}
                     title="Program"
                     info="Luni - Duminică"
-                    details="10:00 - 22:00 (ultimele intrări la 21:00)"
+                    details="10:00 - 20:00 (ultimele intrări la 19:00)"
                   />
                 </div>
               </div>

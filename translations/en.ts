@@ -1,6 +1,6 @@
 export const en = {
   header: {
-    schedule: "SCHEDULE: Mon - Sun, 10:00 - 22:00",
+    schedule: "SCHEDULE: Mon - Sun, 10:00 - 20:00",
     bookVisit: "Book a visit",
     nav: {
       home: "Home",

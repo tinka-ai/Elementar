@@ -265,7 +265,7 @@ export default function Page() {
             <strong>Adresă:</strong> {ELEMENTAR.address.streetAddress}, {ELEMENTAR.address.addressLocality}
           </div>
           <div className="rounded-xl border border-white/10 bg-white/5 p-5 text-gray-300">
-            <strong>Program:</strong> Luni–Duminică, 10:00–22:00 (ultimele intrări cu 1 oră înainte)
+            <strong>Program:</strong> Luni–Duminică, 10:00–20:00 (ultimele intrări cu 1 oră înainte)
           </div>
           <div className="rounded-xl border border-white/10 bg-white/5 p-5 text-gray-300">
             <strong>Telefon:</strong>{" "}

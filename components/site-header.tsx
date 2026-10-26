@@ -120,7 +120,7 @@ const linkCls = (href: string) => {
           <div className="flex items-center gap-3">
             <div className="hidden lg:flex items-center gap-2 text-sm text-gray-300">
               <Clock className="h-4 w-4" />
-              <span>PROGRAM: Lu – Du, 10:00 – 22:00</span>
+              <span>PROGRAM: Lu – Du, 10:00 – 20:00</span>
             </div>
           </div>
         </div>
@@ -143,7 +143,7 @@ const linkCls = (href: string) => {
           {/* Program (vizibil pe mobil) */}
           <p className="mt-1 text-xs text-gray-300 flex items-center gap-1">
             <Clock className="h-3.5 w-3.5" />
-            PROGRAM: Lu – Du, 10:00 – 22:00
+            PROGRAM: Lu – Du, 10:00 – 20:00
           </p>
 
           {/* MENIU – vizibil, cu wrap (fără scroll orizontal) */}

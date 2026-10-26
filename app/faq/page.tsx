@@ -110,7 +110,7 @@ export default function FAQPage() {
         },
         {
           q: "Care este programul de funcționare?",
-          a: "Suntem deschisi Luni - Duminică, 10:00 - 22:00. Ultimele intrări se fac cu o oră înainte de închidere. În zilele de sărbătoare, programul poate fi modificat.",
+          a: "Suntem deschisi Luni - Duminică, 10:00 - 20:00. Ultimele intrări se fac cu o oră înainte de închidere. În zilele de sărbătoare, programul poate fi modificat.",
         },
         {
           q: "Pot reprograma vizita?",
