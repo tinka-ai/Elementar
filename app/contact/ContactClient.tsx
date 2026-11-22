@@ -75,7 +75,7 @@ export default function ContactClient() {
                         </a>
                       </>
                     }
-                    details="Luni - Duminică, 10:00 - 20:00"
+                    details="Marți - Duminică, 10:00 - 20:00 (Luni: închis)"
                   />
                   <ContactInfo
                     fx={fx}
@@ -88,8 +88,8 @@ export default function ContactClient() {
                     fx={fx}
                     icon={<Clock className="h-6 w-6" />}
                     title="Program"
-                    info="Luni - Duminică"
-                    details="10:00 - 20:00 (ultimele intrări la 19:00)"
+                    info="Marți - Duminică"
+                    details="10:00 - 20:00 (ultimele intrări la 19:00) · Luni: închis"
                   />
                 </div>
               </div>
@@ -290,7 +290,7 @@ export default function ContactClient() {
               </p>
 
               <a
-                href="https://www.google.com/maps/dir/?api=1&destination=Mircea+cel+B%C4%83tr%C3%A2n+20%2F1%2C+Chi%C8%99in%C4%83u%2C+Moldova&travelmode=driving"
+                href="https://maps.app.goo.gl/91UhYR7RvMjckLzy5"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`flex items-center gap-4 rounded-xl p-3 hover:bg-white/5 transition-colors ${fx}`}
@@ -302,7 +302,7 @@ export default function ContactClient() {
               </a>
 
               <a
-                href="https://waze.com/ul?q=Mircea%20cel%20B%C4%83tr%C3%A2n%2020%2F1%20Chi%C8%99in%C4%83u%20Moldova&navigate=yes"
+                href="https://waze.com/ul/hu8ke9ktzu"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`flex items-center gap-4 rounded-xl p-3 hover:bg-white/5 transition-colors ${fx}`}

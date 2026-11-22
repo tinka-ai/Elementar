@@ -300,9 +300,9 @@ export default function Page() {
               Tarife de acces – Parcul de Științe „Elementar”
             </h2>
             <p className="mt-4 text-gray-300">
-              Excursii din oră în oră: zilnic, între{" "}
+              Excursii din oră în oră: Marți - Duminică, între{" "}
               <span className="font-semibold text-gray-200">10:00</span> și{" "}
-              <span className="font-semibold text-gray-200">20:00</span> (ultima la 19:00).
+              <span className="font-semibold text-gray-200">20:00</span> (ultima la 19:00). Luni: închis.
             </p>
             <div className="mt-10 grid gap-6 md:grid-cols-3">
               <PricingCard

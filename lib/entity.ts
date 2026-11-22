@@ -13,18 +13,14 @@ export const ELEMENTAR = {
   ],
 
   // 📍 Locație clară pentru AI
-  // ⚠️ TODO: coordonatele GPS exacte (geo, mai jos) trebuie confirmate manual
-  // pe Google Maps pentru noua adresă — nu au fost setate automat.
   locationName: "Mircea cel Bătrân 20/1, Chișinău",
 
-  // ⚠️ Coordonate GPS vechi eliminate — trebuie puse coordonatele exacte
-  // pentru Mircea cel Bătrân 20/1 (vezi TODO mai sus). Până atunci, schema.org
-  // nu publică geo (undefined), ca să nu trimitem vizitatori la adresa greșită.
-  geo: undefined as { latitude: number; longitude: number } | undefined,
+  // Coordonate confirmate de client (2026-11-22), extrase din link-ul oficial
+  // de Waze al locației (waze.com/ul/hu8ke9ktzu -> ll.47.047555,28.891146).
+  geo: { latitude: 47.047555, longitude: 28.891146 } as { latitude: number; longitude: number } | undefined,
 
-  // ✅ Link Google Maps (căutare text, nu coordonate fixe — Google geocodează live)
-  hasMap:
-    "https://www.google.com/maps/search/?api=1&query=Mircea+cel+B%C4%83tr%C3%A2n+20%2F1%2C+Chi%C8%99in%C4%83u%2C+Moldova",
+  // Link Google Maps dat de client (share link al locației exacte, nu cautare text)
+  hasMap: "https://maps.app.goo.gl/91UhYR7RvMjckLzy5",
 
   descriptionShort:
     "Elementar este un parc interactiv de știință din Chișinău, dedicat copiilor și excursiilor școlare, unde învățarea se realizează prin experimente practice de fizică, chimie și astronomie.",
@@ -44,7 +40,7 @@ export const ELEMENTAR = {
     addressCountry: "MD",
   },
 
-  openingHours: ["Mo-Su 10:00-20:00"],
+  openingHours: ["Tu-Su 10:00-20:00"],
 
   // Verificate manual (2026-09-28): profilul de Instagram confirmat "elementar.md";
   // link-ul de Facebook e cel folosit si in footer (share-link verificat, redirectioneaza

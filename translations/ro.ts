@@ -1,6 +1,6 @@
 export const ro = {
   header: {
-    schedule: "PROGRAM: Lu - Du, 10:00 - 20:00",
+    schedule: "PROGRAM: Ma - Du, 10:00 - 20:00",
     bookVisit: "Programează o vizită",
     nav: {
       home: "Acasă",
