@@ -75,7 +75,6 @@ export default function ContactClient() {
                         </a>
                       </>
                     }
-                    details="Marți - Duminică, 10:00 - 20:00 (Luni: închis)"
                   />
                   <ContactInfo
                     fx={fx}
@@ -335,7 +334,7 @@ function ContactInfo({
   icon: React.ReactNode
   title: string
   info: React.ReactNode
-  details: string
+  details?: string
   note?: React.ReactNode
 }) {
   return (
@@ -344,7 +343,7 @@ function ContactInfo({
       <div>
         <h3 className="font-semibold text-gray-300">{title}</h3>
         <p className="text-gray-300">{info}</p>
-        <p className="text-sm text-gray-400">{details}</p>
+        {details && <p className="text-sm text-gray-400">{details}</p>}
         {note && <p className="text-gray-300">{note}</p>}
       </div>
     </div>
