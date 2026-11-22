@@ -3,7 +3,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Clock, MapPin } from "lucide-react"
 import NavLink from "@/components/nav-link"
 
@@ -14,6 +14,139 @@ const NAV = [
   { href: "/faq",     label: "Întrebări" },
   { href: "/contact", label: "Contact" },
 ]
+
+/* ————— Status live deschis/închis — Marți-Duminică 10:00-20:00, Luni închis —————
+   Foloseste Intl.DateTimeFormat cu timeZone Europe/Chisinau ca sa citim corect
+   ora locala indiferent de ora de vara/iarna (DST), fara sa ghicim offset-ul
+   cu mana (spre deosebire de numaratoarea de Halloween, care era o data fixa
+   dinainte de schimbarea DST si putea folosi +03:00 direct). */
+
+const RO_DAY: Record<string, string> = {
+  Mon: "Luni", Tue: "Marți", Wed: "Miercuri", Thu: "Joi", Fri: "Vineri", Sat: "Sâmbătă", Sun: "Duminică",
+}
+
+function getChisinauParts(d: Date) {
+  const fmt = new Intl.DateTimeFormat("en-US", {
+    timeZone: "Europe/Chisinau",
+    weekday: "short",
+    year: "numeric", month: "2-digit", day: "2-digit",
+    hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false,
+  })
+  const map: Record<string, string> = {}
+  for (const p of fmt.formatToParts(d)) map[p.type] = p.value
+  return {
+    weekday: map.weekday,
+    year: Number(map.year),
+    month: Number(map.month),
+    day: Number(map.day),
+    hour: Number(map.hour) % 24, // unele locale dau "24" pentru miezul noptii
+    minute: Number(map.minute),
+    second: Number(map.second),
+  }
+}
+
+// "ora de perete" din Chisinau, tratata ca UTC — valabila doar pentru diferente
+// in aceeasi fereastra de cateva zile (exact cazul nostru), nu ca timestamp real
+function wallMs(y: number, mo: number, d: number, h: number, mi: number, s: number) {
+  return Date.UTC(y, mo - 1, d, h, mi, s)
+}
+
+type OpenState =
+  | { kind: "monday" }
+  | { kind: "open"; dayName: string; msLeft: number }
+  | { kind: "closingSoon"; msLeft: number }
+  | { kind: "closed"; msLeft: number }
+
+function useOpenStatus() {
+  const [state, setState] = useState<OpenState | null>(null)
+
+  useEffect(() => {
+    const tick = () => {
+      const now = new Date()
+      const p = getChisinauParts(now)
+      const nowMs = wallMs(p.year, p.month, p.day, p.hour, p.minute, p.second)
+
+      if (p.weekday === "Mon") {
+        setState({ kind: "monday" })
+        return
+      }
+
+      const openMs = wallMs(p.year, p.month, p.day, 10, 0, 0)
+      const lastEntryMs = wallMs(p.year, p.month, p.day, 19, 0, 0)
+      const closeMs = wallMs(p.year, p.month, p.day, 20, 0, 0)
+
+      if (nowMs >= openMs && nowMs < lastEntryMs) {
+        setState({ kind: "open", dayName: RO_DAY[p.weekday] ?? p.weekday, msLeft: lastEntryMs - nowMs })
+        return
+      }
+      if (nowMs >= lastEntryMs && nowMs < closeMs) {
+        setState({ kind: "closingSoon", msLeft: closeMs - nowMs })
+        return
+      }
+
+      // inchis acum — gasim urmatoarea deschidere (sarind peste Luni)
+      let cursor = now
+      let weekday = p.weekday
+      let candidateOpenMs = openMs
+      if (nowMs >= openMs) {
+        cursor = new Date(now.getTime() + 24 * 3600 * 1000)
+        const p2 = getChisinauParts(cursor)
+        weekday = p2.weekday
+        candidateOpenMs = wallMs(p2.year, p2.month, p2.day, 10, 0, 0)
+      }
+      while (weekday === "Mon") {
+        cursor = new Date(cursor.getTime() + 24 * 3600 * 1000)
+        const p3 = getChisinauParts(cursor)
+        weekday = p3.weekday
+        candidateOpenMs = wallMs(p3.year, p3.month, p3.day, 10, 0, 0)
+      }
+      setState({ kind: "closed", msLeft: candidateOpenMs - nowMs })
+    }
+    tick()
+    const id = setInterval(tick, 1000)
+    return () => clearInterval(id)
+  }, [])
+
+  return state
+}
+
+function formatCountdown(ms: number) {
+  const total = Math.max(0, Math.floor(ms / 1000))
+  const h = Math.floor(total / 3600)
+  const m = Math.floor((total % 3600) / 60)
+  const s = total % 60
+  if (h > 0) return `${h}h ${m}m ${s}s`
+  if (m > 0) return `${m}m ${s}s`
+  return `${s}s`
+}
+
+function LiveOpenStatus({ className }: { className?: string }) {
+  const state = useOpenStatus()
+  if (!state) return null
+
+  if (state.kind === "monday") {
+    return <span className={`text-red-400 font-semibold ${className ?? ""}`}>Astăzi este închis</span>
+  }
+  if (state.kind === "open") {
+    return (
+      <span className={`text-green-400 ${className ?? ""}`}>
+        {state.dayName} · Ultima intrare peste {formatCountdown(state.msLeft)}
+      </span>
+    )
+  }
+  if (state.kind === "closingSoon") {
+    return (
+      <span className={`text-amber-400 ${className ?? ""}`}>
+        Ne închidem peste {formatCountdown(state.msLeft)}
+      </span>
+    )
+  }
+  return (
+    <span className={`text-red-400 ${className ?? ""}`}>
+      Închis · Deschidem peste {formatCountdown(state.msLeft)}
+    </span>
+  )
+}
 
 
 export default function SiteHeader() {
@@ -118,9 +251,12 @@ const linkCls = (href: string) => {
 
           {/* PROGRAM */}
           <div className="flex items-center gap-3">
-            <div className="hidden lg:flex items-center gap-2 text-sm text-gray-300">
-              <Clock className="h-4 w-4" />
-              <span>PROGRAM: Ma – Du, 10:00 – 20:00</span>
+            <div className="hidden lg:flex flex-col items-start gap-0.5">
+              <div className="flex items-center gap-2 text-sm text-gray-300">
+                <Clock className="h-4 w-4" />
+                <span>PROGRAM: Ma – Du, 10:00 – 20:00</span>
+              </div>
+              <LiveOpenStatus className="text-xs pl-6" />
             </div>
           </div>
         </div>
@@ -144,6 +280,9 @@ const linkCls = (href: string) => {
           <p className="mt-1 text-xs text-gray-300 flex items-center gap-1">
             <Clock className="h-3.5 w-3.5" />
             PROGRAM: Ma – Du, 10:00 – 20:00
+          </p>
+          <p className="mt-0.5 text-xs pl-[18px]">
+            <LiveOpenStatus />
           </p>
 
           {/* MENIU – vizibil, cu wrap (fără scroll orizontal) */}
