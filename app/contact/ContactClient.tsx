@@ -89,7 +89,8 @@ export default function ContactClient() {
                     icon={<Clock className="h-6 w-6" />}
                     title="Program"
                     info="Marți - Duminică"
-                    details="10:00 - 20:00 (ultimele intrări la 19:00) · Luni: închis"
+                    details="10:00 - 20:00 (ultimele intrări la 19:00)"
+                    note="Luni: închis"
                   />
                 </div>
               </div>
@@ -328,12 +329,14 @@ function ContactInfo({
   title,
   info,
   details,
+  note,
 }: {
   fx: string
   icon: React.ReactNode
   title: string
   info: React.ReactNode
   details: string
+  note?: React.ReactNode
 }) {
   return (
     <div className={`flex items-start gap-4 p-4 rounded-lg border border-white/10 bg-white/5 ${fx}`}>
@@ -342,6 +345,7 @@ function ContactInfo({
         <h3 className="font-semibold text-gray-300">{title}</h3>
         <p className="text-gray-300">{info}</p>
         <p className="text-sm text-gray-400">{details}</p>
+        {note && <p className="text-gray-300">{note}</p>}
       </div>
     </div>
   )
